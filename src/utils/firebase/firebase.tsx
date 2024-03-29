@@ -1,13 +1,15 @@
 import { initializeApp } from "firebase/app";
-import { 
-  getAuth, 
-  signInWithRedirect, 
-  signInWithPopup, 
+import {
+  getAuth,
+  signInWithRedirect,
+  signInWithPopup,
   GoogleAuthProvider,
   User,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Firebase config
 const firebaseConfig = {
@@ -66,28 +68,46 @@ export const createUserDocumentFromAuth = async (userAuth: User, additionalInfor
   return userDocRef;
 };
 
-// Function to create user with email and password
-export const createAuthUserWithEmailAndPassword = async (email: string, password: string) => {
+type UserDetails = {
+  email: string;
+  password: string;
+  displayName: string;
+};
+
+export const createAuthUserWithEmailAndPassword = async (
+  userDetails: UserDetails
+) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const { email, password, displayName } = userDetails;
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     const user = userCredential.user;
-    await createUserDocumentFromAuth(user); // Automatically create user document
+
+    await createUserDocumentFromAuth(user, { displayName });
+    await updateProfile(user, { displayName: displayName });
     return user;
   } catch (error) {
-    console.error('Error creating user with email and password:', error);
+    console.error("Error creating user with email and password:", error);
     throw error;
   }
 };
 
-// Function to register user with email and password
-export const registerWithEmailAndPassword = async (email: string, password: string) => {
+export const loginUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    await createUserDocumentFromAuth(user); // Automatically create user document
-    return user;
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return userCredential.user;
   } catch (error) {
-    console.error('Error registering user with email and password:', error);
+    console.error("Error logging in user with email and password:", error);
     throw error;
   }
 };

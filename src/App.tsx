@@ -1,55 +1,27 @@
-import React, { useState } from 'react';
-import Login from './components/sign-in-form';
-import SignUpForm from './components/sign-up-form';
-
-interface User {
-  username: string;
-  password: string;
-}
+import Login from "@components/Login/Login";
+import SignUpForm from "./components/Register/Register";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { ROUTE } from "@config/route.config";
+import Dashboard from "./components/Dashboard/Dashboard";
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [users, setUsers] = useState<User[]>([]);
-
-  // Logowanie
-  const handleLogin = (username: string, password: string) => {
-    const user = users.find(user => user.username === username && user.password === password);
-    if (user) {
-      setLoggedIn(true);
-      console.log(`Zalogowano jako: ${username}`);
-    } else {
-      console.log('Nieprawidłowa nazwa użytkownika lub hasło.');
-    }
-  };
-
-  // Rejestracja
-  const handleRegister = (username: string, password: string) => {
-    if (!users.find(user => user.username === username)) {
-      setUsers(prevUsers => [...prevUsers, { username, password }]);
-      console.log(`Utworzono nowego użytkownika: ${username}`);
-    } else {
-      console.log('Nazwa użytkownika jest już zajęta.');
-    }
-  };
-
-  const handleLogout = () => {
-    setLoggedIn(false);
-  };
-
   return (
-    <div>
-      {loggedIn ? (
-        <div>
-          <h2>Jesteś zalogowany</h2>
-          <button onClick={handleLogout}>Wyloguj się</button>
-        </div>
-      ) : (
-        <div>
-          <Login onLogin={handleLogin} />
-          <SignUpForm onRegister={handleRegister} />
-        </div>
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path={ROUTE.LOGIN} element={<Login />} />
+        <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
+        </Route>
+        <Route path="*" element={<Navigate to={ROUTE.REGISTER} replace />} />
+      </Routes>
+    </Router>
   );
 };
 
