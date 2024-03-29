@@ -1,112 +1,83 @@
-import React, { useState } from "react";
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from "../utils/firebase/firebase";
+import { useForm } from "react-hook-form";
+import { Button, TextField, Container, Typography } from "@mui/material";
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from "../utils/firebase/firebase";
+import { useNavigate } from "react-router-dom";
 
-interface SignUpFormProps {
-  onRegister: (email: string, password: string) => void;
-}
+type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
-const defaultFormFields = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-}
+const SignUpForm: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+  const navigate = useNavigate();
 
-const SignUpForm: React.FC<SignUpFormProps> = ({ onRegister }) => {
-    const [formFields, setFormFields] = useState(defaultFormFields);
-    const { firstName, lastName, email, password, confirmPassword } = formFields;
+  const handleSumbit = async (data: FormData) => {
+    const { email, password, firstName, lastName } = data;
 
-    const handleSumbit = async (event: React.FormEvent) => {
-        event.preventDefault();
+    try {
+      const user = await createAuthUserWithEmailAndPassword(email, password);
+      await createUserDocumentFromAuth(user, {
+        displayName: `${firstName} ${lastName}`,
+      });
+      navigate("/login");
+    } catch (error) {
+      console.error("User creation encountered an error", error);
+    }
+  };
 
-        if(password !== confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        }
-
-        try {
-            const user = await createAuthUserWithEmailAndPassword(
-                email,
-                password
-            );
-
-            // Dodaj użytkownika do bazy danych
-            await createUserDocumentFromAuth(user, { displayName: `${firstName} ${lastName}` });
-            
-            // Czyścimy formularz po udanej rejestracji
-            setFormFields(defaultFormFields);
-            
-            // Tutaj możesz przekierować użytkownika do innej strony lub wykonać inne działania
-            console.log("User created successfully:", user);
-
-            // Wywołaj funkcję przekazaną przez props onRegister
-            onRegister(email, password);
-        } catch(error) {
-            console.error('User creation encountered an error', error);
-            // Tutaj możesz obsłużyć błąd rejestracji, np. wyświetlając komunikat dla użytkownika
-        }
-    };
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-
-        setFormFields({...formFields, [name]: value});
-    };
-
-    return (
-        <div>
-            <h1>Create an account</h1>
-            <form onSubmit={handleSumbit}>
-                <label>First name</label>
-                <input 
-                    type='text' 
-                    required 
-                    onChange={handleChange} 
-                    name='firstName' 
-                    value={firstName} 
-                />
-
-                <label>Last name</label>
-                <input 
-                    type="text" 
-                    required 
-                    onChange={handleChange} 
-                    name="lastName" 
-                    value={lastName} 
-                />
-
-                <label>Email</label>
-                <input 
-                    type="email" 
-                    required 
-                    onChange={handleChange} 
-                    name="email" 
-                    value={email} 
-                />
-
-                <label>Password</label>
-                <input 
-                    type="password" 
-                    required 
-                    onChange={handleChange} 
-                    name="password" 
-                    value={password} 
-                />
-
-                <label>Confirm password</label>
-                <input 
-                    type="password" 
-                    required 
-                    onChange={handleChange} 
-                    name="confirmPassword"  
-                    value={confirmPassword} 
-                />
-                
-                <button type='submit'>Create an account</button>
-            </form>
-        </div>
-    );
+  return (
+    <Container>
+      <Typography variant="h4">Create an account</Typography>
+      <form onSubmit={handleSubmit(handleSumbit)}>
+        <TextField
+          label="firstName"
+          error={Boolean(errors.firstName)}
+          helperText={errors.firstName?.message}
+          {...register("firstName", { required: true })}
+        />
+        <TextField
+          label="lastName"
+          error={Boolean(errors.lastName)}
+          helperText={errors.lastName?.message}
+          {...register("lastName", { required: true })}
+        />
+        <TextField
+          label="email"
+          error={Boolean(errors.email)}
+          helperText={errors.email?.message}
+          {...register("email", { required: true })}
+        />
+        <TextField
+          label="password"
+          type="password"
+          error={Boolean(errors.password)}
+          helperText={errors.password?.message}
+          {...register("password", { required: true })}
+        />
+        <TextField
+          label="confirm password"
+          type="password"
+          error={Boolean(errors.confirmPassword)}
+          helperText={errors.confirmPassword?.message}
+          {...register("confirmPassword", { required: true })}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Create an account
+        </Button>
+      </form>
+    </Container>
+  );
 };
 
 export default SignUpForm;

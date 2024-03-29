@@ -1,38 +1,49 @@
-import React, { useState } from "react";
+import { TextField, Button, Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
 
-interface Props {
-  onLogin: (username: string, password: string) => void;
-}
+type FormData = {
+  email: string;
+  password: string;
+};
 
-const Login: React.FC<Props> = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
-  const handleLogin = () => {
-    onLogin(username, password);
+  const onSubmit = async (data: FormData) => {
+    console.log(data);
   };
 
   return (
     <div>
-    <h1>Sign in</h1>
-    <label>Email</label>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-
-    <label>Your password</label>
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Typography align="center">Sign In</Typography>
+        <TextField
+          label="Email"
+          error={Boolean(errors.email)}
+          helperText={errors.email && "Email is required"}
+          {...register("email", { required: true })}
+        />
+        <TextField
+          label="Your password"
+          type="password"
+          error={Boolean(errors.password)}
+          helperText={errors.password && "Password is required"}
+          {...register("password", { required: true })}
+        />
+        <Button type="submit" variant="contained">
+          Login
+        </Button>
+        <Typography>Or log in with</Typography>
+        <Typography>Forget your password</Typography>
+      </form>
+      <Typography>New to our community</Typography>
+      <Typography>Create an account</Typography>
     </div>
   );
 };
 
 export default Login;
-
-
