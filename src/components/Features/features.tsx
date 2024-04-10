@@ -18,7 +18,9 @@ const Features = () => {
           backgroundColor: 'rgb(255,255,255)',
           display: 'flex',
           alignItems: 'center',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          width: '100vw',
+          height: '800px',
         }}
       >
         <Typography 

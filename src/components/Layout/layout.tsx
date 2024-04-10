@@ -1,6 +1,7 @@
 import Navigation from '../Navigation/navigation'
 import Hero from '../Hero/hero'
 import Features from '../Features/features'
+import About from '../About/about'
 
 const Layout = () => {
   return (
@@ -8,6 +9,7 @@ const Layout = () => {
       <Navigation />
       <Hero />
       <Features />
+      <About />
     </div>
   )
 }
