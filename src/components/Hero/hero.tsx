@@ -28,13 +28,13 @@ const Hero = () => {
           color={"rgb(0,0,0)"}
           marginBottom="10px" 
         >
-          Tekst obok obrazka
+          Tekst Tekst Tekst
         </Typography>
         <Typography 
           variant="body1"
           color={"rgb(0,0,0)"}
         >
-          Tutaj możesz dodać więcej tekstu lub inne elementy.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
         </Typography>
       </Box>
       
