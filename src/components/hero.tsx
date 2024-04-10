@@ -10,8 +10,8 @@ const Hero = () => {
         backgroundColor: 'rgb(249, 252, 255)', 
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between', 
-        padding: '0 10px', 
+        padding: '0 30px', 
+        flexWrap: 'wrap'
       }}
     >
       <Box 
@@ -19,14 +19,13 @@ const Hero = () => {
           display: 'flex', 
           flexDirection: 'column',
           justifyContent: 'center', 
-          alignItems: 'flex-start', 
+          alignItems: 'center', 
           marginRight: 'auto',
-          textAlign: 'left', 
+          textAlign: 'center', 
         }}>
         <Typography 
           variant="h4"
           color={"rgb(0,0,0)"}
-          fontFamily="Roboto" 
           marginBottom="10px" 
         >
           Tekst obok obrazka
@@ -34,7 +33,6 @@ const Hero = () => {
         <Typography 
           variant="body1"
           color={"rgb(0,0,0)"}
-          fontFamily="Roboto" 
         >
           Tutaj możesz dodać więcej tekstu lub inne elementy.
         </Typography>
