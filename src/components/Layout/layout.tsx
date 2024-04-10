@@ -1,5 +1,5 @@
-import Navigation from '../navigation'
-import Hero from '../hero'
+import Navigation from '../Navigation/navigation'
+import Hero from '../Hero/hero'
 
 const Layout = () => {
   return (
