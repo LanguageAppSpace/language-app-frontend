@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from "../utils/firebase/firebase";
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from "@utils/firebase/firebase";
 
 interface Props {
   onRegister: (email: string, password: string) => void;
