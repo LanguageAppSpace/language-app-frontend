@@ -13,17 +13,24 @@ import {
   LoginDivider,
   SignUpSection,
   ForgetPassword,
+  LoginWithGoogleButton,
+  GoogleImg,
 } from "@components/Login/Login.styled";
 import {
   FormInput,
   FormInputLabel,
 } from "@components/Register/Register.styled";
 import Logo from "@/assets/images/logo.svg";
+import GoogleIcon from "@/assets/images/google-icon.png";
 import { ROUTE } from "@/config/route.config";
-import { loginUserWithEmailAndPassword } from "@/utils/firebase/firebase";
+import {
+  loginUserWithEmailAndPassword,
+  signInWithGooglePopup,
+} from "@/utils/firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { useDispatch } from "react-redux";
+import { setLoadingUser } from "@/redux/auth/authSlice";
 
 type FormData = {
   email: string;
@@ -47,6 +54,7 @@ const Login = () => {
 
   const onSubmit = async (data: FormData) => {
     const { email, password } = data;
+    dispatch(setLoadingUser(true));
     try {
       await loginUserWithEmailAndPassword(email, password);
       dispatch(
@@ -61,6 +69,18 @@ const Login = () => {
         showNotification({ message: "Login failed", severity: "error" })
       );
     }
+  };
+
+  const logInWithGoogle = async () => {
+    dispatch(setLoadingUser(true));
+    await signInWithGooglePopup();
+    dispatch(
+      showNotification({
+        message: "You've successfully logged in",
+        severity: "success",
+      })
+    );
+    navigate(ROUTE.DASHBOARD);
   };
 
   return (
@@ -100,6 +120,13 @@ const Login = () => {
             </Grid>
           </Grid>
           <LoginDivider>Or log in with</LoginDivider>
+          <LoginWithGoogleButton
+            onClick={logInWithGoogle}
+            variant="outlined"
+            fullWidth
+          >
+            <GoogleImg src={GoogleIcon} alt="google icon" /> Google
+          </LoginWithGoogleButton>
           <ForgetPassword>Forget your password</ForgetPassword>
         </LoginForm>
         <SignUpSection>

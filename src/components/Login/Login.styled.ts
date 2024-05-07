@@ -89,4 +89,24 @@ export const ForgetPassword = styled(Typography)(() => ({
   textDecoration: "underline",
   fontSize: "16px",
   cursor: "pointer",
+  marginTop: "8px",
+}));
+
+export const LoginWithGoogleButton = styled(Button)(() => ({
+  display: "flex",
+  padding: "17px 26px",
+  justifyContent: "center",
+  alignItems: "center",
+  fontSize: "20px",
+  fontStyle: "normal",
+  letterSpacing: "0.4px",
+  width: "100%",
+  borderRadius: "40px",
+  textTransform: "none",
+}));
+
+export const GoogleImg = styled("img")(() => ({
+  width: "34px",
+  height: "34px",
+  marginRight: "10px",
 }));
