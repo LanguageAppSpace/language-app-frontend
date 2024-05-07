@@ -13,13 +13,13 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyBqhCApcT0cUZqNUgaKN1Asd-BkO9SZDF4",
-  authDomain: "discordprojectlanguageapp.firebaseapp.com",
-  databaseURL: "https://discordprojectlanguageapp-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "discordprojectlanguageapp",
-  storageBucket: "discordprojectlanguageapp.appspot.com",
-  messagingSenderId: "266885336157",
-  appId: "1:266885336157:web:50e374f88a025bcffa51b4"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_DATABASE_URL,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 // Initialize Firebase
@@ -29,23 +29,28 @@ const firebaseApp = initializeApp(firebaseConfig);
 const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
-  prompt: "select_account"
+  prompt: "select_account",
 });
 
 export const auth = getAuth();
 
 // Google Auth provider
-export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
 
 // Google Redirect
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 // Firestore
 export const db = getFirestore();
 
 // Function to create user document from authentication
-export const createUserDocumentFromAuth = async (userAuth: User, additionalInformation?: { displayName?: string }) => {
-  const userDocRef = doc(db, 'users', userAuth.uid);
+export const createUserDocumentFromAuth = async (
+  userAuth: User,
+  additionalInformation?: { displayName?: string }
+) => {
+  const userDocRef = doc(db, "users", userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
 
@@ -60,10 +65,10 @@ export const createUserDocumentFromAuth = async (userAuth: User, additionalInfor
         createdAt,
         ...(additionalInformation || {}), // Spread only if additionalInformation is provided
       });
-    } catch(error){
-      console.error('Error creating the user', error);
+    } catch (error) {
+      console.error("Error creating the user", error);
     }
-  } 
+  }
 
   return userDocRef;
 };
