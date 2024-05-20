@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import Login from "@/components/sign-in-form";
+import SignUpForm from "@/components/sign-up-form";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface User {
+  username: string;
+  password: string;
 }
 
-export default App
+const App = () => {
+  // NOTE: This local state will be replaced with another PR
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+
+  const handleLogin = (username: string, password: string) => {
+    const user = users.find(user => user.username === username && user.password === password);
+    if (user) {
+      setLoggedIn(true);
+    }
+  };
+
+  const handleRegister = (username: string, password: string) => {
+    if (!users.find(user => user.username === username)) {
+      setUsers(prevUsers => [...prevUsers, { username, password }]);
+    } 
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
+
+  return (
+    <div>
+      {loggedIn ? (
+        <div>
+          <h2>Jesteś zalogowany</h2>
+          <button onClick={handleLogout}>Wyloguj się</button>
+        </div>
+      ) : (
+        <div>
+          <Login onLogin={handleLogin} />
+          <SignUpForm onRegister={handleRegister} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
