@@ -19,7 +19,6 @@ const Features = () => {
           display: 'flex',
           alignItems: 'center',
           flexWrap: 'wrap',
-          width: '100vw',
           height: '800px',
         }}
       >

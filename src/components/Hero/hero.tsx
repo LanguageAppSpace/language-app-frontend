@@ -5,7 +5,6 @@ const Hero = () => {
   return (
     <Box
       sx={{
-        width: '100vw',
         height: '800px',
         backgroundColor: 'rgb(245, 252, 255)', 
         display: 'flex',
