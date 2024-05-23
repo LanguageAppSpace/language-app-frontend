@@ -32,10 +32,10 @@ import { showNotification } from "@/redux/notification/notificationSlice";
 import { useDispatch } from "react-redux";
 import { setLoadingUser } from "@/redux/auth/authSlice";
 
-type FormData = {
+interface FormData {
   email: string;
   password: string;
-};
+}
 
 const schema = Yup.object().shape({
   email: Yup.string().email().required("Email is required"),

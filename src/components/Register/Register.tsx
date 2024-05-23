@@ -23,13 +23,13 @@ import { ROUTE } from "@config/route.config";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { useDispatch } from "react-redux";
 
-type FormData = {
+interface FormData {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
-};
+}
 
 const schema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
