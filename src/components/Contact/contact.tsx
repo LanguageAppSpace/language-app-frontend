@@ -3,6 +3,7 @@ import { Box, Typography, TextField, Button, Grid, InputAdornment } from '@mui/m
 import EmailIcon from '@mui/icons-material/Email';
 
 const Contact = () => {
+
   const contactContainerStyles = {
     display: "flex",
     alignItems: "center",
@@ -26,19 +27,27 @@ const Contact = () => {
   const inputBoxStyles = {
     display: "flex",
     alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: "16px",
-    padding: "0 10px",
+    borderRadius: "24px",
+    padding: "8px 8px 8px 40px",
+    gap: "8px",
+    background: "rgba(255, 255, 255, 0.7)",
   };
 
+
   const textFieldStyles = {
+    display: "flex",
+    displayDirection: "row",
+    alignItem: "center",
+    padding: "8px 8px 8px 8px",
     marginRight: "10px",
-    width: "250px",
-    backgroundColor: "white",
-    borderRadius: "16px"
+    width: "80px",
+    gap: "8px",
+    background: "#1A2434",  
   };
 
   const buttonStyles = {
+    width: "127px",
+    height: "50px",
     backgroundColor: "rgb(22, 36, 52)",
     borderRadius: "16px",
     "&:hover": {

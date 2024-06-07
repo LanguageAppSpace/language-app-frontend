@@ -5,11 +5,15 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
+
 const Footer = () => {
   const footerContainerStyles = {
+    display: "flex",
+    flexDirection: "row",
     backgroundColor: "rgb(5, 20, 50)",
-    height: "150px",
-    padding: "40px",
+    height: "230px",
+    padding: "80px",
+    justifyContent: "space-between",
   };
 
   const columnHeaderStyles = {

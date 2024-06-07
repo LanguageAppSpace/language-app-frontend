@@ -3,6 +3,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const About = () => {
 
+
   const aboutContainerStyles = {
     backgroundColor: "rgb(245, 252, 255)",
     display: "flex",
@@ -10,6 +11,7 @@ const About = () => {
     flexWrap: "wrap",
     height: "800px",
     padding: "60px",
+    gap: "80px"
   };
 
   const imageGridItemStyles = {

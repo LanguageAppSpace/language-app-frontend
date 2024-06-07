@@ -4,13 +4,15 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const Features = () => {
 
+
   const featuresContainerStyles = {
     backgroundColor: "rgb(255,255,255)",
     display: "flex",
     alignItems: "center",
     flexWrap: "wrap",
-    height: "600px",
-    padding: "20px",
+    height: "660px",
+    padding: "80px",
+    gap: "80px",
   };
 
   const headerTypographyStyles = {
@@ -19,6 +21,7 @@ const Features = () => {
     textAlign: "center",
     width: "100%",
     fontWeight: "bold",
+    gap: "16px"
   };
 
   const iconStyles = {
@@ -28,9 +31,9 @@ const Features = () => {
   };
 
   const textTypographyStyles = {
-    color: "rgb(0,0,0)",
+    color: "#1A2434",
     textAlign: "start",
-    fontWeight: "semibold",
+    fontFamily: 'Plus Jakarta Sans',
   };
 
   const gridItemStyles = {

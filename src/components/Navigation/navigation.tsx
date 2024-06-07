@@ -4,7 +4,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 
 const Navigation = () => {
   
@@ -43,7 +42,6 @@ const Navigation = () => {
             aria-label="menu"
             sx={iconButtonStyles}
           >
-            <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={typographyStyles}>
             LOGO
