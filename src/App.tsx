@@ -1,5 +1,5 @@
 import Login from "@components/Login/Login";
-import SignUpForm from "./components/Register/Register";
+import SignUpForm from "@components/Register/Register";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,8 +7,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
-import Dashboard from "./components/Dashboard/Dashboard";
-import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
+import Dashboard from "@components/Dashboard/Dashboard";
+import ProtectedRoutes from "@components/ProtectedRoutes/ProtectedRoutes";
 
 const App = () => {
   return (
