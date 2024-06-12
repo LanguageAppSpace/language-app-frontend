@@ -23,7 +23,10 @@
     "paths": {
       "@/*": ["*"],
       "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"]
+      "@assets/*": ["assets/*"],
+      "@utils/*": ["utils/*"],
+      "@redux/*": ["redux/*"],
+      "@config/*": ["config/*"]
     }
   },
   "include": ["src"],
