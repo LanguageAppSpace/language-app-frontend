@@ -3,7 +3,19 @@ import { Box, Button, Typography } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import image from "/boy.jpeg";
 
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@config/route.config';
+
 const Hero = () => {
+
+  //handleLoginClick
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate(ROUTE.PAGE404);
+  };
+ 
+  //style
   const heroContainerStyles = {
     height: "800px",
     backgroundColor: "rgb(245, 252, 255)",
@@ -62,7 +74,7 @@ const Hero = () => {
         <Typography variant="body1" sx={bodyTypographyStyles}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. 
         </Typography>
-        <Button sx={buttonStyles} variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
+        <Button sx={buttonStyles} variant="contained" size="large" onClick={handleLoginClick} endIcon={<ArrowForwardIcon />}>
           LEARN MORE
         </Button>
       </Box>

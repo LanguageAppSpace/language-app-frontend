@@ -1,9 +1,19 @@
 import { Box, Grid, Typography, Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@config/route.config';
+
 const About = () => {
 
+  //handleLoginClick
+  const navigate = useNavigate();
 
+  const handleLoginClick = () => {
+    navigate(ROUTE.PAGE404);
+  };
+
+  //style
   const aboutContainerStyles = {
     backgroundColor: "rgb(245, 252, 255)",
     display: "flex",
@@ -65,7 +75,7 @@ const About = () => {
             asperiores omnis in, qui libero incidunt officia! Enim obcaecati optio facere in,
             officia sed exercitationem veniam incidunt cum! Ullam?
           </Typography>
-          <Button sx={buttonStyles} variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
+          <Button sx={buttonStyles} variant="contained" size="large" onClick={handleLoginClick} endIcon={<ArrowForwardIcon />}>
             Learn More
           </Button>
         </Grid>

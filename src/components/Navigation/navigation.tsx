@@ -5,8 +5,19 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@config/route.config';
+
 const Navigation = () => {
   
+  //handleLoginClick
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate(ROUTE.LOGIN);
+  };
+
+  //style
   const boxStyles = {
     flexGrow: 1,
   };
@@ -51,6 +62,7 @@ const Navigation = () => {
             size="large"
             color="primary"
             sx={buttonStyles}
+            onClick={handleLoginClick}
           >
             LOG IN
           </Button>

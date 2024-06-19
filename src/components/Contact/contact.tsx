@@ -2,8 +2,19 @@ import { Box, Typography, TextField, Button, Grid, InputAdornment } from '@mui/m
 
 import EmailIcon from '@mui/icons-material/Email';
 
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@config/route.config';
+
 const Contact = () => {
 
+  //handleLoginClick
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate(ROUTE.REGISTER);
+  };
+  
+  //style
   const contactContainerStyles = {
     display: "flex",
     alignItems: "center",
@@ -78,7 +89,7 @@ const Contact = () => {
               }}
               variant="filled"
             />
-            <Button variant="contained" sx={buttonStyles} size='large'>
+            <Button variant="contained" sx={buttonStyles} size='large' onClick={handleLoginClick}>
               Join now
             </Button>
           </Box>

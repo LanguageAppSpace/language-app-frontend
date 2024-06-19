@@ -3,4 +3,5 @@ export enum ROUTE {
   LOGIN = "/login",
   REGISTER = "/register",
   DASHBOARD = "/dashboard",
+  PAGE404 = "/error"
 }
