@@ -1,27 +1,20 @@
-import ReactDOM from 'react-dom/client'
-import React from 'react';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "App.tsx";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "theme/theme";
+import "index.css";
+import { Provider } from "react-redux";
+import store from "@redux/store";
+import Notification from "@components/Notification/Notification";
 
-import {
-  createBrowserRouter,
-  RouterProvider
-} from "react-router-dom";
-
-import App from './App'
-import Page404 from './pages/Page404';
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "*",
-    element: <Page404 />,
-  },
-]);
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+        <Notification />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>
-)
+);
