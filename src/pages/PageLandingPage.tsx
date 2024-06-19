@@ -6,9 +6,7 @@ import Testimonials from '../components/Testimonials/testimonials'
 import Contact from '../components/Contact/contact'
 import Footer from '../components/Footer/footer'
 
-import './index.css'
-
-const PageLayout = () => {
+const PageLandingPage = () => {
   return (
     <> 
       <Navigation />
@@ -22,4 +20,4 @@ const PageLayout = () => {
   )
 } 
 
-export default PageLayout
+export default PageLandingPage

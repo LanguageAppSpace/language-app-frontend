@@ -5,7 +5,6 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
-
 const Footer = () => {
   const footerContainerStyles = {
     display: "flex",
@@ -19,10 +18,12 @@ const Footer = () => {
   const columnHeaderStyles = {
     marginBottom: "10px",
     fontWeight: "bold",
+    color: "rgb(255, 255, 255)",
   };
 
   const textStyles = {
     marginBottom: "10px",
+    color: "rgb(179, 179, 179)",
   };
 
   const columnStyles = {
@@ -35,6 +36,7 @@ const Footer = () => {
     display: "flex",
     alignItems: "center",
     gap: "10px",
+    color: "rgb(179, 179, 179)",
   };
 
   return (

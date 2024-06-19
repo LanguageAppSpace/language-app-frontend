@@ -33,7 +33,6 @@ const Contact = () => {
     background: "rgba(255, 255, 255, 0.7)",
   };
 
-
   const textFieldStyles = {
     display: "flex",
     displayDirection: "row",

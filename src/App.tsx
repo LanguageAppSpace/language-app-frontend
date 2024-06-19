@@ -9,11 +9,13 @@ import {
 import { ROUTE } from "@config/route.config";
 import Dashboard from "@components/Dashboard/Dashboard";
 import ProtectedRoutes from "@components/ProtectedRoutes/ProtectedRoutes";
+import PageLandingPage from "./pages/PageLandingPage";
 
 const App = () => {
   return (
     <Router>
       <Routes>
+        <Route path={ROUTE.LANDINGPAGE} element={<PageLandingPage />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
         <Route element={<ProtectedRoutes />}>
