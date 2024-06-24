@@ -1,10 +1,10 @@
-import Navigation from '../components/Navigation/navigation'
-import Hero from '../components/Hero/hero'
-import Features from '../components/Features/features'
-import About from '../components/About/about'
-import Testimonials from '../components/Testimonials/testimonials'
-import Contact from '../components/Contact/contact'
-import Footer from '../components/Footer/footer'
+import Navigation from '../components/ComponentsOfLandingPage/About/Navigation/navigation'
+import Hero from '../components/ComponentsOfLandingPage/About/Hero/hero'
+import Features from '../components/ComponentsOfLandingPage/About/Features/features'
+import About from '../components/ComponentsOfLandingPage/About/about'
+import Testimonials from '../components/ComponentsOfLandingPage/About/Testimonials/testimonials'
+import Contact from '../components/ComponentsOfLandingPage/About/Contact/contact'
+import Footer from '../components/ComponentsOfLandingPage/About/Footer/footer'
 
 const PageLandingPage = () => {
   return (
