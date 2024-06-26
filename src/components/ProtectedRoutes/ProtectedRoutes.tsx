@@ -1,16 +1,12 @@
 import { ROUTE } from "@/config/route.config";
 import { Navigate, Outlet } from "react-router-dom";
-import useAuth from "@/hooks/useAuth";
-import { CircularProgress } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "@/redux/auth/authSlice";
 
 const ProtectedRoute = () => {
-  const { user, isUserLoading } = useAuth();
+  const isToken = useSelector(selectCurrentToken);
 
-  if (isUserLoading) {
-    return <CircularProgress />;
-  }
-
-  if (!user) {
+  if (!isToken) {
     return <Navigate to={ROUTE.LOGIN} replace />;
   }
 
