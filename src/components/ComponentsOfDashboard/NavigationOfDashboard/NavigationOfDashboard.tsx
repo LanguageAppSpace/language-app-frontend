@@ -13,7 +13,7 @@ const NavigationOfDashboard = () => {
   return (
     <>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{
           backgroundColor: "rgb(236, 177, 89)",
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -22,7 +22,7 @@ const NavigationOfDashboard = () => {
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               LOGO
             </Typography>
@@ -33,6 +33,7 @@ const NavigationOfDashboard = () => {
           </Toolbar>
         </Container>
       </AppBar>
+      <Toolbar />
     </>
   );
 };

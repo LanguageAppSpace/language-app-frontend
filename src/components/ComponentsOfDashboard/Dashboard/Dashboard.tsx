@@ -9,21 +9,21 @@ import {
   Toolbar,
 } from "@mui/material";
 
-
 import NavigationDashboard from "../NavigationOfDashboard/NavigationOfDashboard";
+import Main from "../Main/Main";
 
 const drawerWidth = 240;
 
 const Sidebar = () => {
-
   const drawer = (
     <div>
       <Toolbar />
-      <List sx={{ backgroundColor: "rgb(5, 20, 50)"}}>
+      <List sx={{ backgroundColor: "rgb(5, 20, 50)", width: drawerWidth }}>
         {["Dashboard", "New lesson", "Your lessons", "Logout"].map((text) => (
-          <ListItem key={text} >
+          <ListItem key={text}>
             <ListItemButton>
               <ListItemText primary={text} />
+              <Box component="main"></Box>
             </ListItemButton>
           </ListItem>
         ))}
@@ -32,37 +32,38 @@ const Sidebar = () => {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <CssBaseline />
       <NavigationDashboard />
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-      > 
+      <Box sx={{ display: "flex", flexGrow: 1 }}>
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            width: drawerWidth,
+            flexShrink: 0,
             "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
               width: drawerWidth,
+              boxSizing: "border-box",
             },
           }}
           open
         >
           {drawer}
         </Drawer>
-      </Box>
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Main />
+        </Box>
       </Box>
     </Box>
   );
