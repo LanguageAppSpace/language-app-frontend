@@ -9,6 +9,7 @@ import {
 import { ROUTE } from "@config/route.config";
 import Dashboard from "@components/Dashboard/Dashboard";
 import ProtectedRoutes from "@components/ProtectedRoutes/ProtectedRoutes";
+import UserSettings from "@components/UserSettings/UserSettings";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
         <Route element={<ProtectedRoutes />}>
           <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
+          <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
         </Route>
         <Route path="*" element={<Navigate to={ROUTE.REGISTER} replace />} />
       </Routes>
