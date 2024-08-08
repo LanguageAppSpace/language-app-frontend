@@ -11,18 +11,33 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }: {
         userId: AuthState["userId"];
         data: PasswordData;
-      }) => ({
-        url: `/user/change_password/${userId}`,
-        method: "PUT",
-        body: data,
-      }),
+      }) => {
+        const { oldPassword, newPassword, newPasswordConfirm } = data;
+        return {
+          url: `/user/change_password/${userId}/`,
+          method: "PUT",
+          body: {
+            old_password: oldPassword,
+            new_password: newPassword,
+            new_password_confirm: newPasswordConfirm,
+          },
+        };
+      },
     }),
     updateProfile: builder.mutation({
-      query: ({ data }: { data: ProfileData }) => ({
-        url: `user/profile/`,
-        method: "PATCH",
-        body: data,
-      }),
+      query: ({ data }: { data: ProfileData }) => {
+        const { firstName, lastName, photo, birthday } = data;
+        return {
+          url: `user/profile/`,
+          method: "PATCH",
+          body: {
+            first_name: firstName,
+            last_name: lastName,
+            photo,
+            birthday,
+          },
+        };
+      },
     }),
     deactivateAccount: builder.mutation<void, void>({
       query: () => ({
@@ -35,6 +50,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useChangePasswordMutation,
-  useDeactivateAccountMutation,
   useUpdateProfileMutation,
+  useDeactivateAccountMutation,
 } = userApiSlice;

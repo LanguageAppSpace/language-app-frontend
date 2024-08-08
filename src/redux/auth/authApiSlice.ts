@@ -10,7 +10,6 @@ interface LoginResponse {
 interface DecodedToken {
   user_id: string;
   username: string;
-  [key: string]: string | number;
 }
 
 export const authApiSlice = apiSlice.injectEndpoints({
