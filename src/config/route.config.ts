@@ -3,4 +3,5 @@ export enum ROUTE {
   REGISTER = "/register",
   DASHBOARD = "/dashboard",
   USER_SETTINGS = "/user-settings",
+  CREATE_LESSON = "/create-lesson",
 }

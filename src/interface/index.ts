@@ -10,3 +10,9 @@ export interface ProfileData {
   photo: string;
   birthday: Date;
 }
+
+export interface Lesson {
+  title: string;
+  description: string;
+  phrasePairs: { phraseOne: string; phraseTwo: string }[];
+}

@@ -10,6 +10,7 @@ import { ROUTE } from "@config/route.config";
 import Dashboard from "@components/Dashboard/Dashboard";
 import ProtectedRoutes from "@components/ProtectedRoutes/ProtectedRoutes";
 import UserSettings from "@components/UserSettings/UserSettings";
+import CreateLesson from "@/components/CreateLesson/CreateLesson";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
           <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
+          <Route path={ROUTE.CREATE_LESSON} element={<CreateLesson />} />
         </Route>
         <Route path="*" element={<Navigate to={ROUTE.REGISTER} replace />} />
       </Routes>
