@@ -3,7 +3,6 @@ import { Grid, Typography } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { createAuthUserWithEmailAndPassword } from "@utils/firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { StyledFormWrapper, LoginButton } from "@components/Login/Login.styled";
 import {
@@ -22,18 +21,17 @@ import Logo from "@assets/images/logo.svg";
 import { ROUTE } from "@config/route.config";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { useDispatch } from "react-redux";
+import { useRegisterUserMutation } from "@/redux/auth/authApiSlice";
 
 interface FormData {
-  firstName: string;
-  lastName: string;
+  username: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
 const schema = Yup.object().shape({
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
+  username: Yup.string().required("Username is required"),
   email: Yup.string().email().required("Email is required"),
   password: Yup.string()
     .required(" Password is required")
@@ -52,16 +50,18 @@ const SignUpForm: React.FC = () => {
   } = useForm<FormData>({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [registerUser] = useRegisterUserMutation();
 
   const handleSumbit = async (data: FormData) => {
     const userData = {
       email: data.email,
       password: data.password,
-      displayName: `${data.firstName} ${data.lastName}`,
+      username: data.username,
+      password_confirm: data.confirmPassword,
     };
 
     try {
-      await createAuthUserWithEmailAndPassword(userData);
+      await registerUser(userData).unwrap();
       dispatch(
         showNotification({
           message: " Your account has been created successfully.",
@@ -89,38 +89,27 @@ const SignUpForm: React.FC = () => {
               Create an account
             </RegisterFormTitle>
             <RegisterFormSubtitle>
-              Already have an account?{" "}
+              Already have an account?
               <LogInLink to={ROUTE.LOGIN}>Log in</LogInLink>
             </RegisterFormSubtitle>
             <Grid container direction="column">
               <FormRow>
-                <Grid item xs={6}>
-                  <FormInputLabel shrink={false} htmlFor={"firstName"}>
-                    <Typography>First name</Typography>
+                <Grid item xs={12}>
+                  <FormInputLabel shrink={false} htmlFor={"username"}>
+                    <Typography>Username</Typography>
                   </FormInputLabel>
                   <FormInput
                     fullWidth
-                    error={Boolean(errors.firstName)}
-                    helperText={errors.firstName?.message}
-                    {...register("firstName", { required: true })}
+                    error={Boolean(errors.username)}
+                    helperText={errors.username?.message}
+                    {...register("username", { required: true })}
                     variant="outlined"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <FormInputLabel shrink={false} htmlFor={"firstName"}>
-                    <Typography>Last name</Typography>
-                  </FormInputLabel>
-                  <FormInput
-                    fullWidth
-                    error={Boolean(errors.lastName)}
-                    helperText={errors.lastName?.message}
-                    {...register("lastName", { required: true })}
                   />
                 </Grid>
               </FormRow>
               <FormRow>
                 <Grid item xs={12}>
-                  <FormInputLabel shrink={false} htmlFor={"firstName"}>
+                  <FormInputLabel shrink={false} htmlFor={"email"}>
                     <Typography>Email address</Typography>
                   </FormInputLabel>
                   <FormInput
@@ -133,7 +122,7 @@ const SignUpForm: React.FC = () => {
               </FormRow>
               <FormRow>
                 <Grid item xs={6} spacing={2}>
-                  <FormInputLabel shrink={false} htmlFor={"firstName"}>
+                  <FormInputLabel shrink={false} htmlFor={"password"}>
                     <Typography>Password</Typography>
                   </FormInputLabel>
                   <FormInput
@@ -145,7 +134,7 @@ const SignUpForm: React.FC = () => {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <FormInputLabel shrink={false} htmlFor={"firstName"}>
+                  <FormInputLabel shrink={false} htmlFor={"confirmPassword"}>
                     <Typography>Confirm your password</Typography>
                   </FormInputLabel>
                   <FormInput

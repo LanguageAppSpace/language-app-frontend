@@ -1,7 +1,7 @@
 import { ROUTE } from "@/config/route.config";
-import { clearUser, clearAccessToken } from "@/redux/auth/authSlice";
+import { useLogOutUserMutation } from "@/redux/auth/authApiSlice";
+import { logOut } from "@/redux/auth/authSlice";
 import { showNotification } from "@/redux/notification/notificationSlice";
-import { auth } from "@/utils/firebase/firebase";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 const LogOutButton = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [logOutUser] = useLogOutUserMutation();
 
-  const logOut = async () => {
+  const onLogOut = async () => {
     try {
-      await auth.signOut();
-      dispatch(clearUser());
-      dispatch(clearAccessToken());
+      await logOutUser();
+      dispatch(logOut());
       navigate(ROUTE.LOGIN);
     } catch {
       dispatch(
@@ -28,7 +28,7 @@ const LogOutButton = () => {
   };
 
   return (
-    <Button onClick={logOut} variant="contained">
+    <Button onClick={onLogOut} variant="contained">
       Log out
     </Button>
   );
