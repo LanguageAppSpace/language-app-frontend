@@ -1,5 +1,5 @@
 export enum ROUTE {
-  LANDINGPAGE = "/home",
+  LANDING_PAGE = "/home",
   LOGIN = "/login",
   REGISTER = "/register",
   DASHBOARD = "/dashboard",

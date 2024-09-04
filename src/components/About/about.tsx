@@ -1,27 +1,20 @@
-import { Box, Grid, Typography, Button } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Box, Grid, Typography, Button } from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import { useNavigate } from 'react-router-dom';
-import { ROUTE } from '@config/route.config';
+import { useNavigate } from "react-router-dom";
+import { ROUTE } from "@config/route.config";
+import { Container } from "@mui/system";
 
 const About = () => {
-
-  //handleLoginClick
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
     navigate(ROUTE.PAGE404);
   };
 
-  //style
   const aboutContainerStyles = {
     backgroundColor: "rgb(245, 252, 255)",
-    display: "flex",
-    alignItems: "center",
-    flexWrap: "wrap",
-    height: "800px",
-    padding: "60px",
-    gap: "80px"
+    padding: "30px 0",
   };
 
   const imageGridItemStyles = {
@@ -56,30 +49,41 @@ const About = () => {
       backgroundColor: "rgb(30, 42, 50)",
     },
     width: "307px",
-
   };
-
 
   return (
     <Box sx={aboutContainerStyles}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} sx={imageGridItemStyles}>
-          <img src="/children.png" alt="Children" style={{ maxWidth: "100%" }} />
+      <Container maxWidth="xl">
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} sx={imageGridItemStyles}>
+            <img
+              src="/children.png"
+              alt="Children"
+              style={{ maxWidth: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} sx={textGridItemStyles}>
+            <Typography variant="h4" sx={headerTypographyStyles}>
+              E-Learning Platform for Learning Language
+            </Typography>
+            <Typography variant="body1" sx={bodyTypographyStyles}>
+              Unlock a world of opportunities with our interactive and engaging
+              language courses. Whether you're a beginner or looking to perfect
+              your skills, our platform offers a personalized learning
+              experience to help you achieve fluency at your own pace.
+            </Typography>
+            <Button
+              sx={buttonStyles}
+              variant="contained"
+              size="large"
+              onClick={handleLoginClick}
+              endIcon={<ArrowForwardIcon />}
+            >
+              Learn More
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} sx={textGridItemStyles}>
-          <Typography variant="h4" sx={headerTypographyStyles}>
-            E-Learning Platform for Learning Language
-          </Typography>
-          <Typography variant="body1" sx={bodyTypographyStyles}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione sint sapiente
-            asperiores omnis in, qui libero incidunt officia! Enim obcaecati optio facere in,
-            officia sed exercitationem veniam incidunt cum! Ullam?
-          </Typography>
-          <Button sx={buttonStyles} variant="contained" size="large" onClick={handleLoginClick} endIcon={<ArrowForwardIcon />}>
-            Learn More
-          </Button>
-        </Grid>
-      </Grid>
+      </Container>
     </Box>
   );
 };

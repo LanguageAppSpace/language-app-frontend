@@ -17,7 +17,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path={ROUTE.LANDINGPAGE} element={<PageLandingPage />} />
+        <Route path={ROUTE.LANDING_PAGE} element={<PageLandingPage />} />
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
@@ -25,7 +25,10 @@ const App = () => {
           <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
           <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
         </Route>
-        <Route path="*" element={<Navigate to={ROUTE.REGISTER} replace />} />
+        <Route
+          path="*"
+          element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
+        />
       </Routes>
     </Router>
   );

@@ -1,15 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import StarIcon from "@mui/icons-material/Star";
+import { Container } from "@mui/system";
 
 const Testimonials = () => {
   const containerStyles = {
     backgroundColor: "rgb(255,255,255)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    height: "600px",
-    paddingTop: "20px",
+    padding: "60px 0",
   };
 
   const headerBoxStyles = {
@@ -22,21 +19,12 @@ const Testimonials = () => {
   const headerTypographyStyles = {
     color: "rgb(0,0,0)",
     fontWeight: "bold",
-    paddingBottom: "80px",
-  };
-
-  const testimonialsContainerStyles = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "90px",
-    color: "black",
+    paddingBottom: "20px",
   };
 
   const testimonialBoxStyles = {
     backgroundColor: "rgb(250,250,250)",
     padding: "20px",
-    textAlign: "left",
-    width: "300px",
     boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
   };
 
@@ -78,103 +66,106 @@ const Testimonials = () => {
 
   return (
     <Box sx={containerStyles}>
-      <Box sx={headerBoxStyles}>
-        <Typography variant="h4" sx={headerTypographyStyles}>
-          What others think:
-        </Typography>
-      </Box>
-
-      <Box sx={testimonialsContainerStyles}>
-        <Box sx={testimonialBoxStyles}>
-          <Box sx={imageContainerStyles}>
-            <img
-              src="boy-testimonial.jpg"
-              alt="Boy-testimonial-image"
-              style={{ width: "100px", height: "100px" }}
-            />
-            <Box sx={testimonialTextContainerStyles}>
-              <Typography variant="body1" sx={nameTextStyles}>
-                Michael Wong
-              </Typography>
-              <Typography variant="body2" sx={professionTextStyles}>
-                Footballer
-              </Typography>
-              <Box sx={iconContainerStyles}>
-                <StarIcon />
-                <Typography variant="body2" sx={iconTextStyles}>
-                  4.9
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-          <Typography variant="body1" sx={footerTextStyles}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim nisi
-            esse unde fugit dicta, saepe earum ipsa a quisquam deserunt, fugiat
-            blanditiis. Magni architecto minus earum culpa commodi mollitia
-            eaque.{" "}
+      <Container maxWidth="xl">
+        <Box sx={headerBoxStyles}>
+          <Typography variant="h4" sx={headerTypographyStyles}>
+            What others think:
           </Typography>
         </Box>
 
-        <Box sx={testimonialBoxStyles}>
-          <Box sx={imageContainerStyles}>
-            <img
-              src="girl-testimonial.jpg"
-              alt="Girl-testimonial-image"
-              style={{ width: "100px", height: "100px" }}
-            />
-            <Box sx={testimonialTextContainerStyles}>
-              <Typography variant="body1" sx={nameTextStyles}>
-                Avril Song
-              </Typography>
-              <Typography variant="body2" sx={professionTextStyles}>
-                Project manager
-              </Typography>
-              <Box sx={iconContainerStyles}>
-                <StarIcon />
-                <Typography variant="body2" sx={iconTextStyles}>
-                  4.8
-                </Typography>
+        <Grid container justifyContent="space-between" spacing={6}>
+          <Grid item xs={12} sm={4}>
+            <Box sx={testimonialBoxStyles}>
+              <Box sx={imageContainerStyles}>
+                <img
+                  src="boy-testimonial.jpg"
+                  alt="Boy-testimonial-image"
+                  style={{ width: "100px", height: "100px" }}
+                />
+                <Box sx={testimonialTextContainerStyles}>
+                  <Typography variant="body1" sx={nameTextStyles}>
+                    Michael Wong
+                  </Typography>
+                  <Typography variant="body2" sx={professionTextStyles}>
+                    Footballer
+                  </Typography>
+                  <Box sx={iconContainerStyles}>
+                    <StarIcon />
+                    <Typography variant="body2" sx={iconTextStyles}>
+                      4.9
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
+              <Typography variant="body1" sx={footerTextStyles}>
+                Learning a new language has never been easier! The app's
+                interactive lessons fit perfectly into my busy schedule, helping
+                me connect with teammates from around the world.
+              </Typography>
             </Box>
-          </Box>
-          <Typography variant="body1" sx={footerTextStyles}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-            molestias nobis, quia alias, minus sunt repellat quo iure architecto
-            voluptate ut earum assumenda esse ex dolor velit voluptas voluptatem
-            facere!{" "}
-          </Typography>
-        </Box>
-
-        <Box sx={testimonialBoxStyles}>
-          <Box sx={imageContainerStyles}>
-            <img
-              src="girl2-testimonial.jpg"
-              alt="Girl2-testimonial-image"
-              style={{ width: "100px", height: "100px" }}
-            />
-            <Box sx={testimonialTextContainerStyles}>
-              <Typography variant="body1" sx={nameTextStyles}>
-                Jeane Wood
-              </Typography>
-              <Typography variant="body2" sx={professionTextStyles}>
-                Philosophy student
-              </Typography>
-              <Box sx={iconContainerStyles}>
-                <StarIcon />
-                <Typography variant="body2" sx={iconTextStyles}>
-                  5.0
-                </Typography>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Box sx={testimonialBoxStyles}>
+              <Box sx={imageContainerStyles}>
+                <img
+                  src="girl-testimonial.jpg"
+                  alt="Girl-testimonial-image"
+                  style={{ width: "100px", height: "100px" }}
+                />
+                <Box sx={testimonialTextContainerStyles}>
+                  <Typography variant="body1" sx={nameTextStyles}>
+                    Avril Song
+                  </Typography>
+                  <Typography variant="body2" sx={professionTextStyles}>
+                    Project manager
+                  </Typography>
+                  <Box sx={iconContainerStyles}>
+                    <StarIcon />
+                    <Typography variant="body2" sx={iconTextStyles}>
+                      4.8
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
+              <Typography variant="body1" sx={footerTextStyles}>
+                The personalized approach to learning is fantastic. I was able
+                to focus on the specific skills I needed for my job, and now I
+                can communicate confidently with international clients.
+              </Typography>
             </Box>
-          </Box>
-          <Typography variant="body1" sx={footerTextStyles}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-            provident nobis atque iusto architecto sapiente, perspiciatis illum
-            quae commodi delectus accusamus impedit debitis velit voluptatum
-            dicta nulla hic harum voluptatibus!
-          </Typography>
-        </Box>
-      </Box>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Box sx={testimonialBoxStyles}>
+              <Box sx={imageContainerStyles}>
+                <img
+                  src="girl2-testimonial.jpg"
+                  alt="Girl2-testimonial-image"
+                  style={{ width: "100px", height: "100px" }}
+                />
+                <Box sx={testimonialTextContainerStyles}>
+                  <Typography variant="body1" sx={nameTextStyles}>
+                    Jeane Wood
+                  </Typography>
+                  <Typography variant="body2" sx={professionTextStyles}>
+                    Philosophy student
+                  </Typography>
+                  <Box sx={iconContainerStyles}>
+                    <StarIcon />
+                    <Typography variant="body2" sx={iconTextStyles}>
+                      5.0
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+              <Typography variant="body1" sx={footerTextStyles}>
+                This app is a game-changer! The lessons are engaging and really
+                helped me grasp complex language concepts quickly. I’m now
+                exploring philosophical texts in their original language.
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
     </Box>
   );
 };
