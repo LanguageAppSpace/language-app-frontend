@@ -27,18 +27,21 @@ const Main = () => {
       phrases: "14 phrases",
       progress: 50,
       path: "/restaurant-and-food",
+      id: 1,
     },
     {
       title: "Traveling",
       phrases: "25 phrases",
       progress: 50,
       path: "/traveling",
+      id: 2,
     },
     {
       title: "Idioms about weather",
       phrases: "15 phrases",
       progress: 50,
       path: "/idioms-about-weather",
+      id: 3,
     },
   ];
 
@@ -66,7 +69,12 @@ const Main = () => {
         <Grid item xs={12} md={6} sx={{ textAlign: "right" }}>
           <img src="/people.jpg" alt="Hello" style={{ maxHeight: "300px" }} />
         </Grid>
-        <Grid item xs={12} md={6} sx={{ display: "flex", alignItems: "center", marginTop: "20px"}}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{ display: "flex", alignItems: "center", marginTop: "20px" }}
+        >
           <Typography variant="h6" component="span" sx={{ color: "black" }}>
             Review your lessons
           </Typography>
@@ -89,7 +97,7 @@ const Main = () => {
           <Typography variant="h6">Review your lessons</Typography>
         </Grid>
         {lessons.map((lesson) => (
-          <Grid item xs={12} md={4} key={lesson.title}>
+          <Grid item xs={12} md={4} key={lesson.id}>
             <Card
               sx={{
                 height: "150px",

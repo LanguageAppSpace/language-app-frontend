@@ -10,10 +10,8 @@ import {
 } from "@mui/material";
 import { To, useNavigate } from "react-router-dom";
 
-import NavigationDashboard from "../NavigationOfDashboard/NavigationOfDashboard";
-import Main from "../Main/Main";
-
-const drawerWidth = 240;
+import NavigationDashboard from "@components/ComponentsOfDashboard/NavigationOfDashboard/NavigationOfDashboard";
+import Main from "@components/ComponentsOfDashboard/Main/Main";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -22,10 +20,18 @@ const Sidebar = () => {
     navigate(path);
   };
 
+  const drawerWidth = 240;
+
   const drawer = (
-    <div>
-      <Toolbar />
-      <List sx={{ backgroundColor: "rgb(5, 20, 50)", width: drawerWidth }}>
+    <>
+      <Toolbar sx={{ backgroundColor: "rgb(5, 20, 50)" }} />
+      <List
+        sx={{
+          backgroundColor: "rgb(5, 20, 50)",
+          width: drawerWidth,
+          height: "100%",
+        }}
+      >
         {[
           { text: "Dashboard", path: "/dashboard" },
           { text: "New lesson", path: "/error" },
@@ -39,14 +45,20 @@ const Sidebar = () => {
           </ListItem>
         ))}
       </List>
-    </div>
+    </>
   );
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <CssBaseline />
       <NavigationDashboard />
-      <Box sx={{ display: "flex", flexGrow: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexGrow: 1,
+          height: "100%",
+        }}
+      >
         <Drawer
           variant="permanent"
           sx={{
@@ -55,6 +67,7 @@ const Sidebar = () => {
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
+              overflow: "hidden",
             },
           }}
           open
