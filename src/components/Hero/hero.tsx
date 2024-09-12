@@ -6,7 +6,6 @@ import { ROUTE } from "@config/route.config";
 import { Container } from "@mui/system";
 
 const Hero = () => {
-  //handleLoginClick
   const navigate = useNavigate();
 
   const handleLoginClick = () => {

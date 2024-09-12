@@ -1,23 +1,23 @@
-import Navigation from '../components/Navigation/navigation'
-import Hero from '../components/Hero/hero'
-import Features from '../components/Features/features'
-import About from '../components/About/about'
-import Testimonials from '../components/Testimonials/testimonials'
-import Contact from '../components/Contact/contact'
-import Footer from '../components/Footer/footer'
+import About from "@/components/About/About";
+import Contact from "@/components/Contact/Contact";
+import Features from "@/components/Features/Features";
+import Footer from "@/components/Footer/Footer";
+import Hero from "@/components/Hero/Hero";
+import Navigation from "@/components/Navigation/Navigation";
+import Testimonials from "@/components/Testimonials/Testimonials";
 
 const PageLandingPage = () => {
   return (
-    <> 
+    <>
       <Navigation />
       <Hero />
       <Features />
       <About />
       <Testimonials />
-      <Contact /> 
+      <Contact />
       <Footer />
     </>
-  )
-} 
+  );
+};
 
-export default PageLandingPage
+export default PageLandingPage;

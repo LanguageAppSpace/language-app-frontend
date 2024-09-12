@@ -1,23 +1,20 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 
-import { useNavigate } from 'react-router-dom';
-import { ROUTE } from '@config/route.config';
+import { useNavigate } from "react-router-dom";
+import { ROUTE } from "@config/route.config";
 
 const Navigation = () => {
-  
-  //handleLoginClick
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
     navigate(ROUTE.LOGIN);
   };
 
-  //style
   const boxStyles = {
     flexGrow: 1,
   };
@@ -52,8 +49,7 @@ const Navigation = () => {
             color="inherit"
             aria-label="menu"
             sx={iconButtonStyles}
-          >
-          </IconButton>
+          ></IconButton>
           <Typography variant="h6" component="div" sx={typographyStyles}>
             LOGO
           </Typography>
@@ -70,6 +66,6 @@ const Navigation = () => {
       </AppBar>
     </Box>
   );
-}
+};
 
 export default Navigation;

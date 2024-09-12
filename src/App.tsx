@@ -9,8 +9,8 @@ import {
 import { ROUTE } from "@config/route.config";
 import Dashboard from "@components/Dashboard/Dashboard";
 import ProtectedRoutes from "@components/ProtectedRoutes/ProtectedRoutes";
-import PageLandingPage from "./pages/PageLandingPage";
-import Page404 from "./pages/Page404";
+import PageLandingPage from "@pages/PageLandingPage";
+import Page404 from "@pages/Page404";
 import UserSettings from "@components/UserSettings/UserSettings";
 
 const App = () => {
