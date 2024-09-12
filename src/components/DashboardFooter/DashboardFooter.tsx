@@ -6,7 +6,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Container } from "@mui/system";
 
-const Footer = () => {
+const DashboardFooter = () => {
   const footerContainerStyles = {
     display: "flex",
     flexDirection: "row",
@@ -138,4 +138,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default DashboardFooter;
