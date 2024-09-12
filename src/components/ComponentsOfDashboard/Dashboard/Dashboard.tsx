@@ -9,7 +9,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import { To, useNavigate } from "react-router-dom";
-
+import { sidebarLinks } from "@/config/data";
 import NavigationDashboard from "@components/ComponentsOfDashboard/NavigationOfDashboard/NavigationOfDashboard";
 import Main from "@components/ComponentsOfDashboard/Main/Main";
 
@@ -32,12 +32,7 @@ const Sidebar = () => {
           height: "100%",
         }}
       >
-        {[
-          { text: "Dashboard", path: "/dashboard" },
-          { text: "New lesson", path: "/error" },
-          { text: "Your lessons", path: "/error" },
-          { text: "Logout", path: "/login" },
-        ].map((item) => (
+        {sidebarLinks.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton onClick={() => handleNavigation(item.path)}>
               <ListItemText primary={item.text} sx={{ color: "white" }} />
