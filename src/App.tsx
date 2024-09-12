@@ -12,6 +12,7 @@ import ProtectedRoutes from "@components/ProtectedRoutes/ProtectedRoutes";
 import PageLandingPage from "@pages/PageLandingPage";
 import Page404 from "@pages/Page404";
 import UserSettings from "@components/UserSettings/UserSettings";
+import CreateLesson from "@/components/CreateLesson/CreateLesson";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
           <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
+          <Route path={ROUTE.CREATE_LESSON} element={<CreateLesson />} />
         </Route>
         <Route
           path="*"

@@ -5,4 +5,5 @@ export enum ROUTE {
   DASHBOARD = "/dashboard",
   PAGE404 = "/error",
   USER_SETTINGS = "/user-settings",
+  CREATE_LESSON = "/create-lesson",
 }
