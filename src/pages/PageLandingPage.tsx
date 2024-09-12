@@ -1,10 +1,10 @@
-import Navigation from "@components/ComponentsOfLandingPage/Navigation/navigation";
-import Hero from "@components//ComponentsOfLandingPage/Hero/hero";
-import Features from "@components//ComponentsOfLandingPage/Features/features";
-import About from "@components//ComponentsOfLandingPage/About/about";
-import Testimonials from "@components//ComponentsOfLandingPage/Testimonials/testimonials";
-import Contact from "@components//ComponentsOfLandingPage/Contact/contact";
-import Footer from "@components//ComponentsOfLandingPage/Footer/footer";
+import About from "@/components/About/About";
+import Contact from "@/components/Contact/Contact";
+import Features from "@/components/Features/Features";
+import DashboardFooter from "@/components/DashboardFooter/DashboardFooter";
+import Hero from "@/components/Hero/Hero";
+import Navigation from "@/components/Navigation/Navigation";
+import Testimonials from "@/components/Testimonials/Testimonials";
 
 const PageLandingPage = () => {
   return (
@@ -15,7 +15,7 @@ const PageLandingPage = () => {
       <About />
       <Testimonials />
       <Contact />
-      <Footer />
+      <DashboardFooter />
     </>
   );
 };

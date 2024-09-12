@@ -26,7 +26,9 @@
       "@assets/*": ["assets/*"],
       "@utils/*": ["utils/*"],
       "@redux/*": ["redux/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@pages/*": ["pages/*"],
+      "@interface/*": ["interface/*"],
     }
   },
   "include": ["src"],
