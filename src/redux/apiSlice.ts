@@ -6,6 +6,8 @@ import type {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 import { RootState } from "@redux/store";
+import camelcaseKeys from "camelcase-keys";
+import snakecaseKeys from "snakecase-keys";
 
 const getAccessToken = (state: RootState): string | null => {
   let accessToken: AuthState["accessToken"] = state.auth.accessToken;
@@ -33,6 +35,9 @@ const baseQueryWithReauth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+  if (typeof args !== "string" && args.body) {
+    args.body = snakecaseKeys(args.body, { deep: true });
+  }
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
@@ -46,7 +51,9 @@ const baseQueryWithReauth: BaseQueryFn<
       api.dispatch(logOut());
     }
   }
-
+  if (result) {
+    result = camelcaseKeys(result, { deep: true });
+  }
   return result;
 };
 
