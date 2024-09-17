@@ -8,8 +8,11 @@ import {
   ButtonAddVocabulary,
   ButtonCreateLesson,
 } from "@components/CreateLesson/CreateLesson.styled";
-import { FormInput, FormInputLabel } from "../Register/Register.styled";
-import Footer from "../Footer/Footer";
+import {
+  FormInput,
+  FormInputLabel,
+} from "@components/Register/Register.styled";
+import Footer from "@components/Footer/Footer";
 import { useCreateNewLessonMutation } from "@/redux/lessons/lessonsApiSlice";
 import { Lesson } from "@/interface";
 

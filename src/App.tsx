@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
-import Dashboard from "./components/ComponentsOfDashboard/Dashboard/Dashboard";
+import Dashboard from "@components/ComponentsOfDashboard/Dashboard/Dashboard";
 import ProtectedRoutes from "@components/ProtectedRoutes/ProtectedRoutes";
 import PageLandingPage from "@pages/PageLandingPage";
 import Page404 from "@pages/Page404";
