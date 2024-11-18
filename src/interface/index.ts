@@ -11,8 +11,17 @@ export interface ProfileData {
   birthday: Date;
 }
 
-export interface Lesson {
+export interface PhrasePairs {
+  phraseOne: string;
+  phraseTwo: string;
+}
+
+export interface NewLesson {
   title: string;
   description: string;
-  phrasePairs: { phraseOne: string; phraseTwo: string }[];
+  phrasePairs: PhrasePairs[];
+}
+
+export interface Lesson extends NewLesson {
+  id: string;
 }

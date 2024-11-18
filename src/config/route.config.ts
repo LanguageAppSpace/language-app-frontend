@@ -6,4 +6,5 @@ export enum ROUTE {
   PAGE404 = "/error",
   USER_SETTINGS = "/user-settings",
   CREATE_LESSON = "/create-lesson",
+  EDIT_LESSON = "/edit-lesson/:lessonId",
 }
