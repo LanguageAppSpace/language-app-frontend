@@ -1,13 +1,4 @@
-import {
-  Box,
-  CssBaseline,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Toolbar,
-} from "@mui/material";
+import { SidebarContainer, ContentWrapper, CustomDrawer, DrawerToolbar, DrawerList, CustomListItemButton, CustomListItemText} from '@components/ComponentsOfDashboard/Dashboard/Dashboard.styled.ts'
 import { To, useNavigate } from "react-router-dom";
 import { sidebarLinks } from "@/config/data";
 import NavigationDashboard from "@components/ComponentsOfDashboard/NavigationOfDashboard/NavigationOfDashboard";
@@ -24,67 +15,41 @@ const Sidebar = () => {
 
   const drawer = (
     <>
-      <Toolbar sx={{ backgroundColor: "rgb(5, 20, 50)" }} />
-      <List
-        sx={{
-          backgroundColor: "rgb(5, 20, 50)",
-          width: drawerWidth,
-          height: "100%",
-        }}
-      >
-        {sidebarLinks.map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton onClick={() => handleNavigation(item.path)}>
-              <ListItemText primary={item.text} sx={{ color: "white" }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </>
+      <DrawerToolbar/>
+        <DrawerList>
+            {sidebarLinks.map((item) => (
+                <ListItemButton key={item.text} disablePadding>
+                    <CustomListItemButton onClick={() => handleNavigation(item.path)}>
+                        <CustomListItemText primary={item.text} />
+                    </CustomListItemButton>
+                </ListItemButton>
+            ))}
+        </DrawerList>
+        </>
   );
-
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <CssBaseline />
-      <NavigationDashboard />
-      <Box
-        sx={{
-          display: "flex",
-          flexGrow: 1,
-          height: "100%",
-        }}
-      >
-        <Drawer
-          variant="permanent"
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-              overflow: "hidden",
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Main />
-        </Box>
-      </Box>
-    </Box>
+      <SidebarContainer>
+          <CssBaseline />
+          <NavigationDashboard />
+          <ContentWrapper>
+              <CustomDrawer variant="permanent" open>
+                  {drawer}
+              </CustomDrawer>
+              <Box
+                  component="main"
+                  sx={{
+                      flexGrow: 1,
+                      p: 3,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                  }}
+              >
+                  <Main />
+              </Box>
+          </ContentWrapper>
+      </SidebarContainer>
   );
 };
 
