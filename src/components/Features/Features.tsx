@@ -1,139 +1,111 @@
-import { Grid, Typography, Box, Button } from "@mui/material";
+import { Grid, Typography, Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Container } from "@mui/system";
+import styled from "@emotion/styled";
+
+const FeaturesContainer = styled.div`
+  background-color: rgb(255, 255, 255);
+  padding: 80px 0;
+`;
+
+const FeatureIcon = styled.img`
+  height: 80px;
+  width: 80px;
+  margin-bottom: 10px;
+`;
+
+const FeaturesHeader = styled(Typography)`
+  color: rgb(0, 0, 0);
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 34px;
+  gap: 16px;
+`;
+
+const BodyText = styled.p`
+  margin-top: 20px;
+  font-family: Poppins;
+`;
+
+const FeatureHeader = styled(Typography)`
+  color: #1a2434;
+  text-align: start;
+  font-weight: 700;
+`;
+
+const LearnMoreButton = styled(Button)`
+  background-color: rgb(255, 255, 255);
+  color: black;
+  justify-content: start;
+  padding: 0;
+
+  &:hover {
+    background-color: rgb(250, 250, 255);
+  }
+`;
+
+const FeatureItem = styled(Grid)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
 
 const Features = () => {
-  const featuresContainerStyles = {
-    backgroundColor: "rgb(255,255,255)",
-    padding: "80px 0",
-  };
-
-  const headerTypographyStyles = {
-    color: "rgb(0,0,0)",
-    marginBottom: "20px",
-    textAlign: "center",
-    width: "100%",
-    fontWeight: "bold",
-    gap: "16px",
-  };
-
-  const iconStyles = {
-    height: "80px",
-    width: "80px",
-    marginBottom: "10px",
-  };
-
-  const textTypographyStyles = {
-    color: "#1A2434",
-    textAlign: "start",
-    fontWeight: "bold",
-  };
-
-  const bodyTextTypographyStyles = {
-    marginTop: "20px",
-    lineHeight: 1.5,
-  };
-
-  const gridItemStyles = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-  };
-
-  const buttonStyles = {
-    backgroundColor: "rgb(255,255,255)",
-    "&:hover": {
-      backgroundColor: "rgb(250, 250, 255)",
-    },
-    color: "black",
-    justifyContent: "start",
-    padding: 0,
-    marginTop: "10px",
-  };
-
   return (
-    <Box sx={featuresContainerStyles}>
+    <FeaturesContainer>
       <Container maxWidth="xl">
-        <Typography variant="h4" sx={headerTypographyStyles}>
-          Best learning experience
-        </Typography>
+        <FeaturesHeader>Best learning experience</FeaturesHeader>
         <Grid container spacing={6}>
-          <Grid item xs={6} sm={3} sx={gridItemStyles}>
-            <img src="/human.svg" alt="Human Icon" style={iconStyles} />
-            <Typography variant="h6" sx={textTypographyStyles}>
-              Free. Fun. Effective.
-            </Typography>
-            <Typography variant="body1" sx={bodyTextTypographyStyles}>
+          <FeatureItem item xs={6} sm={3}>
+            <FeatureIcon src="/human.svg" alt="Human Icon" />
+            <FeatureHeader variant="h6">Free. Fun. Effective.</FeatureHeader>
+            <BodyText>
               Enjoy learning at no cost with our engaging and proven methods.
               Discover a fun way to enhance your language skills effectively!
-            </Typography>
-            <Button
-              sx={buttonStyles}
-              variant="text"
-              endIcon={<ArrowForwardIcon />}
-            >
+            </BodyText>
+            <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
               Learn more
-            </Button>
-          </Grid>
-          <Grid item xs={6} sm={3} sx={gridItemStyles}>
-            <img src="/remote.svg" alt="Remote Icon" style={iconStyles} />
-            <Typography variant="h6" sx={textTypographyStyles}>
-              Interactive learning
-            </Typography>
-            <Typography variant="body1" sx={bodyTextTypographyStyles}>
+            </LearnMoreButton>
+          </FeatureItem>
+          <FeatureItem item xs={6} sm={3}>
+            <FeatureIcon src="/remote.svg" alt="Remote Icon" />
+            <FeatureHeader variant="h6">Interactive learning</FeatureHeader>
+            <BodyText>
               Dive into interactive lessons designed to keep you engaged and
               motivated. Practice in real-time and get immediate feedback to
               improve faster
-            </Typography>
-            <Button
-              sx={buttonStyles}
-              variant="text"
-              endIcon={<ArrowForwardIcon />}
-            >
+            </BodyText>
+            <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
               Learn more
-            </Button>
-          </Grid>
-          <Grid item xs={6} sm={3} sx={gridItemStyles}>
-            <img src="/padlock.svg" alt="Padlock Icon" style={iconStyles} />
-            <Typography variant="h6" sx={textTypographyStyles}>
-              Learn anytime, anywhere
-            </Typography>
-            <Typography variant="body1" sx={bodyTextTypographyStyles}>
+            </LearnMoreButton>
+          </FeatureItem>
+          <FeatureItem item xs={6} sm={3}>
+            <FeatureIcon src="/padlock.svg" alt="Padlock Icon" />
+            <FeatureHeader variant="h6">Learn anytime, anywhere</FeatureHeader>
+            <BodyText>
               Access your courses anytime, anywhere. Whether you're on the go or
               at home, your learning experience is always within reach.
-            </Typography>
-            <Button
-              sx={buttonStyles}
-              variant="text"
-              endIcon={<ArrowForwardIcon />}
-            >
+            </BodyText>
+            <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
               Learn more
-            </Button>
-          </Grid>
-          <Grid item xs={6} sm={3} sx={gridItemStyles}>
-            <img
-              src="/certificate.svg"
-              alt="Certificate Icon"
-              style={iconStyles}
-            />
-            <Typography variant="h6" sx={textTypographyStyles}>
-              Personalized learning
-            </Typography>
-            <Typography variant="body1" sx={bodyTextTypographyStyles}>
+            </LearnMoreButton>
+          </FeatureItem>
+          <FeatureItem item xs={6} sm={3}>
+            <FeatureIcon src="/certificate.svg" alt="Certificate Icon" />
+            <FeatureHeader variant="h6">Personalized learning</FeatureHeader>
+            <BodyText>
               Tailor your learning journey to fit your needs. Our app adapts to
               your level and pace, ensuring you achieve your language goals.
-            </Typography>
-            <Button
-              sx={buttonStyles}
-              variant="text"
-              endIcon={<ArrowForwardIcon />}
-            >
+            </BodyText>
+            <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
               Learn more
-            </Button>
-          </Grid>
+            </LearnMoreButton>
+          </FeatureItem>
         </Grid>
       </Container>
-    </Box>
+    </FeaturesContainer>
   );
 };
 
