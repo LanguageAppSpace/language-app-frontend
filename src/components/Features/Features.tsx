@@ -21,7 +21,6 @@ const FeaturesHeader = styled(Typography)`
   width: 100%;
   font-weight: bold;
   font-size: 34px;
-  gap: 16px;
 `;
 
 const BodyText = styled.p`
