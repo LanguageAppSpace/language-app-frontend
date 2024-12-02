@@ -28,10 +28,7 @@ const App = () => {
           <Route path={ROUTE.CREATE_LESSON} element={<CreateEditLesson />} />
           <Route path={ROUTE.EDIT_LESSON} element={<CreateEditLesson />} />
         </Route>
-        <Route
-          path="*"
-          element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
-        />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </Router>
   );

@@ -1,29 +1,27 @@
+import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 
+const Page404Container = styled.div`
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+`;
+
+const TextContainer = styled.div`
+  color: black;
+  font-size: 3rem;
+  text-align: center;
+`;
+
 const Page404 = () => {
-
-  const page404ContainerStyles = {
-    backgroundColor: "white",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100vh", 
-    width: "100vw", 
-  };
-
-  const textContainerStyles = {
-    textAlign: "center",
-    fontSize: "3rem",
-    color: "black" 
-  };
-
   return (
-    <Box sx={page404ContainerStyles}>
-      <Typography sx={textContainerStyles}>
-        Error 404
-      </Typography>
-    </Box>
+    <Page404Container>
+      <TextContainer>Error 404</TextContainer>
+    </Page404Container>
   );
 };
 
-export default Page404
+export default Page404;
