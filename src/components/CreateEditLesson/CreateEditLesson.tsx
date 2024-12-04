@@ -7,7 +7,7 @@ import {
   useEditLessonMutation,
   useGetLessonByIdQuery,
 } from "@/redux/lessons/lessonsApiSlice";
-import { NewLesson, PhrasePairs } from "@/interface";
+import { NewLesson, PhrasePair } from "@/interface";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import LessonForm from "@components/LessonForm/LessonForm";
 
@@ -21,7 +21,7 @@ const CreateEditLesson = () => {
     skip: !lessonId,
   });
 
-  const trimmedPhrasePairs = (phrasePairs: PhrasePairs[]) =>
+  const trimmedPhrasePairs = (phrasePairs: PhrasePair[]) =>
     phrasePairs.filter(
       (pair) => pair.phraseOne.trim() !== "" || pair.phraseTwo.trim() !== ""
     );

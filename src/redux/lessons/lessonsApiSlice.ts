@@ -23,6 +23,15 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    deleteFlashcard: builder.mutation<
+      void,
+      { lessonId: string; pairId: number }
+    >({
+      query: ({ lessonId, pairId }) => ({
+        url: `flashcards/${lessonId}/pairs/${pairId}/delete/`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -30,4 +39,5 @@ export const {
   useCreateNewLessonMutation,
   useGetLessonByIdQuery,
   useEditLessonMutation,
+  useDeleteFlashcardMutation,
 } = lessonApiSlice;
