@@ -18,6 +18,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        <Route
+          path="/"
+          element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
+        />
         <Route path={ROUTE.LANDING_PAGE} element={<PageLandingPage />} />
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
