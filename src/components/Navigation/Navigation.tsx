@@ -8,30 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
 import styled from "@emotion/styled";
 
-const NavigationContainer = styled.div`
-  flex-grow: 1;
-`;
-
-const StyledAppBar = styled(AppBar)`
-  background-color: rgb(236, 177, 89);
-`;
-
-const StyledMenuIcon = styled(IconButton)`
-  margin-right: 2;
-`;
-
-const LogoText = styled(Typography)`
-  flex-grow: 1;
-`;
-
-const LogInButton = styled(Button)`
-  background-color: rgb(22, 36, 52);
-  border-radius: 16px;
-  &:hover {
-    background-color: rgb(25, 42, 50);
-  }
-`;
-
 const Navigation = () => {
   const navigate = useNavigate();
 
@@ -65,5 +41,29 @@ const Navigation = () => {
     </NavigationContainer>
   );
 };
+
+const NavigationContainer = styled.div`
+  flex-grow: 1;
+`;
+
+const StyledAppBar = styled(AppBar)`
+  background-color: rgb(236, 177, 89);
+`;
+
+const StyledMenuIcon = styled(IconButton)`
+  margin-right: 2;
+`;
+
+const LogoText = styled(Typography)`
+  flex-grow: 1;
+`;
+
+const LogInButton = styled(Button)`
+  background-color: rgb(22, 36, 52);
+  border-radius: 16px;
+  &:hover {
+    background-color: rgb(25, 42, 50);
+  }
+`;
 
 export default Navigation;

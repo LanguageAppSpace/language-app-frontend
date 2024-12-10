@@ -3,69 +3,6 @@ import StarIcon from "@mui/icons-material/Star";
 import { Container } from "@mui/system";
 import styled from "@emotion/styled";
 
-const TestimonialsContainer = styled.div`
-  padding: 60px 0;
-`;
-
-const TestimonialsHeader = styled(Typography)`
-  color: rgb(0, 0, 0);
-  margin-bottom: 40px;
-  text-align: center;
-  width: 100%;
-  font-weight: bold;
-`;
-
-const TestimonialsItem = styled.div`
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  background-color: #fff;
-`;
-
-const TestimonialsItemHeader = styled.div`
-  display: flex;
-  align-items: flex-start;
-`;
-
-const TestimonialsItemHeaderText = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-`;
-
-const UserName = styled(Typography)`
-  font-weight: bold;
-  margin-top: 10px;
-`;
-
-const Profession = styled(Typography)`
-  margin-top: 5px;
-  font-style: italic;
-  font-size: 14px;
-`;
-
-const Rating = styled(Typography)`
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  font-size: 14px;
-  color: rgb(255, 179, 31);
-`;
-
-const RatingText = styled(Typography)`
-  margin-left: 10px;
-`;
-
-const FooterText = styled(Typography)`
-  margin-top: 20px;
-`;
-
-const TestimonialImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-`;
-
 const Testimonials = () => {
   return (
     <TestimonialsContainer>
@@ -149,5 +86,68 @@ const Testimonials = () => {
     </TestimonialsContainer>
   );
 };
+
+const TestimonialsContainer = styled.div`
+  padding: 60px 0;
+`;
+
+const TestimonialsHeader = styled(Typography)`
+  color: rgb(0, 0, 0);
+  margin-bottom: 40px;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+`;
+
+const TestimonialsItem = styled.div`
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+`;
+
+const TestimonialsItemHeader = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
+
+const TestimonialsItemHeaderText = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+`;
+
+const UserName = styled(Typography)`
+  font-weight: bold;
+  margin-top: 10px;
+`;
+
+const Profession = styled(Typography)`
+  margin-top: 5px;
+  font-style: italic;
+  font-size: 14px;
+`;
+
+const Rating = styled(Typography)`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgb(255, 179, 31);
+`;
+
+const RatingText = styled(Typography)`
+  margin-left: 10px;
+`;
+
+const FooterText = styled(Typography)`
+  margin-top: 20px;
+`;
+
+const TestimonialImage = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+`;
 
 export default Testimonials;

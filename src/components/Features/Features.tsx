@@ -3,54 +3,6 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Container } from "@mui/system";
 import styled from "@emotion/styled";
 
-const FeaturesContainer = styled.div`
-  background-color: rgb(255, 255, 255);
-  padding: 80px 0;
-`;
-
-const FeatureIcon = styled.img`
-  height: 80px;
-  width: 80px;
-  margin-bottom: 10px;
-`;
-
-const FeaturesHeader = styled(Typography)`
-  color: rgb(0, 0, 0);
-  margin-bottom: 20px;
-  text-align: center;
-  width: 100%;
-  font-weight: bold;
-  font-size: 34px;
-`;
-
-const BodyText = styled.p`
-  margin-top: 20px;
-  font-family: Poppins;
-`;
-
-const FeatureHeader = styled(Typography)`
-  color: #1a2434;
-  text-align: start;
-  font-weight: 700;
-`;
-
-const LearnMoreButton = styled(Button)`
-  background-color: rgb(255, 255, 255);
-  color: black;
-  justify-content: start;
-  padding: 0;
-
-  &:hover {
-    background-color: rgb(250, 250, 255);
-  }
-`;
-
-const FeatureItem = styled(Grid)`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
 const Features = () => {
   return (
     <FeaturesContainer>
@@ -107,5 +59,53 @@ const Features = () => {
     </FeaturesContainer>
   );
 };
+
+const FeaturesContainer = styled.div`
+  background-color: rgb(255, 255, 255);
+  padding: 80px 0;
+`;
+
+const FeatureIcon = styled.img`
+  height: 80px;
+  width: 80px;
+  margin-bottom: 10px;
+`;
+
+const FeaturesHeader = styled(Typography)`
+  color: rgb(0, 0, 0);
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 34px;
+`;
+
+const BodyText = styled.p`
+  margin-top: 20px;
+  font-family: Poppins;
+`;
+
+const FeatureHeader = styled(Typography)`
+  color: #1a2434;
+  text-align: start;
+  font-weight: 700;
+`;
+
+const LearnMoreButton = styled(Button)`
+  background-color: rgb(255, 255, 255);
+  color: black;
+  justify-content: start;
+  padding: 0;
+
+  &:hover {
+    background-color: rgb(250, 250, 255);
+  }
+`;
+
+const FeatureItem = styled(Grid)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
 
 export default Features;

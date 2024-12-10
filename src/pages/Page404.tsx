@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
+
+const Page404 = () => {
+  return (
+    <Page404Container>
+      <TextContainer>Error 404</TextContainer>
+    </Page404Container>
+  );
+};
 
 const Page404Container = styled.div`
   background-color: white;
@@ -15,13 +22,5 @@ const TextContainer = styled.div`
   font-size: 3rem;
   text-align: center;
 `;
-
-const Page404 = () => {
-  return (
-    <Page404Container>
-      <TextContainer>Error 404</TextContainer>
-    </Page404Container>
-  );
-};
 
 export default Page404;
