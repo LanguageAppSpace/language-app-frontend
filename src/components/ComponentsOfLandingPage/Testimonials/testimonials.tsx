@@ -1,18 +1,6 @@
-import {
-  StyledContainer,
-  StyledHeaderBox,
-  StyledHeaderTypography,
-  StyledTestimonialBox,
-  StyledImageContainer,
-  StyledTextContainer,
-  StyledNameText,
-  StyledProfessionText,
-  StyledIconContainer,
-  StyledIconText,
-  StyledFooterText,
-} from "@components/ComponentsOfLandingPage/Testimonials/Testimonials.styled";
-import { Grid, Container } from "@mui/material";
+import { Grid, Container, Box, Typography } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import { styled } from "@mui/material/styles";
 
 const Testimonials = () => {
   return (
@@ -110,3 +98,63 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+
+const StyledContainer = styled(Box)({
+  backgroundColor: "rgb(255,255,255)",
+  padding: "60px 0",
+});
+
+const StyledHeaderBox = styled(Box)({
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  marginBottom: "40px",
+});
+
+const StyledHeaderTypography = styled(Typography)({
+  color: "rgb(0,0,0)",
+  fontWeight: "bold",
+  paddingBottom: "20px",
+});
+
+const StyledTestimonialBox = styled(Box)({
+  backgroundColor: "rgb(250,250,250)",
+  padding: "20px",
+  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+});
+
+const StyledImageContainer = styled(Box)({
+  display: "flex",
+  alignItems: "flex-start",
+});
+
+const StyledTextContainer = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  marginLeft: "20px",
+});
+
+const StyledNameText = styled(Typography)({
+  fontWeight: "bold",
+  marginTop: "10px",
+});
+
+const StyledProfessionText = styled(Typography)({
+  marginTop: "5px",
+  fontStyle: "italic",
+});
+
+const StyledIconContainer = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  marginTop: "10px",
+  color: "rgb(255,179,31)",
+});
+
+const StyledIconText = styled(Typography)({
+  marginLeft: "10px",
+});
+
+const StyledFooterText = styled(Typography)({
+  marginTop: "20px",
+});

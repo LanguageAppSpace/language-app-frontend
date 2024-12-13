@@ -3,15 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
 import image from "@/boy.jpeg";
 import { Container } from "@mui/system";
-import {
-  HeroContainer,
-  TextContainer,
-  HeaderTypography,
-  StyledButton,
-  ImageContainer,
-  BodyTypography,
-  StyledImage,
-} from "@/components/ComponentsOfLandingPage/Hero/Hero.styled";
+import { styled } from "@mui/material/styles";
+import { Typography } from "@mui/material";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -47,3 +40,51 @@ const Hero = () => {
 };
 
 export default Hero;
+
+const HeroContainer = styled("div")(() => ({
+  backgroundColor: "rgb(245, 252, 255)",
+  paddingTop: "50px",
+}));
+
+const TextContainer = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+}));
+
+const HeaderTypography = styled(Typography)(() => ({
+  color: "rgb(0,0,0)",
+  marginBottom: "10px",
+  fontWeight: "bold",
+}));
+
+const BodyTypography = styled(Typography)(() => ({
+  color: "rgb(0,0,0)",
+}));
+
+const ImageContainer = styled("div")(() => ({
+  display: "flex",
+  alignItems: "center",
+}));
+
+const StyledImage = styled("img")(() => ({
+  width: "450px",
+}));
+
+const StyledButton = styled("button")(({ theme }) => ({
+  margin: "20px 20px 20px 0",
+  padding: "10px",
+  backgroundColor: "rgb(22, 36, 52)",
+  borderRadius: "16px",
+  color: theme.palette.text.primary,
+  fontSize: "16px",
+  border: "none",
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "624px",
+  "&:hover": {
+    backgroundColor: "rgb(30, 42, 50)",
+  },
+}));

@@ -1,17 +1,10 @@
-import {
-  StyledFooterContainer,
-  StyledColumnHeader,
-  StyledText,
-  StyledColumn,
-  StyledIconsContainer,
-  StyledLink,
-} from "@components/DashboardFooter/DashboardFooter.styled";
-import { Grid, Container } from "@mui/material";
+import { Grid, Container, Box, Typography, Link } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import { styled } from "@mui/material/styles";
 
 const DashboardFooter = () => {
   return (
@@ -66,3 +59,41 @@ const DashboardFooter = () => {
 };
 
 export default DashboardFooter;
+
+const StyledFooterContainer = styled(Box)({
+  display: "flex",
+  flexDirection: "row",
+  backgroundColor: "rgb(5, 20, 50)",
+  padding: "80px 0",
+  justifyContent: "space-between",
+});
+
+const StyledColumnHeader = styled(Typography)({
+  marginBottom: "10px",
+  fontWeight: "bold",
+  color: "rgb(255, 255, 255)",
+});
+
+const StyledText = styled(Typography)({
+  marginBottom: "10px",
+  color: "rgb(179, 179, 179)",
+});
+
+const StyledColumn = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+});
+
+const StyledIconsContainer = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
+  color: "rgb(179, 179, 179)",
+});
+
+const StyledLink = styled(Link)({
+  color: "inherit",
+  textDecoration: "none",
+  marginBottom: "10px",
+});
