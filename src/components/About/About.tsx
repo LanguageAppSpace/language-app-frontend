@@ -1,8 +1,8 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
-import { Grid, Container } from "@mui/material";
-import { AboutContainer, ImageGridItem, TextGridItem, HeaderTypography, BodyTypography, StyledButton } from "@components/About/About.styled.ts";
+import { styled } from "@mui/material/styles";
+import { Box, Grid, Button, Typography, Container } from "@mui/material";
 
 const About = () => {
   const navigate = useNavigate();
@@ -46,5 +46,32 @@ const About = () => {
       </AboutContainer>
   );
 };
+
+const AboutContainer = styled(Box)`backgroundColor: "rgb(245, 252, 255)",
+  padding: "30px 0";`
+
+const ImageGridItem = styled(Grid)`display: "flex";
+  alignItems: "center";`
+
+const TextGridItem = styled(Grid)`display: "flex",
+  flexDirection: "column";
+  justifyContent: "center";
+  alignItems: "flex-start";
+  textAlign: "start";
+  gap: "20px";`
+
+const HeaderTypography = styled(Typography)`color: "rgb(0,0,0)",
+  fontWeight: "bold";`
+
+const BodyTypography = styled(Typography)`color: "rgb(0,0,0)";`
+
+const StyledButton = styled(Button)`marginTop: "20px",
+  padding: "20px";
+  backgroundColor: "rgb(22, 36, 52)";
+  borderRadius: "16px";
+  width: "307px";
+  "&:hover": {
+    backgroundColor: "rgb(30, 42, 50)";
+  };`
 
 export default About;
