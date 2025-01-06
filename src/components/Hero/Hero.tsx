@@ -1,9 +1,9 @@
-import { Grid, Typography } from "@mui/material";
-import styled from "styled-components";
+import { Button, Grid, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import image from "/boy.jpeg";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
+import { styled } from "@mui/material/styles";
 import { Box, Container } from "@mui/system";
 
 const Hero = () => {
@@ -27,11 +27,11 @@ const Hero = () => {
             </BodyTypography>
             <StyledButton onClick={handleLoginClick}>
               LEARN MORE
-              <ArrowForwardIcon />
+              <ArrowForwardIcon style={{ marginLeft: "8px" }} />
             </StyledButton>
           </TextContainer>
           <ImageContainer>
-            <Image src={image} alt="boy with flags" />
+            <StyledImage src={image} alt="boy with flags" />
           </ImageContainer>
         </Grid>
       </Container>
@@ -39,62 +39,51 @@ const Hero = () => {
   );
 };
 
-const HeroContainer = styled.div`
-  background-color: rgb(245, 252, 255);
-  padding-top: 50px;
-`;
-
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  @media (min-width: 600px) {
-    flex: 0 0 50%;
-  }
-`;
-
-const HeaderTypography = styled(Typography)`
-  color: rgb(0, 0, 0);
-  margin-bottom: 10px;
-  font-weight: bold;
-`;
-
-const BodyTypography = styled(Typography)`
-  color: rgb(0, 0, 0);
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Image = styled.img`
-  width: 450px;
-`;
-
-const StyledButton = styled(Box)`
-  margin: 20px 20px 20px 0;
-  padding: 10px;
-  background-color: rgb(22, 36, 52);
-  border-radius: 16px;
-  color: white;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 624px;
-  text-align: center;
-
-  &:hover {
-    background-color: rgb(30, 42, 50);
-  }
-
-  svg {
-    margin-left: 8px;
-  }
-`;
-
 export default Hero;
+
+const HeroContainer = styled(Box)(() => ({
+  backgroundColor: "rgb(245, 252, 255)",
+  paddingTop: "50px",
+}));
+
+const TextContainer = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  "@media (min-width: 600px)": {
+    flex: "0 0 50%",
+  },
+}));
+
+const HeaderTypography = styled(Typography)(() => ({
+  color: "rgb(0, 0, 0)",
+  marginBottom: "10px",
+  fontWeight: "bold",
+}));
+
+const BodyTypography = styled(Typography)(() => ({
+  color: "rgb(0, 0, 0)",
+}));
+
+const ImageContainer = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "center",
+}));
+
+const StyledImage = styled("img")(() => ({
+  width: "450px",
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  margin: "20px 20px 20px 0",
+  padding: "10px",
+  backgroundColor: "rgb(22, 36, 52)",
+  borderRadius: "16px",
+  color: theme.palette.text.primary,
+  fontSize: "16px",
+  display: "flex",
+  textAlign: "center",
+  "&:hover": {
+    backgroundColor: "rgb(30, 42, 50)",
+  },
+}));
