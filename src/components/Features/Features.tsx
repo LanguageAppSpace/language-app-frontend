@@ -1,7 +1,8 @@
+import React from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Container } from "@mui/system";
-import styled from "@emotion/styled";
+import { Box, Container } from "@mui/system";
+import { styled } from "@mui/material/styles";
 
 const Features = () => {
   return (
@@ -26,7 +27,7 @@ const Features = () => {
             <BodyText>
               Dive into interactive lessons designed to keep you engaged and
               motivated. Practice in real-time and get immediate feedback to
-              improve faster
+              improve faster.
             </BodyText>
             <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
               Learn more
@@ -60,52 +61,49 @@ const Features = () => {
   );
 };
 
-const FeaturesContainer = styled.div`
-  background-color: rgb(255, 255, 255);
-  padding: 80px 0;
-`;
+const FeaturesContainer = styled(Box)({
+  padding: "80px 0",
+});
 
-const FeatureIcon = styled.img`
-  height: 80px;
-  width: 80px;
-  margin-bottom: 10px;
-`;
+const FeatureIcon = styled("img")({
+  height: "80px",
+  width: "80px",
+  marginBottom: "10px",
+});
 
-const FeaturesHeader = styled(Typography)`
-  color: rgb(0, 0, 0);
-  margin-bottom: 20px;
-  text-align: center;
-  width: 100%;
-  font-weight: bold;
-  font-size: 34px;
-`;
+const FeaturesHeader = styled(Typography)({
+  marginBottom: "20px",
+  textAlign: "center",
+  width: "100%",
+  fontWeight: "bold",
+  fontSize: "34px",
+});
 
-const BodyText = styled.p`
-  margin-top: 20px;
-  font-family: Poppins;
-`;
+const BodyText = styled(Typography)({
+  marginTop: "20px",
+  fontFamily: "Poppins",
+});
 
-const FeatureHeader = styled(Typography)`
-  color: #1a2434;
-  text-align: start;
-  font-weight: 700;
-`;
+const FeatureHeader = styled(Typography)({
+  color: "#1a2434",
+  textAlign: "start",
+  fontWeight: 700,
+});
 
-const LearnMoreButton = styled(Button)`
-  background-color: rgb(255, 255, 255);
-  color: black;
-  justify-content: start;
-  padding: 0;
+const LearnMoreButton = styled(Button)({
+  color: "black",
+  justifyContent: "start",
+  paddingLeft: 0,
 
-  &:hover {
-    background-color: rgb(250, 250, 255);
-  }
-`;
+  "&:hover": {
+    backgroundColor: "rgb(255, 255, 255)",
+  },
+});
 
-const FeatureItem = styled(Grid)`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
+const FeatureItem = styled(Grid)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+});
 
 export default Features;
