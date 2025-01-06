@@ -1,3 +1,4 @@
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -6,7 +7,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
-import styled from "@emotion/styled";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -42,28 +44,28 @@ const Navigation = () => {
   );
 };
 
-const NavigationContainer = styled.div`
-  flex-grow: 1;
-`;
+const NavigationContainer = styled(Box)({
+  flexGrow: 1,
+});
 
-const StyledAppBar = styled(AppBar)`
-  background-color: rgb(236, 177, 89);
-`;
+const StyledAppBar = styled(AppBar)({
+  backgroundColor: "rgb(236, 177, 89)",
+});
 
-const StyledMenuIcon = styled(IconButton)`
-  margin-right: 2;
-`;
+const StyledMenuIcon = styled(IconButton)({
+  marginRight: 2,
+});
 
-const LogoText = styled(Typography)`
-  flex-grow: 1;
-`;
+const LogoText = styled(Typography)({
+  flexGrow: 1,
+});
 
-const LogInButton = styled(Button)`
-  background-color: rgb(22, 36, 52);
-  border-radius: 16px;
-  &:hover {
-    background-color: rgb(25, 42, 50);
-  }
-`;
+const LogInButton = styled(Button)({
+  backgroundColor: "rgb(22, 36, 52)",
+  borderRadius: "16px",
+  "&:hover": {
+    backgroundColor: "rgb(25, 42, 50)",
+  },
+});
 
 export default Navigation;

@@ -43,7 +43,7 @@ export default Hero;
 
 const HeroContainer = styled(Box)(() => ({
   backgroundColor: "rgb(245, 252, 255)",
-  paddingTop: "50px",
+  paddingTop: "120px",
 }));
 
 const TextContainer = styled(Box)(() => ({
