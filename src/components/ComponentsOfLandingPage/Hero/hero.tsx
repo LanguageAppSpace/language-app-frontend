@@ -77,7 +77,7 @@ const StyledButton = styled("button")(({ theme }) => ({
   backgroundColor: "rgb(22, 36, 52)",
   borderRadius: "16px",
   color: theme.palette.text.primary,
-  fontSize: "16px",
+  fontSize: theme.typography.h1.fontSize,
   border: "none",
   cursor: "pointer",
   display: "flex",

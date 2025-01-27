@@ -20,7 +20,7 @@ export const FormRow = styled("div")(({ theme }) => ({
 
 export const FormInputLabel = styled(InputLabel)(({ theme }) => ({
   color: `${theme.palette.primary.dark}`,
-  fontSize: "16px",
+  fontSize: theme.typography.body1.fontSize,
   fontStyle: "normal",
   fontWeight: 400,
   paddingBottom: "7px",

@@ -20,6 +20,25 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: ["Poppins"].join(","),
+    fontSize: 16,
+    h1: {
+      fontSize: 34,
+    },
+    h2: {
+      fontSize: 24,
+    },
+    h3: {
+      fontSize: 20,
+    },
+    h4: {
+      fontSize: 16,
+    },
+    body1: {
+      fontSize: 16,
+    },
+    caption: {
+      fontSize: 14,
+    },
   },
 });
 

@@ -20,10 +20,10 @@ const Page404Container = styled(Box)({
   inset: 0,
 });
 
-const TextContainer = styled(Typography)({
+const TextContainer = styled(Typography)(({ theme }) => ({
   color: "black",
-  fontSize: "3rem",
+  fontSize: theme.typography.h1.fontSize,
   textAlign: "center",
-});
+}));
 
 export default Page404;
