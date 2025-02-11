@@ -26,7 +26,7 @@ export const ButtonAddVocabulary = styled(Button)(({ theme }) => ({
   backgroundColor: `${theme.palette.primary.main}`,
   padding: "12px 18px",
   color: `${theme.palette.text.primary}`,
-  fontSize: theme.typography.caption.fontSize,
+  fontSize: "13px",
 }));
 
 export const ButtonCreateLesson = styled(Button)(({ theme }) => ({
@@ -34,7 +34,7 @@ export const ButtonCreateLesson = styled(Button)(({ theme }) => ({
   backgroundColor: `${theme.palette.secondary.main}`,
   padding: "12px 18px",
   color: `${theme.palette.text.primary}`,
-  fontSize: theme.typography.caption.fontSize,
+  fontSize: "13px",
   width: "auto",
   "&:hover": {
     backgroundColor: alpha(theme.palette.secondary.main, 1),

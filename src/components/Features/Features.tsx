@@ -71,13 +71,13 @@ const FeatureIcon = styled("img")({
   marginBottom: "10px",
 });
 
-const FeaturesHeader = styled(Typography)(({ theme }) => ({
+const FeaturesHeader = styled(Typography)({
   marginBottom: "20px",
   textAlign: "center",
   width: "100%",
   fontWeight: "bold",
-  fontSize: theme.typography.h1.fontSize,
-}));
+  fontSize: "34px",
+});
 
 const BodyText = styled(Typography)({
   marginTop: "20px",

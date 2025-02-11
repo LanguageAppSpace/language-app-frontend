@@ -80,7 +80,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
   backgroundColor: "rgb(22, 36, 52)",
   borderRadius: "16px",
   color: theme.palette.text.primary,
-  fontSize: theme.typography.body1.fontSize,
+  fontSize: "16px",
   display: "flex",
   textAlign: "center",
   "&:hover": {

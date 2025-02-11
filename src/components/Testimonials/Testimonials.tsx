@@ -121,18 +121,19 @@ const UserName = styled(Typography)({
   marginTop: "10px",
 });
 
-const Profession = styled(Typography)(({ theme }) => ({
+const Profession = styled(Typography)({
   marginTop: "5px",
   fontStyle: "italic",
-  fontSize: theme.typography.caption.fontSize,
-}));
+  fontSize: "14px",
+});
 
-const Rating = styled(Box)(({ theme }) => ({
+const Rating = styled(Box)({
+  display: "flex",
   alignItems: "center",
   marginTop: "10px",
-  fontSize: theme.typography.caption.fontSize,
+  fontSize: "14px",
   color: "rgb(255, 179, 31)",
-}));
+});
 
 const RatingText = styled(Typography)({
   marginLeft: "10px",

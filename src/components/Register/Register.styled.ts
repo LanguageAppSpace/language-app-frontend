@@ -20,7 +20,7 @@ export const StyledRegisterImage = styled("img")(() => ({
 
 export const RegisterFormTitle = styled(Typography)(({ theme }) => ({
   color: `${theme.palette.primary.light}`,
-  fontSize: theme.typography.h1.fontSize,
+  fontSize: "32px",
   fontStyle: "normal",
   fontWeight: 500,
   marginTop: theme.spacing(2),
@@ -28,7 +28,7 @@ export const RegisterFormTitle = styled(Typography)(({ theme }) => ({
 
 export const RegisterFormSubtitle = styled(Typography)(({ theme }) => ({
   color: `${theme.palette.primary.light}`,
-  fontSize: theme.typography.body1.fontSize,
+  fontSize: "16px",
   fontWeight: 400,
   marginTop: theme.spacing(1),
   marginBottom: "40px",
@@ -48,7 +48,7 @@ export const FormRow = styled("div")(({ theme }) => ({
 
 export const FormInputLabel = styled(InputLabel)(({ theme }) => ({
   color: `${theme.palette.primary.dark}`,
-  fontSize: theme.typography.body1.fontSize,
+  fontSize: "16px",
   fontStyle: "normal",
   fontWeight: 400,
   paddingBottom: "7px",
