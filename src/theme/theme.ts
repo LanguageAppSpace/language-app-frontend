@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import "@fontsource/poppins";
+import deviceSizes from "@/cssConsts";
 
 const theme = createTheme({
   palette: {
@@ -20,6 +21,9 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: ["Poppins"].join(","),
+  },
+  breakpoints: {
+    values: deviceSizes,
   },
 });
 
