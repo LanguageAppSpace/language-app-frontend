@@ -63,7 +63,7 @@ export const RegisterFormButtons = styled("div")(() => ({
 
 export const FormInput = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-input": {
-    color: "black",
+    color: `${theme.palette.text.secondary}`,
     borderRadius: "12px",
     border: `1px solid ${alpha(theme.palette.primary.light, 0.35)}`,
   },
