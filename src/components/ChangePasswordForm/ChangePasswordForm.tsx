@@ -11,7 +11,7 @@ import {
   FormRow,
   FormInputLabel,
   FormInput,
-} from "@components/UserSettings/UserSettings.styled";
+} from "@components/UserSettings/UserSettings";
 
 const passwordSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Old password is required"),
