@@ -10,9 +10,7 @@ import { alpha } from "@mui/system";
 
 const UserSettings: React.FC = () => {
   const dispatch = useDispatch();
-
   const [deactivateAccount] = useDeactivateAccountMutation();
-
   const handleDeactivateAccount = async () => {
     try {
       await deactivateAccount().unwrap();

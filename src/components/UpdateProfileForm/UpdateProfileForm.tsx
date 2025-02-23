@@ -22,7 +22,6 @@ const profileSchema = Yup.object().shape({
 const UpdateProfileForm = () => {
   const dispatch = useDispatch();
   const [updateProfile] = useUpdateProfileMutation();
-
   const {
     register: registerProfile,
     handleSubmit: handleSubmitProfile,

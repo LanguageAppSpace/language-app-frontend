@@ -42,7 +42,6 @@ const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [registerUser] = useRegisterUserMutation();
-
   const handleSumbit = async (data: FormData) => {
     const userData = {
       email: data.email,
@@ -50,7 +49,6 @@ const SignUpForm: React.FC = () => {
       username: data.username,
       password_confirm: data.confirmPassword,
     };
-
     try {
       await registerUser(userData).unwrap();
       dispatch(
