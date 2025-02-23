@@ -47,8 +47,10 @@ const About = () => {
   );
 };
 
-const AboutContainer = styled(Box)`backgroundColor: "rgb(245, 252, 255)",
-  padding: "30px 0";`
+const AboutContainer = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.light,
+  padding: "30px 0",
+}));
 
 const ImageGridItem = styled(Grid)`display: "flex";
   alignItems: "center";`
@@ -60,14 +62,16 @@ const TextGridItem = styled(Grid)`display: "flex",
   textAlign: "start";
   gap: "20px";`
 
-const HeaderTypography = styled(Typography)`color: "rgb(0,0,0)",
-  fontWeight: "bold";`
+const HeaderTypography = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  fontWeight: "bold",
+}));
 
-const BodyTypography = styled(Typography)`color: "rgb(0,0,0)";`
+const BodyTypography = styled(Typography)(({ theme }) => ({color: theme.palette.text.secondary,}));
 
 const StyledButton = styled(Button)`marginTop: "20px",
   padding: "20px";
-  backgroundColor: "rgb(22, 36, 52)";
+  backgroundColor: "rgb(22, 36, 52)";  
   borderRadius: "16px";
   width: "307px";
   "&:hover": {

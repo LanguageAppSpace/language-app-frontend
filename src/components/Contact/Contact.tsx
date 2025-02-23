@@ -48,13 +48,13 @@ const Contact = () => {
 
 export default Contact;
 
-const StyledContactContainer = styled(Box)({
+const StyledContactContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "rgb(236, 177, 89)",
+  backgroundColor: theme.palette.secondary.main,
   padding: "80px 0",
-});
+}));
 
 const StyledTextContainer = styled(Box)({
   textAlign: "left",
@@ -67,16 +67,16 @@ const StyledFormContainer = styled(Box)({
   justifyContent: "flex-end",
 });
 
-const StyledInputBox = styled(Box)({
+const StyledInputBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  backgroundColor: "#fdeac1",
+  backgroundColor: theme.palette.input.light,
   padding: "8px",
   borderRadius: "24px",
-});
+}));
 
-const StyledTextField = styled(TextField)({
-  backgroundColor: "#fae7cc",
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  backgroundColor: theme.palette.input.medium,
   borderRadius: "30px",
   "& .MuiOutlinedInput-root": {
     borderRadius: "30px",
@@ -87,23 +87,23 @@ const StyledTextField = styled(TextField)({
   },
   "& .MuiInputBase-input": {
     padding: "10px 0",
-    color: "#333",
+    color: theme.palette.primary.dark,
     "&::placeholder": {
-      color: "#333",
+      color: theme.palette.primary.dark,
       opacity: 1,
     },
   },
-});
+}));
 
-const StyledButton = styled(Button)({
-  backgroundColor: "#111827",
-  color: "#fff",
+const StyledButton = styled(Button)(({ theme }) => ({
+  backgroundColor: theme.palette.button.dark,
+  color: theme.palette.text.primary,
   padding: "8px 24px",
   borderRadius: "16px",
   marginLeft: "8px",
   width: "127px",
   height: "50px",
   "&:hover": {
-    backgroundColor: "#333d47",
+    backgroundColor: theme.palette.button.hover,
   },
-});
+}));

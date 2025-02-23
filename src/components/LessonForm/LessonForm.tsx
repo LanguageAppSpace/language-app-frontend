@@ -7,11 +7,11 @@ import {
   InputField,
   ButtonAddVocabulary,
   ButtonCreateLesson,
-} from "@components/CreateEditLesson/CreateEditLesson.styled";
+} from "@components/CreateEditLesson/CreateEditLesson";
 import {
   FormInput,
   FormInputLabel,
-} from "@components/Register/Register.styled";
+} from "@components/Register/Register";
 import { useDeleteFlashcardMutation } from "@/redux/lessons/lessonsApiSlice";
 import Footer from "@components/Footer/Footer";
 import { NewLesson } from "@/interface";

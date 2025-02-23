@@ -41,8 +41,8 @@ const Hero = () => {
 
 export default Hero;
 
-const HeroContainer = styled(Box)(() => ({
-  backgroundColor: "rgb(245, 252, 255)",
+const HeroContainer = styled(Box)(({theme}) => ({
+  backgroundColor: theme.palette.background.light,
   paddingTop: "120px",
 }));
 
@@ -55,14 +55,14 @@ const TextContainer = styled(Box)(() => ({
   },
 }));
 
-const HeaderTypography = styled(Typography)(() => ({
-  color: "rgb(0, 0, 0)",
+const HeaderTypography = styled(Typography)(({theme}) => ({
+  color: theme.palette.text.secondary,
   marginBottom: "10px",
   fontWeight: "bold",
 }));
 
-const BodyTypography = styled(Typography)(() => ({
-  color: "rgb(0, 0, 0)",
+const BodyTypography = styled(Typography)(({theme}) => ({
+  color: theme.palette.text.secondary,
 }));
 
 const ImageContainer = styled(Box)(() => ({
@@ -77,13 +77,13 @@ const StyledImage = styled("img")(() => ({
 const StyledButton = styled(Button)(({ theme }) => ({
   margin: "20px 20px 20px 0",
   padding: "10px",
-  backgroundColor: "rgb(22, 36, 52)",
+  backgroundColor: theme.palette.button.main,
   borderRadius: "16px",
   color: theme.palette.text.primary,
   fontSize: "16px",
   display: "flex",
   textAlign: "center",
   "&:hover": {
-    backgroundColor: "rgb(30, 42, 50)",
+    backgroundColor: theme.palette.button.mainHover,
   },
 }));

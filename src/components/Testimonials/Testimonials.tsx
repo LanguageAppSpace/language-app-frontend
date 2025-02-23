@@ -90,20 +90,20 @@ const TestimonialsContainer = styled(Box)({
   padding: "60px 0",
 });
 
-const TestimonialsHeader = styled(Typography)({
-  color: "rgb(0, 0, 0)",
+const TestimonialsHeader = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary,
   marginBottom: "40px",
   textAlign: "center",
   width: "100%",
   fontWeight: "bold",
-});
+}));
 
-const TestimonialsItem = styled(Box)({
+const TestimonialsItem = styled(Box)(({ theme }) => ({
   padding: "20px",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   borderRadius: "8px",
-  backgroundColor: "#fff",
-});
+  backgroundColor: theme.palette.text.primary,
+}));
 
 const TestimonialsItemHeader = styled(Box)({
   display: "flex",
@@ -127,13 +127,13 @@ const Profession = styled(Typography)({
   fontSize: "14px",
 });
 
-const Rating = styled(Box)({
+const Rating = styled(Box)(({theme}) => ({
   display: "flex",
   alignItems: "center",
   marginTop: "10px",
   fontSize: "14px",
-  color: "rgb(255, 179, 31)",
-});
+  color: theme.palette.secondary.light,
+}));
 
 const RatingText = styled(Typography)({
   marginLeft: "10px",
