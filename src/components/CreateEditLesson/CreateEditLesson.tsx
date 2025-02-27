@@ -1,23 +1,23 @@
-import {Typography, Button, Grid, Input, styled} from "@mui/material";
-import {Box, alpha} from "@mui/material";
-import {useParams} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import { Typography, Button, Grid, Input, styled } from "@mui/material";
+import { Box, alpha } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
   useCreateNewLessonMutation,
   useEditLessonMutation,
   useGetLessonByIdQuery,
 } from "@/redux/lessons/lessonsApiSlice";
-import {NewLesson, PhrasePair} from "@/interface";
-import {showNotification} from "@/redux/notification/notificationSlice";
+import { NewLesson, PhrasePair } from "@/interface";
+import { showNotification } from "@/redux/notification/notificationSlice";
 import LessonForm from "@components/LessonForm/LessonForm";
 
 const CreateEditLesson = () => {
-  const {lessonId} = useParams();
+  const { lessonId } = useParams();
   const [createNewLesson] = useCreateNewLessonMutation();
   const [editLesson] = useEditLessonMutation();
   const dispatch = useDispatch();
 
-  const {data: lesson, isLoading} = useGetLessonByIdQuery(lessonId || "", {
+  const { data: lesson, isLoading } = useGetLessonByIdQuery(lessonId || "", {
     skip: !lessonId,
   });
 
