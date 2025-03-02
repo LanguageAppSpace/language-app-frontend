@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, Container } from "@mui/system";

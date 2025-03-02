@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import createTheme from "@mui/material/styles/createTheme";
 import "@fontsource/poppins";
 
 const theme = createTheme({
