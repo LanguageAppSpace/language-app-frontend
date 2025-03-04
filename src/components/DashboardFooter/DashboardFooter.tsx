@@ -68,16 +68,16 @@ const StyledFooterContainer = styled(Box)({
   justifyContent: "space-between",
 });
 
-const StyledColumnHeader = styled(Typography)({
+const StyledColumnHeader = styled(Typography)(({ theme }) => ({
   marginBottom: "10px",
   fontWeight: "bold",
-  color: "rgb(255, 255, 255)",
-});
+  color: theme.palette.text.primary,
+}));
 
-const StyledText = styled(Typography)({
+const StyledText = styled(Typography)(({ theme }) => ({
   marginBottom: "10px",
-  color: "rgb(179, 179, 179)",
-});
+  color: theme.palette.background.dark,
+}));
 
 const StyledColumn = styled(Box)({
   display: "flex",
@@ -85,12 +85,12 @@ const StyledColumn = styled(Box)({
   alignItems: "flex-start",
 });
 
-const StyledIconsContainer = styled(Box)({
+const StyledIconsContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: "10px",
-  color: "rgb(179, 179, 179)",
-});
+  color: theme.palette.background.dark,
+}));
 
 const StyledLink = styled(Link)({
   color: "inherit",

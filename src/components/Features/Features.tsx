@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, Container } from "@mui/system";
@@ -84,21 +83,20 @@ const BodyText = styled(Typography)({
   fontFamily: "Poppins",
 });
 
-const FeatureHeader = styled(Typography)({
-  color: "#1a2434",
+const FeatureHeader = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
   textAlign: "start",
   fontWeight: 700,
-});
+}));
 
-const LearnMoreButton = styled(Button)({
-  color: "black",
+const LearnMoreButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.text.secondary,
   justifyContent: "start",
   paddingLeft: 0,
-
   "&:hover": {
-    backgroundColor: "rgb(255, 255, 255)",
+    backgroundColor: theme.palette.text.primary,
   },
-});
+}));
 
 const FeatureItem = styled(Grid)({
   display: "flex",

@@ -8,7 +8,7 @@ import {
   FormRow,
   FormInputLabel,
   FormInput,
-} from "@components/UserSettings/UserSettings.styled";
+} from "@components/UserSettings/UserSettings";
 import { useUpdateProfileMutation } from "@/redux/userSettings/userSettingsApiSlice";
 import { ProfileData } from "@/interface";
 
@@ -22,7 +22,6 @@ const profileSchema = Yup.object().shape({
 const UpdateProfileForm = () => {
   const dispatch = useDispatch();
   const [updateProfile] = useUpdateProfileMutation();
-
   const {
     register: registerProfile,
     handleSubmit: handleSubmitProfile,

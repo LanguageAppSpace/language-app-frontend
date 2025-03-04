@@ -1,4 +1,3 @@
-import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -48,9 +47,9 @@ const NavigationContainer = styled(Box)({
   flexGrow: 1,
 });
 
-const StyledAppBar = styled(AppBar)({
-  backgroundColor: "rgb(236, 177, 89)",
-});
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+}));
 
 const StyledMenuIcon = styled(IconButton)({
   marginRight: 2,
@@ -60,12 +59,12 @@ const LogoText = styled(Typography)({
   flexGrow: 1,
 });
 
-const LogInButton = styled(Button)({
-  backgroundColor: "rgb(22, 36, 52)",
+const LogInButton = styled(Button)(({ theme }) => ({
+  backgroundColor: theme.palette.button.main,
   borderRadius: "16px",
   "&:hover": {
-    backgroundColor: "rgb(25, 42, 50)",
+    backgroundColor: theme.palette.button.loginHover,
   },
-});
+}));
 
 export default Navigation;
