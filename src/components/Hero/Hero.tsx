@@ -41,7 +41,7 @@ const Hero = () => {
 
 export default Hero;
 
-const HeroContainer = styled(Box)(({theme}) => ({
+const HeroContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.light,
   paddingTop: "120px",
 }));
@@ -55,13 +55,13 @@ const TextContainer = styled(Box)(() => ({
   },
 }));
 
-const HeaderTypography = styled(Typography)(({theme}) => ({
+const HeaderTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
   marginBottom: "10px",
   fontWeight: "bold",
 }));
 
-const BodyTypography = styled(Typography)(({theme}) => ({
+const BodyTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 

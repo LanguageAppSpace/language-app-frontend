@@ -28,7 +28,7 @@
       "@redux/*": ["redux/*"],
       "@config/*": ["config/*"],
       "@pages/*": ["pages/*"],
-      "@interface/*": ["interface/*"],
+      "@interface/*": ["interface/*"]
     }
   },
   "include": ["src"],

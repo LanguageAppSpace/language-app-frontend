@@ -10,16 +10,16 @@ const theme = createTheme({
     },
     secondary: {
       main: "#ECB159",
-      light: "#FFB31F"
+      light: "#FFB31F",
     },
     background: {
       default: "#f5f5f5",
       light: "#f5fcff",
-      dark: "#b3b3b3"
+      dark: "#b3b3b3",
     },
     text: {
       primary: "#ffffff",
-      secondary: "#000000"
+      secondary: "#000000",
     },
     input: {
       light: "#fdeac1",
@@ -30,8 +30,8 @@ const theme = createTheme({
       mainHover: "#1e2a32",
       dark: "#111827",
       hover: "#333d47",
-      loginHover: "#192a32"
-    }
+      loginHover: "#192a32",
+    },
   },
   typography: {
     fontFamily: ["Poppins"].join(","),

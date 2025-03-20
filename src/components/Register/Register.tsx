@@ -228,4 +228,3 @@ export const FormInput = styled(TextField)(({ theme }) => ({
     border: "none",
   },
 }));
-
