@@ -82,8 +82,13 @@ const StyledButton = styled(Button)({
   borderRadius: "16px",
   width: "307px",
   "&:hover": {
+<<<<<<< HEAD
+    backgroundColor: "rgb(30, 42, 50)";
+  };`;
+=======
     backgroundColor: "rgb(30, 42, 50)",
   },
 });
+>>>>>>> develop
 
 export default About;

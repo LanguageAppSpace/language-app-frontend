@@ -22,29 +22,30 @@ const CreateEditLesson = () => {
   });
 
   const trimmedPhrasePairs = (phrasePairs: PhrasePair[]) =>
-  phrasePairs.filter(
-  (pair) => pair.phraseOne.trim() !== "" || pair.phraseTwo.trim() !== "",
-  );
+    phrasePairs.filter(
+      (pair) => pair.phraseOne.trim() !== "" || pair.phraseTwo.trim() !== ""
+    );
 
   const onSubmit = async (data: NewLesson) => {
     try {
-      await (lessonId
-      ? editLesson({
-        ...data,
-        id: lessonId,
-        phrasePairs: trimmedPhrasePairs(data.phrasePairs),
-      })
-      : createNewLesson({
-        ...data,
-        phrasePairs: trimmedPhrasePairs(data.phrasePairs),
-      })
+      await (
+        lessonId
+          ? editLesson({
+              ...data,
+              id: lessonId,
+              phrasePairs: trimmedPhrasePairs(data.phrasePairs),
+            })
+          : createNewLesson({
+              ...data,
+              phrasePairs: trimmedPhrasePairs(data.phrasePairs),
+            })
       ).unwrap();
     } catch (error) {
       dispatch(
-      showNotification({
-        message: lessonId ? "Failed to edit lesson" : "Failed to save lesson",
-        severity: "error",
-      })
+        showNotification({
+          message: lessonId ? "Failed to edit lesson" : "Failed to save lesson",
+          severity: "error",
+        })
       );
     }
   };
@@ -52,21 +53,21 @@ const CreateEditLesson = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-  <StyledCreateLessonContainer>
-    <Typography variant="h5" sx={{ marginBottom: 2 }}>
-      {lessonId ? "Edit Lesson" : "Create New Lesson"}
-    </Typography>
-    <LessonForm
-    initialValues={{
-      title: lesson?.title || "",
-      description: lesson?.description || "",
-      phrasePairs: lesson?.phrasePairs || [
-        { phraseOne: "", phraseTwo: "" },
-      ],
-    }}
-    onSubmit={onSubmit}
-    />
-  </StyledCreateLessonContainer>
+    <StyledCreateLessonContainer>
+      <Typography variant="h5" sx={{ marginBottom: 2 }}>
+        {lessonId ? "Edit Lesson" : "Create New Lesson"}
+      </Typography>
+      <LessonForm
+        initialValues={{
+          title: lesson?.title || "",
+          description: lesson?.description || "",
+          phrasePairs: lesson?.phrasePairs || [
+            { phraseOne: "", phraseTwo: "" },
+          ],
+        }}
+        onSubmit={onSubmit}
+      />
+    </StyledCreateLessonContainer>
   );
 };
 const StyledCreateLessonContainer = styled(Box)(() => ({

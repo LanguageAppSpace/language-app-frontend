@@ -127,7 +127,7 @@ const Profession = styled(Typography)({
   fontSize: "14px",
 });
 
-const Rating = styled(Box)(({theme}) => ({
+const Rating = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   marginTop: "10px",

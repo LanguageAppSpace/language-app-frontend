@@ -1,5 +1,12 @@
 import React from "react";
-import { Typography, Button, Divider, Box, InputLabel, TextField } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Divider,
+  Box,
+  InputLabel,
+  TextField,
+} from "@mui/material";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { useDeactivateAccountMutation } from "@/redux/userSettings/userSettingsApiSlice";
