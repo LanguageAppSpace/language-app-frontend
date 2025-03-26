@@ -1,5 +1,6 @@
 import createTheme from "@mui/material/styles/createTheme";
 import "@fontsource/poppins";
+import deviceSizes from "@/cssConsts";
 
 const theme = createTheme({
   palette: {
@@ -36,6 +37,43 @@ const theme = createTheme({
   typography: {
     fontFamily: ["Poppins"].join(","),
   },
+  breakpoints: {
+    values: deviceSizes,
+  },
 });
+
+declare module "@mui/material/styles" {
+  interface TypeBackground {
+    light: string;
+    dark: string;
+  }
+  interface Palette {
+    button: {
+      main: string;
+      mainHover: string;
+      dark: string;
+      hover: string;
+      loginHover: string;
+    };
+    input: {
+      light: string;
+      medium: string;
+    };
+  }
+
+  interface PaletteOptions {
+    button?: {
+      main: string;
+      mainHover: string;
+      dark: string;
+      hover: string;
+      loginHover: string;
+    };
+    input?: {
+      light: string;
+      medium: string;
+    };
+  }
+}
 
 export default theme;

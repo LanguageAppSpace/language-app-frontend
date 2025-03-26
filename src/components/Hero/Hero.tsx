@@ -46,11 +46,11 @@ const HeroContainer = styled(Box)(({ theme }) => ({
   paddingTop: "120px",
 }));
 
-const TextContainer = styled(Box)(() => ({
+const TextContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  "@media (min-width: 600px)": {
+  [theme.breakpoints.up("sm")]: {
     flex: "0 0 50%",
   },
 }));
