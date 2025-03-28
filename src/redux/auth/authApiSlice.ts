@@ -1,3 +1,4 @@
+import { LoginUser, RegisterUser } from "@/interface";
 import { apiSlice } from "@redux/apiSlice";
 import { jwtDecode } from "jwt-decode";
 
@@ -14,14 +15,14 @@ interface DecodedToken {
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    registerUser: builder.mutation({
+    registerUser: builder.mutation<void, RegisterUser>({
       query: (user) => ({
         url: "/user/register/",
         method: "POST",
         body: user,
       }),
     }),
-    loginUser: builder.mutation({
+    loginUser: builder.mutation<LoginResponse, LoginUser>({
       query: (user) => ({
         url: "/user/token/",
         method: "POST",
