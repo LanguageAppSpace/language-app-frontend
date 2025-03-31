@@ -26,3 +26,15 @@ export interface NewLesson {
 export interface Lesson extends NewLesson {
   id: string;
 }
+
+export interface RegisterUser {
+  username: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
+
+export interface LoginUser {
+  username: string;
+  password: string;
+}

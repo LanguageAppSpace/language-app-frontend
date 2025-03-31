@@ -41,27 +41,27 @@ const Hero = () => {
 
 export default Hero;
 
-const HeroContainer = styled(Box)(({theme}) => ({
+const HeroContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.light,
   paddingTop: "120px",
 }));
 
-const TextContainer = styled(Box)(() => ({
+const TextContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  "@media (min-width: 600px)": {
+  [theme.breakpoints.up("sm")]: {
     flex: "0 0 50%",
   },
 }));
 
-const HeaderTypography = styled(Typography)(({theme}) => ({
+const HeaderTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
   marginBottom: "10px",
   fontWeight: "bold",
 }));
 
-const BodyTypography = styled(Typography)(({theme}) => ({
+const BodyTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
