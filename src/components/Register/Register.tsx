@@ -18,7 +18,7 @@ interface FormData {
   username: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  passwordConfirm: string;
 }
 
 const schema = Yup.object().shape({
@@ -27,7 +27,7 @@ const schema = Yup.object().shape({
   password: Yup.string()
     .required(" Password is required")
     .min(6, "Password  should have at least 6 characters"),
-  confirmPassword: Yup.string()
+  passwordConfirm: Yup.string()
     .required("Confirm password is required")
     .min(6, "Password  should have at least 6 characters")
     .oneOf([Yup.ref("password")], "Passwords does not match"),
@@ -43,14 +43,8 @@ const SignUpForm: React.FC = () => {
   const dispatch = useDispatch();
   const [registerUser] = useRegisterUserMutation();
   const handleSumbit = async (data: FormData) => {
-    const userData = {
-      email: data.email,
-      password: data.password,
-      username: data.username,
-      password_confirm: data.confirmPassword,
-    };
     try {
-      await registerUser(userData).unwrap();
+      await registerUser(data).unwrap();
       dispatch(
         showNotification({
           message: " Your account has been created successfully.",
@@ -123,15 +117,15 @@ const SignUpForm: React.FC = () => {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <FormInputLabel shrink={false} htmlFor={"confirmPassword"}>
+                  <FormInputLabel shrink={false} htmlFor={"passwordConfirm"}>
                     <Typography>Confirm your password</Typography>
                   </FormInputLabel>
                   <FormInput
                     fullWidth
                     type="password"
-                    error={Boolean(errors.confirmPassword)}
-                    helperText={errors.confirmPassword?.message}
-                    {...register("confirmPassword", { required: true })}
+                    error={Boolean(errors.passwordConfirm)}
+                    helperText={errors.passwordConfirm?.message}
+                    {...register("passwordConfirm", { required: true })}
                   />
                 </Grid>
               </FormRow>
