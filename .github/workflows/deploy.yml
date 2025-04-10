@@ -60,11 +60,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          publish-dir: ./dist
-          production-branch: ${{ github.ref_name }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          site-id: ${{ github.ref == 'refs/heads/main' && secrets.NETLIFY_SITE_ID_PROD || secrets.NETLIFY_SITE_ID_STAGING }}
+          node-version: 18
+
+      - name: Install dependencies and build project
+        run: |
+          npm ci
+          npm run build
+        env:
+          VITE_API: ${{ secrets.VITE_API }}
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Deploy to Netlify
+        run: |
+          netlify deploy \
+            --dir=dist \
+            --auth=${{ secrets.NETLIFY_AUTH_TOKEN }} \
+            --site=${{ github.ref == 'refs/heads/main' && secrets.NETLIFY_SITE_ID_PROD || secrets.NETLIFY_SITE_ID_STAGING }} \
+            --prod
