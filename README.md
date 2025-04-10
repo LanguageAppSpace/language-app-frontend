@@ -12,13 +12,6 @@
 ## Overview
 LanguageApp is a web-based application designed to facilitate language learning. Built with React, TypeScript, and Vite, it provides an interactive and user-friendly experience.
 
-## Features
-- User authentication and authorization
-- Flashcard-based learning system
-- Progress tracking and analytics
-- Responsive UI with Material UI components
-- Form validation using React Hook Form and Yup
-
 ## Installation
 
 ### Running the project locally
