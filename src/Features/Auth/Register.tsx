@@ -6,13 +6,13 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
-import { StyledFormWrapper, LoginButton } from "@components/Login/Login";
+import { StyledFormWrapper, LoginButton } from "@/Features/Auth/Login.tsx";
 import RegisterImage from "@assets/images/register-page-image.png";
 import Logo from "@assets/images/logo.svg";
-import { ROUTE } from "@config/route.config";
-import { showNotification } from "@/redux/notification/notificationSlice";
+import { ROUTE } from "@config/route.config.ts";
+import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
-import { useRegisterUserMutation } from "@/redux/auth/authApiSlice";
+import { useRegisterUserMutation } from "@redux/auth/authApiSlice.ts";
 
 interface FormData {
   username: string;
@@ -55,7 +55,7 @@ const SignUpForm: React.FC = () => {
         showNotification({
           message: " Your account has been created successfully.",
           severity: "success",
-        })
+        }),
       );
       navigate(ROUTE.LOGIN);
     } catch (error) {
@@ -63,7 +63,7 @@ const SignUpForm: React.FC = () => {
         showNotification({
           message: "Account creation failed",
           severity: "error",
-        })
+        }),
       );
     }
   };
@@ -228,4 +228,3 @@ export const FormInput = styled(TextField)(({ theme }) => ({
     border: "none",
   },
 }));
-

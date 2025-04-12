@@ -7,17 +7,14 @@ import {
   InputField,
   ButtonAddVocabulary,
   ButtonCreateLesson,
-} from "@components/CreateEditLesson/CreateEditLesson";
-import {
-  FormInput,
-  FormInputLabel,
-} from "@components/Register/Register";
-import { useDeleteFlashcardMutation } from "@/redux/lessons/lessonsApiSlice";
-import Footer from "@components/Footer/Footer";
+} from "@/Features/Lessons/CreateEditLesson.tsx";
+import { FormInput, FormInputLabel } from "@/Features/Auth/Register.tsx";
+import { useDeleteFlashcardMutation } from "@redux/lessons/lessonsApiSlice.ts";
+import Footer from "@/Layouts/Footer.tsx";
 import { NewLesson } from "@/interface";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { showNotification } from "@/redux/notification/notificationSlice";
+import { showNotification } from "@redux/notification/notificationSlice.ts";
 
 interface LessonFormProps {
   initialValues: NewLesson;
@@ -40,7 +37,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
 
   const onDeleteFlashcard = async (
     pairId: number | undefined,
-    index: number
+    index: number,
   ) => {
     if (lessonId && pairId) {
       try {
@@ -53,7 +50,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           showNotification({
             message: "Error deleting flashcard",
             severity: "error",
-          })
+          }),
         );
       }
     }

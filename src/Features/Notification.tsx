@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   hideNotification,
   selectNotification,
-} from "@/redux/notification/notificationSlice";
+} from "@redux/notification/notificationSlice.ts";
 import Alert from "@mui/material/Alert";
 
 const SnackbarNotification = () => {

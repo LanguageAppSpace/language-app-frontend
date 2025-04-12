@@ -1,10 +1,17 @@
 import React from "react";
-import { Typography, Button, Divider, Box, InputLabel, TextField } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Divider,
+  Box,
+  InputLabel,
+  TextField,
+} from "@mui/material";
 import { useDispatch } from "react-redux";
-import { showNotification } from "@/redux/notification/notificationSlice";
-import { useDeactivateAccountMutation } from "@/redux/userSettings/userSettingsApiSlice";
-import ChangePasswordForm from "@components/ChangePasswordForm/ChangePasswordForm.tsx";
-import UpdateProfileForm from "@components/UpdateProfileForm/UpdateProfileForm";
+import { showNotification } from "@redux/notification/notificationSlice.ts";
+import { useDeactivateAccountMutation } from "@redux/userSettings/userSettingsApiSlice.ts";
+import ChangePasswordForm from "@/Features/Profile/ChangePasswordForm.tsx";
+import UpdateProfileForm from "@/Features/Profile/UpdateProfileForm.tsx";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
 
@@ -18,14 +25,14 @@ const UserSettings: React.FC = () => {
         showNotification({
           message: "Account deactivated",
           severity: "warning",
-        })
+        }),
       );
     } catch (error) {
       dispatch(
         showNotification({
           message: "Failed to deactivate account",
           severity: "error",
-        })
+        }),
       );
     }
   };

@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
-import { ROUTE } from "@config/route.config";
+import { ROUTE } from "@config/route.config.ts";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 

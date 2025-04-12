@@ -6,7 +6,7 @@ import theme from "@/theme/theme";
 import "@/index.css";
 import { Provider } from "react-redux";
 import store from "@redux/store";
-import Notification from "@components/Notification/Notification";
+import Notification from "@/Features/Notification.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -16,5 +16,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Notification />
       </Provider>
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

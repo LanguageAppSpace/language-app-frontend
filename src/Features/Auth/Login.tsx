@@ -4,17 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
 import * as Yup from "yup";
-import {
-  FormInput,
-  FormInputLabel,
-} from "@components/Register/Register";
-import Logo from "@/assets/images/logo.svg";
-import { ROUTE } from "@/config/route.config";
+import { FormInput, FormInputLabel } from "@/Features/Auth/Register.tsx";
+import Logo from "@assets/images/logo.svg";
+import { ROUTE } from "@config/route.config.ts";
 import { useNavigate, Link } from "react-router-dom";
-import { showNotification } from "@/redux/notification/notificationSlice";
+import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
-import { setLoadingUser, setCredentials } from "@/redux/auth/authSlice";
-import { useLoginUserMutation } from "@/redux/auth/authApiSlice";
+import { setLoadingUser, setCredentials } from "@redux/auth/authSlice.ts";
+import { useLoginUserMutation } from "@redux/auth/authApiSlice.ts";
 
 interface FormData {
   username: string;
@@ -46,18 +43,18 @@ const Login = () => {
           username: data.username,
           accessToken: userData.access,
           refreshToken: userData.refresh,
-        })
+        }),
       );
       dispatch(
         showNotification({
           message: "You've successfully logged in",
           severity: "success",
-        })
+        }),
       );
       navigate(ROUTE.DASHBOARD);
     } catch {
       dispatch(
-        showNotification({ message: "Login failed", severity: "error" })
+        showNotification({ message: "Login failed", severity: "error" }),
       );
     }
   };

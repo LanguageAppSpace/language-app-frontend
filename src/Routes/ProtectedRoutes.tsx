@@ -1,7 +1,7 @@
-import { ROUTE } from "@/config/route.config";
+import { ROUTE } from "@config/route.config.ts";
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCurrentToken } from "@/redux/auth/authSlice";
+import { selectCurrentToken } from "@redux/auth/authSlice.ts";
 
 const ProtectedRoute = () => {
   const isToken = useSelector(selectCurrentToken);

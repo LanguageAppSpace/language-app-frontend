@@ -9,9 +9,9 @@ import {
   Toolbar,
 } from "@mui/material";
 import { To, useNavigate } from "react-router-dom";
-import { sidebarLinks } from "@/config/data";
-import NavigationDashboard from "@components/ComponentsOfDashboard/NavigationOfDashboard/NavigationOfDashboard";
-import Main from "@components/ComponentsOfDashboard/Main/Main";
+import { sidebarLinks } from "@config/data.ts";
+import NavigationDashboard from "@/Layouts/Navigation/NavigationOfDashboard.tsx";
+import Main from "@/Layouts/Main.tsx";
 
 const Sidebar = () => {
   const navigate = useNavigate();

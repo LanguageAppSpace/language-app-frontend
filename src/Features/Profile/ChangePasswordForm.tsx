@@ -1,17 +1,17 @@
-import { useChangePasswordMutation } from "@/redux/userSettings/userSettingsApiSlice";
+import { useChangePasswordMutation } from "@redux/userSettings/userSettingsApiSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { PasswordData } from "@/interface";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { selectCurrentUserId } from "@/redux/auth/authSlice";
-import { showNotification } from "@/redux/notification/notificationSlice";
+import { selectCurrentUserId } from "@redux/auth/authSlice.ts";
+import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { Grid, Typography, Button } from "@mui/material";
 import {
   FormRow,
   FormInputLabel,
   FormInput,
-} from "@components/UserSettings/UserSettings";
+} from "@/Features/Profile/UserSettings.tsx";
 
 const passwordSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Old password is required"),
@@ -42,7 +42,7 @@ const ChangePasswordForm = () => {
         showNotification({
           message: "Password changed successfully",
           severity: "success",
-        })
+        }),
       );
       resetPassword();
     } catch (error) {
@@ -50,7 +50,7 @@ const ChangePasswordForm = () => {
         showNotification({
           message: "Failed to change password",
           severity: "error",
-        })
+        }),
       );
     }
   };
