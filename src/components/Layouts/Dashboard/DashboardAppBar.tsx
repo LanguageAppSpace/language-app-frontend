@@ -9,7 +9,7 @@ import {
 
 const drawerWidth = 240;
 
-const NavigationOfDashboard = () => {
+const DashboardAppBar = () => {
   return (
     <>
       <AppBar
@@ -37,4 +37,4 @@ const NavigationOfDashboard = () => {
     </>
   );
 };
-export default NavigationOfDashboard;
+export default DashboardAppBar;

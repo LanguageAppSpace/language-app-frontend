@@ -7,10 +7,10 @@ import {
   InputField,
   ButtonAddVocabulary,
   ButtonCreateLesson,
-} from "@/Features/Lessons/CreateEditLesson.tsx";
-import { FormInput, FormInputLabel } from "@/Features/Auth/Register.tsx";
+} from "@components/Lessons/CreateEditLesson.tsx";
+import { FormInput, FormInputLabel } from "@components/Auth/Register.tsx";
 import { useDeleteFlashcardMutation } from "@redux/lessons/lessonsApiSlice.ts";
-import Footer from "@/Layouts/Footer.tsx";
+import Footer from "@components/Layouts/Footer.tsx";
 import { NewLesson } from "@/interface";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";

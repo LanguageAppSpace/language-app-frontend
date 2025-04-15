@@ -1,5 +1,5 @@
-import Login from "@/Features/Auth/Login.tsx";
-import SignUpForm from "@/Features/Auth/Register.tsx";
+import Login from "@components/Auth/Login.tsx";
+import SignUpForm from "@components/Auth/Register.tsx";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,12 +7,12 @@ import {
   Navigate,
 } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
-import Dashboard from "@/Layouts/Dashboard/Dashboard.tsx";
-import ProtectedRoutes from "@/Routes/ProtectedRoutes.tsx";
-import PageLandingPage from "@pages/PageLandingPage";
-import Page404 from "@pages/Page404";
-import UserSettings from "@/Features/Profile/UserSettings.tsx";
-import CreateEditLesson from "@/Features/Lessons/CreateEditLesson.tsx";
+import Dashboard from "@components/Layouts/Dashboard/Dashboard.tsx";
+import ProtectedRoutes from "@components/Routes/ProtectedRoutes.tsx";
+import PageLandingPage from "@components/Pages/PageLandingPage.tsx";
+import Page404 from "@components/Pages/Page404.tsx";
+import UserSettings from "@components/Profile/UserSettings.tsx";
+import CreateEditLesson from "@components/Lessons/CreateEditLesson.tsx";
 
 const App = () => {
   return (

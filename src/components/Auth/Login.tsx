@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
 import * as Yup from "yup";
-import { FormInput, FormInputLabel } from "@/Features/Auth/Register.tsx";
+import { FormInput, FormInputLabel } from "@components/Auth/Register.tsx";
 import Logo from "@assets/images/logo.svg";
 import { ROUTE } from "@config/route.config.ts";
 import { useNavigate, Link } from "react-router-dom";

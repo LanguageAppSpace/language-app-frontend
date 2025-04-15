@@ -8,7 +8,7 @@ import {
   FormRow,
   FormInputLabel,
   FormInput,
-} from "@/Features/Profile/UserSettings.tsx";
+} from "@components/Profile/UserSettings.tsx";
 import { useUpdateProfileMutation } from "@redux/userSettings/userSettingsApiSlice.ts";
 import { ProfileData } from "@/interface";
 

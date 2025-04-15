@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import { To, useNavigate } from "react-router-dom";
 import { sidebarLinks } from "@config/data.ts";
-import NavigationDashboard from "@/Layouts/Navigation/NavigationOfDashboard.tsx";
-import Main from "@/Layouts/Main.tsx";
+import NavigationDashboard from "@components/Layouts/Dashboard/DashboardAppBar.tsx";
+import Main from "@components/Layouts/Main.tsx";
 
 const Sidebar = () => {
   const navigate = useNavigate();

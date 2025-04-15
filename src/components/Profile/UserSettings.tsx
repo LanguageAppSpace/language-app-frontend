@@ -10,8 +10,8 @@ import {
 import { useDispatch } from "react-redux";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDeactivateAccountMutation } from "@redux/userSettings/userSettingsApiSlice.ts";
-import ChangePasswordForm from "@/Features/Profile/ChangePasswordForm.tsx";
-import UpdateProfileForm from "@/Features/Profile/UpdateProfileForm.tsx";
+import ChangePasswordForm from "@components/Profile/ChangePasswordForm.tsx";
+import UpdateProfileForm from "@components/Profile/UpdateProfileForm.tsx";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
 
