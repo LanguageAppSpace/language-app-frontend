@@ -6,7 +6,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
-import { StyledFormWrapper, LoginButton } from "@components/Auth/Login.tsx";
+import { StyledFormWrapper, LoginButton } from "@/Auth/Login.tsx";
 import RegisterImage from "@assets/images/register-page-image.png";
 import Logo from "@assets/images/logo.svg";
 import { ROUTE } from "@config/route.config.ts";

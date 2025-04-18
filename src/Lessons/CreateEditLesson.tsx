@@ -9,7 +9,7 @@ import {
 } from "@redux/lessons/lessonsApiSlice.ts";
 import { NewLesson, PhrasePair } from "@/interface";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
-import LessonForm from "@components/Lessons/LessonForm.tsx";
+import LessonForm from "@/Lessons/LessonForm.tsx";
 
 const CreateEditLesson = () => {
   const { lessonId } = useParams();

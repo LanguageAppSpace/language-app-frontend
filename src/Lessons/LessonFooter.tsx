@@ -1,11 +1,11 @@
 import React from "react";
 import { styled } from "@mui/system";
 
-const Footer = ({ children }: { children: React.ReactNode }) => {
+const LessonFooter = ({ children }: { children: React.ReactNode }) => {
   return <FooterStyled>{children}</FooterStyled>;
 };
 
-export default Footer;
+export default LessonFooter;
 
 export const FooterStyled = styled("footer")(({ theme }) => ({
   backgroundColor: `${theme.palette.primary.main}`,

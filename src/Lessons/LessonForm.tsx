@@ -7,10 +7,10 @@ import {
   InputField,
   ButtonAddVocabulary,
   ButtonCreateLesson,
-} from "@components/Lessons/CreateEditLesson.tsx";
-import { FormInput, FormInputLabel } from "@components/Auth/Register.tsx";
+} from "@/Lessons/CreateEditLesson.tsx";
+import { FormInput, FormInputLabel } from "@/Auth/Register.tsx";
 import { useDeleteFlashcardMutation } from "@redux/lessons/lessonsApiSlice.ts";
-import Footer from "@components/Layouts/Footer.tsx";
+import LessonFooter from "@/Lessons/LessonFooter.tsx";
 import { NewLesson } from "@/interface";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -130,7 +130,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           Add new vocabulary
         </ButtonAddVocabulary>
       </Grid>
-      <Footer>
+      <LessonFooter>
         <ButtonCreateLesson
           variant="contained"
           color="primary"
@@ -139,7 +139,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
         >
           {lessonId ? "Update Lesson" : "Create Lesson"}
         </ButtonCreateLesson>
-      </Footer>
+      </LessonFooter>
     </form>
   );
 };

@@ -1,5 +1,5 @@
-import Login from "@components/Auth/Login.tsx";
-import SignUpForm from "@components/Auth/Register.tsx";
+import Login from "@/Auth/Login.tsx";
+import SignUpForm from "@/Auth/Register.tsx";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,12 +7,12 @@ import {
   Navigate,
 } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
-import Dashboard from "@components/Layouts/Dashboard/Dashboard.tsx";
-import ProtectedRoutes from "@components/Routes/ProtectedRoutes.tsx";
-import PageLandingPage from "@components/Pages/PageLandingPage.tsx";
-import Page404 from "@components/Pages/Page404.tsx";
-import UserSettings from "@components/Profile/UserSettings.tsx";
-import CreateEditLesson from "@components/Lessons/CreateEditLesson.tsx";
+import Dashboard from "@/Dashboard/Dashboard.tsx";
+import ProtectedRoutes from "@/routes/ProtectedRoutes.tsx";
+import LandingPage from "@/Landing Page/LandingPage.tsx";
+import Page404 from "@pages/Page404.tsx";
+import UserSettings from "@/Profile/UserSettings.tsx";
+import CreateEditLesson from "@/Lessons/CreateEditLesson.tsx";
 
 const App = () => {
   return (
@@ -22,7 +22,7 @@ const App = () => {
           path="/"
           element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
         />
-        <Route path={ROUTE.LANDING_PAGE} element={<PageLandingPage />} />
+        <Route path={ROUTE.LANDING_PAGE} element={<LandingPage />} />
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
