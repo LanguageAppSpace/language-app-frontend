@@ -9,6 +9,11 @@ import { RootState } from "@redux/store";
 import camelcaseKeys from "camelcase-keys";
 import snakecaseKeys from "snakecase-keys";
 
+interface RefreshResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+
 const getAccessToken = (state: RootState): string | null => {
   let accessToken: AuthState["accessToken"] = state.auth.accessToken;
   if (!accessToken) {
@@ -36,16 +41,20 @@ const baseQueryWithReauth: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   if (typeof args !== "string" && args.body) {
-    args.body = snakecaseKeys(args.body, { deep: true });
+    args.body = snakecaseKeys(args.body, { deep: true }) as Record<
+      string,
+      unknown
+    >;
   }
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
+    const refreshData = refreshResult.data as RefreshResponse;
 
-    if (refreshResult?.data) {
-      const user = (api.getState() as RootState).auth.username;
-      api.dispatch(setCredentials({ ...refreshResult.data, user }));
+    if (refreshData) {
+      const username = (api.getState() as RootState).auth.username;
+      api.dispatch(setCredentials({ ...refreshData, username }));
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(logOut());

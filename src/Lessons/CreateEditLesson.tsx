@@ -1,5 +1,12 @@
-import { Typography, Button, Grid, Input, styled } from "@mui/material";
-import { Box, alpha } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Grid,
+  Input,
+  styled,
+  Box,
+  alpha,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -17,13 +24,13 @@ const CreateEditLesson = () => {
   const [editLesson] = useEditLessonMutation();
   const dispatch = useDispatch();
 
-  const { data: lesson, isLoading } = useGetLessonByIdQuery(lessonId || "", {
+  const { data: lesson, isLoading } = useGetLessonByIdQuery(lessonId ?? "", {
     skip: !lessonId,
   });
 
   const trimmedPhrasePairs = (phrasePairs: PhrasePair[]) =>
     phrasePairs.filter(
-      (pair) => pair.phraseOne.trim() !== "" || pair.phraseTwo.trim() !== "",
+      (pair) => pair.phraseOne.trim() !== "" || pair.phraseTwo.trim() !== ""
     );
 
   const onSubmit = async (data: NewLesson) => {
@@ -45,7 +52,7 @@ const CreateEditLesson = () => {
         showNotification({
           message: lessonId ? "Failed to edit lesson" : "Failed to save lesson",
           severity: "error",
-        }),
+        })
       );
     }
   };
@@ -59,9 +66,9 @@ const CreateEditLesson = () => {
       </Typography>
       <LessonForm
         initialValues={{
-          title: lesson?.title || "",
-          description: lesson?.description || "",
-          phrasePairs: lesson?.phrasePairs || [
+          title: lesson?.title ?? "",
+          description: lesson?.description ?? "",
+          phrasePairs: lesson?.phrasePairs ?? [
             { phraseOne: "", phraseTwo: "" },
           ],
         }}

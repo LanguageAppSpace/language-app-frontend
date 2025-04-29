@@ -37,7 +37,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
 
   const onDeleteFlashcard = async (
     pairId: number | undefined,
-    index: number,
+    index: number
   ) => {
     if (lessonId && pairId) {
       try {
@@ -50,7 +50,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           showNotification({
             message: "Error deleting flashcard",
             severity: "error",
-          }),
+          })
         );
       }
     }

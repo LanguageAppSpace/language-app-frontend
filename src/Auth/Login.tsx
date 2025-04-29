@@ -43,18 +43,18 @@ const Login = () => {
           username: data.username,
           accessToken: userData.access,
           refreshToken: userData.refresh,
-        }),
+        })
       );
       dispatch(
         showNotification({
           message: "You've successfully logged in",
           severity: "success",
-        }),
+        })
       );
       navigate(ROUTE.DASHBOARD);
     } catch {
       dispatch(
-        showNotification({ message: "Login failed", severity: "error" }),
+        showNotification({ message: "Login failed", severity: "error" })
       );
     }
   };
