@@ -22,7 +22,7 @@ const LogOutButton = () => {
           message:
             "An error occurred while trying to log out. Please try again.",
           severity: "error",
-        }),
+        })
       );
     }
   };

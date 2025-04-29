@@ -14,7 +14,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   const handleCreateNewLesson = () => {
-    navigate(ROUTE.PAGE404);
+    navigate(ROUTE.CREATE_LESSON);
   };
 
   const handleLessonClick = (path: To) => {

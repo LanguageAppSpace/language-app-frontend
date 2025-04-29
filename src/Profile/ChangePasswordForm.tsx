@@ -7,11 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { selectCurrentUserId } from "@redux/auth/authSlice.ts";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { Grid, Typography, Button } from "@mui/material";
-import {
-  FormRow,
-  FormInputLabel,
-  FormInput,
-} from "@/Profile/UserSettings.tsx";
+import { FormRow, FormInputLabel, FormInput } from "@/Profile/UserSettings.tsx";
 
 const passwordSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Old password is required"),
@@ -42,7 +38,7 @@ const ChangePasswordForm = () => {
         showNotification({
           message: "Password changed successfully",
           severity: "success",
-        }),
+        })
       );
       resetPassword();
     } catch (error) {
@@ -50,7 +46,7 @@ const ChangePasswordForm = () => {
         showNotification({
           message: "Failed to change password",
           severity: "error",
-        }),
+        })
       );
     }
   };

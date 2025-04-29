@@ -6,7 +6,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { styled } from "@mui/material/styles";
 
-const DashboardFooter = () => {
+const Footer = () => {
   return (
     <StyledFooterContainer>
       <Container maxWidth="xl">
@@ -58,7 +58,7 @@ const DashboardFooter = () => {
   );
 };
 
-export default DashboardFooter;
+export default Footer;
 
 const StyledFooterContainer = styled(Box)({
   display: "flex",

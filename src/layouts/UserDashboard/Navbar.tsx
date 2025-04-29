@@ -8,8 +8,7 @@ import {
 } from "@mui/material";
 
 const drawerWidth = 240;
-
-const DashboardAppBar = () => {
+const Navbar = () => {
   return (
     <>
       <AppBar
@@ -26,7 +25,6 @@ const DashboardAppBar = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               LOGO
             </Typography>
-
             <Box sx={{ flexGrow: 0 }}>
               <Avatar />
             </Box>
@@ -37,4 +35,5 @@ const DashboardAppBar = () => {
     </>
   );
 };
-export default DashboardAppBar;
+
+export default Navbar;

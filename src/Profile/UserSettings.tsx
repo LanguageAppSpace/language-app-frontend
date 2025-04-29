@@ -25,14 +25,14 @@ const UserSettings: React.FC = () => {
         showNotification({
           message: "Account deactivated",
           severity: "warning",
-        }),
+        })
       );
     } catch (error) {
       dispatch(
         showNotification({
           message: "Failed to deactivate account",
           severity: "error",
-        }),
+        })
       );
     }
   };

@@ -16,5 +16,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Notification />
       </Provider>
     </ThemeProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

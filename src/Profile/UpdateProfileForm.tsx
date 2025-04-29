@@ -4,11 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { Grid, Typography, Button } from "@mui/material";
-import {
-  FormRow,
-  FormInputLabel,
-  FormInput,
-} from "@/Profile/UserSettings.tsx";
+import { FormRow, FormInputLabel, FormInput } from "@/Profile/UserSettings.tsx";
 import { useUpdateProfileMutation } from "@redux/userSettings/userSettingsApiSlice.ts";
 import { ProfileData } from "@/interface";
 
@@ -36,7 +32,7 @@ const UpdateProfileForm = () => {
         showNotification({
           message: "Profile updated successfully",
           severity: "success",
-        }),
+        })
       );
       resetProfile();
     } catch (error) {
@@ -44,7 +40,7 @@ const UpdateProfileForm = () => {
         showNotification({
           message: "Failed to update profile",
           severity: "error",
-        }),
+        })
       );
     }
   };
