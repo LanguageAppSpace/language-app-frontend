@@ -1,5 +1,5 @@
-import Login from "@components/Login/Login";
-import SignUpForm from "@components/Register/Register";
+import Login from "@/Login/Login";
+import SignUpForm from "@/Register/Register";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,12 +7,13 @@ import {
   Navigate,
 } from "react-router-dom";
 import { ROUTE } from "@config/route.config";
-import Dashboard from "@components/ComponentsOfDashboard/Dashboard/Dashboard";
-import ProtectedRoutes from "@components/ProtectedRoutes/ProtectedRoutes";
-import PageLandingPage from "@pages/PageLandingPage";
-import Page404 from "@pages/Page404";
-import UserSettings from "@components/UserSettings/UserSettings";
-import CreateEditLesson from "@/components/CreateEditLesson/CreateEditLesson";
+import Dashboard from "@/UserDashboard/Main.tsx";
+import ProtectedRoutes from "@/routes/ProtectedRoutes.tsx";
+import LandingPage from "@/Landing Page/LandingPage.tsx";
+import Page404 from "@pages/Page404.tsx";
+import UserSettings from "@/Profile/UserSettings.tsx";
+import CreateEditLesson from "@/Lessons/CreateEditLesson.tsx";
+import UserDashboardLayout from "./layouts/UserDashboard/Layout";
 
 const App = () => {
   return (
@@ -22,15 +23,17 @@ const App = () => {
           path="/"
           element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
         />
-        <Route path={ROUTE.LANDING_PAGE} element={<PageLandingPage />} />
+        <Route path={ROUTE.LANDING_PAGE} element={<LandingPage />} />
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
-          <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
-          <Route path={ROUTE.CREATE_LESSON} element={<CreateEditLesson />} />
-          <Route path={ROUTE.EDIT_LESSON} element={<CreateEditLesson />} />
+          <Route element={<UserDashboardLayout />}>
+            <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
+            <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
+            <Route path={ROUTE.CREATE_LESSON} element={<CreateEditLesson />} />
+            <Route path={ROUTE.EDIT_LESSON} element={<CreateEditLesson />} />
+          </Route>
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>
