@@ -47,7 +47,7 @@ const SignUpForm: React.FC = () => {
       await registerUser(data).unwrap();
       dispatch(
         showNotification({
-          message: " Your account has been created successfully.",
+          message: "Your account has been created successfully.",
           severity: "success",
         })
       );

@@ -20,7 +20,7 @@ interface FormData {
 
 const schema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
-  password: Yup.string().required(" Password is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const Login = () => {
@@ -74,7 +74,7 @@ const Login = () => {
                 <FormInput
                   fullWidth
                   error={Boolean(errors.username)}
-                  helperText={errors.username && "Username is required"}
+                  helperText={errors.username?.message}
                   {...register("username", { required: true })}
                 />
               </Grid>
@@ -86,7 +86,7 @@ const Login = () => {
                   fullWidth
                   type="password"
                   error={Boolean(errors.password)}
-                  helperText={errors.password && "Password is required"}
+                  helperText={errors.username?.message}
                   {...register("password", { required: true })}
                 />
               </Grid>
