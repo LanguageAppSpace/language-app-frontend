@@ -5,13 +5,13 @@ import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
 import * as Yup from "yup";
 import { FormInput, FormInputLabel } from "@/Register/Register";
-import Logo from "@assets/images/logo.svg";
 import { ROUTE } from "@config/route.config.ts";
 import { useNavigate, Link } from "react-router-dom";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
 import { setLoadingUser, setCredentials } from "@redux/auth/authSlice.ts";
 import { useLoginUserMutation } from "@redux/auth/authApiSlice.ts";
+import Navigation from "@/Landing Page/Navigation";
 
 interface FormData {
   username: string;
@@ -60,53 +60,55 @@ const Login = () => {
   };
 
   return (
-    <StyledFormWrapper>
-      <SignInFormContainer>
-        <img src={Logo} alt="Logo" />
-        <LoginForm onSubmit={handleSubmit(onSubmit)}>
-          <LoginFormTitle align="center">Sign in</LoginFormTitle>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <FormInputLabel shrink={false} htmlFor={"username"}>
-                <Typography>Username</Typography>
-              </FormInputLabel>
-              <FormInput
-                fullWidth
-                error={Boolean(errors.username)}
-                helperText={errors.username && "Username is required"}
-                {...register("username", { required: true })}
-              />
+    <>
+      <Navigation />
+      <StyledFormWrapper>
+        <SignInFormContainer>
+          <LoginForm onSubmit={handleSubmit(onSubmit)}>
+            <LoginFormTitle align="center">Sign in</LoginFormTitle>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <FormInputLabel shrink={false} htmlFor={"username"}>
+                  <Typography>Username</Typography>
+                </FormInputLabel>
+                <FormInput
+                  fullWidth
+                  error={Boolean(errors.username)}
+                  helperText={errors.username && "Username is required"}
+                  {...register("username", { required: true })}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormInputLabel shrink={false} htmlFor={"password"}>
+                  <Typography>Your password</Typography>
+                </FormInputLabel>
+                <FormInput
+                  fullWidth
+                  type="password"
+                  error={Boolean(errors.password)}
+                  helperText={errors.password && "Password is required"}
+                  {...register("password", { required: true })}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <LoginButton type="submit" variant="contained" fullWidth>
+                  Log in
+                </LoginButton>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <FormInputLabel shrink={false} htmlFor={"password"}>
-                <Typography>Your password</Typography>
-              </FormInputLabel>
-              <FormInput
-                fullWidth
-                type="password"
-                error={Boolean(errors.password)}
-                helperText={errors.password && "Password is required"}
-                {...register("password", { required: true })}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <LoginButton type="submit" variant="contained" fullWidth>
-                Log in
-              </LoginButton>
-            </Grid>
-          </Grid>
-          <ForgetPassword>Forget your password</ForgetPassword>
-        </LoginForm>
-        <SignUpSection>
-          <LoginDivider>New to our community</LoginDivider>
-          <StyledLink to={ROUTE.REGISTER}>
-            <CreateAccountButton variant="outlined" fullWidth>
-              Create an account
-            </CreateAccountButton>
-          </StyledLink>
-        </SignUpSection>
-      </SignInFormContainer>
-    </StyledFormWrapper>
+            <ForgetPassword>Forgot your password?</ForgetPassword>
+          </LoginForm>
+          <SignUpSection>
+            <LoginDivider>New to our community</LoginDivider>
+            <StyledLink to={ROUTE.REGISTER}>
+              <CreateAccountButton variant="outlined" fullWidth>
+                Create an account
+              </CreateAccountButton>
+            </StyledLink>
+          </SignUpSection>
+        </SignInFormContainer>
+      </StyledFormWrapper>
+    </>
   );
 };
 
@@ -118,7 +120,7 @@ export const StyledFormWrapper = styled("div")(() => ({
   justifyContent: "center",
   alignItems: "center",
   height: "100vh",
-  padding: "85px 0 48px 0",
+  padding: "80px 0 48px 0",
 }));
 
 export const SignInFormContainer = styled("div")(() => ({
