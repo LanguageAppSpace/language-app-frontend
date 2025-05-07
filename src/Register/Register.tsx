@@ -13,6 +13,7 @@ import { ROUTE } from "@config/route.config.ts";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "@redux/auth/authApiSlice.ts";
+import Navigation from "@/Landing Page/Navigation";
 
 interface FormData {
   username: string;
@@ -21,16 +22,20 @@ interface FormData {
   passwordConfirm: string;
 }
 
+const PASSWORD_MIN_LENGTH = 6;
+const PASSWORD_MIN_MESSAGE = `Password must be at least ${PASSWORD_MIN_LENGTH} characters`;
+
 const schema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
-  email: Yup.string().email().required("Email is required"),
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("Email is required"),
   password: Yup.string()
-    .required(" Password is required")
-    .min(6, "Password  should have at least 6 characters"),
+    .required("Password is required")
+    .min(PASSWORD_MIN_LENGTH, PASSWORD_MIN_MESSAGE),
   passwordConfirm: Yup.string()
-    .required("Confirm password is required")
-    .min(6, "Password  should have at least 6 characters")
-    .oneOf([Yup.ref("password")], "Passwords does not match"),
+    .required("Password confirmation is required")
+    .oneOf([Yup.ref("password")], "Passwords do not match"),
 });
 
 const SignUpForm: React.FC = () => {
@@ -63,103 +68,107 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <StyledFormWrapper>
-      <RegisterForm onSubmit={handleSubmit(handleSumbit)}>
-        <Grid container justifyContent="center" alignItems="center">
-          <Grid item xs={7}>
-            <img src={Logo} alt="Logo" />
-            <RegisterFormTitle variant="h4">
-              Create an account
-            </RegisterFormTitle>
-            <RegisterFormSubtitle>
-              Already have an account?
-              <LogInLink to={ROUTE.LOGIN}>Log in</LogInLink>
-            </RegisterFormSubtitle>
-            <Grid container direction="column">
-              <FormRow>
-                <Grid item xs={12}>
-                  <FormInputLabel shrink={false} htmlFor={"username"}>
-                    <Typography>Username</Typography>
-                  </FormInputLabel>
-                  <FormInput
-                    fullWidth
-                    error={Boolean(errors.username)}
-                    helperText={errors.username?.message}
-                    {...register("username", { required: true })}
-                    variant="outlined"
-                  />
-                </Grid>
-              </FormRow>
-              <FormRow>
-                <Grid item xs={12}>
-                  <FormInputLabel shrink={false} htmlFor={"email"}>
-                    <Typography>Email address</Typography>
-                  </FormInputLabel>
-                  <FormInput
-                    fullWidth
-                    error={Boolean(errors.email)}
-                    helperText={errors.email?.message}
-                    {...register("email", { required: true })}
-                  />
-                </Grid>
-              </FormRow>
-              <FormRow>
-                <Grid item xs={6} spacing={2}>
-                  <FormInputLabel shrink={false} htmlFor={"password"}>
-                    <Typography>Password</Typography>
-                  </FormInputLabel>
-                  <FormInput
-                    fullWidth
-                    type="password"
-                    error={Boolean(errors.password)}
-                    helperText={errors.password?.message}
-                    {...register("password", { required: true })}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <FormInputLabel shrink={false} htmlFor={"passwordConfirm"}>
-                    <Typography>Confirm your password</Typography>
-                  </FormInputLabel>
-                  <FormInput
-                    fullWidth
-                    type="password"
-                    error={Boolean(errors.passwordConfirm)}
-                    helperText={errors.passwordConfirm?.message}
-                    {...register("passwordConfirm", { required: true })}
-                  />
-                </Grid>
-              </FormRow>
-            </Grid>
-            <RegisterFormButtons>
-              <LogInLink to={ROUTE.LOGIN}>log in instead</LogInLink>
-              <LoginButton
-                type="submit"
-                variant="contained"
-                color="primary"
-                endIcon={<ArrowForwardIcon />}
-              >
+    <>
+      <Navigation />
+      <StyledFormWrapper>
+        <RegisterForm onSubmit={handleSubmit(handleSumbit)}>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item xs={7}>
+              <img src={Logo} alt="Logo" />
+              <RegisterFormTitle variant="h4">
                 Create an account
-              </LoginButton>
-            </RegisterFormButtons>
+              </RegisterFormTitle>
+              <RegisterFormSubtitle>
+                <>Already have an account?</>
+                <LogInLink to={ROUTE.LOGIN}>Log in</LogInLink>
+              </RegisterFormSubtitle>
+              <Grid container direction="column">
+                <FormRow>
+                  <Grid item xs={12}>
+                    <FormInputLabel shrink={false} htmlFor={"username"}>
+                      <Typography>Username</Typography>
+                    </FormInputLabel>
+                    <FormInput
+                      fullWidth
+                      error={Boolean(errors.username)}
+                      helperText={errors.username?.message}
+                      {...register("username", { required: true })}
+                      variant="outlined"
+                    />
+                  </Grid>
+                </FormRow>
+                <FormRow>
+                  <Grid item xs={12}>
+                    <FormInputLabel shrink={false} htmlFor={"email"}>
+                      <Typography>Email address</Typography>
+                    </FormInputLabel>
+                    <FormInput
+                      fullWidth
+                      error={Boolean(errors.email)}
+                      helperText={errors.email?.message}
+                      {...register("email", { required: true })}
+                    />
+                  </Grid>
+                </FormRow>
+                <FormRow>
+                  <Grid item xs={6} spacing={2}>
+                    <FormInputLabel shrink={false} htmlFor={"password"}>
+                      <Typography>Password</Typography>
+                    </FormInputLabel>
+                    <FormInput
+                      fullWidth
+                      type="password"
+                      error={Boolean(errors.password)}
+                      helperText={errors.password?.message}
+                      {...register("password", { required: true })}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <FormInputLabel shrink={false} htmlFor={"passwordConfirm"}>
+                      <Typography>Confirm your password</Typography>
+                    </FormInputLabel>
+                    <FormInput
+                      fullWidth
+                      type="password"
+                      error={Boolean(errors.passwordConfirm)}
+                      helperText={errors.passwordConfirm?.message}
+                      {...register("passwordConfirm", { required: true })}
+                    />
+                  </Grid>
+                </FormRow>
+              </Grid>
+              <RegisterFormButtons>
+                <LoginButton
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  endIcon={<ArrowForwardIcon />}
+                  aria-label="Create an account"
+                >
+                  Create an account
+                </LoginButton>
+              </RegisterFormButtons>
+            </Grid>
+            <Grid item xs={5}>
+              <StyledRegisterImage src={RegisterImage} alt="Register" />
+            </Grid>
           </Grid>
-          <Grid item xs={5}>
-            <StyledRegisterImage src={RegisterImage} alt="Register" />
-          </Grid>
-        </Grid>
-      </RegisterForm>
-    </StyledFormWrapper>
+        </RegisterForm>
+      </StyledFormWrapper>
+    </>
   );
 };
 
 export default SignUpForm;
 
 export const RegisterForm = styled("form")(({ theme }) => ({
+  marginTop: theme.spacing(4),
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  gap: theme.spacing(2),
   borderRadius: "24px",
   border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
-  padding: "56px",
+  padding: theme.spacing(7),
   maxWidth: "1017px",
   boxSizing: "border-box",
 }));
@@ -178,6 +187,10 @@ export const RegisterFormTitle = styled(Typography)(({ theme }) => ({
 
 export const RegisterFormSubtitle = styled(Typography)(({ theme }) => ({
   color: `${theme.palette.primary.light}`,
+  flexDirection: "row",
+  display: "flex",
+  alignItems: "center",
+  gap: theme.spacing(1),
   fontSize: "16px",
   fontWeight: 400,
   marginTop: theme.spacing(1),
@@ -201,14 +214,14 @@ export const FormInputLabel = styled(InputLabel)(({ theme }) => ({
   fontSize: "16px",
   fontStyle: "normal",
   fontWeight: 400,
-  paddingBottom: "7px",
+  paddingBottom: theme.spacing(1),
 }));
 
 export const RegisterFormButtons = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-between",
   marginTop: "15px",
-  alignItems: "flex-end",
+  alignItems: "center",
 }));
 
 export const FormInput = styled(TextField)(({ theme }) => ({
