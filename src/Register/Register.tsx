@@ -6,14 +6,14 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
-import { StyledFormWrapper, LoginButton } from "@/Login/Login";
+import { LoginButton, LoginWrapper } from "@/Login/Login";
 import RegisterImage from "@assets/images/register-page-image.png";
-import Logo from "@assets/images/logo.svg";
 import { ROUTE } from "@config/route.config.ts";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "@redux/auth/authApiSlice.ts";
 import Navigation from "@/Landing Page/Navigation";
+import BackButton from "@/components/BackButton";
 
 interface FormData {
   username: string;
@@ -68,13 +68,13 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <>
+    <LoginWrapper>
       <Navigation />
-      <StyledFormWrapper>
+      <BackButton />
+      <RegisterFormContainer>
         <RegisterForm onSubmit={handleSubmit(handleSumbit)}>
           <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={7}>
-              <img src={Logo} alt="Logo" />
               <RegisterFormTitle variant="h4">
                 Create an account
               </RegisterFormTitle>
@@ -154,23 +154,30 @@ const SignUpForm: React.FC = () => {
             </Grid>
           </Grid>
         </RegisterForm>
-      </StyledFormWrapper>
-    </>
+      </RegisterFormContainer>
+    </LoginWrapper>
   );
 };
 
 export default SignUpForm;
 
+export const RegisterFormContainer = styled("div")(() => ({
+  maxWidth: "100%",
+  display: "flex",
+  boxSizing: "border-box",
+  flexDirection: "column",
+  justifyContent: "center",
+}));
+
 export const RegisterForm = styled("form")(({ theme }) => ({
-  marginTop: theme.spacing(4),
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(2),
   borderRadius: "24px",
   border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
-  padding: theme.spacing(7),
-  maxWidth: "1017px",
+  padding: "40px 56px",
+  maxWidth: 1017,
   boxSizing: "border-box",
+  width: "100%",
 }));
 
 export const StyledRegisterImage = styled("img")(() => ({
@@ -190,11 +197,11 @@ export const RegisterFormSubtitle = styled(Typography)(({ theme }) => ({
   flexDirection: "row",
   display: "flex",
   alignItems: "center",
-  gap: theme.spacing(1),
+  gap: 8,
   fontSize: "16px",
   fontWeight: 400,
   marginTop: theme.spacing(1),
-  marginBottom: "40px",
+  marginBottom: 36,
 }));
 
 export const LogInLink = styled(Link)(({ theme }) => ({
@@ -220,7 +227,7 @@ export const FormInputLabel = styled(InputLabel)(({ theme }) => ({
 export const RegisterFormButtons = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-between",
-  marginTop: "15px",
+  marginTop: 16,
   alignItems: "center",
 }));
 

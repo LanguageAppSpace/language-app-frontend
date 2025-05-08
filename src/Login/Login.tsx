@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingUser, setCredentials } from "@redux/auth/authSlice.ts";
 import { useLoginUserMutation } from "@redux/auth/authApiSlice.ts";
 import Navigation from "@/Landing Page/Navigation";
+import BackButton from "@/components/BackButton";
 
 interface FormData {
   username: string;
@@ -60,61 +61,60 @@ const Login = () => {
   };
 
   return (
-    <>
+    <LoginWrapper>
       <Navigation />
-      <StyledFormWrapper>
-        <SignInFormContainer>
-          <LoginForm onSubmit={handleSubmit(onSubmit)}>
-            <LoginFormTitle align="center">Sign in</LoginFormTitle>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <FormInputLabel shrink={false} htmlFor={"username"}>
-                  <Typography>Username</Typography>
-                </FormInputLabel>
-                <FormInput
-                  fullWidth
-                  error={Boolean(errors.username)}
-                  helperText={errors.username?.message}
-                  {...register("username", { required: true })}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormInputLabel shrink={false} htmlFor={"password"}>
-                  <Typography>Your password</Typography>
-                </FormInputLabel>
-                <FormInput
-                  fullWidth
-                  type="password"
-                  error={Boolean(errors.password)}
-                  helperText={errors.username?.message}
-                  {...register("password", { required: true })}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <LoginButton type="submit" variant="contained" fullWidth>
-                  Log in
-                </LoginButton>
-              </Grid>
+      <BackButton />
+      <LoginFormContainer>
+        <LoginForm onSubmit={handleSubmit(onSubmit)}>
+          <LoginFormTitle align="center">Sign in</LoginFormTitle>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <FormInputLabel shrink={false} htmlFor={"username"}>
+                <Typography>Username</Typography>
+              </FormInputLabel>
+              <FormInput
+                fullWidth
+                error={Boolean(errors.username)}
+                helperText={errors.username?.message}
+                {...register("username", { required: true })}
+              />
             </Grid>
-            <ForgetPassword>Forgot your password?</ForgetPassword>
-          </LoginForm>
-          <SignUpSection>
-            <LoginDivider>New to our community</LoginDivider>
-            <StyledLink to={ROUTE.REGISTER}>
-              <CreateAccountButton variant="outlined" fullWidth>
-                Create an account
-              </CreateAccountButton>
-            </StyledLink>
-          </SignUpSection>
-        </SignInFormContainer>
-      </StyledFormWrapper>
-    </>
+            <Grid item xs={12}>
+              <FormInputLabel shrink={false} htmlFor={"password"}>
+                <Typography>Your password</Typography>
+              </FormInputLabel>
+              <FormInput
+                fullWidth
+                type="password"
+                error={Boolean(errors.password)}
+                helperText={errors.username?.message}
+                {...register("password", { required: true })}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <LoginButton type="submit" variant="contained" fullWidth>
+                Log in
+              </LoginButton>
+            </Grid>
+          </Grid>
+          <ForgetPassword>Forgot your password?</ForgetPassword>
+        </LoginForm>
+        <SignUpSection>
+          <LoginDivider>New to our community</LoginDivider>
+          <StyledLink to={ROUTE.REGISTER}>
+            <CreateAccountButton variant="outlined" fullWidth>
+              Create an account
+            </CreateAccountButton>
+          </StyledLink>
+        </SignUpSection>
+      </LoginFormContainer>
+    </LoginWrapper>
   );
 };
 
 export default Login;
 
-export const StyledFormWrapper = styled("div")(() => ({
+export const LoginWrapper = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -123,25 +123,24 @@ export const StyledFormWrapper = styled("div")(() => ({
   padding: "80px 0 48px 0",
 }));
 
-export const SignInFormContainer = styled("div")(() => ({
+export const LoginFormContainer = styled("div")(() => ({
   maxWidth: "640px",
   width: "100%",
   boxSizing: "border-box",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
 }));
 
 export const LoginForm = styled("form")(({ theme }) => ({
   display: "flex",
+  maxWidth: 640,
+  justifyContent: "center",
   flexDirection: "column",
   borderRadius: "16px",
   border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
   padding: "40px 56px",
   boxSizing: "border-box",
   width: "100%",
-  margin: "32px 0 14px 0",
 }));
 
 export const LoginButton = styled(Button)(({ theme }) => ({
@@ -168,17 +167,11 @@ export const LoginFormTitle = styled(Typography)(({ theme }) => ({
   marginBottom: "48px",
 }));
 
-export const CreateAccountButton = styled(Button)(() => ({
-  display: "flex",
-  padding: "16px 0",
-  justifyContent: "center",
-  alignItems: "center",
-  fontSize: "20px",
-  fontStyle: "normal",
-  fontWeight: "700",
-  letterSpacing: "0.4px",
-  width: "100%",
-  borderRadius: "40px",
+export const ForgetPassword = styled(Typography)(() => ({
+  textDecoration: "underline",
+  fontSize: "16px",
+  cursor: "pointer",
+  marginTop: 6,
 }));
 
 export const StyledLink = styled(Link)`
@@ -196,13 +189,20 @@ export const SignUpSection = styled("div")(() => ({
   width: "100%",
 }));
 
-export const ForgetPassword = styled(Typography)(() => ({
-  textDecoration: "underline",
-  fontSize: "16px",
-  cursor: "pointer",
-  marginTop: "8px",
+export const CreateAccountButton = styled(Button)(() => ({
+  display: "flex",
+  padding: "16px 0",
+  justifyContent: "center",
+  alignItems: "center",
+  fontSize: "20px",
+  fontStyle: "normal",
+  fontWeight: "700",
+  letterSpacing: "0.4px",
+  width: "100%",
+  borderRadius: "40px",
 }));
 
+// Unused components
 export const LoginWithGoogleButton = styled(Button)(() => ({
   display: "flex",
   padding: "17px 26px",
