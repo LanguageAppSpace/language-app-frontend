@@ -13,6 +13,8 @@ import { setLoadingUser, setCredentials } from "@redux/auth/authSlice.ts";
 import { useLoginUserMutation } from "@redux/auth/authApiSlice.ts";
 import Navigation from "@/Landing Page/Navigation";
 import BackButton from "@/components/BackButton";
+import deviceSizes from "@/cssConsts";
+import theme from "@/theme/theme";
 
 interface FormData {
   username: string;
@@ -100,7 +102,7 @@ const Login = () => {
           <ForgetPassword>Forgot your password?</ForgetPassword>
         </LoginForm>
         <SignUpSection>
-          <LoginDivider>New to our community</LoginDivider>
+          <LoginDivider>New to our community?</LoginDivider>
           <StyledLink to={ROUTE.REGISTER}>
             <CreateAccountButton variant="outlined" fullWidth>
               Create an account
@@ -119,8 +121,7 @@ export const LoginWrapper = styled("div")(() => ({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  height: "100vh",
-  padding: "80px 0 48px 0",
+  padding: "56px 0 48px 0",
 }));
 
 export const LoginFormContainer = styled("div")(() => ({
@@ -133,7 +134,6 @@ export const LoginFormContainer = styled("div")(() => ({
 
 export const LoginForm = styled("form")(({ theme }) => ({
   display: "flex",
-  maxWidth: 640,
   justifyContent: "center",
   flexDirection: "column",
   borderRadius: "16px",
@@ -141,6 +141,24 @@ export const LoginForm = styled("form")(({ theme }) => ({
   padding: "40px 56px",
   boxSizing: "border-box",
   width: "100%",
+  [theme.breakpoints.down(deviceSizes.sm)]: {
+    padding: "16px 36px",
+    border: "none",
+  },
+}));
+
+export const LoginFormTitle = styled(Typography)(({ theme }) => ({
+  color: `${theme.palette.primary.dark}`,
+  textAlign: "center",
+  fontSize: 32,
+  fontStyle: "normal",
+  fontWeight: 500,
+  lineHeight: "normal",
+  marginBottom: 24,
+  [theme.breakpoints.down(deviceSizes.sm)]: {
+    marginBottom: 16,
+    fontSize: 24,
+  },
 }));
 
 export const LoginButton = styled(Button)(({ theme }) => ({
@@ -155,16 +173,6 @@ export const LoginButton = styled(Button)(({ theme }) => ({
   fontStyle: "normal",
   fontWeight: "700",
   letterSpacing: "0.4px",
-}));
-
-export const LoginFormTitle = styled(Typography)(({ theme }) => ({
-  color: `${theme.palette.primary.dark}`,
-  textAlign: "center",
-  fontSize: "32px",
-  fontStyle: "normal",
-  fontWeight: 500,
-  lineHeight: "normal",
-  marginBottom: "48px",
 }));
 
 export const ForgetPassword = styled(Typography)(() => ({
@@ -183,6 +191,9 @@ export const LoginDivider = styled(Divider)(({ theme }) => ({
   color: `${theme.palette.primary.light}`,
   fontSize: "22px",
   fontWeight: 400,
+  [theme.breakpoints.down(deviceSizes.sm)]: {
+    fontSize: "16px",
+  },
 }));
 
 export const SignUpSection = styled("div")(() => ({
@@ -200,6 +211,10 @@ export const CreateAccountButton = styled(Button)(() => ({
   letterSpacing: "0.4px",
   width: "100%",
   borderRadius: "40px",
+  [theme.breakpoints.down(deviceSizes.sm)]: {
+    padding: "10px 16px",
+    fontSize: "16px",
+  },
 }));
 
 // Unused components
