@@ -1,5 +1,5 @@
 import { LoginUser, RegisterUser } from "@/interface";
-import { apiSlice } from "@redux/apiSlice";
+import { apiSlice } from "@/redux/apiSlice";
 import { jwtDecode } from "jwt-decode";
 
 interface LoginResponse {

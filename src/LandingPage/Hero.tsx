@@ -1,8 +1,8 @@
 import { Button, Grid, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import image from "/boy.jpeg";
+import image from "@/assets/images/boy.jpeg";
 import { useNavigate } from "react-router-dom";
-import { ROUTE } from "@config/route.config.ts";
+import { ROUTE } from "@/config/route.config.ts";
 import { styled } from "@mui/material/styles";
 import { Box, Container } from "@mui/system";
 

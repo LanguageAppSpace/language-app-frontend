@@ -1,6 +1,6 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
-import { ROUTE } from "@config/route.config.ts";
+import { ROUTE } from "@/config/route.config.ts";
 import { styled } from "@mui/material/styles";
 import { Box, Grid, Button, Typography, Container } from "@mui/material";
 
