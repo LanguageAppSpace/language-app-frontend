@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "@redux/auth/authApiSlice.ts";
 import Navigation from "@/Landing Page/Navigation";
 import BackButton from "@/components/BackButton";
+import deviceSizes from "@/cssConsts";
 
 interface FormData {
   username: string;
@@ -73,7 +74,12 @@ const SignUpForm: React.FC = () => {
       <BackButton />
       <RegisterFormContainer>
         <RegisterForm onSubmit={handleSubmit(handleSumbit)}>
-          <Grid container justifyContent="center" alignItems="center">
+          <Grid
+            container
+            direction={{ xs: "column", md: "row" }}
+            justifyContent="center"
+            alignItems="center"
+          >
             <Grid item xs={7}>
               <RegisterFormTitle variant="h4">
                 Create an account
@@ -111,7 +117,7 @@ const SignUpForm: React.FC = () => {
                   </Grid>
                 </FormRow>
                 <FormRow>
-                  <Grid item xs={6} spacing={2}>
+                  <Grid item xs={12} spacing={2}>
                     <FormInputLabel shrink={false} htmlFor={"password"}>
                       <Typography>Password</Typography>
                     </FormInputLabel>
@@ -123,7 +129,7 @@ const SignUpForm: React.FC = () => {
                       {...register("password", { required: true })}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12}>
                     <FormInputLabel shrink={false} htmlFor={"passwordConfirm"}>
                       <Typography>Confirm your password</Typography>
                     </FormInputLabel>
@@ -178,6 +184,10 @@ export const RegisterForm = styled("form")(({ theme }) => ({
   maxWidth: 1017,
   boxSizing: "border-box",
   width: "100%",
+  [theme.breakpoints.down(deviceSizes.md)]: {
+    border: "none",
+    padding: 16,
+  },
 }));
 
 export const StyledRegisterImage = styled("img")(() => ({
@@ -202,6 +212,12 @@ export const RegisterFormSubtitle = styled(Typography)(({ theme }) => ({
   fontWeight: 400,
   marginTop: theme.spacing(1),
   marginBottom: 36,
+  [theme.breakpoints.down(deviceSizes.sm)]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 0.5,
+    marginBottom: 4,
+  },
 }));
 
 export const LogInLink = styled(Link)(({ theme }) => ({
@@ -214,6 +230,9 @@ export const FormRow = styled("div")(({ theme }) => ({
   display: "flex",
   margin: "12px 0",
   gap: theme.spacing(2),
+  [theme.breakpoints.down(deviceSizes.sm)]: {
+    flexDirection: "column",
+  },
 }));
 
 export const FormInputLabel = styled(InputLabel)(({ theme }) => ({
