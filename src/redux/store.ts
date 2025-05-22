@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import authReducer from "@redux/auth/authSlice";
-import notificationReducer from "@redux/notification/notificationSlice";
-import { apiSlice } from "@redux/apiSlice";
+import authReducer from "@/redux/auth/authSlice";
+import notificationReducer from "@/redux/notification/notificationSlice";
+import { apiSlice } from "@/redux/apiSlice";
 const store = configureStore({
   reducer: {
     auth: authReducer,

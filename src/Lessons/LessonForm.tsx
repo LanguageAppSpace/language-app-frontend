@@ -9,12 +9,12 @@ import {
   ButtonCreateLesson,
 } from "@/Lessons/CreateEditLesson.tsx";
 import { FormInput, FormInputLabel } from "@/Register/Register";
-import { useDeleteFlashcardMutation } from "@redux/lessons/lessonsApiSlice.ts";
+import { useDeleteFlashcardMutation } from "@/redux/lessons/lessonsApiSlice.ts";
 import LessonFooter from "@/Lessons/LessonFooter.tsx";
 import { NewLesson } from "@/interface";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { showNotification } from "@redux/notification/notificationSlice.ts";
+import { showNotification } from "@/redux/notification/notificationSlice.ts";
 
 interface LessonFormProps {
   initialValues: NewLesson;

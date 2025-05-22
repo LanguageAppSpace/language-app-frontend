@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "@redux/store";
+import { RootState } from "@/redux/store";
 
 interface NotificationState {
   isOpen: boolean;

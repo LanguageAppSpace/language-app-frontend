@@ -1,5 +1,5 @@
 import { Lesson, NewLesson } from "@/interface";
-import { apiSlice } from "@redux/apiSlice";
+import { apiSlice } from "@/redux/apiSlice";
 
 export const lessonApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

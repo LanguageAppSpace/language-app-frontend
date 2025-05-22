@@ -1,6 +1,6 @@
-import { apiSlice } from "@redux/apiSlice";
+import { apiSlice } from "@/redux/apiSlice";
 import { PasswordData, ProfileData } from "@/interface";
-import { AuthState } from "@redux/auth/authSlice";
+import { AuthState } from "@/redux/auth/authSlice";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

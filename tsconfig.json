@@ -21,14 +21,7 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"],
-      "@components/*": ["components/*"],
-      "@assets/*": ["assets/*"],
-      "@utils/*": ["utils/*"],
-      "@redux/*": ["redux/*"],
-      "@config/*": ["config/*"],
-      "@pages/*": ["pages/*"],
-      "@interface/*": ["interface/*"]
+      "@/*": ["*"]
     }
   },
   "include": ["src"],

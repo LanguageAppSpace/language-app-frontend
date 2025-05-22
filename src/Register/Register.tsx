@@ -7,12 +7,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
 import { StyledFormWrapper, LoginButton } from "@/Login/Login";
-import RegisterImage from "@assets/images/register-page-image.png";
-import Logo from "@assets/images/logo.svg";
-import { ROUTE } from "@config/route.config.ts";
-import { showNotification } from "@redux/notification/notificationSlice.ts";
+import RegisterImage from "@/assets/images/register-page-image.png";
+import Logo from "@/assets/images/logo.svg";
+import { ROUTE } from "@/config/route.config.ts";
+import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
-import { useRegisterUserMutation } from "@redux/auth/authApiSlice.ts";
+import { useRegisterUserMutation } from "@/redux/auth/authApiSlice.ts";
 
 interface FormData {
   username: string;
