@@ -1,20 +1,19 @@
-import { useForm } from "react-hook-form";
 import { Grid, Typography, InputLabel, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
-import { LoginButton, LoginWrapper } from "@/Login/Login";
 import RegisterImage from "@assets/images/register-page-image.png";
 import { ROUTE } from "@config/route.config.ts";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "@redux/auth/authApiSlice.ts";
-import Navigation from "@/Landing Page/Navigation";
-import BackButton from "@/components/BackButton";
 import deviceSizes from "@/cssConsts";
+import AuthLayout from "@/layouts/AuthLayout";
+import FormButton from "@/components/Buttons/FormButton";
 
 interface FormData {
   username: string;
@@ -24,7 +23,6 @@ interface FormData {
 }
 
 const PASSWORD_MIN_LENGTH = 6;
-const PASSWORD_MIN_MESSAGE = `Password must be at least ${PASSWORD_MIN_LENGTH} characters`;
 
 const schema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -33,7 +31,10 @@ const schema = Yup.object().shape({
     .required("Email is required"),
   password: Yup.string()
     .required("Password is required")
-    .min(PASSWORD_MIN_LENGTH, PASSWORD_MIN_MESSAGE),
+    .min(
+      PASSWORD_MIN_LENGTH,
+      `Password must be at least ${PASSWORD_MIN_LENGTH} characters`
+    ),
   passwordConfirm: Yup.string()
     .required("Password confirmation is required")
     .oneOf([Yup.ref("password")], "Passwords do not match"),
@@ -48,6 +49,7 @@ const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [registerUser] = useRegisterUserMutation();
+
   const handleSumbit = async (data: FormData) => {
     try {
       await registerUser(data).unwrap();
@@ -69,9 +71,7 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <LoginWrapper>
-      <Navigation />
-      <BackButton />
+    <AuthLayout>
       <RegisterFormContainer>
         <RegisterForm onSubmit={handleSubmit(handleSumbit)}>
           <Grid
@@ -98,8 +98,7 @@ const SignUpForm: React.FC = () => {
                       fullWidth
                       error={Boolean(errors.username)}
                       helperText={errors.username?.message}
-                      {...register("username", { required: true })}
-                      variant="outlined"
+                      {...register("username")}
                     />
                   </Grid>
                 </FormRow>
@@ -110,14 +109,15 @@ const SignUpForm: React.FC = () => {
                     </FormInputLabel>
                     <FormInput
                       fullWidth
+                      type="email"
                       error={Boolean(errors.email)}
                       helperText={errors.email?.message}
-                      {...register("email", { required: true })}
+                      {...register("email")}
                     />
                   </Grid>
                 </FormRow>
                 <FormRow>
-                  <Grid item xs={12} spacing={2}>
+                  <Grid item xs={12}>
                     <FormInputLabel shrink={false} htmlFor={"password"}>
                       <Typography>Password</Typography>
                     </FormInputLabel>
@@ -126,7 +126,7 @@ const SignUpForm: React.FC = () => {
                       type="password"
                       error={Boolean(errors.password)}
                       helperText={errors.password?.message}
-                      {...register("password", { required: true })}
+                      {...register("password")}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -138,13 +138,13 @@ const SignUpForm: React.FC = () => {
                       type="password"
                       error={Boolean(errors.passwordConfirm)}
                       helperText={errors.passwordConfirm?.message}
-                      {...register("passwordConfirm", { required: true })}
+                      {...register("passwordConfirm")}
                     />
                   </Grid>
                 </FormRow>
               </Grid>
               <RegisterFormButtons>
-                <LoginButton
+                <FormButton
                   type="submit"
                   variant="contained"
                   color="primary"
@@ -152,7 +152,7 @@ const SignUpForm: React.FC = () => {
                   aria-label="Create an account"
                 >
                   Create an account
-                </LoginButton>
+                </FormButton>
               </RegisterFormButtons>
             </Grid>
             <Grid item xs={5}>
@@ -161,13 +161,14 @@ const SignUpForm: React.FC = () => {
           </Grid>
         </RegisterForm>
       </RegisterFormContainer>
-    </LoginWrapper>
+    </AuthLayout>
   );
 };
 
 export default SignUpForm;
 
-export const RegisterFormContainer = styled("div")(() => ({
+// --- styles ---
+const RegisterFormContainer = styled("div")(() => ({
   maxWidth: "100%",
   display: "flex",
   boxSizing: "border-box",
@@ -175,14 +176,13 @@ export const RegisterFormContainer = styled("div")(() => ({
   justifyContent: "center",
 }));
 
-export const RegisterForm = styled("form")(({ theme }) => ({
+const RegisterForm = styled("form")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   borderRadius: "24px",
   border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
   padding: "40px 56px",
   maxWidth: 1017,
-  boxSizing: "border-box",
   width: "100%",
   [theme.breakpoints.down(deviceSizes.md)]: {
     border: "none",
@@ -190,21 +190,19 @@ export const RegisterForm = styled("form")(({ theme }) => ({
   },
 }));
 
-export const StyledRegisterImage = styled("img")(() => ({
+const StyledRegisterImage = styled("img")(() => ({
   width: "100%",
 }));
 
-export const RegisterFormTitle = styled(Typography)(({ theme }) => ({
-  color: `${theme.palette.primary.light}`,
+const RegisterFormTitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.light,
   fontSize: "32px",
-  fontStyle: "normal",
   fontWeight: 500,
   marginTop: theme.spacing(2),
 }));
 
-export const RegisterFormSubtitle = styled(Typography)(({ theme }) => ({
-  color: `${theme.palette.primary.light}`,
-  flexDirection: "row",
+const RegisterFormSubtitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.light,
   display: "flex",
   alignItems: "center",
   gap: 8,
@@ -220,13 +218,13 @@ export const RegisterFormSubtitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const LogInLink = styled(Link)(({ theme }) => ({
-  color: `${theme.palette.primary.light}`,
+const LogInLink = styled(Link)(({ theme }) => ({
+  color: theme.palette.primary.light,
   textDecoration: "underline",
   cursor: "pointer",
 }));
 
-export const FormRow = styled("div")(({ theme }) => ({
+const FormRow = styled("div")(({ theme }) => ({
   display: "flex",
   margin: "12px 0",
   gap: theme.spacing(2),
@@ -235,24 +233,16 @@ export const FormRow = styled("div")(({ theme }) => ({
   },
 }));
 
-export const FormInputLabel = styled(InputLabel)(({ theme }) => ({
-  color: `${theme.palette.primary.dark}`,
+const FormInputLabel = styled(InputLabel)(({ theme }) => ({
+  color: theme.palette.primary.dark,
   fontSize: "16px",
-  fontStyle: "normal",
   fontWeight: 400,
   paddingBottom: theme.spacing(1),
 }));
 
-export const RegisterFormButtons = styled("div")(() => ({
-  display: "flex",
-  justifyContent: "space-between",
-  marginTop: 16,
-  alignItems: "center",
-}));
-
-export const FormInput = styled(TextField)(({ theme }) => ({
+const FormInput = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-input": {
-    color: `${theme.palette.text.secondary}`,
+    color: theme.palette.text.secondary,
     borderRadius: "12px",
     border: `1px solid ${alpha(theme.palette.primary.light, 0.35)}`,
   },
@@ -260,4 +250,11 @@ export const FormInput = styled(TextField)(({ theme }) => ({
     borderRadius: "12px",
     border: "none",
   },
+}));
+
+const RegisterFormButtons = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  marginTop: 16,
+  alignItems: "center",
 }));

@@ -1,20 +1,19 @@
 import { Grid, Typography, Button, Divider } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
-import * as Yup from "yup";
-import { FormInput, FormInputLabel } from "@/Register/Register";
 import { ROUTE } from "@config/route.config.ts";
 import { useNavigate, Link } from "react-router-dom";
 import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
 import { setLoadingUser, setCredentials } from "@redux/auth/authSlice.ts";
 import { useLoginUserMutation } from "@redux/auth/authApiSlice.ts";
-import Navigation from "@/Landing Page/Navigation";
-import BackButton from "@/components/BackButton";
 import deviceSizes from "@/cssConsts";
-import theme from "@/theme/theme";
+import AuthLayout from "@/layouts/AuthLayout";
+import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
+import FormButton from "@/components/Buttons/FormButton";
 
 interface FormData {
   username: string;
@@ -63,9 +62,7 @@ const Login = () => {
   };
 
   return (
-    <LoginWrapper>
-      <Navigation />
-      <BackButton />
+    <AuthLayout>
       <LoginFormContainer>
         <LoginForm onSubmit={handleSubmit(onSubmit)}>
           <LoginFormTitle align="center">Sign in</LoginFormTitle>
@@ -89,14 +86,14 @@ const Login = () => {
                 fullWidth
                 type="password"
                 error={Boolean(errors.password)}
-                helperText={errors.username?.message}
+                helperText={errors.password?.message}
                 {...register("password", { required: true })}
               />
             </Grid>
             <Grid item xs={12}>
-              <LoginButton type="submit" variant="contained" fullWidth>
+              <FormButton type="submit" variant="contained" fullWidth>
                 Log in
-              </LoginButton>
+              </FormButton>
             </Grid>
           </Grid>
           <ForgetPassword>Forgot your password?</ForgetPassword>
@@ -110,21 +107,13 @@ const Login = () => {
           </StyledLink>
         </SignUpSection>
       </LoginFormContainer>
-    </LoginWrapper>
+    </AuthLayout>
   );
 };
 
 export default Login;
 
-export const LoginWrapper = styled("div")(() => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "56px 0 48px 0",
-}));
-
-export const LoginFormContainer = styled("div")(() => ({
+const LoginFormContainer = styled("div")(() => ({
   maxWidth: "640px",
   width: "100%",
   boxSizing: "border-box",
@@ -132,7 +121,7 @@ export const LoginFormContainer = styled("div")(() => ({
   flexDirection: "column",
 }));
 
-export const LoginForm = styled("form")(({ theme }) => ({
+const LoginForm = styled("form")(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   flexDirection: "column",
@@ -147,13 +136,11 @@ export const LoginForm = styled("form")(({ theme }) => ({
   },
 }));
 
-export const LoginFormTitle = styled(Typography)(({ theme }) => ({
-  color: `${theme.palette.primary.dark}`,
+const LoginFormTitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.dark,
   textAlign: "center",
   fontSize: 32,
-  fontStyle: "normal",
   fontWeight: 500,
-  lineHeight: "normal",
   marginBottom: 24,
   [theme.breakpoints.down(deviceSizes.sm)]: {
     marginBottom: 16,
@@ -161,34 +148,20 @@ export const LoginFormTitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const LoginButton = styled(Button)(({ theme }) => ({
-  borderRadius: "16px",
-  display: "flex",
-  backgroundColor: `${theme.palette.primary.main}`,
-  padding: "17px 26px",
-  justifyContent: "center",
-  alignItems: "center",
-  color: `${theme.palette.text.primary}`,
-  fontSize: "20px",
-  fontStyle: "normal",
-  fontWeight: "700",
-  letterSpacing: "0.4px",
-}));
-
-export const ForgetPassword = styled(Typography)(() => ({
+const ForgetPassword = styled(Typography)(() => ({
   textDecoration: "underline",
   fontSize: "16px",
   cursor: "pointer",
   marginTop: 6,
 }));
 
-export const StyledLink = styled(Link)`
+const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const LoginDivider = styled(Divider)(({ theme }) => ({
+const LoginDivider = styled(Divider)(({ theme }) => ({
   margin: "18px 0",
-  color: `${theme.palette.primary.light}`,
+  color: theme.palette.primary.light,
   fontSize: "22px",
   fontWeight: 400,
   [theme.breakpoints.down(deviceSizes.sm)]: {
@@ -196,43 +169,18 @@ export const LoginDivider = styled(Divider)(({ theme }) => ({
   },
 }));
 
-export const SignUpSection = styled("div")(() => ({
+const SignUpSection = styled("div")(() => ({
   width: "100%",
 }));
 
-export const CreateAccountButton = styled(Button)(() => ({
-  display: "flex",
+const CreateAccountButton = styled(Button)(({ theme }) => ({
   padding: "16px 0",
-  justifyContent: "center",
-  alignItems: "center",
   fontSize: "20px",
-  fontStyle: "normal",
   fontWeight: "700",
-  letterSpacing: "0.4px",
   width: "100%",
   borderRadius: "40px",
   [theme.breakpoints.down(deviceSizes.sm)]: {
     padding: "10px 16px",
     fontSize: "16px",
   },
-}));
-
-// Unused components
-export const LoginWithGoogleButton = styled(Button)(() => ({
-  display: "flex",
-  padding: "17px 26px",
-  justifyContent: "center",
-  alignItems: "center",
-  fontSize: "20px",
-  fontStyle: "normal",
-  letterSpacing: "0.4px",
-  width: "100%",
-  borderRadius: "40px",
-  textTransform: "none",
-}));
-
-export const GoogleImg = styled("img")(() => ({
-  width: "34px",
-  height: "34px",
-  marginRight: "10px",
 }));

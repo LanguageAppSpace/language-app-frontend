@@ -8,7 +8,7 @@ import {
   ButtonAddVocabulary,
   ButtonCreateLesson,
 } from "@/Lessons/CreateEditLesson.tsx";
-import { FormInput, FormInputLabel } from "@/Register/Register";
+import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
 import { useDeleteFlashcardMutation } from "@redux/lessons/lessonsApiSlice.ts";
 import LessonFooter from "@/Lessons/LessonFooter.tsx";
 import { NewLesson } from "@/interface";
