@@ -12,7 +12,6 @@ import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "@redux/auth/authApiSlice.ts";
 import deviceSizes from "@/cssConsts";
-import AuthLayout from "@/layouts/AuthLayout";
 import FormButton from "@/components/Buttons/FormButton";
 
 interface FormData {
@@ -71,103 +70,100 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <AuthLayout>
-      <RegisterFormContainer>
-        <RegisterForm onSubmit={handleSubmit(handleSumbit)}>
-          <Grid
-            container
-            direction={{ xs: "column", md: "row" }}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Grid item xs={7}>
-              <RegisterFormTitle variant="h4">
+    <RegisterFormContainer>
+      <RegisterForm onSubmit={handleSubmit(handleSumbit)}>
+        <Grid
+          container
+          direction={{ xs: "column", md: "row" }}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Grid item xs={7}>
+            <RegisterFormTitle variant="h4">
+              Create an account
+            </RegisterFormTitle>
+            <RegisterFormSubtitle>
+              <>Already have an account?</>
+              <LogInLink to={ROUTE.LOGIN}>Log in</LogInLink>
+            </RegisterFormSubtitle>
+            <Grid container direction="column">
+              <FormRow>
+                <Grid item xs={12}>
+                  <FormInputLabel shrink={false} htmlFor={"username"}>
+                    <Typography>Username</Typography>
+                  </FormInputLabel>
+                  <FormInput
+                    fullWidth
+                    error={Boolean(errors.username)}
+                    helperText={errors.username?.message}
+                    {...register("username")}
+                  />
+                </Grid>
+              </FormRow>
+              <FormRow>
+                <Grid item xs={12}>
+                  <FormInputLabel shrink={false} htmlFor={"email"}>
+                    <Typography>Email address</Typography>
+                  </FormInputLabel>
+                  <FormInput
+                    fullWidth
+                    type="email"
+                    error={Boolean(errors.email)}
+                    helperText={errors.email?.message}
+                    {...register("email")}
+                  />
+                </Grid>
+              </FormRow>
+              <FormRow>
+                <Grid item xs={12}>
+                  <FormInputLabel shrink={false} htmlFor={"password"}>
+                    <Typography>Password</Typography>
+                  </FormInputLabel>
+                  <FormInput
+                    fullWidth
+                    type="password"
+                    error={Boolean(errors.password)}
+                    helperText={errors.password?.message}
+                    {...register("password")}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormInputLabel shrink={false} htmlFor={"passwordConfirm"}>
+                    <Typography>Confirm your password</Typography>
+                  </FormInputLabel>
+                  <FormInput
+                    fullWidth
+                    type="password"
+                    error={Boolean(errors.passwordConfirm)}
+                    helperText={errors.passwordConfirm?.message}
+                    {...register("passwordConfirm")}
+                  />
+                </Grid>
+              </FormRow>
+            </Grid>
+            <RegisterFormButtons>
+              <FormButton
+                type="submit"
+                variant="contained"
+                color="primary"
+                endIcon={<ArrowForwardIcon />}
+                aria-label="Create an account"
+              >
                 Create an account
-              </RegisterFormTitle>
-              <RegisterFormSubtitle>
-                <>Already have an account?</>
-                <LogInLink to={ROUTE.LOGIN}>Log in</LogInLink>
-              </RegisterFormSubtitle>
-              <Grid container direction="column">
-                <FormRow>
-                  <Grid item xs={12}>
-                    <FormInputLabel shrink={false} htmlFor={"username"}>
-                      <Typography>Username</Typography>
-                    </FormInputLabel>
-                    <FormInput
-                      fullWidth
-                      error={Boolean(errors.username)}
-                      helperText={errors.username?.message}
-                      {...register("username")}
-                    />
-                  </Grid>
-                </FormRow>
-                <FormRow>
-                  <Grid item xs={12}>
-                    <FormInputLabel shrink={false} htmlFor={"email"}>
-                      <Typography>Email address</Typography>
-                    </FormInputLabel>
-                    <FormInput
-                      fullWidth
-                      type="email"
-                      error={Boolean(errors.email)}
-                      helperText={errors.email?.message}
-                      {...register("email")}
-                    />
-                  </Grid>
-                </FormRow>
-                <FormRow>
-                  <Grid item xs={12}>
-                    <FormInputLabel shrink={false} htmlFor={"password"}>
-                      <Typography>Password</Typography>
-                    </FormInputLabel>
-                    <FormInput
-                      fullWidth
-                      type="password"
-                      error={Boolean(errors.password)}
-                      helperText={errors.password?.message}
-                      {...register("password")}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormInputLabel shrink={false} htmlFor={"passwordConfirm"}>
-                      <Typography>Confirm your password</Typography>
-                    </FormInputLabel>
-                    <FormInput
-                      fullWidth
-                      type="password"
-                      error={Boolean(errors.passwordConfirm)}
-                      helperText={errors.passwordConfirm?.message}
-                      {...register("passwordConfirm")}
-                    />
-                  </Grid>
-                </FormRow>
-              </Grid>
-              <RegisterFormButtons>
-                <FormButton
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  endIcon={<ArrowForwardIcon />}
-                  aria-label="Create an account"
-                >
-                  Create an account
-                </FormButton>
-              </RegisterFormButtons>
-            </Grid>
-            <Grid item xs={5}>
-              <StyledRegisterImage src={RegisterImage} alt="Register" />
-            </Grid>
+              </FormButton>
+            </RegisterFormButtons>
           </Grid>
-        </RegisterForm>
-      </RegisterFormContainer>
-    </AuthLayout>
+          <Grid item xs={5}>
+            <StyledRegisterImage src={RegisterImage} alt="Register" />
+          </Grid>
+        </Grid>
+      </RegisterForm>
+    </RegisterFormContainer>
   );
 };
 
 export default SignUpForm;
 
-// --- styles ---
 const RegisterFormContainer = styled("div")(() => ({
   maxWidth: "100%",
   display: "flex",

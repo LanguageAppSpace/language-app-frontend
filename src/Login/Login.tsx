@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 import { setLoadingUser, setCredentials } from "@redux/auth/authSlice.ts";
 import { useLoginUserMutation } from "@redux/auth/authApiSlice.ts";
 import deviceSizes from "@/cssConsts";
-import AuthLayout from "@/layouts/AuthLayout";
 import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
 import FormButton from "@/components/Buttons/FormButton";
 
@@ -62,52 +61,50 @@ const Login = () => {
   };
 
   return (
-    <AuthLayout>
-      <LoginFormContainer>
-        <LoginForm onSubmit={handleSubmit(onSubmit)}>
-          <LoginFormTitle align="center">Sign in</LoginFormTitle>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <FormInputLabel shrink={false} htmlFor={"username"}>
-                <Typography>Username</Typography>
-              </FormInputLabel>
-              <FormInput
-                fullWidth
-                error={Boolean(errors.username)}
-                helperText={errors.username?.message}
-                {...register("username", { required: true })}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormInputLabel shrink={false} htmlFor={"password"}>
-                <Typography>Your password</Typography>
-              </FormInputLabel>
-              <FormInput
-                fullWidth
-                type="password"
-                error={Boolean(errors.password)}
-                helperText={errors.password?.message}
-                {...register("password", { required: true })}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormButton type="submit" variant="contained" fullWidth>
-                Log in
-              </FormButton>
-            </Grid>
+    <LoginFormContainer>
+      <LoginForm onSubmit={handleSubmit(onSubmit)}>
+        <LoginFormTitle align="center">Sign in</LoginFormTitle>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <FormInputLabel shrink={false} htmlFor={"username"}>
+              <Typography>Username</Typography>
+            </FormInputLabel>
+            <FormInput
+              fullWidth
+              error={Boolean(errors.username)}
+              helperText={errors.username?.message}
+              {...register("username", { required: true })}
+            />
           </Grid>
-          <ForgetPassword>Forgot your password?</ForgetPassword>
-        </LoginForm>
-        <SignUpSection>
-          <LoginDivider>New to our community?</LoginDivider>
-          <StyledLink to={ROUTE.REGISTER}>
-            <CreateAccountButton variant="outlined" fullWidth>
-              Create an account
-            </CreateAccountButton>
-          </StyledLink>
-        </SignUpSection>
-      </LoginFormContainer>
-    </AuthLayout>
+          <Grid item xs={12}>
+            <FormInputLabel shrink={false} htmlFor={"password"}>
+              <Typography>Your password</Typography>
+            </FormInputLabel>
+            <FormInput
+              fullWidth
+              type="password"
+              error={Boolean(errors.password)}
+              helperText={errors.password?.message}
+              {...register("password", { required: true })}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FormButton type="submit" variant="contained" fullWidth>
+              Log in
+            </FormButton>
+          </Grid>
+        </Grid>
+        <ForgetPassword>Forgot your password?</ForgetPassword>
+      </LoginForm>
+      <SignUpSection>
+        <LoginDivider>New to our community?</LoginDivider>
+        <StyledLink to={ROUTE.REGISTER}>
+          <CreateAccountButton variant="outlined" fullWidth>
+            Create an account
+          </CreateAccountButton>
+        </StyledLink>
+      </SignUpSection>
+    </LoginFormContainer>
   );
 };
 

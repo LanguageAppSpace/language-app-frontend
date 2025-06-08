@@ -1,18 +1,14 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Navigation from "@/Landing Page/Navigation";
 import BackButton from "@/components/Buttons/BackButton";
 
-interface AuthLayoutProps {
-  children: React.ReactNode;
-}
-
-const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+const AuthLayout = () => {
   return (
     <LoginWrapper>
       <Navigation />
       <BackButton />
-      {children}
+      <Outlet />
     </LoginWrapper>
   );
 };
