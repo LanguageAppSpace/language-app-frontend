@@ -1,7 +1,7 @@
-import { ROUTE } from "@config/route.config.ts";
-import { useLogOutUserMutation } from "@redux/auth/authApiSlice.ts";
-import { logOut } from "@redux/auth/authSlice.ts";
-import { showNotification } from "@redux/notification/notificationSlice.ts";
+import { ROUTE } from "@/config/route.config.ts";
+import { useLogOutUserMutation } from "@/redux/auth/authApiSlice.ts";
+import { logOut } from "@/redux/auth/authSlice.ts";
+import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";

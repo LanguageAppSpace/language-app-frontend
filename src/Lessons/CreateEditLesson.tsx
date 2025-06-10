@@ -13,9 +13,9 @@ import {
   useCreateNewLessonMutation,
   useEditLessonMutation,
   useGetLessonByIdQuery,
-} from "@redux/lessons/lessonsApiSlice.ts";
+} from "@/redux/lessons/lessonsApiSlice.ts";
 import { NewLesson, PhrasePair } from "@/interface";
-import { showNotification } from "@redux/notification/notificationSlice.ts";
+import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import LessonForm from "@/Lessons/LessonForm.tsx";
 
 const CreateEditLesson = () => {

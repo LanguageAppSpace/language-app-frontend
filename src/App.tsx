@@ -6,11 +6,11 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { ROUTE } from "@config/route.config";
+import { ROUTE } from "@/config/route.config";
 import Dashboard from "@/UserDashboard/Main.tsx";
 import ProtectedRoutes from "@/routes/ProtectedRoutes.tsx";
-import LandingPage from "@/Landing Page/LandingPage.tsx";
-import Page404 from "@pages/Page404.tsx";
+import LandingPage from "@/LandingPage/LandingPage.tsx";
+import Page404 from "@/pages/Page404.tsx";
 import UserSettings from "@/Profile/UserSettings.tsx";
 import CreateEditLesson from "@/Lessons/CreateEditLesson.tsx";
 import UserDashboardLayout from "@/layouts/UserDashboard/Layout.tsx";

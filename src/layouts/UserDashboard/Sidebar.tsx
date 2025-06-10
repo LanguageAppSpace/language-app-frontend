@@ -6,7 +6,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import { To, useNavigate } from "react-router-dom";
-import { sidebarLinks } from "@config/data.ts";
+import { sidebarLinks } from "@/config/data.ts";
 
 const drawerWidth = 240;
 

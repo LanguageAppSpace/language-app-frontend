@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setCredentials, logOut, AuthState } from "@redux/auth/authSlice";
+import { setCredentials, logOut, AuthState } from "@/redux/auth/authSlice";
 import type {
   BaseQueryFn,
   FetchArgs,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { RootState } from "@redux/store";
+import { RootState } from "@/redux/store";
 import camelcaseKeys from "camelcase-keys";
 import snakecaseKeys from "snakecase-keys";
 

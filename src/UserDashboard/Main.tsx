@@ -1,4 +1,4 @@
-import { ROUTE } from "@config/route.config.ts";
+import { ROUTE } from "@/config/route.config.ts";
 import {
   Box,
   Typography,
