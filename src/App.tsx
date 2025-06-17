@@ -13,17 +13,22 @@ import LandingPage from "@/LandingPage/LandingPage.tsx";
 import Page404 from "@/pages/Page404.tsx";
 import UserSettings from "@/Profile/UserSettings.tsx";
 import CreateEditLesson from "@/Lessons/CreateEditLesson.tsx";
-import UserDashboardLayout from "./layouts/UserDashboard/Layout";
+import UserDashboardLayout from "@/layouts/UserDashboard/Layout";
+import PublicLayout from "@/layouts/Public/PublicLayout";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
-        />
-        <Route path={ROUTE.LANDING_PAGE} element={<LandingPage />} />
+        <Route element={<PublicLayout />}>
+          <Route
+            path="/"
+            element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
+          />
+          <Route path={ROUTE.LANDING_PAGE} element={<LandingPage />} />
+          <Route path={ROUTE.PRIVACY_POLICY} element={<PrivacyPolicy />} />
+        </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
