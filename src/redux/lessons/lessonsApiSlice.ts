@@ -1,4 +1,4 @@
-import { Lesson, NewLesson } from "@/interface";
+import { Lesson, NewLesson, PhrasePair } from "@/interface";
 import { apiSlice } from "@/redux/apiSlice";
 
 export const lessonApiSlice = apiSlice.injectEndpoints({
@@ -32,6 +32,16 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    editPhrasePair: builder.mutation<
+      void,
+      { lessonId: string; pairId: number; data: PhrasePair }
+    >({
+      query: ({ lessonId, pairId, data }) => ({
+        url: `flashcards/${lessonId}/pairs/${pairId}/`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -40,4 +50,5 @@ export const {
   useGetLessonByIdQuery,
   useEditLessonMutation,
   useDeleteFlashcardMutation,
+  useEditPhrasePairMutation,
 } = lessonApiSlice;

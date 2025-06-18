@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import {
   useCreateNewLessonMutation,
   useEditLessonMutation,
+  useEditPhrasePairMutation,
   useGetLessonByIdQuery,
 } from "@/redux/lessons/lessonsApiSlice.ts";
 import { NewLesson, PhrasePair } from "@/interface";
@@ -22,6 +23,7 @@ const CreateEditLesson = () => {
   const { lessonId } = useParams();
   const [createNewLesson] = useCreateNewLessonMutation();
   const [editLesson] = useEditLessonMutation();
+  const [editPhraisePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
 
   const { data: lesson, isLoading } = useGetLessonByIdQuery(lessonId ?? "", {
@@ -33,20 +35,87 @@ const CreateEditLesson = () => {
       (pair) => pair.phraseOne.trim() !== "" || pair.phraseTwo.trim() !== ""
     );
 
+  const splitNewAndUpdatedPairs = (
+    original: PhrasePair[],
+    updated: PhrasePair[]
+  ) => {
+    const newPairs = updated.filter((pair) => !pair.id);
+
+    const updatedPairs = updated.filter((pair) => {
+      const orig = original.find((p) => p.id === pair.id);
+      return (
+        orig &&
+        (orig.phraseOne !== pair.phraseOne || orig.phraseTwo !== pair.phraseTwo)
+      );
+    });
+
+    return { newPairs, updatedPairs };
+  };
+
+  const updateModifiedPairs = async (
+    updatedPairs: PhrasePair[],
+    lessonId: string
+  ) => {
+    return Promise.all(
+      updatedPairs.map((pair) =>
+        editPhraisePair({
+          lessonId,
+          pairId: pair.id!,
+          data: pair,
+        })
+      )
+    );
+  };
+
+  const submitEditLesson = async (
+    lessonId: string,
+    data: NewLesson,
+    newPairs: PhrasePair[]
+  ) => {
+    await editLesson({
+      id: lessonId,
+      title: data.title,
+      description: data.description,
+      phrasePairs: newPairs,
+    }).unwrap();
+  };
+
   const onSubmit = async (data: NewLesson) => {
+    const { newPairs, updatedPairs } = splitNewAndUpdatedPairs(
+      lesson?.phrasePairs ?? [],
+      trimmedPhrasePairs(data.phrasePairs)
+    );
+
     try {
-      await (
-        lessonId
-          ? editLesson({
-              ...data,
-              id: lessonId,
-              phrasePairs: trimmedPhrasePairs(data.phrasePairs),
-            })
-          : createNewLesson({
-              ...data,
-              phrasePairs: trimmedPhrasePairs(data.phrasePairs),
-            })
-      ).unwrap();
+      if (lessonId) {
+        await updateModifiedPairs(updatedPairs, lessonId);
+
+        const isTitleChanged = lesson?.title !== data.title;
+        const isDescriptionChanged = lesson?.description !== data.description;
+
+        if (newPairs.length > 0 || isTitleChanged || isDescriptionChanged) {
+          await submitEditLesson(lessonId, data, newPairs);
+        }
+
+        dispatch(
+          showNotification({
+            message: "Lesson updated successfully",
+            severity: "success",
+          })
+        );
+      } else {
+        await createNewLesson({
+          ...data,
+          phrasePairs: trimmedPhrasePairs(data.phrasePairs),
+        }).unwrap();
+
+        dispatch(
+          showNotification({
+            message: "Lesson created successfully",
+            severity: "success",
+          })
+        );
+      }
     } catch (error) {
       dispatch(
         showNotification({
@@ -61,9 +130,9 @@ const CreateEditLesson = () => {
 
   return (
     <StyledCreateLessonContainer>
-      <Typography variant="h5" sx={{ marginBottom: 2 }}>
+      <Heading variant="h5" sx={{ marginBottom: 2 }}>
         {lessonId ? "Edit Lesson" : "Create New Lesson"}
-      </Typography>
+      </Heading>
       <LessonForm
         initialValues={{
           title: lesson?.title ?? "",
@@ -114,6 +183,10 @@ export const ButtonCreateLesson = styled(Button)(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.secondary.main, 1),
   },
+}));
+
+const Heading = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary,
 }));
 
 export default CreateEditLesson;
