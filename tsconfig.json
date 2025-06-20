@@ -21,7 +21,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@redux/*": ["redux/*"],
+      "@config/*": ["config/*"]
     }
   },
   "include": ["src"],
