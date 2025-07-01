@@ -4,19 +4,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
-import { ROUTE } from "@config/route.config.ts";
 import { useNavigate, Link } from "react-router-dom";
-import { showNotification } from "@redux/notification/notificationSlice.ts";
 import { useDispatch } from "react-redux";
-import { setLoadingUser, setCredentials } from "@redux/auth/authSlice.ts";
-import { useLoginUserMutation } from "@redux/auth/authApiSlice.ts";
 import deviceSizes from "@/cssConsts";
 import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
 import FormButton from "@/components/Buttons/FormButton";
+import { ROUTE } from "@/config/route.config";
+import { showNotification } from "@/redux/notification/notificationSlice";
+import { useLoginUserMutation } from "@/redux/auth/authApiSlice";
+import { setCredentials, setLoadingUser } from "@/redux/auth/authSlice";
 
 interface FormData {
   username: string;
   password: string;
+}
+
+interface LoginResponse {
+  access: string;
+  refresh: string;
 }
 
 const schema = Yup.object().shape({
@@ -38,7 +43,7 @@ const Login = () => {
   const onSubmit = async (data: FormData) => {
     dispatch(setLoadingUser(true));
     try {
-      const userData = await loginUser(data).unwrap();
+      const userData = (await loginUser(data).unwrap()) as LoginResponse;
       dispatch(
         setCredentials({
           username: data.username,

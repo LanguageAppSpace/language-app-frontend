@@ -9,12 +9,12 @@ import {
   ButtonCreateLesson,
 } from "@/Lessons/CreateEditLesson.tsx";
 import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
-import { useDeleteFlashcardMutation } from "@redux/lessons/lessonsApiSlice.ts";
 import LessonFooter from "@/Lessons/LessonFooter.tsx";
 import { NewLesson } from "@/interface";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
+import { useDeleteFlashcardMutation } from "@/redux/lessons/lessonsApiSlice";
 
 interface LessonFormProps {
   initialValues: NewLesson;
@@ -23,13 +23,20 @@ interface LessonFormProps {
 
 const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
   const [deleteFlashcard] = useDeleteFlashcardMutation();
-  const { lessonId } = useParams();
+
+  const { lessonId } = useParams<{ lessonId: string }>();
+
   const dispatch = useDispatch();
-  const { control, register, handleSubmit } = useForm({
+
+  const { control, register, handleSubmit } = useForm<NewLesson>({
     defaultValues: initialValues,
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove } = useFieldArray<
+    NewLesson,
+    "phrasePairs",
+    "uid"
+  >({
     control,
     name: "phrasePairs",
     keyName: "uid",
@@ -39,13 +46,10 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
     pairId: number | undefined,
     index: number
   ) => {
-    if (lessonId && pairId) {
+    if (lessonId && pairId !== undefined) {
       try {
-        await deleteFlashcard({
-          lessonId: lessonId,
-          pairId,
-        }).unwrap();
-      } catch (error) {
+        await deleteFlashcard({ lessonId, pairId }).unwrap();
+      } catch (error: unknown) {
         dispatch(
           showNotification({
             message: "Error deleting flashcard",
@@ -66,6 +70,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           </FormInputLabel>
           <FormInput fullWidth variant="outlined" {...register("title")} />
         </Grid>
+
         <Grid item>
           <FormInputLabel htmlFor="description">
             <Typography>Description</Typography>
@@ -77,6 +82,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           />
         </Grid>
       </Grid>
+
       {fields.map((item, index) => (
         <VocabularyRowStyled key={item.id} container columns={14} spacing={0}>
           <Grid item xs>
@@ -95,6 +101,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
               )}
             />
           </Grid>
+
           <Grid item xs>
             <Controller
               name={`phrasePairs.${index}.phraseTwo`}
@@ -111,6 +118,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
               )}
             />
           </Grid>
+
           <Grid item xs="auto">
             <IconButton
               aria-label="delete"
@@ -121,6 +129,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           </Grid>
         </VocabularyRowStyled>
       ))}
+
       <Grid container justifyContent="center">
         <ButtonAddVocabulary
           variant="contained"
@@ -130,6 +139,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           Add new vocabulary
         </ButtonAddVocabulary>
       </Grid>
+
       <LessonFooter>
         <ButtonCreateLesson
           variant="contained"

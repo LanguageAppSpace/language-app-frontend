@@ -6,13 +6,13 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate, Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
-import RegisterImage from "@assets/images/register-page-image.png";
-import { ROUTE } from "@config/route.config.ts";
-import { showNotification } from "@redux/notification/notificationSlice.ts";
+import RegisterImage from "@/assets/images/register-page-image.png";
 import { useDispatch } from "react-redux";
-import { useRegisterUserMutation } from "@redux/auth/authApiSlice.ts";
 import deviceSizes from "@/cssConsts";
 import FormButton from "@/components/Buttons/FormButton";
+import { showNotification } from "@/redux/notification/notificationSlice";
+import { useRegisterUserMutation } from "@/redux/auth/authApiSlice";
+import { ROUTE } from "@/config/route.config";
 
 interface FormData {
   username: string;
@@ -45,6 +45,7 @@ const SignUpForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [registerUser] = useRegisterUserMutation();
