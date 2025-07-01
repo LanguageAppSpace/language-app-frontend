@@ -70,7 +70,6 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           </FormInputLabel>
           <FormInput fullWidth variant="outlined" {...register("title")} />
         </Grid>
-
         <Grid item>
           <FormInputLabel htmlFor="description">
             <Typography>Description</Typography>
@@ -82,7 +81,6 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           />
         </Grid>
       </Grid>
-
       {fields.map((item, index) => (
         <VocabularyRowStyled key={item.id} container columns={14} spacing={0}>
           <Grid item xs>
@@ -101,7 +99,6 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
               )}
             />
           </Grid>
-
           <Grid item xs>
             <Controller
               name={`phrasePairs.${index}.phraseTwo`}
@@ -118,7 +115,6 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
               )}
             />
           </Grid>
-
           <Grid item xs="auto">
             <IconButton
               aria-label="delete"
@@ -129,7 +125,6 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           </Grid>
         </VocabularyRowStyled>
       ))}
-
       <Grid container justifyContent="center">
         <ButtonAddVocabulary
           variant="contained"
@@ -139,7 +134,6 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           Add new vocabulary
         </ButtonAddVocabulary>
       </Grid>
-
       <LessonFooter>
         <ButtonCreateLesson
           variant="contained"
