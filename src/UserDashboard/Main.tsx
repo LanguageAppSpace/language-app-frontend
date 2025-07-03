@@ -1,4 +1,5 @@
 import { ROUTE } from "@/config/route.config.ts";
+import { useGetLessonsQuery } from "@/redux/lessons/lessonsApiSlice";
 import {
   Box,
   Typography,
@@ -8,42 +9,21 @@ import {
   CardContent,
   CircularProgress,
 } from "@mui/material";
-import { To, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const navigate = useNavigate();
+  const { data } = useGetLessonsQuery();
 
   const handleCreateNewLesson = () => {
     navigate(ROUTE.CREATE_LESSON);
   };
 
-  const handleLessonClick = (path: To) => {
-    navigate(path);
+  const handleLessonClick = (id: string) => {
+    navigate(`/edit-lesson/${id}`);
   };
 
-  const lessons = [
-    {
-      title: "Restaurant and Food",
-      phrases: "14 phrases",
-      progress: 50,
-      path: "/restaurant-and-food",
-      id: 1,
-    },
-    {
-      title: "Traveling",
-      phrases: "25 phrases",
-      progress: 50,
-      path: "/traveling",
-      id: 2,
-    },
-    {
-      title: "Idioms about weather",
-      phrases: "15 phrases",
-      progress: 50,
-      path: "/idioms-about-weather",
-      id: 3,
-    },
-  ];
+  const lessons = data?.results ?? [];
 
   return (
     <Box sx={{ width: "100%", p: 3 }}>
@@ -75,9 +55,11 @@ const Main = () => {
           md={6}
           sx={{ display: "flex", alignItems: "center", marginTop: "20px" }}
         >
-          <Typography variant="h6" component="span" sx={{ color: "black" }}>
-            Review your lessons
-          </Typography>
+          {lessons.length > 0 && (
+            <Typography variant="h6" component="span" sx={{ color: "black" }}>
+              Review your lessons
+            </Typography>
+          )}
         </Grid>
         <Grid item xs={12} md={6} sx={{ textAlign: "right" }}>
           <Button
@@ -93,9 +75,6 @@ const Main = () => {
             Create new lesson
           </Button>
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6">Review your lessons</Typography>
-        </Grid>
         {lessons.map((lesson) => (
           <Grid item xs={12} md={4} key={lesson.id}>
             <Card
@@ -106,12 +85,13 @@ const Main = () => {
                 cursor: "pointer",
                 position: "relative",
               }}
-              onClick={() => handleLessonClick(lesson.path)}
+              onClick={() => handleLessonClick(lesson.id)}
             >
               <CardContent>
                 <Typography variant="h6">{lesson.title}</Typography>
                 <Typography variant="body2" sx={{ mt: 1, color: "red" }}>
-                  {lesson.phrases}
+                  {lesson.phrasePairs.length}{" "}
+                  {lesson.phrasePairs.length === 1 ? "phrase" : "phrases"}
                 </Typography>
                 <Box
                   sx={{
@@ -141,7 +121,7 @@ const Main = () => {
                       variant="caption"
                       component="div"
                       color="white"
-                    >{`${Math.round(lesson.progress)}%`}</Typography>
+                    >{`${Math.round(lesson.progress ?? 0)}%`}</Typography>
                   </Box>
                 </Box>
               </CardContent>
