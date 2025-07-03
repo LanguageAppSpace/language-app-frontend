@@ -16,7 +16,7 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         url: `flashcards/lessons/${id}/`,
         method: "GET",
       }),
-      providesTags: (result, error, id) => [{ type: "Lesson", id }],
+      providesTags: (_result, _error, id) => [{ type: "Lesson", id }],
     }),
     editLesson: builder.mutation<void, Lesson>({
       query: (data) => ({
@@ -24,7 +24,7 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_result, _error, { id }) => [
         { type: "Lesson", id },
         { type: "Lessons" },
       ],
@@ -37,7 +37,7 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         url: `flashcards/${lessonId}/pairs/${pairId}/delete/`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, { lessonId }) => [
+      invalidatesTags: (_result, _error, { lessonId }) => [
         { type: "Lesson", id: lessonId },
         { type: "Lessons" },
       ],
@@ -58,7 +58,7 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result, error, { lessonId }) => [
+      invalidatesTags: (_result, _error, { lessonId }) => [
         { type: "Lesson", id: lessonId },
         { type: "Lessons" },
       ],
