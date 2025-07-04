@@ -7,7 +7,7 @@ import {
   Box,
   alpha,
 } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   useCreateNewLessonMutation,
@@ -18,6 +18,7 @@ import {
 import { NewLesson, PhrasePair } from "@/interface";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import LessonForm from "@/Lessons/LessonForm.tsx";
+import { ROUTE } from "@/config/route.config";
 
 const CreateEditLesson = () => {
   const { lessonId } = useParams();
@@ -25,6 +26,7 @@ const CreateEditLesson = () => {
   const [editLesson] = useEditLessonMutation();
   const [editPhraisePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { data: lesson, isLoading } = useGetLessonByIdQuery(lessonId ?? "", {
     skip: !lessonId,
@@ -116,6 +118,7 @@ const CreateEditLesson = () => {
           })
         );
       }
+      navigate(ROUTE.DASHBOARD);
     } catch (error) {
       dispatch(
         showNotification({

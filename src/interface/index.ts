@@ -25,6 +25,7 @@ export interface NewLesson {
 
 export interface Lesson extends NewLesson {
   id: string;
+  progress?: number;
 }
 
 export interface RegisterUser {
@@ -37,4 +38,11 @@ export interface RegisterUser {
 export interface LoginUser {
   username: string;
   password: string;
+}
+
+export interface PaginatedLessons {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Lesson[];
 }
