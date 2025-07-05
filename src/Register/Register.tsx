@@ -60,10 +60,18 @@ const SignUpForm: React.FC = () => {
         })
       );
       navigate(ROUTE.LOGIN);
-    } catch (error) {
+    } catch (err) {
+      const error = err as { data?: Record<string, string[]> };
+      const errorData = error.data ?? {};
+      const firstErrorKey = Object.keys(errorData)[0];
+      const firstMessage =
+        errorData[firstErrorKey]?.[0] ?? "Something went wrong";
+      const formattedMessage =
+        firstMessage.charAt(0).toUpperCase() + firstMessage.slice(1);
+
       dispatch(
         showNotification({
-          message: "Account creation failed",
+          message: formattedMessage,
           severity: "error",
         })
       );
