@@ -15,6 +15,7 @@ import UserSettings from "@/Profile/UserSettings.tsx";
 import CreateEditLesson from "@/Lessons/CreateEditLesson.tsx";
 import UserDashboardLayout from "@/layouts/UserDashboard/Layout.tsx";
 import AuthLayout from "@/layouts/AuthLayout.tsx";
+import LearnMore from "@/LandingPage/LearnMore.tsx";
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ const App = () => {
           element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
         />
         <Route path={ROUTE.LANDING_PAGE} element={<LandingPage />} />
-        <Route path={ROUTE.PAGE404} element={<Page404 />} />
+        <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
         <Route element={<AuthLayout />}>
           <Route path={ROUTE.LOGIN} element={<Login />} />
           <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
