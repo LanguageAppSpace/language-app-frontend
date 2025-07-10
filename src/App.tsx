@@ -27,19 +27,15 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
-        />
         <Route element={<PublicLayout />}>
+          <Route
+            path="/"
+            element={<Navigate to={ROUTE.LANDING_PAGE} replace />}
+          />
           <Route path={ROUTE.LANDING_PAGE} element={<LandingPage />} />
           <Route path={ROUTE.PRIVACY_POLICY} element={<PrivacyPolicy />} />
-          <Route path={ROUTE.SUPPORT} element={<Support />} />
-          <Route path={ROUTE.ABOUT_US} element={<AboutUs />} />
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
-        <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
-
         <Route element={<AuthLayout />}>
           <Route path={ROUTE.LOGIN} element={<Login />} />
           <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
