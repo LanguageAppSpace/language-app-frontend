@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Footer from "@/layouts/Public/Footer";
-import Navigation from "@/layouts/Public/Navigation";
+import Navigation from "@/LandingPage/Navigation";
 
 const PublicLayout = () => {
   return (

@@ -28,7 +28,9 @@ const Navigation = () => {
           >
             <MenuIcon />
           </StyledMenuIcon>
-          <LogoText variant="h6">LOGO</LogoText>
+          <LogoText variant="h6" onClick={() => navigate("/")}>
+            LOGO
+          </LogoText>
           <LogInButton
             variant="contained"
             size="large"
@@ -57,6 +59,7 @@ const StyledMenuIcon = styled(IconButton)({
 
 const LogoText = styled(Typography)({
   flexGrow: 1,
+  cursor: "pointer",
 });
 
 const LogInButton = styled(Button)(({ theme }) => ({

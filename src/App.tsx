@@ -13,9 +13,10 @@ import LandingPage from "@/LandingPage/LandingPage.tsx";
 import Page404 from "@/pages/Page404.tsx";
 import UserSettings from "@/Profile/UserSettings.tsx";
 import CreateEditLesson from "@/Lessons/CreateEditLesson.tsx";
-import UserDashboardLayout from "@/layouts/UserDashboard/Layout";
 import PublicLayout from "@/layouts/Public/PublicLayout";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import UserDashboardLayout from "@/layouts/UserDashboard/Layout.tsx";
+import AuthLayout from "@/layouts/AuthLayout.tsx";
 
 const App = () => {
   return (
@@ -30,8 +31,10 @@ const App = () => {
           <Route path={ROUTE.PRIVACY_POLICY} element={<PrivacyPolicy />} />
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
-        <Route path={ROUTE.LOGIN} element={<Login />} />
-        <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
+        <Route element={<AuthLayout />}>
+          <Route path={ROUTE.LOGIN} element={<Login />} />
+          <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
+        </Route>
         <Route element={<ProtectedRoutes />}>
           <Route element={<UserDashboardLayout />}>
             <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
