@@ -15,6 +15,8 @@ import UserSettings from "@/Profile/UserSettings.tsx";
 import CreateEditLesson from "@/Lessons/CreateEditLesson.tsx";
 import UserDashboardLayout from "@/layouts/UserDashboard/Layout.tsx";
 import AuthLayout from "@/layouts/AuthLayout.tsx";
+import ForgotPassword from "@/ForgotPassword/ForgotPassword";
+import ResetPassword from "@/ResetPassword/ResetPassword";
 
 const App = () => {
   return (
@@ -29,6 +31,8 @@ const App = () => {
         <Route element={<AuthLayout />}>
           <Route path={ROUTE.LOGIN} element={<Login />} />
           <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
+          <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
+          <Route path={ROUTE.RESET_PASSWORD} element={<ResetPassword />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route element={<UserDashboardLayout />}>
