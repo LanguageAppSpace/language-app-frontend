@@ -20,6 +20,8 @@ import AuthLayout from "@/layouts/AuthLayout.tsx";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
 import AboutUs from "@/pages/AboutUs";
+import ForgotPassword from "@/ForgotPassword/ForgotPassword";
+import ResetPassword from "@/ResetPassword/ResetPassword";
 
 const App = () => {
   return (
@@ -41,6 +43,8 @@ const App = () => {
         <Route element={<AuthLayout />}>
           <Route path={ROUTE.LOGIN} element={<Login />} />
           <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
+          <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
+          <Route path={ROUTE.RESET_PASSWORD} element={<ResetPassword />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route element={<UserDashboardLayout />}>

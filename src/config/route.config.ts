@@ -12,4 +12,6 @@ export enum ROUTE {
   PRIVACY_POLICY = "/privacy-policy",
   SUPPORT = "/support",
   ABOUT_US = "/about-us",
+  FORGOT_PASSWORD = "/forgot-password",
+  RESET_PASSWORD = "/reset-password",
 }
