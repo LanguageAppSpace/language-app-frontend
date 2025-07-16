@@ -11,10 +11,7 @@ import {
 import { styled } from "@mui/material/styles";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
-
-const ROUTE = {
-  REGISTER: "/register",
-};
+import { ROUTE } from "@/config/route.config.ts";
 
 const LearnMore = () => {
   const navigate = useNavigate();
@@ -25,7 +22,6 @@ const LearnMore = () => {
 
   return (
     <Box sx={{ fontFamily: "Inter, sans-serif" }}>
-      {" "}
       <HeroBox>
         <Container maxWidth="md">
           <Typography
