@@ -92,8 +92,8 @@ const StyledIconsContainer = styled(Box)(({ theme }) => ({
   color: theme.palette.background.dark,
 }));
 
-const StyledLink = styled(Link)({
-  color: "inherit",
+const StyledLink = styled(Link)(({ theme }) => ({
   textDecoration: "none",
   marginBottom: "10px",
-});
+  color: theme.palette.text.primary,
+}));
