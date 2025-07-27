@@ -1,6 +1,5 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
@@ -8,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@/config/route.config.ts";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Logo from "@/components/Logo/Logo";
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -28,9 +28,7 @@ const Navigation = () => {
           >
             <MenuIcon />
           </StyledMenuIcon>
-          <LogoText variant="h6" onClick={() => navigate("/")}>
-            LOGO
-          </LogoText>
+          <Logo />
           <LogInButton
             variant="contained"
             size="large"
@@ -55,11 +53,6 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 
 const StyledMenuIcon = styled(IconButton)({
   marginRight: 2,
-});
-
-const LogoText = styled(Typography)({
-  flexGrow: 1,
-  cursor: "pointer",
 });
 
 const LogInButton = styled(Button)(({ theme }) => ({
