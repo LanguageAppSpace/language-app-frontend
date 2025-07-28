@@ -28,6 +28,7 @@ export const BackButtonDiv = styled(Box)({
 export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   boxShadow: theme.shadows[3],
   marginLeft: 16,
+  marginTop: 16,
   backgroundColor: theme.palette.background.paper,
   "&:hover": {
     boxShadow: theme.shadows[5],
