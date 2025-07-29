@@ -1,11 +1,13 @@
 export enum ROUTE {
   LANDING_PAGE = "/home",
   LOGIN = "/login",
+  ABOUT = "/about",
   REGISTER = "/register",
   DASHBOARD = "/dashboard",
-  PAGE404 = "/error",
+  LEARN_MORE = "/learn-more",
   USER_SETTINGS = "/user-settings",
   CREATE_LESSON = "/create-lesson",
   EDIT_LESSON = "/edit-lesson/:lessonId",
+  PAGE404 = "/error",
   PRIVACY_POLICY = "/privacy-policy",
 }

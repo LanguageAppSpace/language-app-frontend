@@ -8,7 +8,7 @@ const About = () => {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    navigate(ROUTE.PAGE404);
+    navigate(ROUTE.LEARN_MORE);
   };
 
   return (
