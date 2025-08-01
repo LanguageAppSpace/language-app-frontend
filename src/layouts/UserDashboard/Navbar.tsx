@@ -1,5 +1,6 @@
 import Logo from "@/components/Logo/Logo";
 import { Box, Toolbar, Container, Avatar, AppBar } from "@mui/material";
+import Hamburger from "@/components/Buttons/Hamburger";
 
 const drawerWidth = 240;
 const Navbar = () => {
@@ -16,6 +17,7 @@ const Navbar = () => {
       >
         <Container maxWidth="xl">
           <Toolbar>
+            <Hamburger />
             <Logo />
             <Box sx={{ flexGrow: 0 }}>
               <Avatar />
