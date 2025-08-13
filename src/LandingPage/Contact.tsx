@@ -9,8 +9,19 @@ import {
 import EmailIcon from "@mui/icons-material/Email";
 import { Container } from "@mui/system";
 import { styled } from "@mui/material/styles";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+
+  const handleJoin = () => {
+    if (email) {
+      navigate(`/register?email=${encodeURIComponent(email)}`);
+    }
+  };
+
   return (
     <StyledContactContainer>
       <Container maxWidth="xl">
@@ -28,6 +39,8 @@ const Contact = () => {
                 <StyledTextField
                   variant="outlined"
                   placeholder="name@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -36,7 +49,9 @@ const Contact = () => {
                     ),
                   }}
                 />
-                <StyledButton variant="contained">Join now</StyledButton>
+                <StyledButton variant="contained" onClick={handleJoin}>
+                  Join now
+                </StyledButton>
               </StyledInputBox>
             </StyledFormContainer>
           </Grid>
