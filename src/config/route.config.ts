@@ -10,4 +10,5 @@ export enum ROUTE {
   EDIT_LESSON = "/edit-lesson/:lessonId",
   PAGE404 = "/error",
   PRIVACY_POLICY = "/privacy-policy",
+  SUPPORT = "/support",
 }
