@@ -9,17 +9,35 @@ import {
 import EmailIcon from "@mui/icons-material/Email";
 import { Container } from "@mui/system";
 import { styled } from "@mui/material/styles";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import { ROUTE } from "@/config/route.config";
+
+const schema = Yup.object({
+  email: Yup.string()
+    .required("Email is required")
+    .email("Please enter a valid email"),
+});
+
+interface FormValues {
+  email: string;
+}
 
 const Contact = () => {
-  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const handleJoin = () => {
-    if (email) {
-      navigate(`/register?email=${encodeURIComponent(email)}`);
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  });
+
+  const handleJoin = (data: FormValues) => {
+    navigate(`${ROUTE.REGISTER}?email=${encodeURIComponent(data.email)}`);
   };
 
   return (
@@ -39,8 +57,8 @@ const Contact = () => {
                 <StyledTextField
                   variant="outlined"
                   placeholder="name@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -48,8 +66,12 @@ const Contact = () => {
                       </InputAdornment>
                     ),
                   }}
+                  {...register("email")}
                 />
-                <StyledButton variant="contained" onClick={handleJoin}>
+                <StyledButton
+                  variant="contained"
+                  onClick={handleSubmit(handleJoin)}
+                >
                   Join now
                 </StyledButton>
               </StyledInputBox>
