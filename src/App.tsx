@@ -19,6 +19,7 @@ import UserDashboardLayout from "@/layouts/UserDashboard/Layout.tsx";
 import AuthLayout from "@/layouts/AuthLayout.tsx";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
+import AboutUs from "@/pages/AboutUs";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           <Route path={ROUTE.LANDING_PAGE} element={<LandingPage />} />
           <Route path={ROUTE.PRIVACY_POLICY} element={<PrivacyPolicy />} />
           <Route path={ROUTE.SUPPORT} element={<Support />} />
+          <Route path={ROUTE.ABOUT_US} element={<AboutUs />} />
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
