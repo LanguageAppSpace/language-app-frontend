@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
 import RegisterImage from "@/assets/images/register-page-image.png";
@@ -40,11 +40,19 @@ const schema = Yup.object().shape({
 });
 
 const SignUpForm: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const emailFromQuery = searchParams.get("email") ?? "";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(schema) });
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: emailFromQuery,
+    },
+  });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
