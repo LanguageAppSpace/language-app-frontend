@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { styled } from "@mui/material/styles";
-import { alpha } from "@mui/system";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import deviceSizes from "@/cssConsts";
@@ -13,6 +12,11 @@ import { ROUTE } from "@/config/route.config";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { useLoginUserMutation } from "@/redux/auth/authApiSlice";
 import { setCredentials, setLoadingUser } from "@/redux/auth/authSlice";
+import {
+  AuthForm,
+  AuthFormContainer,
+  AuthFormTitle,
+} from "@/components/AuthForm/AuthForm";
 
 interface FormData {
   username: string;
@@ -66,9 +70,9 @@ const Login = () => {
   };
 
   return (
-    <LoginFormContainer>
-      <LoginForm onSubmit={handleSubmit(onSubmit)}>
-        <LoginFormTitle align="center">Sign in</LoginFormTitle>
+    <AuthFormContainer>
+      <AuthForm onSubmit={handleSubmit(onSubmit)}>
+        <AuthFormTitle align="center">Sign in</AuthFormTitle>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"username"}>
@@ -99,8 +103,10 @@ const Login = () => {
             </FormButton>
           </Grid>
         </Grid>
-        <ForgetPassword>Forgot your password?</ForgetPassword>
-      </LoginForm>
+        <ForgotPassword to="/forgot-password">
+          Forgot your password?
+        </ForgotPassword>
+      </AuthForm>
       <SignUpSection>
         <LoginDivider>New to our community?</LoginDivider>
         <StyledLink to={ROUTE.REGISTER}>
@@ -109,52 +115,18 @@ const Login = () => {
           </CreateAccountButton>
         </StyledLink>
       </SignUpSection>
-    </LoginFormContainer>
+    </AuthFormContainer>
   );
 };
 
 export default Login;
 
-const LoginFormContainer = styled("div")(() => ({
-  maxWidth: "640px",
-  width: "100%",
-  boxSizing: "border-box",
-  display: "flex",
-  flexDirection: "column",
-}));
-
-const LoginForm = styled("form")(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  flexDirection: "column",
-  borderRadius: "16px",
-  border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
-  padding: "40px 56px",
-  boxSizing: "border-box",
-  width: "100%",
-  [theme.breakpoints.down(deviceSizes.sm)]: {
-    padding: "16px 36px",
-    border: "none",
-  },
-}));
-
-const LoginFormTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.dark,
-  textAlign: "center",
-  fontSize: 32,
-  fontWeight: 500,
-  marginBottom: 24,
-  [theme.breakpoints.down(deviceSizes.sm)]: {
-    marginBottom: 16,
-    fontSize: 24,
-  },
-}));
-
-const ForgetPassword = styled(Typography)(() => ({
+const ForgotPassword = styled(Link)(({ theme }) => ({
   textDecoration: "underline",
   fontSize: "16px",
   cursor: "pointer",
-  marginTop: 6,
+  color: theme.palette.primary.light,
+  marginTop: "10px",
 }));
 
 const StyledLink = styled(Link)`
@@ -164,11 +136,8 @@ const StyledLink = styled(Link)`
 const LoginDivider = styled(Divider)(({ theme }) => ({
   margin: "18px 0",
   color: theme.palette.primary.light,
-  fontSize: "22px",
+  fontSize: "16px",
   fontWeight: 400,
-  [theme.breakpoints.down(deviceSizes.sm)]: {
-    fontSize: "16px",
-  },
 }));
 
 const SignUpSection = styled("div")(() => ({
@@ -176,13 +145,13 @@ const SignUpSection = styled("div")(() => ({
 }));
 
 const CreateAccountButton = styled(Button)(({ theme }) => ({
-  padding: "16px 0",
-  fontSize: "20px",
-  fontWeight: "700",
+  padding: "12px 20px",
+  fontSize: "16px",
+  fontWeight: 600,
   width: "100%",
-  borderRadius: "40px",
+  borderRadius: "12px",
   [theme.breakpoints.down(deviceSizes.sm)]: {
     padding: "10px 16px",
-    fontSize: "16px",
+    fontSize: "14px",
   },
 }));
