@@ -1,13 +1,12 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import MenuIcon from "@mui/icons-material/Menu";
-import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@/config/route.config.ts";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Logo from "@/components/Logo/Logo";
+import Hamburger from "@/components/Buttons/Hamburger";
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -20,17 +19,8 @@ const Navigation = () => {
     <NavigationContainer>
       <StyledAppBar>
         <Toolbar>
-          <StyledMenuIcon
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </StyledMenuIcon>
-          <LogoText variant="h6" onClick={() => navigate("/")}>
-            LOGO
-          </LogoText>
+          <Hamburger />
+          <Logo />
           <LogInButton
             variant="contained"
             size="large"
@@ -52,15 +42,6 @@ const NavigationContainer = styled(Box)({
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
 }));
-
-const StyledMenuIcon = styled(IconButton)({
-  marginRight: 2,
-});
-
-const LogoText = styled(Typography)({
-  flexGrow: 1,
-  cursor: "pointer",
-});
 
 const LogInButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.button.main,

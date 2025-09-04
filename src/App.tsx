@@ -37,7 +37,6 @@ const App = () => {
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
-
         <Route element={<AuthLayout />}>
           <Route path={ROUTE.LOGIN} element={<Login />} />
           <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
