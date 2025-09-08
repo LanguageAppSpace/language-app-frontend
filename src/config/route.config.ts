@@ -13,4 +13,5 @@ export enum ROUTE {
   PAGE404 = "/error",
   PRIVACY_POLICY = "/privacy-policy",
   SUPPORT = "/support",
+  ABOUT_US = "/about-us",
 }

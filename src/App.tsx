@@ -21,6 +21,7 @@ import ForgotPassword from "@/ForgotPassword/ForgotPassword";
 import ResetPassword from "@/ResetPassword/ResetPassword";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
+import AboutUs from "@/pages/AboutUs";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
+        <Route path={ROUTE.ABOUT_US} element={<AboutUs />} />
         <Route element={<AuthLayout />}>
           <Route path={ROUTE.LOGIN} element={<Login />} />
           <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
