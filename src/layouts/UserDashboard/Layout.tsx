@@ -1,28 +1,18 @@
-import { Box, CssBaseline, Drawer, useMediaQuery } from "@mui/material";
+import { Box, CssBaseline, Drawer } from "@mui/material";
 import Navbar from "@/layouts/UserDashboard/Navbar";
 import Sidebar from "@/layouts/UserDashboard/Sidebar";
 import { Outlet } from "react-router-dom";
-import deviceSizes from "@/cssConsts";
-import { useState } from "react";
 
 const drawerWidth = 240;
 
 const Layout = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-  const isMobile = useMediaQuery(`(max-width:${deviceSizes.sm - 1}px)`);
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <CssBaseline />
-      <Navbar isMobile={isMobile} handleDrawerToggle={handleDrawerToggle} />
-
+      <Navbar />
       <Box sx={{ display: "flex", flexGrow: 1 }}>
         <Drawer
-          variant={isMobile ? "temporary" : "permanent"}
+          variant="permanent"
           sx={{
             width: drawerWidth,
             flexShrink: 0,
@@ -32,8 +22,7 @@ const Layout = () => {
               overflow: "hidden",
             },
           }}
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
+          open
         >
           <Sidebar />
         </Drawer>
