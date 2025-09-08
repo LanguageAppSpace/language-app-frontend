@@ -5,10 +5,17 @@ import {
   Container,
   Avatar,
   AppBar,
+  IconButton,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const drawerWidth = 240;
-const Navbar = () => {
+
+interface NavbarProps {
+  isMobile: boolean;
+  handleDrawerToggle: () => void;
+}
+const Navbar = ({ isMobile, handleDrawerToggle }: NavbarProps) => {
   return (
     <>
       <AppBar
@@ -22,6 +29,16 @@ const Navbar = () => {
       >
         <Container maxWidth="xl">
           <Toolbar>
+            {isMobile && (
+              <IconButton
+                color="inherit"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               LOGO
             </Typography>

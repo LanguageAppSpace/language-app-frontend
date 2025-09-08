@@ -19,6 +19,7 @@ import UserDashboardLayout from "@/layouts/UserDashboard/Layout.tsx";
 import AuthLayout from "@/layouts/AuthLayout.tsx";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
+import FlashcardLearning from "@/Lessons/Flashcards/FlashcardLearning";
 
 const App = () => {
   return (
@@ -46,6 +47,7 @@ const App = () => {
             <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
             <Route path={ROUTE.CREATE_LESSON} element={<CreateEditLesson />} />
             <Route path={ROUTE.EDIT_LESSON} element={<CreateEditLesson />} />
+            <Route path={ROUTE.FLASHCARDS} element={<FlashcardLearning />} />
           </Route>
         </Route>
         <Route path="*" element={<Page404 />} />

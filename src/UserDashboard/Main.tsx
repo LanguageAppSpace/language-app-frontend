@@ -10,7 +10,7 @@ import {
   CircularProgress,
   IconButton,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, generatePath } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import { Delete, ArrowForward } from "@mui/icons-material";
 
@@ -132,7 +132,7 @@ const Main = () => {
                       <>
                         <CircularProgress
                           variant="determinate"
-                          value={90}
+                          value={lesson.progress ?? 0}
                           sx={{ color: "red" }}
                         />
                         <Box
@@ -158,6 +158,13 @@ const Main = () => {
                       color="inherit"
                       size="small"
                       endIcon={<ArrowForward />}
+                      onClick={() =>
+                        navigate(
+                          generatePath(ROUTE.FLASHCARDS, {
+                            lessonId: lesson.id,
+                          })
+                        )
+                      }
                     >
                       Learn now
                     </Button>
