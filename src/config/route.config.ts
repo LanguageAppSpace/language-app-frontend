@@ -8,6 +8,8 @@ export enum ROUTE {
   USER_SETTINGS = "/user-settings",
   CREATE_LESSON = "/create-lesson",
   EDIT_LESSON = "/edit-lesson/:lessonId",
+  FORGOT_PASSWORD = "/forgot-password",
+  RESET_PASSWORD = "/reset-password",
   PAGE404 = "/error",
   PRIVACY_POLICY = "/privacy-policy",
   SUPPORT = "/support",

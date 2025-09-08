@@ -17,6 +17,8 @@ import PublicLayout from "@/layouts/Public/PublicLayout";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import UserDashboardLayout from "@/layouts/UserDashboard/Layout.tsx";
 import AuthLayout from "@/layouts/AuthLayout.tsx";
+import ForgotPassword from "@/ForgotPassword/ForgotPassword";
+import ResetPassword from "@/ResetPassword/ResetPassword";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
 import FlashcardLearning from "@/Lessons/Flashcards/FlashcardLearning";
@@ -36,10 +38,11 @@ const App = () => {
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
-
         <Route element={<AuthLayout />}>
           <Route path={ROUTE.LOGIN} element={<Login />} />
           <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
+          <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
+          <Route path={ROUTE.RESET_PASSWORD} element={<ResetPassword />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route element={<UserDashboardLayout />}>
