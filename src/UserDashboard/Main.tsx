@@ -8,8 +8,11 @@ import {
   Card,
   CardContent,
   CircularProgress,
+  IconButton,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, generatePath } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import { Delete, ArrowForward } from "@mui/icons-material";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -83,45 +86,88 @@ const Main = () => {
                 backgroundColor: "rgb(5, 20, 50)",
                 color: "white",
                 cursor: "pointer",
-                position: "relative",
               }}
-              onClick={() => handleLessonClick(lesson.id)}
             >
               <CardContent>
-                <Typography variant="h6">{lesson.title}</Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography variant="h6">{lesson.title}</Typography>
+                  <Box>
+                    <IconButton
+                      color="inherit"
+                      onClick={() => handleLessonClick(lesson.id)}
+                    >
+                      <EditIcon fontSize="small" />
+                    </IconButton>
+                    <IconButton color="inherit">
+                      <Delete fontSize="small" />
+                    </IconButton>
+                  </Box>
+                </Box>
                 <Typography variant="body2" sx={{ mt: 1, color: "red" }}>
                   {lesson.phrasePairs.length}{" "}
                   {lesson.phrasePairs.length === 1 ? "phrase" : "phrases"}
                 </Typography>
                 <Box
                   sx={{
-                    position: "absolute",
-                    top: 16,
-                    right: 16,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
                   }}
                 >
-                  <CircularProgress
-                    variant="determinate"
-                    value={lesson.progress}
-                    sx={{ color: "red" }}
-                  />
                   <Box
                     sx={{
-                      top: 0,
-                      left: 0,
-                      bottom: 0,
-                      right: 0,
-                      position: "absolute",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      mt: 2,
+                      position: "relative",
+                      width: 40,
+                      height: 40,
                     }}
                   >
-                    <Typography
-                      variant="caption"
-                      component="div"
-                      color="white"
-                    >{`${Math.round(lesson.progress ?? 0)}%`}</Typography>
+                    {(lesson.progress ?? 0) > 0 && (
+                      <>
+                        <CircularProgress
+                          variant="determinate"
+                          value={lesson.progress ?? 0}
+                          sx={{ color: "red" }}
+                        />
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                          }}
+                        >
+                          <Typography
+                            variant="caption"
+                            component="div"
+                            color="white"
+                          >{`${Math.round(lesson.progress ?? 0)}%`}</Typography>
+                        </Box>
+                      </>
+                    )}
+                  </Box>
+                  <Box>
+                    <Button
+                      variant="outlined"
+                      color="inherit"
+                      size="small"
+                      endIcon={<ArrowForward />}
+                      onClick={() =>
+                        navigate(
+                          generatePath(ROUTE.FLASHCARDS, {
+                            lessonId: lesson.id,
+                          })
+                        )
+                      }
+                    >
+                      Learn now
+                    </Button>
                   </Box>
                 </Box>
               </CardContent>

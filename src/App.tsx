@@ -21,6 +21,7 @@ import ForgotPassword from "@/ForgotPassword/ForgotPassword";
 import ResetPassword from "@/ResetPassword/ResetPassword";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
+import FlashcardLearning from "@/Lessons/Flashcards/FlashcardLearning";
 import AboutUs from "@/pages/AboutUs";
 
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
             <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
             <Route path={ROUTE.CREATE_LESSON} element={<CreateEditLesson />} />
             <Route path={ROUTE.EDIT_LESSON} element={<CreateEditLesson />} />
+            <Route path={ROUTE.FLASHCARDS} element={<FlashcardLearning />} />
           </Route>
         </Route>
         <Route path="*" element={<Page404 />} />

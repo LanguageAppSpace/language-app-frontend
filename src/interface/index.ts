@@ -15,6 +15,7 @@ export interface PhrasePair {
   phraseOne: string;
   phraseTwo: string;
   id?: number;
+  isLearned?: boolean;
 }
 
 export interface NewLesson {
