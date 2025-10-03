@@ -16,6 +16,12 @@ import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SchoolIcon from "@mui/icons-material/School";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
+import {
+  Tile,
+  TileDescription,
+  TileIcon,
+  TileName,
+} from "@/components/Tile/Tile";
 
 const POLSKIE_PROGRAMISTKI_LINK = "https://polskieprogramistki.pl/";
 const DISCORD_INVITE = "https://discord.com/invite/56K84HzUgd";
@@ -153,13 +159,13 @@ export default function AboutUs() {
               const Icon = m.icon;
               return (
                 <Grid key={m.name} item xs={12} sm={6} md={4}>
-                  <TeamCard>
-                    <TeamIcon>
+                  <Tile>
+                    <TileIcon>
                       <Icon fontSize="inherit" />
-                    </TeamIcon>
-                    <TeamName variant="h6">{m.name}</TeamName>
-                    <TeamRole variant="body2">{m.role}</TeamRole>
-                  </TeamCard>
+                    </TileIcon>
+                    <TileName variant="h6">{m.name}</TileName>
+                    <TileDescription variant="body2">{m.role}</TileDescription>
+                  </Tile>
                 </Grid>
               );
             })}
@@ -336,44 +342,6 @@ const ValueTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const ValueDesc = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary,
-}));
-
-const TeamCard = styled(Card)(({ theme }) => ({
-  borderRadius: 12,
-  textAlign: "center",
-  padding: theme.spacing(3, 0),
-  backgroundColor: theme.palette.background.paper,
-  border: "1px solid transparent",
-  cursor: "pointer",
-  transition:
-    "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease",
-  "&:hover": {
-    transform: "translateY(-4px)",
-    boxShadow: theme.shadows[6],
-    borderColor: theme.palette.secondary.main,
-    backgroundColor: theme.palette.background.default,
-  },
-  "&:active": {
-    transform: "translateY(-1px)",
-  },
-}));
-
-const TeamIcon = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  fontSize: 40,
-  color: theme.palette.secondary.main,
-  marginBottom: theme.spacing(1),
-}));
-
-const TeamName = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontWeight: 800,
-}));
-
-const TeamRole = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
