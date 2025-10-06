@@ -16,9 +16,10 @@ import { Lesson } from "@/interface";
 
 interface LessonCardProps {
   lesson: Lesson;
+  onCardClick: () => void;
 }
 
-const LessonCard: React.FC<LessonCardProps> = ({ lesson }) => {
+const LessonCard: React.FC<LessonCardProps> = ({ lesson, onCardClick }) => {
   const navigate = useNavigate();
 
   return (
@@ -106,13 +107,7 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson }) => {
               color="inherit"
               size="small"
               endIcon={<ArrowForward />}
-              onClick={() =>
-                navigate(
-                  generatePath(ROUTE.FLASHCARDS, {
-                    lessonId: lesson.id,
-                  })
-                )
-              }
+              onClick={onCardClick}
             >
               Learn now
             </Button>

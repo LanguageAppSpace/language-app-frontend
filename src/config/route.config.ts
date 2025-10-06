@@ -13,6 +13,7 @@ export enum ROUTE {
   PAGE404 = "/error",
   PRIVACY_POLICY = "/privacy-policy",
   SUPPORT = "/support",
-  FLASHCARDS = "/flashcards/:lessonId",
+  FLASHCARDS_BROWSE = "/flashcards/:lessonId/browse",
+  FLASHCARDS_REVIEW = "/flashcards/:lessonId/review",
   ABOUT_US = "/about-us",
 }
