@@ -23,6 +23,7 @@ import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
 import FlashcardLearning from "@/Lessons/Flashcards/FlashcardLearning";
 import AboutUs from "@/pages/AboutUs";
+import Contact from "./pages/Contact";
 
 const App = () => {
   return (
@@ -36,10 +37,11 @@ const App = () => {
           <Route path={ROUTE.LANDING_PAGE} element={<LandingPage />} />
           <Route path={ROUTE.PRIVACY_POLICY} element={<PrivacyPolicy />} />
           <Route path={ROUTE.SUPPORT} element={<Support />} />
+          <Route path={ROUTE.ABOUT_US} element={<AboutUs />} />
+          <Route path={ROUTE.CONTACT} element={<Contact />} />
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
-        <Route path={ROUTE.ABOUT_US} element={<AboutUs />} />
         <Route element={<AuthLayout />}>
           <Route path={ROUTE.LOGIN} element={<Login />} />
           <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
