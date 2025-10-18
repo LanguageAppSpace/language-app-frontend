@@ -11,19 +11,9 @@ interface FlashcardWrapperProps {
 
 const FlashcardSlider: React.FC<FlashcardWrapperProps> = ({
   children,
-  isSliding,
-  slideDirection,
-  onTransitionEnd,
+  ...props
 }) => {
-  return (
-    <StyledFlashcardSlider
-      isSliding={isSliding}
-      slideDirection={slideDirection}
-      onTransitionEnd={onTransitionEnd}
-    >
-      {children}
-    </StyledFlashcardSlider>
-  );
+  return <StyledFlashcardSlider {...props}>{children}</StyledFlashcardSlider>;
 };
 
 export default FlashcardSlider;
