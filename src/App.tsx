@@ -23,7 +23,7 @@ import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
 import FlashcardLearning from "@/Lessons/Flashcards/FlashcardLearning";
 import AboutUs from "@/pages/AboutUs";
-import Contact from "./pages/Contact";
+import Contact from "@/pages/Contact";
 
 const App = () => {
   return (
