@@ -21,8 +21,9 @@ import ForgotPassword from "@/ForgotPassword/ForgotPassword";
 import ResetPassword from "@/ResetPassword/ResetPassword";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
-import FlashcardLearning from "@/Lessons/Flashcards/FlashcardLearning";
 import AboutUs from "@/pages/AboutUs";
+import FlashcardsBrowse from "@/Lessons/Flashcards/FlashcardsBrowse/FlashcardsBrowse";
+import FlashcardsReview from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReview";
 
 const App = () => {
   return (
@@ -52,7 +53,14 @@ const App = () => {
             <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
             <Route path={ROUTE.CREATE_LESSON} element={<CreateEditLesson />} />
             <Route path={ROUTE.EDIT_LESSON} element={<CreateEditLesson />} />
-            <Route path={ROUTE.FLASHCARDS} element={<FlashcardLearning />} />
+            <Route
+              path={ROUTE.FLASHCARDS_BROWSE}
+              element={<FlashcardsBrowse />}
+            />
+            <Route
+              path={ROUTE.FLASHCARDS_REVIEW}
+              element={<FlashcardsReview />}
+            />
           </Route>
         </Route>
         <Route path="*" element={<Page404 />} />
