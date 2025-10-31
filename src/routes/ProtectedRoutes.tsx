@@ -1,12 +1,10 @@
-import { ROUTE } from "@/config/route.config.ts";
 import { Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectCurrentToken } from "@/redux/auth/authSlice.ts";
+import { ROUTE } from "@/config/route.config";
 
 const ProtectedRoute = () => {
-  const isToken = useSelector(selectCurrentToken);
+  const refreshToken = localStorage.getItem("refreshToken");
 
-  if (!isToken) {
+  if (!refreshToken) {
     return <Navigate to={ROUTE.LOGIN} replace />;
   }
 

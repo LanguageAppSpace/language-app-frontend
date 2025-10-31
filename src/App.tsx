@@ -22,6 +22,7 @@ import ResetPassword from "@/ResetPassword/ResetPassword";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
 import AboutUs from "@/pages/AboutUs";
+import Contact from "@/pages/Contact";
 import FlashcardsBrowse from "@/Lessons/Flashcards/FlashcardsBrowse/FlashcardsBrowse";
 import FlashcardsReview from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReview";
 

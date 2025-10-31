@@ -1,25 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
 
-export interface AuthState {
+interface AuthState {
   username: string;
   accessToken: string | null;
-  refreshToken: string | null;
-  isLoading: boolean;
   userId: string | null;
-}
-
-interface CredentialsPayload {
-  username: string;
-  accessToken: string;
-  refreshToken: string;
 }
 
 const initialState: AuthState = {
   username: "",
-  accessToken: localStorage.getItem("accessToken"),
-  refreshToken: null,
-  isLoading: true,
+  accessToken: null,
   userId: localStorage.getItem("userId"),
 };
 
@@ -27,26 +17,23 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCredentials(state, action: PayloadAction<CredentialsPayload>) {
-      const { username, accessToken, refreshToken } = action.payload;
-      state.username = username;
-      state.accessToken = accessToken;
-      state.refreshToken = refreshToken;
+    setCredentials: (
+      state,
+      action: PayloadAction<{ username: string; accessToken: string }>
+    ) => {
+      state.username = action.payload.username;
+      state.accessToken = action.payload.accessToken;
     },
     logOut: (state) => {
       state.username = "";
       state.accessToken = null;
       localStorage.clear();
     },
-    setLoadingUser(state, action: PayloadAction<boolean>) {
-      state.isLoading = action.payload;
-    },
   },
 });
 
-export default authSlice.reducer;
-export const { setCredentials, logOut, setLoadingUser } = authSlice.actions;
-export const selectCurrentUser = (state: RootState) => state.auth.username;
+export const { setCredentials, logOut } = authSlice.actions;
+export const selectAccessToken = (state: RootState) => state.auth.accessToken;
 export const selectCurrentUserId = (state: RootState) => state.auth.userId;
-export const selectCurrentToken = (state: RootState) => state.auth.accessToken;
-export const selectIsLoadingUser = (state: RootState) => state.auth.isLoading;
+
+export default authSlice.reducer;
