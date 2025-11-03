@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
 
-interface AuthState {
+export interface AuthState {
   username: string;
   accessToken: string | null;
   userId: string | null;
 }
 
 const initialState: AuthState = {
-  username: "",
+  username: localStorage.getItem("username") ?? "",
   accessToken: null,
   userId: localStorage.getItem("userId"),
 };
@@ -35,5 +35,8 @@ const authSlice = createSlice({
 export const { setCredentials, logOut } = authSlice.actions;
 export const selectAccessToken = (state: RootState) => state.auth.accessToken;
 export const selectCurrentUserId = (state: RootState) => state.auth.userId;
+export const selectIsAuthenticated = (state: RootState) =>
+  Boolean(state.auth.accessToken ?? localStorage.getItem("refreshToken"));
+export const selectUsername = (state: RootState) => state.auth.username;
 
 export default authSlice.reducer;

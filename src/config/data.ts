@@ -1,6 +1,17 @@
-export const sidebarLinks = [
-  { text: "Dashboard", path: "/dashboard" },
-  { text: "New lesson", path: "/create-lesson" },
-  { text: "Your Lessons", path: "/dashboard" },
-  { text: "Logout", path: "/login" },
+import { ROUTE } from "@/config/route.config";
+
+export interface SidebarLink {
+  text: string;
+  path: ROUTE;
+  auth: string;
+  action?: string;
+}
+
+export const sidebarLinks: SidebarLink[] = [
+  { text: "Dashboard", path: ROUTE.DASHBOARD, auth: "auth" },
+  { text: "New lesson", path: ROUTE.CREATE_LESSON, auth: "auth" },
+  { text: "Settings", path: ROUTE.USER_SETTINGS, auth: "auth" },
+  { text: "Log in", path: ROUTE.LOGIN, auth: "public" },
+  { text: "Register", path: ROUTE.REGISTER, auth: "public" },
+  { text: "Logout", path: ROUTE.LANDING_PAGE, auth: "auth", action: "logout" },
 ];

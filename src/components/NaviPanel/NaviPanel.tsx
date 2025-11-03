@@ -8,8 +8,10 @@ import {
   Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { ROUTE } from "@/config/route.config.ts";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector, useDispatch } from "react-redux";
+import { logOut, selectIsAuthenticated } from "@/redux/auth/authSlice";
+import { sidebarLinks, SidebarLink } from "@/config/data";
 
 interface NaviPanelProps {
   open: boolean;
@@ -20,8 +22,19 @@ const drawerWidth = 240;
 
 const NaviPanel = ({ open, onClose }: NaviPanelProps) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
-  const handleNavigate = (path: string) => {
+  const visibleLinks = sidebarLinks.filter((link) => {
+    if (link.auth === "auth") return isAuthenticated;
+    if (link.auth === "public") return !isAuthenticated;
+    return false;
+  });
+
+  const handleNavigate = ({ action, path }: SidebarLink) => {
+    if (action === "logout") {
+      dispatch(logOut());
+    }
     navigate(path);
     onClose();
   };
@@ -46,23 +59,14 @@ const NaviPanel = ({ open, onClose }: NaviPanelProps) => {
       </Box>
 
       <List>
-        <StyledListItemButton onClick={() => handleNavigate(ROUTE.DASHBOARD)}>
-          <ListItemText primary="Dashboard" />
-        </StyledListItemButton>
-
-        <StyledListItemButton onClick={() => handleNavigate(ROUTE.LOGIN)}>
-          <ListItemText primary="Log in" />
-        </StyledListItemButton>
-
-        <StyledListItemButton onClick={() => handleNavigate(ROUTE.REGISTER)}>
-          <ListItemText primary="Register" />
-        </StyledListItemButton>
-
-        <StyledListItemButton
-          onClick={() => handleNavigate(ROUTE.USER_SETTINGS)}
-        >
-          <ListItemText primary="User settings" />
-        </StyledListItemButton>
+        {visibleLinks.map((link) => (
+          <StyledListItemButton
+            key={link.text}
+            onClick={() => handleNavigate(link)}
+          >
+            <ListItemText primary={link.text} />
+          </StyledListItemButton>
+        ))}
       </List>
     </Drawer>
   );

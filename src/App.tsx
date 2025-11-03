@@ -25,6 +25,7 @@ import AboutUs from "@/pages/AboutUs";
 import Contact from "@/pages/Contact";
 import FlashcardsBrowse from "@/Lessons/Flashcards/FlashcardsBrowse/FlashcardsBrowse";
 import FlashcardsReview from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReview";
+import PublicRoutes from "@/routes/PublicRoutes";
 
 const App = () => {
   return (
@@ -43,11 +44,13 @@ const App = () => {
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
-        <Route element={<AuthLayout />}>
-          <Route path={ROUTE.LOGIN} element={<Login />} />
-          <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
-          <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
-          <Route path={ROUTE.RESET_PASSWORD} element={<ResetPassword />} />
+        <Route element={<PublicRoutes />}>
+          <Route element={<AuthLayout />}>
+            <Route path={ROUTE.LOGIN} element={<Login />} />
+            <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
+            <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
+            <Route path={ROUTE.RESET_PASSWORD} element={<ResetPassword />} />
+          </Route>
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route element={<UserDashboardLayout />}>

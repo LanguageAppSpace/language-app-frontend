@@ -6,12 +6,14 @@ import LessonCard from "./LessonCard/LessonCard";
 import { LessonModeDialog } from "./LessonModeDialog/LessonModeDialog";
 import { Lesson } from "@/interface";
 import { useState } from "react";
-
+import { useSelector } from "react-redux";
+import { selectUsername } from "@/redux/auth/authSlice";
 const Main = () => {
   const navigate = useNavigate();
   const { data } = useGetLessonsQuery();
   const [open, setOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+  const username = useSelector(selectUsername);
 
   const handleOpenDialog = (lesson: Lesson) => {
     setSelectedLesson(lesson);
@@ -26,7 +28,7 @@ const Main = () => {
 
   return (
     <>
-      <Box sx={{ width: "100%", p: 3 }}>
+      <Box sx={{ width: "100%", p: 3, mt: 8 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Box>
@@ -37,7 +39,7 @@ const Main = () => {
               >
                 👋 Hello,{" "}
                 <Typography variant="h5" component="span" fontWeight="bold">
-                  Anna!
+                  {username}!
                 </Typography>
               </Typography>
               <Typography variant="h6" component="span" sx={{ color: "black" }}>
