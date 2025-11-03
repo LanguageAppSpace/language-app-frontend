@@ -24,7 +24,7 @@ import Support from "@/pages/Support";
 import AboutUs from "@/pages/AboutUs";
 import FlashcardsBrowse from "@/Lessons/Flashcards/FlashcardsBrowse/FlashcardsBrowse";
 import FlashcardsReview from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReview";
-
+import Contact from "@/pages/Contact";
 const App = () => {
   return (
     <Router>
