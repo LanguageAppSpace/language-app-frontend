@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setCredentials, logOut, AuthState } from "@/redux/auth/authSlice";
+import { setCredentials, logOut } from "@/redux/auth/authSlice";
 import type {
   BaseQueryFn,
   FetchArgs,
@@ -10,24 +10,15 @@ import camelcaseKeys from "camelcase-keys";
 import snakecaseKeys from "snakecase-keys";
 
 interface RefreshResponse {
-  accessToken: string;
-  refreshToken: string;
+  access: string;
+  refresh: string;
 }
-
-const getAccessToken = (state: RootState): string | null => {
-  let accessToken: AuthState["accessToken"] = state.auth.accessToken;
-  if (!accessToken) {
-    accessToken = localStorage.getItem("accessToken");
-  }
-  return accessToken;
-};
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const state = getState() as RootState;
-    const accessToken = getAccessToken(state);
+    const accessToken = (getState() as RootState).auth.accessToken;
     if (accessToken) {
       headers.set("authorization", `Bearer ${accessToken}`);
     }
@@ -49,12 +40,25 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    const refreshResult = await baseQuery("/refresh", api, extraOptions);
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!refreshToken) api.dispatch(logOut());
+
+    const refreshResult = await baseQuery(
+      {
+        url: "/user/token/refresh/",
+        method: "POST",
+        body: { refresh: refreshToken },
+      },
+      api,
+      extraOptions
+    );
     const refreshData = refreshResult.data as RefreshResponse;
 
     if (refreshData) {
+      const { refresh, access } = refreshData;
       const username = (api.getState() as RootState).auth.username;
-      api.dispatch(setCredentials({ ...refreshData, username }));
+      api.dispatch(setCredentials({ accessToken: access, username }));
+      localStorage.setItem("refreshToken", refresh);
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(logOut());
