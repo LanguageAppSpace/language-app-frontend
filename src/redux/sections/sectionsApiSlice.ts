@@ -1,14 +1,9 @@
-import {
-  NewSection,
-  PaginatedResponse,
-  Section,
-  UpdateSectionPayload,
-} from "@/interface";
+import { NewSection, SectionResponse, UpdateSectionPayload } from "@/interface";
 import { apiSlice } from "@/redux/apiSlice";
 
 export const sectionApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getSections: builder.query<PaginatedResponse<Section>, void>({
+    getSections: builder.query<SectionResponse, void>({
       query: () => ({
         url: `flashcards/sections/`,
         method: "GET",

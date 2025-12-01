@@ -9,10 +9,6 @@ interface EmptyStateSectionProps {
 const EmptyStateSection: React.FC<EmptyStateSectionProps> = ({
   onOpenModal,
 }) => {
-  const handleCreateNewSection = () => {
-    onOpenModal();
-  };
-
   return (
     <EmptyStateCard>
       <img src={folderImg} alt="folder" style={{ maxHeight: "100px" }} />
@@ -23,7 +19,7 @@ const EmptyStateSection: React.FC<EmptyStateSectionProps> = ({
       <Button
         size="large"
         variant="contained"
-        onClick={handleCreateNewSection}
+        onClick={onOpenModal}
         color="primary"
       >
         Create new section

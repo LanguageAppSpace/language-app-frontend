@@ -23,7 +23,7 @@ const DeleteSectionDialog = ({
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>
-        <Typography color="primary" variant="h6">
+        <Typography color="primary" variant="h6" component="span">
           Delete section
         </Typography>
       </DialogTitle>

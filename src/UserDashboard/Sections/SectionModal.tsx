@@ -93,7 +93,6 @@ const SectionModal: React.FC<SectionModal> = ({
       }
       onClose();
     } catch (error) {
-      console.log(error);
       dispatch(
         showNotification({
           message: `Failed to ${editingSection ? "update" : "create"} section`,
@@ -193,20 +192,20 @@ const StyledInput = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const ColorCircle = styled(Box)<{ $color: string; $selected: boolean }>(
-  ({ $color, $selected, theme }) => ({
-    width: "36px",
-    height: "36px",
-    borderRadius: "50%",
-    backgroundColor: $color,
-    border: "2px solid",
-    borderColor: $selected
-      ? theme.palette.primary.light
-      : theme.palette.background.dark,
-    cursor: "pointer",
-    transition: "0.2s",
-    "&:hover": {
-      transform: "scale(1.08)",
-    },
-  })
-);
+const ColorCircle = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "$color" && prop !== "$selected",
+})<{ $color: string; $selected: boolean }>(({ $color, $selected, theme }) => ({
+  width: "36px",
+  height: "36px",
+  borderRadius: "50%",
+  backgroundColor: $color,
+  border: "2px solid",
+  borderColor: $selected
+    ? theme.palette.primary.light
+    : theme.palette.background.dark,
+  cursor: "pointer",
+  transition: "0.2s",
+  "&:hover": {
+    transform: "scale(1.08)",
+  },
+}));

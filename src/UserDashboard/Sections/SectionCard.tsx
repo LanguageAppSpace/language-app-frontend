@@ -37,7 +37,9 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
 
 export default SectionCard;
 
-const SectionCardWrapper = styled(Box)<{ $bg: string }>`
+const SectionCardWrapper = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "$bg",
+})<{ $bg: string }>`
   background: ${(props) => props.$bg};
   border-radius: 20px;
   padding: 28px;

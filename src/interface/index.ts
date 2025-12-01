@@ -41,13 +41,6 @@ export interface LoginUser {
   password: string;
 }
 
-export interface PaginatedResponse<T> {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: T[];
-}
-
 export interface Section extends NewSection {
   id: number;
   progress: string;
@@ -62,4 +55,18 @@ export interface NewSection {
 
 export interface UpdateSectionPayload extends NewSection {
   id: number;
+}
+
+export interface SectionResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Section[];
+}
+
+export interface LessonResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Lesson[];
 }
