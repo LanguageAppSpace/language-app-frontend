@@ -1,5 +1,5 @@
 import { Typography, Button, Grid } from "@mui/material";
-import folderImg from "@/assets/images/folder.png";
+import emptyFolderImg from "@/assets/images/empty-folder.png";
 import { styled } from "@mui/material/styles";
 
 interface EmptyStateSectionProps {
@@ -11,7 +11,7 @@ const EmptyStateSection: React.FC<EmptyStateSectionProps> = ({
 }) => {
   return (
     <EmptyStateCard>
-      <img src={folderImg} alt="folder" style={{ maxHeight: "100px" }} />
+      <img src={emptyFolderImg} alt="folder" style={{ maxHeight: "100px" }} />
       <Typography variant="h6">You don't have any sections yet</Typography>
       <Typography variant="body1">
         Create your first section to start organizing your lessons.

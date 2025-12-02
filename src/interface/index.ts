@@ -19,6 +19,7 @@ export interface PhrasePair {
 }
 
 export interface NewLesson {
+  section: number | null;
   title: string;
   description: string;
   phrasePairs: PhrasePair[];

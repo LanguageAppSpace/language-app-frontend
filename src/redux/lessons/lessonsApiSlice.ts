@@ -9,7 +9,7 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Lessons"],
+      invalidatesTags: ["Lessons", "Sections"],
     }),
     getLessonById: builder.query<Lesson, string>({
       query: (id) => ({
@@ -26,7 +26,8 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "Lesson", id },
-        { type: "Lessons" },
+        "Lessons",
+        "Sections",
       ],
     }),
     deleteFlashcard: builder.mutation<

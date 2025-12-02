@@ -7,6 +7,7 @@ export enum ROUTE {
   LEARN_MORE = "/learn-more",
   USER_SETTINGS = "/user-settings",
   CREATE_LESSON = "/create-lesson",
+  CREATE_LESSON_IN_SECTION = "/section/:sectionId/create-lesson",
   EDIT_LESSON = "/edit-lesson/:lessonId",
   FORGOT_PASSWORD = "/forgot-password",
   RESET_PASSWORD = "/reset-password",

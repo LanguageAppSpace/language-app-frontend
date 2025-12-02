@@ -2,7 +2,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
-import NaviPanel from "../NaviPanel/NaviPanel";
+import NaviPanel from "@/components/NaviPanel/NaviPanel";
 
 const Hamburger = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);

@@ -11,6 +11,7 @@ import DeleteSectionDialog from "@/UserDashboard/Sections/DeleteSectionModal";
 import { Section } from "@/interface";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
+import UnassignedLessons from "@/UserDashboard/UnassignedLessons/UnassignedLessons";
 
 const Sections = () => {
   const { data: sections, isLoading } = useGetSectionsQuery();
@@ -49,13 +50,26 @@ const Sections = () => {
     closeModal();
   };
 
-  const hasUserSections = sections && sections.results.length > 0;
+  const filteredSections: Section[] = [];
+  let otherSection: Section | null = null;
+
+  for (const section of sections?.results ?? []) {
+    if (section.title.toLowerCase() === "other") {
+      otherSection = section;
+    } else {
+      filteredSections.push(section);
+    }
+  }
+
+  const unassignedLessons = otherSection?.lessons ?? [];
+  const hasUserSections = filteredSections && filteredSections.length > 0;
+  const hasUnassignedLessons = unassignedLessons.length > 0;
 
   if (isLoading) {
     return (
       <>
-        {[1, 2, 3, 4].map((i) => (
-          <Grid item xs={12} sm={6} md={3} key={i}>
+        {[1, 2, 3].map((i) => (
+          <Grid item xs={12} sm={6} md={4} key={i}>
             <Skeleton
               variant="rectangular"
               height={280}
@@ -80,9 +94,8 @@ const Sections = () => {
               Create new section
             </Button>
           </Grid>
-
-          {sections?.results.map((section) => (
-            <Grid item xs={12} sm={6} md={3} key={section.id}>
+          {filteredSections?.map((section) => (
+            <Grid item xs={12} sm={6} md={4} key={section.id}>
               <SectionCard
                 section={section}
                 onEdit={() => openModal("edit", section)}
@@ -95,6 +108,9 @@ const Sections = () => {
         <Grid item xs={12}>
           <EmptyStateSection onOpenModal={() => openModal("create")} />
         </Grid>
+      )}
+      {hasUnassignedLessons && (
+        <UnassignedLessons lessons={unassignedLessons} />
       )}
       <SectionModal
         open={modalState.modal === "create" || modalState.modal === "edit"}
