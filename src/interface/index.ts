@@ -41,7 +41,30 @@ export interface LoginUser {
   password: string;
 }
 
-export interface PaginatedLessons {
+export interface Section extends NewSection {
+  id: number;
+  progress: string;
+  lessons: Lesson[];
+}
+
+export interface NewSection {
+  title: string;
+  description?: string;
+  color: string;
+}
+
+export interface UpdateSectionPayload extends NewSection {
+  id: number;
+}
+
+export interface SectionResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Section[];
+}
+
+export interface LessonResponse {
   count: number;
   next: string | null;
   previous: string | null;

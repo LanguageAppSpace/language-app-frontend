@@ -1,4 +1,4 @@
-import { Lesson, NewLesson, PhrasePair, PaginatedLessons } from "@/interface";
+import { Lesson, NewLesson, PhrasePair, LessonResponse } from "@/interface";
 import { apiSlice } from "@/redux/apiSlice";
 
 export const lessonApiSlice = apiSlice.injectEndpoints({
@@ -42,7 +42,7 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         { type: "Lessons" },
       ],
     }),
-    getLessons: builder.query<PaginatedLessons, void>({
+    getLessons: builder.query<LessonResponse, void>({
       query: () => ({
         url: `flashcards/lessons/`,
         method: "GET",
