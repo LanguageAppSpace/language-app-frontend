@@ -16,7 +16,7 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         url: `flashcards/lessons/${id}/`,
         method: "GET",
       }),
-      providesTags: (_result, _error, id) => [{ type: "Lesson", id }],
+      providesTags: (_result, _error, id) => [{ type: "Lessons", id }],
     }),
     editLesson: builder.mutation<void, Lesson>({
       query: (data) => ({
@@ -25,7 +25,7 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
       invalidatesTags: (_result, _error, { id }) => [
-        { type: "Lesson", id },
+        { type: "Lessons", id },
         "Lessons",
         "Sections",
       ],
@@ -39,8 +39,8 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: (_result, _error, { lessonId }) => [
-        { type: "Lesson", id: lessonId },
-        { type: "Lessons" },
+        { type: "Lessons", id: lessonId },
+        "Lessons",
       ],
     }),
     getLessons: builder.query<LessonResponse, void>({
@@ -60,9 +60,16 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
       invalidatesTags: (_result, _error, { lessonId }) => [
-        { type: "Lesson", id: lessonId },
-        { type: "Lessons" },
+        { type: "Lessons", id: lessonId },
+        "Lessons",
       ],
+    }),
+    deleteLesson: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `flashcards/lessons/${id}/`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Lessons", "Sections"],
     }),
   }),
 });
@@ -74,4 +81,5 @@ export const {
   useDeleteFlashcardMutation,
   useEditPhrasePairMutation,
   useGetLessonsQuery,
+  useDeleteLessonMutation,
 } = lessonApiSlice;

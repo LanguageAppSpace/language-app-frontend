@@ -8,7 +8,7 @@ export enum ROUTE {
   USER_SETTINGS = "/user-settings",
   CREATE_LESSON = "/create-lesson",
   CREATE_LESSON_IN_SECTION = "/section/:sectionId/create-lesson",
-  EDIT_LESSON = "/edit-lesson/:lessonId",
+  EDIT_LESSON = "/section/:sectionId/edit-lesson/:lessonId",
   FORGOT_PASSWORD = "/forgot-password",
   RESET_PASSWORD = "/reset-password",
   PAGE404 = "/error",
@@ -18,4 +18,5 @@ export enum ROUTE {
   FLASHCARDS_REVIEW = "/flashcards/:lessonId/review",
   ABOUT_US = "/about-us",
   CONTACT = "/contact",
+  SECTION = "/section/:sectionId",
 }

@@ -12,7 +12,7 @@ import {
   useConfirmPasswordResetMutation,
 } from "@/redux/auth/authApiSlice";
 import { ROUTE } from "@/config/route.config";
-import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
+import { FormInput, FormInputLabel } from "@/components/Form/Form";
 import {
   AuthForm,
   AuthFormContainer,

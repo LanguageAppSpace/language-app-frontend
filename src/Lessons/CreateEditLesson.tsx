@@ -23,13 +23,14 @@ import { useGetSectionByIdQuery } from "@/redux/sections/sectionsApiSlice";
 import FolderImg from "@/assets/images/folder.png";
 
 const CreateEditLesson = () => {
-  const { lessonId } = useParams();
   const [createNewLesson] = useCreateNewLessonMutation();
   const [editLesson] = useEditLessonMutation();
   const [editPhraisePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { sectionId: sectionIdString } = useParams();
+  const params = useParams();
+  const lessonId = params.lessonId;
+  const sectionIdString = params.sectionId;
 
   const { data: lesson, isLoading } = useGetLessonByIdQuery(lessonId ?? "", {
     skip: !lessonId,
@@ -87,8 +88,16 @@ const CreateEditLesson = () => {
       title: data.title,
       description: data.description,
       phrasePairs: newPairs,
-      section: sectionId,
+      section: data.section ?? null,
     }).unwrap();
+  };
+
+  const getFinalSectionId = (
+    sectionIdFromUrl: number | null,
+    formSection: number | null
+  ) => {
+    if (sectionIdFromUrl) return sectionIdFromUrl;
+    return formSection ?? null;
   };
 
   const onSubmit = async (data: NewLesson) => {
@@ -103,11 +112,16 @@ const CreateEditLesson = () => {
 
         const isTitleChanged = lesson?.title !== data.title;
         const isDescriptionChanged = lesson?.description !== data.description;
+        const isSectionChanged = lesson?.section !== data.section;
 
-        if (newPairs.length > 0 || isTitleChanged || isDescriptionChanged) {
+        if (
+          newPairs.length > 0 ||
+          isTitleChanged ||
+          isDescriptionChanged ||
+          isSectionChanged
+        ) {
           await submitEditLesson(lessonId, data, newPairs);
         }
-
         dispatch(
           showNotification({
             message: "Lesson updated successfully",
@@ -115,9 +129,11 @@ const CreateEditLesson = () => {
           })
         );
       } else {
+        const finalSectionId = getFinalSectionId(sectionId, data.section);
+
         await createNewLesson({
           ...data,
-          section: sectionId,
+          section: finalSectionId,
           phrasePairs: trimmedPhrasePairs(data.phrasePairs),
         }).unwrap();
 
@@ -163,18 +179,19 @@ const CreateEditLesson = () => {
 
   return (
     <StyledCreateLessonContainer>
-      <Heading variant="h5"> {titleText}</Heading>
-      {sectionId && section && (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
-          <img
-            src={FolderImg}
-            alt="folder icon"
-            style={{ width: 25, height: 25 }}
-          />
-          <Heading variant="h5">{section.title}</Heading>
-        </Box>
-      )}
-
+      <Box sx={{ mb: 2 }}>
+        <Heading variant="h5"> {titleText}</Heading>
+        {sectionId && section && (
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <img
+              src={FolderImg}
+              alt="folder icon"
+              style={{ width: 25, height: 25 }}
+            />
+            <Heading variant="h5">{section.title}</Heading>
+          </Box>
+        )}
+      </Box>
       <LessonForm
         initialValues={{
           title: lesson?.title ?? "",
@@ -182,17 +199,17 @@ const CreateEditLesson = () => {
           phrasePairs: lesson?.phrasePairs ?? [
             { phraseOne: "", phraseTwo: "" },
           ],
-          section: sectionId ?? null,
+          section: lesson?.section ?? sectionId ?? null,
         }}
         onSubmit={onSubmit}
       />
     </StyledCreateLessonContainer>
   );
 };
-const StyledCreateLessonContainer = styled(Box)(() => ({
+const StyledCreateLessonContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  padding: "90px",
+  padding: theme.spacing(3),
 }));
 
 export const VocabularyRowStyled = styled(Grid)(({ theme }) => ({

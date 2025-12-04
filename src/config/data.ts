@@ -9,7 +9,6 @@ export interface SidebarLink {
 
 export const sidebarLinks: SidebarLink[] = [
   { text: "Dashboard", path: ROUTE.DASHBOARD, auth: "auth" },
-  { text: "New lesson", path: ROUTE.CREATE_LESSON, auth: "auth" },
   { text: "Settings", path: ROUTE.USER_SETTINGS, auth: "auth" },
   { text: "Log in", path: ROUTE.LOGIN, auth: "public" },
   { text: "Register", path: ROUTE.REGISTER, auth: "public" },
