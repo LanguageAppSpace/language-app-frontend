@@ -1,12 +1,22 @@
+import { ROUTE } from "@/config/route.config";
+import { selectIsAuthenticated } from "@/redux/auth/authSlice";
 import { Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Logo = () => {
   const navigate = useNavigate();
-
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const handleClick = () => {
+    if (isAuthenticated) {
+      navigate(ROUTE.DASHBOARD);
+    } else {
+      navigate(ROUTE.LANDING_PAGE);
+    }
+  };
   return (
-    <LogoContainer onClick={() => navigate("/")}>
+    <LogoContainer onClick={handleClick}>
       <LogoText variant="h6">LanguageApp</LogoText>
     </LogoContainer>
   );

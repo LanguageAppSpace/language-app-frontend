@@ -6,32 +6,30 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import React from "react";
 
 interface Props {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  sectionTitle?: string;
+  message: React.ReactNode;
 }
 
-const DeleteSectionDialog = ({
+const DeleteConfirmationModal = ({
   open,
   onClose,
   onConfirm,
-  sectionTitle,
+  message,
 }: Props) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>
         <Typography color="primary" variant="h6" component="span">
-          Delete section
+          Confirm action
         </Typography>
       </DialogTitle>
       <DialogContent>
-        <Typography color="primary">
-          Are you sure you want to delete <b>{sectionTitle}</b>? This action
-          cannot be undone.
-        </Typography>
+        <Typography color="primary">{message}</Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={onConfirm} color="primary" variant="contained">
@@ -45,4 +43,4 @@ const DeleteSectionDialog = ({
   );
 };
 
-export default DeleteSectionDialog;
+export default DeleteConfirmationModal;

@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { selectCurrentUserId } from "@/redux/auth/authSlice.ts";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import { Grid, Typography, Button } from "@mui/material";
-import { FormRow, FormInputLabel, FormInput } from "@/Profile/UserSettings.tsx";
+import { FormRow, FormInputLabel, FormInput } from "@/components/Form/Form.tsx";
 
 const passwordSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Old password is required"),

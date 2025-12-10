@@ -1,8 +1,12 @@
 import { Section } from "@/interface";
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography, IconButton, Divider, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import folderImg from "@/assets/images/folder.png";
+import { Link, useNavigate, generatePath } from "react-router-dom";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { ROUTE } from "@/config/route.config";
 
 interface SectionCard {
   section: Section;
@@ -11,19 +15,40 @@ interface SectionCard {
 }
 
 const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
-  const { title, description } = section;
+  const { title, description, lessons } = section;
+  const navigate = useNavigate();
 
   return (
-    <SectionCardWrapper $bg={section.color}>
+    <SectionCardWrapper
+      $border={section.color}
+      onClick={() =>
+        navigate(generatePath(ROUTE.SECTION, { sectionId: String(section.id) }))
+      }
+    >
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6" color="primary">
-          {title}
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <img src={folderImg} alt="folder" style={{ maxHeight: "25px" }} />
+          <Typography variant="h6" color="primary">
+            {title}
+          </Typography>
+        </Box>
         <IconsRow>
-          <IconButton size="small" onClick={() => onEdit?.(section)}>
+          <IconButton
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit?.(section);
+            }}
+          >
             <EditIcon fontSize="small" />
           </IconButton>
-          <IconButton size="small" onClick={() => onDelete?.(section)}>
+          <IconButton
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete?.(section);
+            }}
+          >
             <DeleteIcon fontSize="small" />
           </IconButton>
         </IconsRow>
@@ -31,6 +56,26 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
       <Typography variant="body2" color="primary.light">
         {description}
       </Typography>
+      <Divider />
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography variant="body1" color="primary">
+          {lessons.length} {lessons.length > 1 ? "lessons" : "lesson"}
+        </Typography>
+        <Link
+          to={generatePath(ROUTE.CREATE_LESSON_IN_SECTION, {
+            sectionId: String(section.id),
+          })}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Button
+            variant="contained"
+            startIcon={<AddCircleIcon />}
+            size="small"
+          >
+            Add Lesson
+          </Button>
+        </Link>
+      </Box>
     </SectionCardWrapper>
   );
 };
@@ -38,9 +83,8 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
 export default SectionCard;
 
 const SectionCardWrapper = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "$bg",
-})<{ $bg: string }>`
-  background: ${(props) => props.$bg};
+  shouldForwardProp: (prop) => prop !== "$border",
+})<{ $border: string }>`
   border-radius: 20px;
   padding: 28px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.04);
@@ -48,6 +92,10 @@ const SectionCardWrapper = styled(Box, {
   flex-direction: column;
   gap: 20px;
   transition: all 0.25s ease;
+  border-color: ${(props) => props.$border};
+  border-width: 2px;
+  border-style: solid;
+  cursor: pointer;
   &:hover {
     box-shadow: 0px 10px 24px rgba(0, 0, 0, 0.12);
     filter: brightness(1.03);

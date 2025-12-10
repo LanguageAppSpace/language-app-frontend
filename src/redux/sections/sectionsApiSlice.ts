@@ -1,4 +1,9 @@
-import { NewSection, SectionResponse, UpdateSectionPayload } from "@/interface";
+import {
+  NewSection,
+  SectionResponse,
+  UpdateSectionPayload,
+  Section,
+} from "@/interface";
 import { apiSlice } from "@/redux/apiSlice";
 
 export const sectionApiSlice = apiSlice.injectEndpoints({
@@ -25,8 +30,8 @@ export const sectionApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
       invalidatesTags: (_result, _error, { id }) => [
-        { type: "Section", id },
-        { type: "Sections" },
+        { type: "Sections", id },
+        "Sections",
       ],
     }),
     deleteSection: builder.mutation<void, number>({
@@ -36,6 +41,13 @@ export const sectionApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Sections"],
     }),
+    getSectionById: builder.query<Section, number>({
+      query: (id) => ({
+        url: `flashcards/sections/${id}/`,
+        method: "GET",
+      }),
+      providesTags: (_result, _error, id) => [{ type: "Sections", id }],
+    }),
   }),
 });
 
@@ -44,4 +56,5 @@ export const {
   useCreateSectionMutation,
   useUpdateSectionMutation,
   useDeleteSectionMutation,
+  useGetSectionByIdQuery,
 } = sectionApiSlice;

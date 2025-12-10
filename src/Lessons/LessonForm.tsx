@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography, IconButton, InputLabel } from "@mui/material";
+import { Grid, IconButton, InputLabel, FormControl } from "@mui/material";
 import { Controller, useForm, useFieldArray } from "react-hook-form";
 import { Add as AddIcon, Delete as DeleteIcon } from "@mui/icons-material";
 import {
@@ -8,14 +8,19 @@ import {
   ButtonAddVocabulary,
   ButtonCreateLesson,
 } from "@/Lessons/CreateEditLesson.tsx";
-import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
+import {
+  FormInput,
+  FormMenuItem,
+  FormSelect,
+} from "@/components/Form/Form.tsx";
 import LessonFooter from "@/Lessons/LessonFooter.tsx";
 import { NewLesson } from "@/interface";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import { useDeleteFlashcardMutation } from "@/redux/lessons/lessonsApiSlice";
-
+import { useGetSectionsQuery } from "@/redux/sections/sectionsApiSlice";
+import CloseIcon from "@mui/icons-material/Close";
 interface LessonFormProps {
   initialValues: NewLesson;
   onSubmit: (data: NewLesson) => void;
@@ -24,7 +29,11 @@ interface LessonFormProps {
 const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
   const [deleteFlashcard] = useDeleteFlashcardMutation();
 
-  const { lessonId } = useParams<{ lessonId: string }>();
+  const { data: sections } = useGetSectionsQuery();
+  const { lessonId, sectionId: sectionIdFromUrl } = useParams<{
+    lessonId: string;
+    sectionId: string;
+  }>();
 
   const dispatch = useDispatch();
 
@@ -61,25 +70,75 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
     remove(index);
   };
 
+  const hasSection = sections && sections?.results.length > 0;
+  const sectionsList = sections ? sections.results : [];
+  const isEditMode = Boolean(lessonId);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2} direction="column" xs={6}>
         <Grid item>
-          <FormInputLabel htmlFor="title">
-            <Typography>Title</Typography>
-          </FormInputLabel>
-          <FormInput fullWidth variant="outlined" {...register("title")} />
-        </Grid>
-        <Grid item>
-          <FormInputLabel htmlFor="description">
-            <Typography>Description</Typography>
-          </FormInputLabel>
           <FormInput
             fullWidth
+            variant="outlined"
+            required
+            label="Title"
+            {...register("title")}
+          />
+        </Grid>
+        <Grid item>
+          <FormInput
+            label="Description"
+            fullWidth
+            required
             variant="outlined"
             {...register("description")}
           />
         </Grid>
+        {(!sectionIdFromUrl || isEditMode) && hasSection ? (
+          <Grid item>
+            <Controller
+              name="section"
+              control={control}
+              render={({ field }) => (
+                <FormControl fullWidth>
+                  <InputLabel id="sections">Section</InputLabel>
+                  <FormSelect
+                    labelId="sections"
+                    id="sections"
+                    label="Section"
+                    {...field}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      field.onChange(value === "" ? null : Number(value));
+                    }}
+                    endAdornment={
+                      field.value && (
+                        <IconButton
+                          sx={{
+                            mr: 2,
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            field.onChange(null);
+                          }}
+                        >
+                          <CloseIcon fontSize="small" />
+                        </IconButton>
+                      )
+                    }
+                  >
+                    {sectionsList?.map(({ id, title }) => (
+                      <FormMenuItem key={id} value={id}>
+                        {title}
+                      </FormMenuItem>
+                    ))}
+                  </FormSelect>
+                </FormControl>
+              )}
+            />
+          </Grid>
+        ) : null}
       </Grid>
       {fields.map((item, index) => (
         <VocabularyRowStyled key={item.id} container columns={14} spacing={0}>

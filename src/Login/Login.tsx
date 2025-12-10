@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import deviceSizes from "@/cssConsts";
-import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
+import { FormInput, FormInputLabel } from "@/components/Form/Form";
 import FormButton from "@/components/Buttons/FormButton";
 import { ROUTE } from "@/config/route.config";
 import { showNotification } from "@/redux/notification/notificationSlice";

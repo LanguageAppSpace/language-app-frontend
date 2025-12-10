@@ -7,7 +7,7 @@ import FormButton from "@/components/Buttons/FormButton";
 import { ROUTE } from "@/config/route.config";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { useDispatch } from "react-redux";
-import { FormInput, FormInputLabel } from "@/Profile/UserSettings";
+import { FormInput, FormInputLabel } from "@/components/Form/Form";
 import {
   AuthForm,
   AuthFormContainer,

@@ -4,7 +4,6 @@ import {
   DialogTitle,
   DialogContent,
   IconButton,
-  TextField,
   Box,
   DialogActions,
   Button,
@@ -15,7 +14,6 @@ import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { styled } from "@mui/material/styles";
-import { alpha } from "@mui/system";
 import {
   useCreateSectionMutation,
   useUpdateSectionMutation,
@@ -24,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { Section } from "@/interface";
 import { SECTION_COLORS } from "@/constants/sectionColors";
+import { FormInput } from "@/components/Form/Form";
 
 interface SectionModal {
   open: boolean;
@@ -135,7 +134,7 @@ const SectionModal: React.FC<SectionModal> = ({
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: 2 }}
         >
-          <StyledInput
+          <FormInput
             id="title"
             label="Title"
             variant="outlined"
@@ -144,7 +143,7 @@ const SectionModal: React.FC<SectionModal> = ({
             error={!!errors.title}
             helperText={errors.title?.message}
           />
-          <StyledInput
+          <FormInput
             id="description"
             label="Description"
             variant="outlined"
@@ -154,7 +153,7 @@ const SectionModal: React.FC<SectionModal> = ({
           />
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
             <Typography color="primary">Choose section color:</Typography>
-            <Box sx={{ display: "flex", gap: 2 }}>
+            <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
               {SECTION_COLORS.map((color) => (
                 <ColorCircle
                   key={color}
@@ -185,13 +184,6 @@ const SectionModal: React.FC<SectionModal> = ({
 
 export default SectionModal;
 
-const StyledInput = styled(TextField)(({ theme }) => ({
-  "& .MuiInputBase-input": {
-    color: theme.palette.text.secondary,
-    border: `1px solid ${alpha(theme.palette.primary.light, 0.35)}`,
-  },
-}));
-
 const ColorCircle = styled(Box, {
   shouldForwardProp: (prop) => prop !== "$color" && prop !== "$selected",
 })<{ $color: string; $selected: boolean }>(({ $color, $selected, theme }) => ({
@@ -205,6 +197,7 @@ const ColorCircle = styled(Box, {
     : theme.palette.background.dark,
   cursor: "pointer",
   transition: "0.2s",
+
   "&:hover": {
     transform: "scale(1.08)",
   },
