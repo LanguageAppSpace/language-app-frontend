@@ -1,4 +1,4 @@
-import { Lesson, NewLesson, PhrasePair, PaginatedLessons } from "@/interface";
+import { Lesson, NewLesson, PhrasePair, LessonResponse } from "@/interface";
 import { apiSlice } from "@/redux/apiSlice";
 
 export const lessonApiSlice = apiSlice.injectEndpoints({
@@ -9,14 +9,14 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Lessons"],
+      invalidatesTags: ["Lessons", "Sections"],
     }),
     getLessonById: builder.query<Lesson, string>({
       query: (id) => ({
         url: `flashcards/lessons/${id}/`,
         method: "GET",
       }),
-      providesTags: (_result, _error, id) => [{ type: "Lesson", id }],
+      providesTags: (_result, _error, id) => [{ type: "Lessons", id }],
     }),
     editLesson: builder.mutation<void, Lesson>({
       query: (data) => ({
@@ -25,8 +25,9 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
       invalidatesTags: (_result, _error, { id }) => [
-        { type: "Lesson", id },
-        { type: "Lessons" },
+        { type: "Lessons", id },
+        "Lessons",
+        "Sections",
       ],
     }),
     deleteFlashcard: builder.mutation<
@@ -38,11 +39,11 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: (_result, _error, { lessonId }) => [
-        { type: "Lesson", id: lessonId },
-        { type: "Lessons" },
+        { type: "Lessons", id: lessonId },
+        "Lessons",
       ],
     }),
-    getLessons: builder.query<PaginatedLessons, void>({
+    getLessons: builder.query<LessonResponse, void>({
       query: () => ({
         url: `flashcards/lessons/`,
         method: "GET",
@@ -59,9 +60,16 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
       invalidatesTags: (_result, _error, { lessonId }) => [
-        { type: "Lesson", id: lessonId },
-        { type: "Lessons" },
+        { type: "Lessons", id: lessonId },
+        "Lessons",
       ],
+    }),
+    deleteLesson: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `flashcards/lessons/${id}/`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Lessons", "Sections"],
     }),
   }),
 });
@@ -73,4 +81,5 @@ export const {
   useDeleteFlashcardMutation,
   useEditPhrasePairMutation,
   useGetLessonsQuery,
+  useDeleteLessonMutation,
 } = lessonApiSlice;

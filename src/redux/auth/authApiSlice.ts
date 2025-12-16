@@ -29,10 +29,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: user,
       }),
       transformResponse: (response: LoginResponse) => {
-        const { access, refresh } = response;
+        const { refresh, access } = response;
         const { user_id, username } = jwtDecode<DecodedToken>(access);
 
-        localStorage.setItem("accessToken", access);
         localStorage.setItem("refreshToken", refresh);
         localStorage.setItem("userId", user_id);
         localStorage.setItem("username", username);
@@ -69,6 +68,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { token, newPassword, confirmNewPassword },
       }),
     }),
+    refreshToken: builder.mutation<LoginResponse, { refresh: string }>({
+      query: (body) => ({
+        url: "user/token/refresh/",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -79,4 +85,5 @@ export const {
   useResetPasswordMutation,
   useValidatePasswordResetTokenQuery,
   useConfirmPasswordResetMutation,
+  useRefreshTokenMutation,
 } = authApiSlice;

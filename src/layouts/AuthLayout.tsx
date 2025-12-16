@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import BackButton from "@/components/Buttons/BackButton";
-import Navigation from "@/LandingPage/Navigation";
+import Navigation from "@/components/Navigation/Navigation";
 
 const AuthLayout = () => {
   return (

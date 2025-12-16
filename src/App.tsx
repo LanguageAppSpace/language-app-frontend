@@ -22,9 +22,12 @@ import ResetPassword from "@/ResetPassword/ResetPassword";
 import LearnMore from "@/LandingPage/LearnMore.tsx";
 import Support from "@/pages/Support";
 import AboutUs from "@/pages/AboutUs";
+import Contact from "@/pages/Contact";
 import FlashcardsBrowse from "@/Lessons/Flashcards/FlashcardsBrowse/FlashcardsBrowse";
 import FlashcardsReview from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReview";
-import Contact from "@/pages/Contact";
+import PublicRoutes from "@/routes/PublicRoutes";
+import SectionView from "@/UserDashboard/Sections/SectionView/SectionView";
+
 const App = () => {
   return (
     <Router>
@@ -42,17 +45,23 @@ const App = () => {
         </Route>
         <Route path={ROUTE.PAGE404} element={<Page404 />} />
         <Route path={ROUTE.LEARN_MORE} element={<LearnMore />} />
-        <Route element={<AuthLayout />}>
-          <Route path={ROUTE.LOGIN} element={<Login />} />
-          <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
-          <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
-          <Route path={ROUTE.RESET_PASSWORD} element={<ResetPassword />} />
+        <Route element={<PublicRoutes />}>
+          <Route element={<AuthLayout />}>
+            <Route path={ROUTE.LOGIN} element={<Login />} />
+            <Route path={ROUTE.REGISTER} element={<SignUpForm />} />
+            <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
+            <Route path={ROUTE.RESET_PASSWORD} element={<ResetPassword />} />
+          </Route>
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route element={<UserDashboardLayout />}>
             <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
             <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
             <Route path={ROUTE.CREATE_LESSON} element={<CreateEditLesson />} />
+            <Route
+              path={ROUTE.CREATE_LESSON_IN_SECTION}
+              element={<CreateEditLesson />}
+            />
             <Route path={ROUTE.EDIT_LESSON} element={<CreateEditLesson />} />
             <Route
               path={ROUTE.FLASHCARDS_BROWSE}
@@ -62,6 +71,7 @@ const App = () => {
               path={ROUTE.FLASHCARDS_REVIEW}
               element={<FlashcardsReview />}
             />
+            <Route path={ROUTE.SECTION} element={<SectionView />} />
           </Route>
         </Route>
         <Route path="*" element={<Page404 />} />

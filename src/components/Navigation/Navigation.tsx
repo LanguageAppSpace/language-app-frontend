@@ -7,37 +7,41 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Logo from "@/components/Logo/Logo";
 import Hamburger from "@/components/Buttons/Hamburger";
+import { selectIsAuthenticated } from "@/redux/auth/authSlice";
+import { useSelector } from "react-redux";
+import { AccountCircle } from "@mui/icons-material";
 
 const Navigation = () => {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
     navigate(ROUTE.LOGIN);
   };
-
   return (
-    <NavigationContainer>
+    <Box>
       <StyledAppBar>
         <Toolbar>
           <Hamburger />
           <Logo />
-          <LogInButton
-            variant="contained"
-            size="large"
-            color="primary"
-            onClick={handleLoginClick}
-          >
-            LOG IN
-          </LogInButton>
+          {isAuthenticated ? (
+            <AccountCircle fontSize="large" />
+          ) : (
+            <LogInButton
+              variant="contained"
+              size="large"
+              color="primary"
+              onClick={handleLoginClick}
+            >
+              LOG IN
+            </LogInButton>
+          )}
         </Toolbar>
       </StyledAppBar>
-    </NavigationContainer>
+    </Box>
   );
 };
-
-const NavigationContainer = styled(Box)({
-  flexGrow: 1,
-});
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
