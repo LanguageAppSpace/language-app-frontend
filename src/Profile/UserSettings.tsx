@@ -64,9 +64,3 @@ export const StyledContainer = styled("div")(({ theme }) => ({
   width: "600px",
   color: theme.palette.text.secondary,
 }));
-
-export const FormRow = styled("div")(({ theme }) => ({
-  display: "flex",
-  margin: "12px 0",
-  gap: theme.spacing(2),
-}));
