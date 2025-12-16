@@ -6,8 +6,6 @@ import { useDeactivateAccountMutation } from "@/redux/userSettings/userSettingsA
 import ChangePasswordForm from "@/Profile/ChangePasswordForm.tsx";
 import UpdateProfileForm from "@/Profile/UpdateProfileForm.tsx";
 import { styled } from "@mui/material/styles";
-import { alpha } from "@mui/system";
-import theme from "@/theme/theme";
 
 const UserSettings: React.FC = () => {
   const dispatch = useDispatch();
@@ -62,7 +60,7 @@ export const StyledFormWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(8, 0),
 }));
 
-export const StyledContainer = styled("div")(() => ({
+export const StyledContainer = styled("div")(({ theme }) => ({
   width: "600px",
   color: theme.palette.text.secondary,
 }));
@@ -71,24 +69,4 @@ export const FormRow = styled("div")(({ theme }) => ({
   display: "flex",
   margin: "12px 0",
   gap: theme.spacing(2),
-}));
-
-export const FormInputLabel = styled(InputLabel)(({ theme }) => ({
-  color: `${theme.palette.primary.dark}`,
-  fontSize: "16px",
-  fontStyle: "normal",
-  fontWeight: 400,
-  paddingBottom: "7px",
-}));
-
-export const FormInput = styled(TextField)(({ theme }) => ({
-  "& .MuiInputBase-input": {
-    color: theme.palette.text.secondary,
-    borderRadius: "12px",
-    border: `1px solid ${alpha(theme.palette.primary.light, 0.35)}`,
-  },
-  "& .MuiOutlinedInput-root ": {
-    borderRadius: "12px",
-    border: "none",
-  },
 }));
