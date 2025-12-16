@@ -14,6 +14,7 @@ import ChangePasswordForm from "@/Profile/ChangePasswordForm.tsx";
 import UpdateProfileForm from "@/Profile/UpdateProfileForm.tsx";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system";
+import theme from "@/theme/theme";
 
 const UserSettings: React.FC = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ export const StyledFormWrapper = styled("div")(({ theme }) => ({
 
 export const StyledContainer = styled("div")(() => ({
   width: "600px",
+  color: theme.palette.text.secondary,
 }));
 
 export const FormRow = styled("div")(({ theme }) => ({
