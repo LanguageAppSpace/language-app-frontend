@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import { Grid, Typography, Button } from "@mui/material";
-import { FormRow, FormInputLabel, FormInput } from "@/Profile/UserSettings.tsx";
+import { FormRow, FormInputLabel, FormInput } from "@/components/Form/Form.tsx";
 import { useUpdateProfileMutation } from "@/redux/userSettings/userSettingsApiSlice.ts";
 import { ProfileData } from "@/interface";
 

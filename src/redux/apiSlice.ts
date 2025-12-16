@@ -38,10 +38,17 @@ const baseQueryWithReauth: BaseQueryFn<
     >;
   }
   let result = await baseQuery(args, api, extraOptions);
-
-  if (result.error && result.error.status === 401) {
+  if (
+    result.error &&
+    typeof result.error.status === "number" &&
+    [401, 403].includes(result.error.status)
+  ) {
     const refreshToken = localStorage.getItem("refreshToken");
-    if (!refreshToken) api.dispatch(logOut());
+
+    if (!refreshToken) {
+      api.dispatch(logOut());
+      return result;
+    }
 
     const refreshResult = await baseQuery(
       {
@@ -62,6 +69,7 @@ const baseQueryWithReauth: BaseQueryFn<
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(logOut());
+      return result;
     }
   }
   if (result) {
@@ -73,5 +81,5 @@ const baseQueryWithReauth: BaseQueryFn<
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: ["Lessons", "Lesson"],
+  tagTypes: ["Lessons", "Sections"],
 });

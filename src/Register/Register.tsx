@@ -1,4 +1,4 @@
-import { Grid, Typography, InputLabel, TextField } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -13,6 +13,7 @@ import FormButton from "@/components/Buttons/FormButton";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { useRegisterUserMutation } from "@/redux/auth/authApiSlice";
 import { ROUTE } from "@/config/route.config";
+import { FormInput, FormInputLabel } from "@/components/Form/Form";
 
 interface FormData {
   username: string;
@@ -243,25 +244,6 @@ const FormRow = styled("div")(({ theme }) => ({
   gap: theme.spacing(2),
   [theme.breakpoints.down(deviceSizes.sm)]: {
     flexDirection: "column",
-  },
-}));
-
-const FormInputLabel = styled(InputLabel)(({ theme }) => ({
-  color: theme.palette.primary.dark,
-  fontSize: "16px",
-  fontWeight: 400,
-  paddingBottom: theme.spacing(1),
-}));
-
-const FormInput = styled(TextField)(({ theme }) => ({
-  "& .MuiInputBase-input": {
-    color: theme.palette.text.secondary,
-    borderRadius: "12px",
-    border: `1px solid ${alpha(theme.palette.primary.light, 0.35)}`,
-  },
-  "& .MuiOutlinedInput-root ": {
-    borderRadius: "12px",
-    border: "none",
   },
 }));
 

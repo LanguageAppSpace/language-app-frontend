@@ -20,7 +20,7 @@ const Navigation = () => {
     navigate(ROUTE.LOGIN);
   };
   return (
-    <NavigationContainer>
+    <Box>
       <StyledAppBar>
         <Toolbar>
           <Hamburger />
@@ -39,13 +39,9 @@ const Navigation = () => {
           )}
         </Toolbar>
       </StyledAppBar>
-    </NavigationContainer>
+    </Box>
   );
 };
-
-const NavigationContainer = styled(Box)({
-  flexGrow: 1,
-});
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,

@@ -26,6 +26,7 @@ import Contact from "@/pages/Contact";
 import FlashcardsBrowse from "@/Lessons/Flashcards/FlashcardsBrowse/FlashcardsBrowse";
 import FlashcardsReview from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReview";
 import PublicRoutes from "@/routes/PublicRoutes";
+import SectionView from "@/UserDashboard/Sections/SectionView/SectionView";
 
 const App = () => {
   return (
@@ -57,6 +58,10 @@ const App = () => {
             <Route path={ROUTE.DASHBOARD} element={<Dashboard />} />
             <Route path={ROUTE.USER_SETTINGS} element={<UserSettings />} />
             <Route path={ROUTE.CREATE_LESSON} element={<CreateEditLesson />} />
+            <Route
+              path={ROUTE.CREATE_LESSON_IN_SECTION}
+              element={<CreateEditLesson />}
+            />
             <Route path={ROUTE.EDIT_LESSON} element={<CreateEditLesson />} />
             <Route
               path={ROUTE.FLASHCARDS_BROWSE}
@@ -66,6 +71,7 @@ const App = () => {
               path={ROUTE.FLASHCARDS_REVIEW}
               element={<FlashcardsReview />}
             />
+            <Route path={ROUTE.SECTION} element={<SectionView />} />
           </Route>
         </Route>
         <Route path="*" element={<Page404 />} />
