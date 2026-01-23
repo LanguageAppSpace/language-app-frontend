@@ -7,8 +7,15 @@ import { showNotification } from "@/redux/notification/notificationSlice";
 import theme from "@/theme/theme";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
 const ReviewModeControls = () => {
-  const { handleNext, isSliding, currentIndex, phrases, lesson } =
-    useFlashcardsContext();
+  const {
+    isSliding,
+    currentIndex,
+    phrases,
+    lesson,
+    setReviewFeedback,
+    setCurrentIndex,
+    calcNextIndex,
+  } = useFlashcardsContext();
   const [editPhrasePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
 
@@ -17,6 +24,9 @@ const ReviewModeControls = () => {
 
     const pair = phrases[currentIndex];
     const isStatusChanged = pair.isLearned !== learned;
+
+    setReviewFeedback(learned ? "correct" : "incorrect");
+    setCurrentIndex(calcNextIndex(currentIndex, "next"));
 
     if (isStatusChanged) {
       try {
@@ -35,8 +45,6 @@ const ReviewModeControls = () => {
         console.error(err);
       }
     }
-
-    handleNext();
   };
 
   return (

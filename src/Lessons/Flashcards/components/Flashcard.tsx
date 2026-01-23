@@ -5,7 +5,7 @@ interface FlashcardProps {
   phraseTwo: string;
   flipped: boolean;
   onFlip: () => void;
-  currentIndex: number;
+  disableFlipAnimation?: boolean;
 }
 
 const Flashcard = ({
@@ -13,10 +13,14 @@ const Flashcard = ({
   phraseTwo,
   flipped,
   onFlip,
-  currentIndex,
+  disableFlipAnimation,
 }: FlashcardProps) => {
   return (
-    <FlashcardContainer flipped={flipped} key={currentIndex} onClick={onFlip}>
+    <FlashcardContainer
+      flipped={flipped}
+      onClick={onFlip}
+      disableFlipAnimation={disableFlipAnimation}
+    >
       <FlashcardSide>{phraseOne}</FlashcardSide>
       <FlashcardSideBack>{phraseTwo}</FlashcardSideBack>
     </FlashcardContainer>
@@ -26,24 +30,27 @@ const Flashcard = ({
 export default Flashcard;
 
 const FlashcardContainer = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "flipped",
-})<{ flipped: boolean }>(({ theme, flipped }) => ({
-  width: "100%",
-  height: "100%",
-  position: "relative",
-  transformStyle: "preserve-3d",
-  transition: "transform 0.6s",
-  transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-  boxShadow: theme.shadows[3],
-  borderRadius: theme.spacing(1),
-  backgroundColor: theme.palette.primary.main,
-  color: theme.palette.text.primary,
-  cursor: "pointer",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: "1.2rem",
-}));
+  shouldForwardProp: (prop) =>
+    prop !== "flipped" && prop !== "disableFlipAnimation",
+})<{ flipped: boolean; disableFlipAnimation?: boolean }>(
+  ({ theme, flipped, disableFlipAnimation }) => ({
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    transformStyle: "preserve-3d",
+    transition: disableFlipAnimation ? "none" : "transform 0.6s",
+    transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+    boxShadow: theme.shadows[3],
+    borderRadius: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.text.primary,
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "1.2rem",
+  })
+);
 
 const FlashcardSide = styled(Box)(({ theme }) => ({
   position: "absolute",
