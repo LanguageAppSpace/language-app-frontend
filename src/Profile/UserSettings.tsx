@@ -60,6 +60,7 @@ export const StyledFormWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(8, 0),
 }));
 
-export const StyledContainer = styled("div")(() => ({
+export const StyledContainer = styled("div")(({ theme }) => ({
   width: "600px",
+  color: theme.palette.text.secondary,
 }));
