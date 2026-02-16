@@ -85,13 +85,12 @@ const Contact = () => {
 
 export default Contact;
 
-const StyledContactContainer = styled(Box)(({ theme }) => ({
+const StyledContactContainer = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: theme.palette.secondary.main,
   padding: "80px 0",
-}));
+});
 
 const StyledTextContainer = styled(Box)({
   textAlign: "left",
