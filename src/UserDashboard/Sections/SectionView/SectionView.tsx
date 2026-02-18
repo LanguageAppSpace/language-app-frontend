@@ -17,6 +17,7 @@ import { LessonModeDialog } from "@/UserDashboard/LessonModeDialog/LessonModeDia
 import { useState } from "react";
 import { Lesson } from "@/interface";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal/DeleteConfirmationModal";
+import { useResetLessonProgressMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useDeleteLessonMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
@@ -26,6 +27,7 @@ const SectionView = () => {
   const { sectionId: sectionIdString } = useParams();
   const navigate = useNavigate();
   const sectionId = sectionIdString ? Number(sectionIdString) : null;
+  const [resetLessonProgress] = useResetLessonProgressMutation();
   const [deleteLesson] = useDeleteLessonMutation();
   const dispatch = useDispatch();
 
@@ -43,6 +45,22 @@ const SectionView = () => {
   ) => setModalState({ modal: type, lesson });
 
   const closeModal = () => setModalState({ modal: null, lesson: null });
+
+  const handleResetLessonProgress = async (lessonId: string) => {
+    try {
+      await resetLessonProgress(lessonId).unwrap();
+      dispatch(
+        showNotification({ message: "Progress reset", severity: "success" })
+      );
+    } catch {
+      dispatch(
+        showNotification({
+          message: "Failed to reset progress",
+          severity: "error",
+        })
+      );
+    }
+  };
 
   const handleDeleteConfirm = async () => {
     if (!modalState.lesson) return;
@@ -156,6 +174,9 @@ const SectionView = () => {
                 <LessonCard
                   lesson={lesson}
                   onCardClick={() => openModal("lessonMode", lesson)}
+                  onResetProgressClick={async () => {
+                    await handleResetLessonProgress(lesson.id);
+                  }}
                   onDeleteClick={() => openModal("delete", lesson)}
                   key={lesson.id}
                 />

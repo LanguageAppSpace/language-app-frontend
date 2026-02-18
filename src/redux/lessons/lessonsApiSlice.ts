@@ -64,6 +64,13 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
         "Lessons",
       ],
     }),
+    resetLessonProgress: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `flashcards/lessons/${id}/reset-progress/`,
+        method: "POST",
+      }),
+      invalidatesTags: (_result, _error, id) => [{ type: "Lessons", id }],
+    }),
     deleteLesson: builder.mutation<void, string>({
       query: (id) => ({
         url: `flashcards/lessons/${id}/`,
@@ -81,5 +88,6 @@ export const {
   useDeleteFlashcardMutation,
   useEditPhrasePairMutation,
   useGetLessonsQuery,
+  useResetLessonProgressMutation,
   useDeleteLessonMutation,
 } = lessonApiSlice;
