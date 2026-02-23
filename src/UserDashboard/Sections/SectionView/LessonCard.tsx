@@ -8,6 +8,7 @@ import {
   LinearProgress,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { Delete } from "@mui/icons-material";
 import { useNavigate, generatePath } from "react-router-dom";
 import { Lesson } from "@/interface";
@@ -16,12 +17,14 @@ import { styled } from "@mui/material/styles";
 interface LessonCardProps {
   lesson: Lesson;
   onCardClick: () => void;
+  onResetProgressClick: (lesson: Lesson) => void | Promise<void>;
   onDeleteClick: (lesson: Lesson) => void;
 }
 
 const LessonCard: React.FC<LessonCardProps> = ({
   lesson,
   onCardClick,
+  onResetProgressClick,
   onDeleteClick,
 }) => {
   const navigate = useNavigate();
@@ -67,6 +70,14 @@ const LessonCard: React.FC<LessonCardProps> = ({
             }
           >
             <EditIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            onClick={async (e) => {
+              e.stopPropagation();
+              await onResetProgressClick?.(lesson);
+            }}
+          >
+            <RestartAltIcon fontSize="small" />
           </IconButton>
           <IconButton
             onClick={(e) => {
