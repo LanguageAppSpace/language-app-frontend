@@ -4,6 +4,7 @@ import FlashcardSlider from "@/Lessons/Flashcards/components/FlashcardSlider";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
 import React from "react";
 import { ReviewFeedback } from "@/Lessons/Flashcards/context/FlashcardsContext";
+import { LessonSessionProgressBar } from "@/Lessons/Flashcards/components/LessonSessionProgressBar";
 
 interface FlashcardsLayout {
   children: React.ReactNode;
@@ -33,9 +34,10 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
         <Typography variant="h4" color="primary">
           {lesson.title}
         </Typography>
-        <Typography color="primary">
-          {currentIndex + 1}/{phrases.length} phrases
-        </Typography>
+        <LessonSessionProgressBar
+          activeIndex={currentIndex}
+          totalPhrases={phrases.length}
+        />
         <FlashcardStage>
           <FlashcardSlider
             isSliding={isSliding}
