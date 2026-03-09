@@ -34,6 +34,7 @@ const ReviewModeControls = () => {
           lessonId: lesson.id,
           pairId: pair.id!,
           data: { ...pair, isLearned: learned },
+          sectionId: lesson.section,
         });
       } catch (err) {
         dispatch(
