@@ -52,16 +52,24 @@ export const lessonApiSlice = apiSlice.injectEndpoints({
     }),
     editPhrasePair: builder.mutation<
       void,
-      { lessonId: string; pairId: number; data: PhrasePair }
+      {
+        lessonId: string;
+        pairId: number;
+        data: PhrasePair;
+        sectionId?: number | null;
+      }
     >({
       query: ({ lessonId, pairId, data }) => ({
         url: `flashcards/${lessonId}/pairs/${pairId}/`,
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (_result, _error, { lessonId }) => [
-        { type: "Lessons", id: lessonId },
-        "Lessons",
+      invalidatesTags: (_result, _error, { lessonId, sectionId }) => [
+        { type: "Lessons" as const, id: lessonId },
+        "Lessons" as const,
+        ...(sectionId != null
+          ? [{ type: "Sections" as const, id: sectionId }]
+          : []),
       ],
     }),
     resetLessonProgress: builder.mutation<void, string>({
