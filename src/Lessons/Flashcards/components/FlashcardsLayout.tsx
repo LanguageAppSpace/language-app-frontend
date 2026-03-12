@@ -2,6 +2,7 @@ import { Box, Typography, styled } from "@mui/material";
 import Flashcard from "@/Lessons/Flashcards/components/Flashcard";
 import FlashcardSlider from "@/Lessons/Flashcards/components/FlashcardSlider";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
+import FlashcardsReviewSummary from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReviewSummary";
 import React from "react";
 
 interface FlashcardsLayout {
@@ -19,8 +20,17 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
     isSliding,
     slideDirection,
     handleTransitionEnd,
+    isReviewFinished
   } = useFlashcardsContext();
 
+  if(isReviewFinished){
+    return(
+    <FlashcardPageWrapper>
+      <FlashcardsReviewSummary />
+    </FlashcardPageWrapper>
+    );
+  }
+  
   const currentPhrase = phrases[currentIndex];
 
   return (
@@ -30,7 +40,7 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
           {lesson.title}
         </Typography>
         <Typography color="primary">
-          {currentIndex + 1}/{phrases.length} phrases
+          Card {currentIndex + 1} of {phrases.length}
         </Typography>
 
         <FlashcardSlider

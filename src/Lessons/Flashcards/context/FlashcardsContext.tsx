@@ -18,6 +18,15 @@ interface FlashcardsContextType {
     currentIndex: number,
     setCurrentIndex: (index: number) => void
   ) => void;
+  isReviewFinished: boolean;
+  finishReview: () => void;
+  correctCount: number;
+  wrongCount: number;
+  markCorrect: () => void;
+  markWrong: () => void;
+  resetReview: () => void;
+  wrongPhrases: PhrasePair[];
+  keepReviewingWrongPhrases: () => void;
 }
 
 const FlashcardsContext = createContext<FlashcardsContextType | null>(null);
