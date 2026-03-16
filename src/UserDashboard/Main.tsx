@@ -5,9 +5,37 @@ import Sections from "@/UserDashboard/Sections/Sections";
 import { styled } from "@mui/system";
 import heroImg from "@/assets/images/dashboard-hero-image.png";
 import { Trans, useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
+
 const Main = () => {
   const username = useSelector(selectUsername);
   const { t } = useTranslation("dashboard");
+  const [streak, setStreak] = useState<number>(0);
+
+  useEffect(() => {
+    const today = new Date();
+    const lastActiveRaw = localStorage.getItem("lastActiveDate");
+    const lastActive = new Date(lastActiveRaw ?? today);
+    const savedStreak = Number(localStorage.getItem("streak") ?? 0);
+
+    const diffDays = Math.floor(
+      (today.setHours(0, 0, 0, 0) - lastActive.setHours(0, 0, 0, 0)) /
+        (1000 * 60 * 60 * 24)
+    );
+
+    let newStreak;
+    if (diffDays === 0) {
+      newStreak = savedStreak;
+    } else if (diffDays === 1) {
+      newStreak = savedStreak + 1;
+    } else {
+      newStreak = 1;
+    }
+
+    setStreak(newStreak);
+    localStorage.setItem("streak", String(newStreak));
+    localStorage.setItem("lastActiveDate", today.toISOString());
+  }, []);
 
   return (
     <Grid container spacing={3}>
@@ -25,7 +53,7 @@ const Main = () => {
             <Trans
               t={t}
               i18nKey="hero.streak"
-              values={{ count: 9 }}
+              values={{ count: streak }}
               components={{ strong: <strong /> }}
             />
           </Typography>
