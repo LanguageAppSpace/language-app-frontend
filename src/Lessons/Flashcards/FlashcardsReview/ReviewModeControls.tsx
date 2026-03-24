@@ -8,14 +8,17 @@ import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsCo
 
 const ReviewModeControls = () => {
   const {
-    handleNext,
     isSliding,
     currentIndex,
     phrases,
     lesson,
     markCorrect,
     markWrong,
+    setReviewFeedback,
+    setCurrentIndex,
+    calcNextIndex,
   } = useFlashcardsContext();
+
   const [editPhrasePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
 
@@ -32,12 +35,16 @@ const ReviewModeControls = () => {
       markWrong();
     }
     
+    setReviewFeedback(learned ? "correct" : "incorrect");
+    setCurrentIndex(calcNextIndex(currentIndex, "next"));
+
     if (isStatusChanged) {
       try {
         await editPhrasePair({
           lessonId: lesson.id,
           pairId: pair.id!,
           data: { ...pair, isLearned: learned },
+          sectionId: lesson.section,
         });
       } catch (err) {
         dispatch(
@@ -49,8 +56,6 @@ const ReviewModeControls = () => {
         console.error(err);
       }
     }
-
-    handleNext();
   };
 
   return (

@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Typography, CircularProgress } from "@mui/material";
 import useFlashcards from "@/Lessons/Flashcards/hooks/useFlashcards";
 import useFlashcardSlider from "@/Lessons/Flashcards/hooks/useFlashcardSlider";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FlashcardsContext from "@/Lessons/Flashcards/context/FlashcardsContext";
 import { FlashcardPageWrapper } from "@/Lessons/Flashcards/components/FlashcardsLayout";
 import { PhrasePair } from "@/interface";
@@ -12,6 +12,8 @@ export const FlashcardsProvider = ({
   children: React.ReactNode;
 }) => {
   const { lessonId } = useParams<{ lessonId: string }>();
+  const location = useLocation();
+
   const {
     lesson,
     isLoading,
@@ -69,7 +71,19 @@ export const FlashcardsProvider = ({
     isSliding,
     slideDirection,
     handleTransitionEnd,
-  } = useFlashcardSlider(activePhrases.length, finishReview);
+    reviewFeedback,
+    setReviewFeedback,
+    calcNextIndex,
+    mode,
+    setMode,
+  } = useFlashcardSlider(activePhrases.length);
+
+  useEffect(() => {
+    const currentMode = location.pathname.endsWith("/review")
+      ? "review"
+      : "browse";
+    setMode(currentMode);
+  }, [location.pathname, setMode]);
 
   if (isLoading)
     return (
@@ -97,6 +111,16 @@ export const FlashcardsProvider = ({
     setIsSliding(true);
   };
 
+    //useEffect(() => {
+    //if (
+    //  mode === "review" &&
+    //  currentIndex === activePhrases.length - 1 &&
+    //  reviewFeedback
+    //) {
+    //  finishReview();
+    //}
+ // }, [currentIndex, activePhrases.length, reviewFeedback, mode]);
+
   return (
     <FlashcardsContext.Provider
       value={{
@@ -120,6 +144,10 @@ export const FlashcardsProvider = ({
         resetReview,
         wrongPhrases,
         keepReviewingWrongPhrases,
+        reviewFeedback,
+        setReviewFeedback,
+        calcNextIndex,
+        mode,
       }}
     >
       {children}

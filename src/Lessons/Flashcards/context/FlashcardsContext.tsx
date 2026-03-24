@@ -2,6 +2,8 @@ import { Lesson, PhrasePair } from "@/interface";
 import { createContext } from "react";
 
 export type SlideDirection = "next" | "prev" | null;
+export type ReviewFeedback = "correct" | "incorrect" | null;
+export type FlashcardsMode = "browse" | "review";
 
 interface FlashcardsContextType {
   lesson: Lesson;
@@ -27,6 +29,10 @@ interface FlashcardsContextType {
   resetReview: () => void;
   wrongPhrases: PhrasePair[];
   keepReviewingWrongPhrases: () => void;
+  reviewFeedback: ReviewFeedback;
+  setReviewFeedback: (feedback: ReviewFeedback) => void;
+  calcNextIndex: (currentIndex: number, dir: SlideDirection) => number;
+  mode: FlashcardsMode;
 }
 
 const FlashcardsContext = createContext<FlashcardsContextType | null>(null);
