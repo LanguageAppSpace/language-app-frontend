@@ -16,6 +16,7 @@ export enum ROUTE {
   SUPPORT = "/support",
   FLASHCARDS_BROWSE = "/flashcards/:lessonId/browse",
   FLASHCARDS_REVIEW = "/flashcards/:lessonId/review",
+  FLASHCARDS_QUIZ = "/flashcards/:lessonId/quiz",
   ABOUT_US = "/about-us",
   CONTACT = "/contact",
   SECTION = "/section/:sectionId",
