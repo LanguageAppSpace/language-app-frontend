@@ -8,7 +8,6 @@ import { showNotification } from "@/redux/notification/notificationSlice.ts";
 const useQuiz = (lesson?: Lesson) => {
   const [correctCount, setCorrectCount] = useState(0);
   const [wrongCount, setWrongCount] = useState(0);
-  const [wrongQuestions, setWrongQuestions] = useState<QuizQuestion[]>([]);
   const [questions, setQuestions] = useState<QuizQuestion[]>(() =>
     buildQuizQuestions(lesson?.phrasePairs ?? [])
   );
@@ -34,7 +33,6 @@ const useQuiz = (lesson?: Lesson) => {
       setCorrectCount((c) => c + 1);
     } else {
       setWrongCount((c) => c + 1);
-      setWrongQuestions((prev) => [...prev, currentQuestion]);
     }
 
     const shouldUpdateProgress =
@@ -76,21 +74,8 @@ const useQuiz = (lesson?: Lesson) => {
     setSelectedAnswer(null);
     setCorrectCount(0);
     setWrongCount(0);
-    setWrongQuestions([]);
   };
 
-  const restartWrongQuestions = () => {
-    if (!wrongQuestions.length) return;
-
-    const wrongPairs = wrongQuestions.map((q) => q.originalPair);
-
-    setQuestions(buildQuizQuestions(wrongPairs));
-    setCurrentIndex(0);
-    setSelectedAnswer(null);
-    setCorrectCount(0);
-    setWrongCount(0);
-    setWrongQuestions([]);
-  };
   return {
     quizQuestions,
     currentQuestion,
@@ -103,7 +88,6 @@ const useQuiz = (lesson?: Lesson) => {
     correctCount,
     wrongCount,
     restartQuiz,
-    restartWrongQuestions,
   };
 };
 
