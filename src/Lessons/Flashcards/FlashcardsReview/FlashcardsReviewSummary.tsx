@@ -14,7 +14,7 @@ const FlashcardsReviewSummary = () => {
   return (
     <SummaryCard>
       <Typography variant="h4" textAlign="center">
-        Brilliant work!
+        Review finished!
       </Typography>
 
       <Typography

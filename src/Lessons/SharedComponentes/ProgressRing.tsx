@@ -58,7 +58,7 @@ const RingWrapper = styled(Box)({
 });
 
 const RedRing = styled(CircularProgress)(() => ({
-  color: "#DC2626",
+  color: "#EF4444",
   width: 140,
   height: 140,
   "& .MuiCircularProgress-circle": {
