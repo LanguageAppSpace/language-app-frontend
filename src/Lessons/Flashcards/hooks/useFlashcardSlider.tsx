@@ -5,16 +5,11 @@ import {
   FlashcardsMode,
 } from "@/Lessons/Flashcards/context/FlashcardsContext";
 
-const useFlashcardSlider = (
-  phrasesLength: number,
-  onLastCard?: () => void
-) => {
+const useFlashcardSlider = (phrasesLength: number, onLastCard?: () => void) => {
   const [mode, setMode] = useState<FlashcardsMode>("browse");
   const [isSliding, setIsSliding] = useState(false);
-  const [slideDirection, setSlideDirection] =
-    useState<SlideDirection>(null);
-  const [reviewFeedback, setReviewFeedback] =
-    useState<ReviewFeedback>(null);
+  const [slideDirection, setSlideDirection] = useState<SlideDirection>(null);
+  const [reviewFeedback, setReviewFeedback] = useState<ReviewFeedback>(null);
 
   const calcNextIndex = (currentIndex: number, dir: SlideDirection) => {
     if (!phrasesLength) return currentIndex;
@@ -27,7 +22,6 @@ const useFlashcardSlider = (
     currentIndex: number,
     setCurrentIndex: (i: number) => void
   ) => {
-
     if (!isSliding || !phrasesLength) return;
 
     if (mode === "review") {
