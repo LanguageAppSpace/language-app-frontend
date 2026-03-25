@@ -28,17 +28,17 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
     setReviewFeedback,
   } = useFlashcardsContext();
 
-  if(isReviewFinished){
-    return(
-    <FlashcardPageWrapper>
-      <FlashcardsReviewSummary />
-    </FlashcardPageWrapper>
+  if (isReviewFinished) {
+    return (
+      <FlashcardPageWrapper>
+        <FlashcardsReviewSummary />
+      </FlashcardPageWrapper>
     );
   }
-  
+
   const currentPhrase = phrases[currentIndex];
 
-   return (
+  return (
     <FlashcardPageWrapper>
       <FlashcardContainer>
         <Typography variant="h4" color="primary">
@@ -70,15 +70,13 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
               }
             />
           </FlashcardSlider>
-          
+
           {reviewFeedback && (
             <FlashcardOverlayCard
               reviewFeedback={reviewFeedback}
               onAnimationEnd={() => setReviewFeedback(null)}
             >
-              {reviewFeedback === "correct"
-                ? "I know"
-                : "Still learning"}
+              {reviewFeedback === "correct" ? "I know" : "Still learning"}
             </FlashcardOverlayCard>
           )}
         </FlashcardStage>

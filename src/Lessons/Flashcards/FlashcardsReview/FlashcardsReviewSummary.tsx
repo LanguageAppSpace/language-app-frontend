@@ -1,15 +1,13 @@
-import { Box, Typography, Button, styled } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
-import ReviewProgressRing from "./FlashcardsProgressRing";
+import ProgressRing from "../../SharedComponentes/ProgressRing";
 import { useNavigate } from "react-router-dom";
+import SummaryCard from "@/Lessons/SharedComponentes/SummaryCard";
+import ButtonsContainer from "@/Lessons/SharedComponentes/ButtonsContainer";
 
 const FlashcardsReviewSummary = () => {
-  const {
-    correctCount,
-    wrongCount,
-    resetReview,
-    keepReviewingWrongPhrases,
-  } = useFlashcardsContext();
+  const { correctCount, wrongCount, resetReview, keepReviewingWrongPhrases } =
+    useFlashcardsContext();
 
   const navigate = useNavigate();
 
@@ -19,17 +17,18 @@ const FlashcardsReviewSummary = () => {
         Brilliant work!
       </Typography>
 
-      <Typography color="text.secondary" textAlign="center">
-        All flashcards have been reviewed
+      <Typography
+        color="text.secondary"
+        textAlign="center"
+        sx={{ lineHeight: 1.6 }}
+      >
+        All flashcards have been reviewed, <br />
+        here's how you did:
       </Typography>
 
-      <ReviewProgressRing
-        correct={correctCount}
-        wrong={wrongCount}
-      />
+      <ProgressRing correct={correctCount} wrong={wrongCount} />
 
       <ButtonsContainer>
-
         <Button
           variant="contained"
           size="large"
@@ -46,7 +45,7 @@ const FlashcardsReviewSummary = () => {
             fullWidth
             onClick={keepReviewingWrongPhrases}
           >
-            Keep reviewing {wrongCount} terms
+            Keep reviewing {wrongCount} {wrongCount === 1 ? "term" : "terms"}
           </Button>
         )}
 
@@ -58,30 +57,9 @@ const FlashcardsReviewSummary = () => {
         >
           Back to section
         </Button>
-
       </ButtonsContainer>
     </SummaryCard>
   );
 };
 
 export default FlashcardsReviewSummary;
-
-const SummaryCard = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  gap: theme.spacing(3),
-  padding: theme.spacing(5),
-  borderRadius: theme.spacing(3),
-  background: theme.palette.background.paper,
-  boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-  maxWidth: 420,
-  width: "100%",
-}));
-
-const ButtonsContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(2),
-  width: "100%",
-}));

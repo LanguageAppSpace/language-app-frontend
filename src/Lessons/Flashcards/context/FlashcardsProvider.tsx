@@ -50,6 +50,7 @@ export const FlashcardsProvider = ({
     setCorrectCount(0);
     setWrongCount(0);
     setIsReviewFinished(false);
+    setReviewFeedback(null);
   };
 
   const resetReview = () => {
@@ -59,6 +60,7 @@ export const FlashcardsProvider = ({
     setCorrectCount(0);
     setWrongCount(0);
     setIsReviewFinished(false);
+    setReviewFeedback(null);
   };
 
   const finishReview = () => {
@@ -110,16 +112,6 @@ export const FlashcardsProvider = ({
     setSlideDirection("prev");
     setIsSliding(true);
   };
-
-    //useEffect(() => {
-    //if (
-    //  mode === "review" &&
-    //  currentIndex === activePhrases.length - 1 &&
-    //  reviewFeedback
-    //) {
-    //  finishReview();
-    //}
- // }, [currentIndex, activePhrases.length, reviewFeedback, mode]);
 
   return (
     <FlashcardsContext.Provider
