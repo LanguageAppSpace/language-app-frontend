@@ -7,6 +7,7 @@ import folderImg from "@/assets/images/folder.png";
 import { Link, useNavigate, generatePath } from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { ROUTE } from "@/config/route.config";
+import { useTranslation } from "react-i18next";
 
 interface SectionCard {
   section: Section;
@@ -17,6 +18,7 @@ interface SectionCard {
 const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
   const { title, description, lessons } = section;
   const navigate = useNavigate();
+  const { t } = useTranslation("lessons");
 
   return (
     <SectionCardWrapper
@@ -59,7 +61,7 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
       <Divider />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="body1" color="primary">
-          {lessons.length} {lessons.length > 1 ? "lessons" : "lesson"}
+          {t("counts.lesson", { count: lessons.length })}
         </Typography>
         <Link
           to={generatePath(ROUTE.CREATE_LESSON_IN_SECTION, {
@@ -72,7 +74,7 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
             startIcon={<AddCircleIcon />}
             size="small"
           >
-            Add Lesson
+            {t("actions.add")}
           </Button>
         </Link>
       </Box>

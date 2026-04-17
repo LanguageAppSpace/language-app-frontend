@@ -14,33 +14,37 @@ import {
   AuthFormTitle,
 } from "@/components/AuthForm/AuthForm";
 import { useResetPasswordMutation } from "@/redux/auth/authApiSlice";
+import { useTranslation } from "react-i18next";
 
 interface FormData {
   email: string;
 }
 
-const schema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-});
-
 const ForgotPassword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [forgotPassword, { isLoading }] = useResetPasswordMutation();
+  const { t } = useTranslation("auth");
+
+  const schema = Yup.object().shape({
+    email: Yup.string()
+      .email(t("forgotPassword.validation.emailInvalid"))
+      .required(t("forgotPassword.validation.emailRequired")),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [forgotPassword, { isLoading }] = useResetPasswordMutation();
-
   const onSubmit = async ({ email }: FormData) => {
     try {
       await forgotPassword(email).unwrap();
       dispatch(
         showNotification({
-          message: "If this email is registered, a reset link has been sent.",
+          message: t("forgotPassword.notifications.success"),
           severity: "success",
         })
       );
@@ -48,7 +52,7 @@ const ForgotPassword = () => {
     } catch {
       dispatch(
         showNotification({
-          message: "Something went wrong. Please try again.",
+          message: t("forgotPassword.notifications.error"),
           severity: "error",
         })
       );
@@ -58,11 +62,13 @@ const ForgotPassword = () => {
   return (
     <AuthFormContainer>
       <AuthForm onSubmit={handleSubmit(onSubmit)}>
-        <AuthFormTitle align="center">Reset your password</AuthFormTitle>
+        <AuthFormTitle align="center">
+          {t("forgotPassword.title")}
+        </AuthFormTitle>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"username"}>
-              <Typography>Email address</Typography>
+              <Typography>{t("forgotPassword.fields.email")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -79,7 +85,9 @@ const ForgotPassword = () => {
               fullWidth
               disabled={isLoading}
             >
-              {isLoading ? "Sending..." : "Send reset link"}
+              {isLoading
+                ? t("forgotPassword.buttons.submitting")
+                : t("forgotPassword.buttons.submit")}
             </FormButton>
           </Grid>
         </Grid>

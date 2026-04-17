@@ -12,37 +12,47 @@ import { styled } from "@mui/material/styles";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useTranslation } from "react-i18next";
 
 export default function Contact() {
+  const { t } = useTranslation("contact");
+
   return (
     <Section>
       <Container maxWidth="lg">
         <Grid container spacing={6}>
           <Grid item xs={12} md={6}>
             <Typography variant="h3" fontWeight={800} gutterBottom>
-              Contact us
+              {t("title")}
             </Typography>
             <Typography variant="body1" color="text.secondary" paragraph>
-              Have a question, suggestion, or just want to say hi? Fill out the
-              form or reach out to us directly.
+              {t("text")}
             </Typography>
 
             <Stack spacing={2} mt={3}>
               <ContactRow>
-                <EmailIcon color="secondary" /> contact@languageapp.com
+                <EmailIcon color="secondary" />
+                {t("email")}
               </ContactRow>
               <ContactRow>
-                <PhoneIcon color="secondary" /> +48 123 456 789
+                <PhoneIcon color="secondary" />
+                {t("phone")}
               </ContactRow>
               <ContactRow>
-                <LocationOnIcon color="secondary" /> Warsaw, Poland
+                <LocationOnIcon color="secondary" />
+                {t("address")}
               </ContactRow>
             </Stack>
           </Grid>
           <Grid item xs={12} md={6}>
             <Card sx={{ p: 4, borderRadius: 3 }}>
-              <Typography variant="h5" fontWeight={700} gutterBottom>
-                Send us a message
+              <Typography
+                variant="h5"
+                fontWeight={700}
+                gutterBottom
+                color="text.secondary"
+              >
+                {t("formText")}
               </Typography>
               <Stack spacing={2} mt={2}>
                 <TextField label="Name" fullWidth required />
@@ -55,7 +65,7 @@ export default function Contact() {
                   required
                 />
                 <Button variant="contained" color="secondary">
-                  Send
+                  {t("buttonText")}
                 </Button>
               </Stack>
             </Card>

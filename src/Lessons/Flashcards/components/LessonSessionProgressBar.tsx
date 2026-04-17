@@ -1,4 +1,5 @@
 import { Box, LinearProgress, Typography, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface LessonSessionProgressProps {
   activeIndex: number;
@@ -9,6 +10,7 @@ export const LessonSessionProgressBar = ({
   activeIndex,
   totalPhrases,
 }: LessonSessionProgressProps) => {
+  const { t } = useTranslation("flashcards");
   const total = Math.max(totalPhrases, 1);
   const current = Math.min(activeIndex + 1, total);
   const progressValue = (current / total) * 100;
@@ -16,7 +18,7 @@ export const LessonSessionProgressBar = ({
   return (
     <Box sx={{ width: "100%", mb: 2 }}>
       <ProgressBarCounter variant="body2">
-        {current} / {total} phrases
+        {t("progress.counter", { current, total })}
       </ProgressBarCounter>
       <LinearProgressBar variant="determinate" value={progressValue} />
     </Box>

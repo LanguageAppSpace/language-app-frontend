@@ -7,8 +7,10 @@ import {
   FlashcardPageWrapper,
 } from "@/Lessons/Flashcards/components/FlashcardsLayout";
 import useQuiz from "@/Lessons/Quiz/hooks/useQuiz";
+import { useTranslation } from "react-i18next";
 
 const QuizSession = ({ lesson }: { lesson: Lesson }) => {
+  const { t } = useTranslation("flashcards");
   const {
     quizQuestions,
     currentQuestion,
@@ -23,7 +25,7 @@ const QuizSession = ({ lesson }: { lesson: Lesson }) => {
   if (isFinished) {
     return (
       <FlashcardPageWrapper>
-        <Typography color="primary">You have completed this lesson.</Typography>
+        <Typography color="primary">{t("states.completedLesson")}</Typography>
       </FlashcardPageWrapper>
     );
   }

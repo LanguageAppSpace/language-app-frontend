@@ -5,35 +5,51 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { styled } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation("landing");
+
   return (
     <StyledFooterContainer>
       <Container maxWidth="xl">
         <Grid container spacing={4} justifyContent="space-between">
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <StyledColumnHeader variant="h6">a'la Duolingo</StyledColumnHeader>
-            <StyledText variant="body2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              nisl eros, pulvinar facilisis justo mollis, auctor consequat urna.
-            </StyledText>
+            <StyledColumnHeader variant="h6">
+              {t("footer.brand")}
+            </StyledColumnHeader>
+            <StyledText variant="body2">{t("footer.description")}</StyledText>
           </Grid>
           <Grid item xs={12} sm={6} md={2} lg={2}>
-            <StyledColumnHeader variant="h6">Quick links</StyledColumnHeader>
+            <StyledColumnHeader variant="h6">
+              {t("footer.quickLinks.title")}
+            </StyledColumnHeader>
             <StyledColumn>
-              <StyledLink href="/about-us">About us</StyledLink>
-              <StyledLink href="/contact">Contact</StyledLink>
+              <StyledLink href="/about-us">
+                {t("footer.quickLinks.about")}
+              </StyledLink>
+              <StyledLink href="/contact">
+                {t("footer.quickLinks.contact")}
+              </StyledLink>
             </StyledColumn>
           </Grid>
           <Grid item xs={12} sm={6} md={2} lg={2}>
-            <StyledColumnHeader variant="h6">Resources</StyledColumnHeader>
+            <StyledColumnHeader variant="h6">
+              {t("footer.resources.title")}
+            </StyledColumnHeader>
             <StyledColumn>
-              <StyledLink href="/support">Support</StyledLink>
-              <StyledLink href="/privacy-policy">Privacy policy</StyledLink>
+              <StyledLink href="/support">
+                {t("footer.resources.support")}
+              </StyledLink>
+              <StyledLink href="/privacy-policy">
+                {t("footer.resources.privacy")}
+              </StyledLink>
             </StyledColumn>
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <StyledColumnHeader variant="h6">Social Media</StyledColumnHeader>
+            <StyledColumnHeader variant="h6">
+              {t("footer.social.title")}
+            </StyledColumnHeader>
             <StyledIconsContainer>
               <StyledLink href="https://facebook.com">
                 <FacebookIcon />

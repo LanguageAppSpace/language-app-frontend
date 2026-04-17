@@ -8,21 +8,28 @@ import { selectCurrentUserId } from "@/redux/auth/authSlice.ts";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import { Grid, Typography, Button } from "@mui/material";
 import { FormRow, FormInputLabel, FormInput } from "@/components/Form/Form.tsx";
-
-const passwordSchema = Yup.object().shape({
-  oldPassword: Yup.string().required("Old password is required"),
-  newPassword: Yup.string()
-    .min(6, "New password should have at least 6 characters")
-    .required("New password is required"),
-  newPasswordConfirm: Yup.string()
-    .oneOf([Yup.ref("newPassword")], "Passwords do not match")
-    .required("Confirm new password is required"),
-});
+import { useTranslation } from "react-i18next";
 
 const ChangePasswordForm = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentUserId);
   const [changePassword] = useChangePasswordMutation();
+  const { t } = useTranslation("profile");
+
+  const passwordSchema = Yup.object().shape({
+    oldPassword: Yup.string().required(
+      t("changePassword.validation.oldPasswordRequired")
+    ),
+    newPassword: Yup.string()
+      .min(6, t("changePassword.validation.newPasswordMin"))
+      .required(t("changePassword.validation.newPasswordRequired")),
+    newPasswordConfirm: Yup.string()
+      .oneOf(
+        [Yup.ref("newPassword")],
+        t("changePassword.validation.newPasswordConfirmMatch")
+      )
+      .required(t("changePassword.validation.newPasswordConfirmRequired")),
+  });
 
   const {
     register: registerPassword,
@@ -36,7 +43,7 @@ const ChangePasswordForm = () => {
       await changePassword({ userId, data });
       dispatch(
         showNotification({
-          message: "Password changed successfully",
+          message: t("changePassword.notifications.success"),
           severity: "success",
         })
       );
@@ -44,7 +51,7 @@ const ChangePasswordForm = () => {
     } catch (error) {
       dispatch(
         showNotification({
-          message: "Failed to change password",
+          message: t("changePassword.notifications.error"),
           severity: "error",
         })
       );
@@ -53,12 +60,12 @@ const ChangePasswordForm = () => {
 
   return (
     <form onSubmit={handleSubmitPassword(handlePasswordSubmit)}>
-      <Typography variant="h6">Change Password</Typography>
+      <Typography variant="h6">{t("changePassword.title")}</Typography>
       <Grid container direction="column">
         <FormRow>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"oldPassword"}>
-              <Typography>Old Password</Typography>
+              <Typography>{t("changePassword.fields.oldPassword")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -72,7 +79,7 @@ const ChangePasswordForm = () => {
         <FormRow>
           <Grid item xs={6}>
             <FormInputLabel shrink={false} htmlFor={"newPassword"}>
-              <Typography>New Password</Typography>
+              <Typography>{t("changePassword.fields.newPassword")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -84,7 +91,9 @@ const ChangePasswordForm = () => {
           </Grid>
           <Grid item xs={6}>
             <FormInputLabel shrink={false} htmlFor={"newPasswordConfirm"}>
-              <Typography>Confirm New Password</Typography>
+              <Typography>
+                {t("changePassword.fields.newPasswordConfirm")}
+              </Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -96,7 +105,7 @@ const ChangePasswordForm = () => {
           </Grid>
         </FormRow>
         <Button type="submit" variant="contained" color="primary">
-          Change Password
+          {t("changePassword.button")}
         </Button>
       </Grid>
     </form>

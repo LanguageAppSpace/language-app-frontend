@@ -10,9 +10,11 @@ import Hamburger from "@/components/Buttons/Hamburger";
 import { selectIsAuthenticated } from "@/redux/auth/authSlice";
 import { useSelector } from "react-redux";
 import { AccountCircle } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const { t } = useTranslation("common");
 
   const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ const Navigation = () => {
               color="primary"
               onClick={handleLoginClick}
             >
-              LOG IN
+              {t("actions.logIn")}
             </LogInButton>
           )}
         </Toolbar>
@@ -50,6 +52,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 const LogInButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.button.main,
   borderRadius: "16px",
+  textTransform: "uppercase",
   "&:hover": {
     backgroundColor: theme.palette.button.loginHover,
   },

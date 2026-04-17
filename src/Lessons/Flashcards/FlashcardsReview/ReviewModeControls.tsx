@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import theme from "@/theme/theme";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
+import { useTranslation } from "react-i18next";
 const ReviewModeControls = () => {
   const {
     isSliding,
@@ -18,6 +19,7 @@ const ReviewModeControls = () => {
   } = useFlashcardsContext();
   const [editPhrasePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
+  const { t } = useTranslation("flashcards");
 
   const handleEditFlashcard = async (learned: boolean) => {
     if (isSliding) return;
@@ -39,7 +41,7 @@ const ReviewModeControls = () => {
       } catch (err) {
         dispatch(
           showNotification({
-            message: "Failed to update flashcard",
+            message: t("notifications.updateFailed"),
             severity: "error",
           })
         );

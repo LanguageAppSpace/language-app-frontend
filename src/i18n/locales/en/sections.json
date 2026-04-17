@@ -1,0 +1,44 @@
+{
+  "actions": {
+    "createSection": "Create section",
+    "createLesson": "Create lesson",
+    "addLesson": "Add Lesson",
+    "save": "Save",
+    "edit": "Edit section"
+  },
+  "form": {
+    "title": {
+      "create": "Create new section",
+      "edit": "Edit section"
+    },
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "color": "Choose section color:"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "colorRequired": "Color is required"
+    }
+  },
+  "notifications": {
+    "created": "Section created successfully",
+    "updated": "Section updated successfully",
+    "deleted": "Section deleted",
+    "createFailed": "Failed to create section",
+    "updateFailed": "Failed to update section",
+    "deleteFailed": "Failed to delete"
+  },
+  "emptyState": {
+    "title": "You don't have any sections yet",
+    "description": "Create your first section to start organizing your lessons.",
+    "button": "Create new section",
+    "imageAlt": "section empty state"
+  },
+  "details": {
+    "notFound": "Section not found."
+  },
+  "deleteConfirmation": {
+    "message": "Are you sure you want to delete the section <strong>{{name}}</strong>?<br />This cannot be undone."
+  }
+}

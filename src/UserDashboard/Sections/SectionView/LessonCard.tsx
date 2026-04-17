@@ -13,6 +13,7 @@ import { Delete } from "@mui/icons-material";
 import { useNavigate, generatePath } from "react-router-dom";
 import { Lesson } from "@/interface";
 import { styled } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 interface LessonCardProps {
   lesson: Lesson;
@@ -28,7 +29,7 @@ const LessonCard: React.FC<LessonCardProps> = ({
   onDeleteClick,
 }) => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation("lessons");
   const phrasesCount = lesson.phrasePairs.length;
   const progressValue = lesson.progress ?? 0;
 
@@ -44,7 +45,7 @@ const LessonCard: React.FC<LessonCardProps> = ({
           </Typography>
         </LessonTitle>
         <StyledChip
-          label={`${phrasesCount} ${phrasesCount === 1 ? "phrase" : "phrases"}`}
+          label={t("counts.phrase", { count: phrasesCount })}
           color="default"
           size="small"
           variant="outlined"

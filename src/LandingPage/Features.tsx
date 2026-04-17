@@ -2,58 +2,46 @@ import { Grid, Typography, Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, Container } from "@mui/system";
 import { styled } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
+
+interface FeatureItemTranslation {
+  iconAlt: string;
+  title: string;
+  description: string;
+}
+
+const featureIcons = [
+  { icon: "/human.svg" },
+  { icon: "/remote.svg" },
+  { icon: "/padlock.svg" },
+  { icon: "/certificate.svg" },
+];
 
 const Features = () => {
+  const { t } = useTranslation("landing");
+
+  const items = t("features.items", {
+    returnObjects: true,
+  }) as FeatureItemTranslation[];
+
   return (
     <FeaturesContainer>
       <Container maxWidth="xl">
-        <FeaturesHeader>Best learning experience</FeaturesHeader>
+        <FeaturesHeader>{t("features.title")}</FeaturesHeader>
         <Grid container spacing={6}>
-          <FeatureItem item xs={6} sm={3}>
-            <FeatureIcon src="/human.svg" alt="Human Icon" />
-            <FeatureHeader variant="h6">Free. Fun. Effective.</FeatureHeader>
-            <BodyText>
-              Enjoy learning at no cost with our engaging and proven methods.
-              Discover a fun way to enhance your language skills effectively!
-            </BodyText>
-            <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
-              Learn more
-            </LearnMoreButton>
-          </FeatureItem>
-          <FeatureItem item xs={6} sm={3}>
-            <FeatureIcon src="/remote.svg" alt="Remote Icon" />
-            <FeatureHeader variant="h6">Interactive learning</FeatureHeader>
-            <BodyText>
-              Dive into interactive lessons designed to keep you engaged and
-              motivated. Practice in real-time and get immediate feedback to
-              improve faster.
-            </BodyText>
-            <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
-              Learn more
-            </LearnMoreButton>
-          </FeatureItem>
-          <FeatureItem item xs={6} sm={3}>
-            <FeatureIcon src="/padlock.svg" alt="Padlock Icon" />
-            <FeatureHeader variant="h6">Learn anytime, anywhere</FeatureHeader>
-            <BodyText>
-              Access your courses anytime, anywhere. Whether you're on the go or
-              at home, your learning experience is always within reach.
-            </BodyText>
-            <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
-              Learn more
-            </LearnMoreButton>
-          </FeatureItem>
-          <FeatureItem item xs={6} sm={3}>
-            <FeatureIcon src="/certificate.svg" alt="Certificate Icon" />
-            <FeatureHeader variant="h6">Personalized learning</FeatureHeader>
-            <BodyText>
-              Tailor your learning journey to fit your needs. Our app adapts to
-              your level and pace, ensuring you achieve your language goals.
-            </BodyText>
-            <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
-              Learn more
-            </LearnMoreButton>
-          </FeatureItem>
+          {items.map((feature, index) => (
+            <FeatureItem item xs={6} sm={3} key={feature.title}>
+              <FeatureIcon
+                src={featureIcons[index]?.icon}
+                alt={feature.iconAlt}
+              />
+              <FeatureHeader variant="h6">{feature.title}</FeatureHeader>
+              <BodyText>{feature.description}</BodyText>
+              <LearnMoreButton variant="text" endIcon={<ArrowForwardIcon />}>
+                {t("features.learnMore")}
+              </LearnMoreButton>
+            </FeatureItem>
+          ))}
         </Grid>
       </Container>
     </FeaturesContainer>

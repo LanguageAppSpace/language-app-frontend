@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -21,11 +22,12 @@ const DeleteConfirmationModal = ({
   onConfirm,
   message,
 }: Props) => {
+  const { t } = useTranslation("common");
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>
         <Typography color="primary" variant="h6" component="span">
-          Confirm action
+          {t("modal.confirmAction")}
         </Typography>
       </DialogTitle>
       <DialogContent>
@@ -33,10 +35,10 @@ const DeleteConfirmationModal = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onConfirm} color="primary" variant="contained">
-          Delete
+          {t("actions.delete")}
         </Button>
         <Button onClick={onClose} variant="outlined">
-          Cancel
+          {t("actions.cancel")}
         </Button>
       </DialogActions>
     </Dialog>

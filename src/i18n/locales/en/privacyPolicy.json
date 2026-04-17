@@ -1,0 +1,58 @@
+{
+  "title": "Privacy Policy",
+  "sections": [
+    {
+      "title": "1. Information We Collect",
+      "text": "When you use the app, we may collect and store the following information:",
+      "list": [
+        {
+          "label": "Account Information",
+          "text": "such as your email address, username, and password."
+        },
+        {
+          "label": "User-generated Content",
+          "text": "including flashcards, lessons, notes, and other materials you create."
+        },
+        {
+          "label": "Usage Data",
+          "text": "such as your app interactions and activity logs."
+        }
+      ]
+    },
+    {
+      "title": "2. How Your Information is Used",
+      "text": "We use your data to:",
+      "list": [
+        { "text": "Enable login and access to your account." },
+        { "text": "Store and display your lessons and flashcards." },
+        { "text": "Improve app functionality and user experience." },
+        { "text": "Respond to support requests." }
+      ],
+      "footer": "We do not sell your personal data to third parties."
+    },
+    {
+      "title": "3. Data Storage and Security",
+      "text": "All user data is stored securely on our backend servers. We use authentication and encryption to protect your data. Only authorized personnel have access to your information, and we take reasonable measures to ensure its safety."
+    },
+    {
+      "title": "4. Your Rights",
+      "text": "You have the right to:",
+      "list": [
+        { "text": "Access the data we store about you." },
+        { "text": "Request corrections to inaccurate data." },
+        { "text": "Request deletion of your account and content." }
+      ],
+      "footer": "To make a request, please contact us at:",
+      "email": "languageApp@gmail.com"
+    },
+    {
+      "title": "5. Changes to This Policy",
+      "text": "We may update this Privacy Policy from time to time. If significant changes are made, we will notify users in the app."
+    },
+    {
+      "title": "Contact Us",
+      "footer": "If you have any questions about this Privacy Policy, please contact us at:",
+      "email": "languageApp@gmail.com"
+    }
+  ]
+}

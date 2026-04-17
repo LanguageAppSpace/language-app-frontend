@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@/config/route.config.ts";
 import { styled } from "@mui/material/styles";
 import { Box, Container } from "@mui/system";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation("landing");
   const handleLoginClick = () => {
     navigate(ROUTE.LEARN_MORE);
   };
@@ -18,15 +19,12 @@ const Hero = () => {
       <Container maxWidth="xl">
         <Grid container justifyContent="space-between">
           <TextContainer>
-            <HeaderTypography variant="h4">
-              Learn a Language, Unlock a World
-            </HeaderTypography>
+            <HeaderTypography variant="h4">{t("hero.title")}</HeaderTypography>
             <BodyTypography variant="body1">
-              Expand your horizons with interactive lessons designed to make
-              language learning easy, effective, and fun.
+              {t("hero.description")}
             </BodyTypography>
             <StyledButton onClick={handleLoginClick}>
-              LEARN MORE
+              {t("hero.buttonText").toUpperCase()}
               <ArrowForwardIcon style={{ marginLeft: "8px" }} />
             </StyledButton>
           </TextContainer>

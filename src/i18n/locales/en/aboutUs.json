@@ -1,0 +1,77 @@
+{
+  "hero": {
+    "chip": "About us",
+    "title": "Built by the <em>Polskie Programistki</em> community",
+    "subtitle": "We're a group of women from the Polskie Programistki Discord server who teamed up to create a friendly, modern platform for learning languages and to show that there's room for everyone in tech.",
+    "joinDiscord": "Join our Discord",
+    "website": "Website",
+    "imageAlt": "Women collaborating"
+  },
+  "mission": {
+    "title": "Our mission",
+    "text": "We combine language education with our love for technology. This is a community-driven project designed to help learners gain confidence in new languages while empowering more women to explore and enter the IT field. By blending real product work with mentorship and peer support, we grow together.",
+    "valuesTitle": "What guides us:"
+  },
+  "values": [
+    {
+      "id": "community",
+      "icon": "community",
+      "title": "Community over ego",
+      "desc": "We build together. We share knowledge, pair-program, and learn by shipping real features."
+    },
+    {
+      "id": "kindness",
+      "icon": "kindness",
+      "title": "Kindness & accessibility",
+      "desc": "Friendly UX and zero gatekeeping - in language learning and in tech. Everyone is welcome."
+    },
+    {
+      "id": "learning",
+      "icon": "learning",
+      "title": "Learning by doing",
+      "desc": "From idea to deployment: code reviews, testing, CI/CD, and continuous improvement."
+    },
+    {
+      "id": "equality",
+      "icon": "equality",
+      "title": "Equality & support",
+      "desc": "We uplift women in tech. Every path and pace is valid, curiosity is celebrated."
+    }
+  ],
+  "team": {
+    "title": "Meet the team",
+    "subtitle": "A handful of us lead the work, and many contributors from the community jump in with code, design, testing, and ideas.",
+    "members": [
+      {
+        "name": "aryla",
+        "role": "Project Manager / QA",
+        "icon": "bug"
+      },
+      {
+        "name": "pescarynka",
+        "role": "Backend Developer",
+        "icon": "storage"
+      },
+      {
+        "name": "magdalena",
+        "role": "Frontend Developer",
+        "icon": "code"
+      },
+      {
+        "name": "ania",
+        "role": "Frontend Developer",
+        "icon": "code"
+      },
+      {
+        "name": "kathy",
+        "role": "Frontend Developer",
+        "icon": "code"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Want to learn, build, or mentor?",
+    "text": "Whether you're new to coding, passionate about languages, or ready to mentor - you're invited. Come shape a helpful, inclusive learning app with us.",
+    "button": "Join our Discord"
+  }
+}

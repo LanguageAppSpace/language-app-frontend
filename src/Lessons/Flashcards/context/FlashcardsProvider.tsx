@@ -5,6 +5,7 @@ import useFlashcardSlider from "@/Lessons/Flashcards/hooks/useFlashcardSlider";
 import React, { useEffect } from "react";
 import FlashcardsContext from "@/Lessons/Flashcards/context/FlashcardsContext";
 import { FlashcardPageWrapper } from "@/Lessons/Flashcards/components/FlashcardsLayout";
+import { useTranslation } from "react-i18next";
 export const FlashcardsProvider = ({
   children,
 }: {
@@ -12,6 +13,7 @@ export const FlashcardsProvider = ({
 }) => {
   const { lessonId } = useParams<{ lessonId: string }>();
   const location = useLocation();
+  const { t } = useTranslation("flashcards");
 
   const {
     lesson,
@@ -53,9 +55,7 @@ export const FlashcardsProvider = ({
   if (!lesson || lesson.phrasePairs.length === 0)
     return (
       <FlashcardPageWrapper>
-        <Typography color="primary">
-          No phrases found in this lesson.
-        </Typography>
+        <Typography color="primary">{t("states.noPhrases")}</Typography>
       </FlashcardPageWrapper>
     );
 

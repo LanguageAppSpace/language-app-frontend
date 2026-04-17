@@ -1,0 +1,23 @@
+{
+  "buttons": {
+    "learnMore": "Learn More"
+  },
+  "modal": {
+    "confirmAction": "Confirm action"
+  },
+  "actions": {
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "logIn": "Log in",
+    "logOut": "Log out",
+    "register": "Register",
+    "save": "Save",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "settings": "Settings"
+  }
+}

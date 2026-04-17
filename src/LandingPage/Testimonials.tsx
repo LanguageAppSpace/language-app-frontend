@@ -1,85 +1,54 @@
 import { Grid, Typography, Container, Box } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { styled } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
+interface TestimonialItem {
+  image: "boy" | "girl" | "girl2";
+  name: string;
+  profession: string;
+  rating: string;
+  text: string;
+}
+const testimonialImages: Record<TestimonialItem["image"], string> = {
+  boy: "boy-testimonial.jpg",
+  girl: "girl-testimonial.jpg",
+  girl2: "girl2-testimonial.jpg",
+};
 
 const Testimonials = () => {
+  const { t } = useTranslation("landing");
+  const testimonials = t("testimonials.items", {
+    returnObjects: true,
+  }) as TestimonialItem[];
+
   return (
     <TestimonialsContainer>
       <Container maxWidth="xl">
-        <TestimonialsHeader variant="h4">What others think:</TestimonialsHeader>
-
+        <TestimonialsHeader variant="h4">
+          {t("testimonials.title")}
+        </TestimonialsHeader>
         <Grid container justifyContent="space-between" spacing={6}>
-          <Grid item xs={12} sm={4}>
-            <TestimonialsItem>
-              <TestimonialsItemHeader>
-                <TestimonialImage
-                  src="boy-testimonial.jpg"
-                  alt="Boy-testimonial-image"
-                />
-                <TestimonialsItemHeaderText>
-                  <UserName>Michael Wong</UserName>
-                  <Profession>Footballer</Profession>
-                  <Rating>
-                    <StarIcon />
-                    <RatingText>4.9</RatingText>
-                  </Rating>
-                </TestimonialsItemHeaderText>
-              </TestimonialsItemHeader>
-              <FooterText variant="body1">
-                Learning a new language has never been easier! The app's
-                interactive lessons fit perfectly into my busy schedule, helping
-                me connect with teammates from around the world.
-              </FooterText>
-            </TestimonialsItem>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <TestimonialsItem>
-              <TestimonialsItemHeader>
-                <TestimonialImage
-                  src="girl-testimonial.jpg"
-                  alt="Girl-testimonial-image"
-                />
-                <TestimonialsItemHeaderText>
-                  <UserName>Avril Song</UserName>
-                  <Profession>Project manager</Profession>
-                  <Rating>
-                    <StarIcon />
-                    <RatingText>4.8</RatingText>
-                  </Rating>
-                </TestimonialsItemHeaderText>
-              </TestimonialsItemHeader>
-              <FooterText variant="body1">
-                The personalized approach to learning is fantastic. I was able
-                to focus on the specific skills I needed for my job, and now I
-                can communicate confidently with international clients.
-              </FooterText>
-            </TestimonialsItem>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <TestimonialsItem>
-              <TestimonialsItemHeader>
-                <TestimonialImage
-                  src="girl2-testimonial.jpg"
-                  alt="Girl2-testimonial-image"
-                />
-                <TestimonialsItemHeaderText>
-                  <UserName>Jeane Wood</UserName>
-                  <Profession>Philosophy student</Profession>
-                  <Rating>
-                    <StarIcon />
-                    <RatingText>5.0</RatingText>
-                  </Rating>
-                </TestimonialsItemHeaderText>
-              </TestimonialsItemHeader>
-              <FooterText variant="body1">
-                This app is a game-changer! The lessons are engaging and really
-                helped me grasp complex language concepts quickly. I’m now
-                exploring philosophical texts in their original language.
-              </FooterText>
-            </TestimonialsItem>
-          </Grid>
+          {testimonials.map((testimonial) => (
+            <Grid item xs={12} sm={4} key={testimonial.name}>
+              <TestimonialsItem>
+                <TestimonialsItemHeader>
+                  <TestimonialImage
+                    src={testimonialImages[testimonial.image]}
+                    alt={testimonial.name}
+                  />
+                  <TestimonialsItemHeaderText>
+                    <UserName>{testimonial.name}</UserName>
+                    <Profession>{testimonial.profession}</Profession>
+                    <Rating>
+                      <StarIcon />
+                      <RatingText>{testimonial.rating}</RatingText>
+                    </Rating>
+                  </TestimonialsItemHeaderText>
+                </TestimonialsItemHeader>
+                <FooterText variant="body1">{testimonial.text}</FooterText>
+              </TestimonialsItem>
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </TestimonialsContainer>

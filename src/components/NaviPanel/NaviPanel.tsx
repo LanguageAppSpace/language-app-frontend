@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut, selectIsAuthenticated } from "@/redux/auth/authSlice";
 import { sidebarLinks, SidebarLink } from "@/config/data";
+import { useTranslation } from "react-i18next";
 
 interface NaviPanelProps {
   open: boolean;
@@ -24,6 +25,7 @@ const NaviPanel = ({ open, onClose }: NaviPanelProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const { t } = useTranslation("common");
 
   const visibleLinks = sidebarLinks.filter((link) => {
     if (link.auth === "auth") return isAuthenticated;
@@ -64,7 +66,7 @@ const NaviPanel = ({ open, onClose }: NaviPanelProps) => {
             key={link.text}
             onClick={() => handleNavigate(link)}
           >
-            <ListItemText primary={link.text} />
+            <ListItemText primary={t(link.text)} />
           </StyledListItemButton>
         ))}
       </List>

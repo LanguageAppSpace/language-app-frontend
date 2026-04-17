@@ -7,17 +7,28 @@ import { Grid, Typography, Button } from "@mui/material";
 import { FormRow, FormInputLabel, FormInput } from "@/components/Form/Form.tsx";
 import { useUpdateProfileMutation } from "@/redux/userSettings/userSettingsApiSlice.ts";
 import { ProfileData } from "@/interface";
-
-const profileSchema = Yup.object().shape({
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
-  photo: Yup.string().url("Invalid URL format").required(),
-  birthday: Yup.date().required("Birthday is required"),
-});
+import { useTranslation } from "react-i18next";
 
 const UpdateProfileForm = () => {
   const dispatch = useDispatch();
   const [updateProfile] = useUpdateProfileMutation();
+  const { t } = useTranslation("profile");
+
+  const profileSchema = Yup.object().shape({
+    firstName: Yup.string().required(
+      t("updateProfile.validation.firstNameRequired")
+    ),
+    lastName: Yup.string().required(
+      t("updateProfile.validation.lastNameRequired")
+    ),
+    photo: Yup.string()
+      .url()
+      .required(t("updateProfile.validation.photoRequired")),
+    birthday: Yup.date().required(
+      t("updateProfile.validation.birthdayRequired")
+    ),
+  });
+
   const {
     register: registerProfile,
     handleSubmit: handleSubmitProfile,
@@ -30,7 +41,7 @@ const UpdateProfileForm = () => {
       await updateProfile({ data });
       dispatch(
         showNotification({
-          message: "Profile updated successfully",
+          message: t("updateProfile.notifications.success"),
           severity: "success",
         })
       );
@@ -38,7 +49,7 @@ const UpdateProfileForm = () => {
     } catch (error) {
       dispatch(
         showNotification({
-          message: "Failed to update profile",
+          message: t("updateProfile.notifications.error"),
           severity: "error",
         })
       );
@@ -47,12 +58,12 @@ const UpdateProfileForm = () => {
 
   return (
     <form onSubmit={handleSubmitProfile(handleProfileSubmit)}>
-      <Typography variant="h6">Update Profile</Typography>
+      <Typography variant="h6">{t("updateProfile.title")}</Typography>
       <Grid container direction="column">
         <FormRow>
           <Grid item xs={6}>
             <FormInputLabel shrink={false} htmlFor={"firstName"}>
-              <Typography>First Name</Typography>
+              <Typography>{t("updateProfile.fields.firstName")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -63,7 +74,7 @@ const UpdateProfileForm = () => {
           </Grid>
           <Grid item xs={6}>
             <FormInputLabel shrink={false} htmlFor={"lastName"}>
-              <Typography>Last Name</Typography>
+              <Typography>{t("updateProfile.fields.lastName")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -76,7 +87,7 @@ const UpdateProfileForm = () => {
         <FormRow>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"photo"}>
-              <Typography>Profile Photo URL</Typography>
+              <Typography>{t("updateProfile.fields.photo")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -89,7 +100,7 @@ const UpdateProfileForm = () => {
         <FormRow>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"birthday"}>
-              <Typography>Birthday</Typography>
+              <Typography>{t("updateProfile.fields.birthday")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -101,7 +112,7 @@ const UpdateProfileForm = () => {
           </Grid>
         </FormRow>
         <Button type="submit" variant="contained" color="primary">
-          Save Profile
+          {t("updateProfile.button")}
         </Button>
       </Grid>
     </form>

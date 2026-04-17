@@ -12,10 +12,19 @@ import { styled } from "@mui/material/styles";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@/config/route.config.ts";
+import { useTranslation } from "react-i18next";
 
+interface LearnMoreFeature {
+  title: string;
+  description: string;
+  button: string;
+}
 const LearnMore = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation("landing");
+  const features = t("learnMore.features", {
+    returnObjects: true,
+  }) as LearnMoreFeature[];
   const handleRegisterClick = () => {
     navigate(ROUTE.REGISTER);
   };
@@ -30,12 +39,10 @@ const LearnMore = () => {
             gutterBottom
             sx={{ fontWeight: 700 }}
           >
-            Unlock Your Language Potential
+            {t("learnMore.hero.title")}
           </Typography>
           <Typography variant="h5" component="p" sx={{ mb: 4 }}>
-            Dive into the world of new languages with our intuitive and
-            effective app. Learn at your own pace, track your progress, and
-            achieve your goals!
+            {t("learnMore.hero.subtitle")}
           </Typography>
           <Button
             variant="contained"
@@ -43,7 +50,7 @@ const LearnMore = () => {
             size="large"
             sx={{ borderRadius: "20px", px: 4, py: 1.5 }}
           >
-            Start learning for free
+            {t("learnMore.hero.button")}
           </Button>
         </Container>
       </HeroBox>
@@ -55,148 +62,33 @@ const LearnMore = () => {
           gutterBottom
           sx={{ mb: 6, fontWeight: 600 }}
         >
-          Why Us?
+          {t("learnMore.whyUs.title")}
         </Typography>
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={4}>
-            <FeatureCard>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  gutterBottom
-                  sx={{ fontWeight: 500 }}
-                >
-                  Personalized Lessons
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Our app adapts to your learning style and level, offering
-                  personalized learning paths tailored just for you.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
-                  Learn More
-                </Button>
-              </CardActions>
-            </FeatureCard>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FeatureCard>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  gutterBottom
-                  sx={{ fontWeight: 500 }}
-                >
-                  Interactive Exercises
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Learn through engaging games, challenging quizzes, and
-                  real-life conversations that make learning fun and effective.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
-                  Discover Exercises
-                </Button>
-              </CardActions>
-            </FeatureCard>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FeatureCard>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  gutterBottom
-                  sx={{ fontWeight: 500 }}
-                >
-                  Progress Tracking
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Track your achievements, earn badges, and stay motivated to
-                  learn more with detailed statistics and insights.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
-                  View Progress
-                </Button>
-              </CardActions>
-            </FeatureCard>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FeatureCard>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  gutterBottom
-                  sx={{ fontWeight: 500 }}
-                >
-                  Offline Access
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Learn wherever you are, even without internet access. Download
-                  lessons and exercises directly to your device.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
-                  More Info
-                </Button>
-              </CardActions>
-            </FeatureCard>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FeatureCard>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  gutterBottom
-                  sx={{ fontWeight: 500 }}
-                >
-                  Learner Community
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Join a global community of language learners. Exchange
-                  experiences, find study partners, and motivate each other.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
-                  Join Now
-                </Button>
-              </CardActions>
-            </FeatureCard>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FeatureCard>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  gutterBottom
-                  sx={{ fontWeight: 500 }}
-                >
-                  Professional Teachers
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Take advantage of optional lessons with certified teachers to
-                  accelerate your language development and get personalized
-                  feedback.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
-                  Meet Teachers
-                </Button>
-              </CardActions>
-            </FeatureCard>
-          </Grid>
+          {features.map(({ title, description, button }) => (
+            <Grid item xs={12} sm={6} md={4} key={title}>
+              <FeatureCard>
+                <CardContent>
+                  <Typography
+                    variant="h6"
+                    component="h3"
+                    gutterBottom
+                    sx={{ fontWeight: 500 }}
+                  >
+                    {title}
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    {description}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" endIcon={<ArrowForwardIcon />}>
+                    {button}
+                  </Button>
+                </CardActions>
+              </FeatureCard>
+            </Grid>
+          ))}
         </Grid>
       </Container>
       <Box
@@ -217,11 +109,10 @@ const LearnMore = () => {
             gutterBottom
             sx={{ fontWeight: 600 }}
           >
-            Ready to start your language adventure?
+            {t("learnMore.cta.title")}
           </Typography>
           <Typography variant="body1" sx={{ mb: 4 }}>
-            Join the thousands of satisfied users who are already learning with
-            us!
+            {t("learnMore.cta.subtitle")}
           </Typography>
           <Button
             variant="contained"
@@ -231,7 +122,7 @@ const LearnMore = () => {
             endIcon={<ArrowForwardIcon />}
             sx={{ borderRadius: "25px", px: 5, py: 1.8, fontSize: "1.1rem" }}
           >
-            Register Today
+            {t("learnMore.cta.button")}
           </Button>
         </Container>
       </Box>

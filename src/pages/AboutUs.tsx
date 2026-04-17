@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CodeIcon from "@mui/icons-material/Code";
-import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import StorageIcon from "@mui/icons-material/Storage";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import GroupWorkIcon from "@mui/icons-material/GroupWork";
@@ -22,44 +21,48 @@ import {
   TileIcon,
   TileName,
 } from "@/components/Tile/Tile";
+import { Trans, useTranslation } from "react-i18next";
 
 const POLSKIE_PROGRAMISTKI_LINK = "https://polskieprogramistki.pl/";
 const DISCORD_INVITE = "https://discord.com/invite/56K84HzUgd";
 
-type IconComp = typeof CodeIcon;
+const teamIcons = {
+  bug: BugReportIcon,
+  code: CodeIcon,
+  storage: StorageIcon,
+};
 
-const team: { name: string; role: string; icon: IconComp }[] = [
-  { name: "aryla", role: "Project Manager / QA", icon: BugReportIcon },
-  { name: "magdalena", role: "Frontend Developer", icon: CodeIcon },
-  { name: "pescarynka", role: "Backend Developer", icon: StorageIcon },
-  { name: "anusianne", role: "Frontend Developer", icon: CodeIcon },
-  { name: "olcolcolc", role: "Frontend Developer", icon: DesignServicesIcon },
-];
+const valueIcons = {
+  community: GroupWorkIcon,
+  kindness: FavoriteIcon,
+  learning: SchoolIcon,
+  equality: Diversity3Icon,
+};
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  icon: keyof typeof teamIcons;
+}
 
-const values = [
-  {
-    title: "Community over ego",
-    desc: "We build together. We share knowledge, pair-program, and learn by shipping real features.",
-    icon: GroupWorkIcon,
-  },
-  {
-    title: "Kindness & accessibility",
-    desc: "Friendly UX and zero gatekeeping - in language learning and in tech. Everyone is welcome.",
-    icon: FavoriteIcon,
-  },
-  {
-    title: "Learning by doing",
-    desc: "From idea to deployment: code reviews, testing, CI/CD, and continuous improvement.",
-    icon: SchoolIcon,
-  },
-  {
-    title: "Equality & support",
-    desc: "We uplift women in tech. Every path and pace is valid, curiosity is celebrated.",
-    icon: Diversity3Icon,
-  },
-];
+interface ValueItem {
+  id: string;
+  icon: keyof typeof valueIcons;
+  title: string;
+  desc: string;
+}
 
 export default function AboutUs() {
+  const { t } = useTranslation("aboutUs");
+
+  const values = t("values", {
+    returnObjects: true,
+  }) as ValueItem[];
+
+  const team = t("team.members", {
+    returnObjects: true,
+  }) as TeamMember[];
+
   return (
     <>
       <Hero>
@@ -68,34 +71,26 @@ export default function AboutUs() {
             <Grid item xs={12} md={7}>
               <StyledChip label="About us" />
               <HeroTitle variant="h3">
-                Built by the <em>Polskie Programistki</em> community
+                <Trans t={t} i18nKey="hero.title" components={{ em: <em /> }} />
               </HeroTitle>
-
-              <HeroSub variant="h6">
-                We're a group of women from the{" "}
-                <strong>Polskie Programistki</strong> Discord server who teamed
-                up to create a friendly, modern platform for learning languages
-                and to show that there's room for everyone in tech.
-              </HeroSub>
-
+              <HeroSub variant="h6">{t("hero.subtitle")}</HeroSub>
               <ButtonRow>
                 <PrimaryButton
                   target="_blank"
                   rel="noopener noreferrer"
                   href={DISCORD_INVITE}
                 >
-                  Join our Discord
+                  {t("hero.joinDiscord")}
                 </PrimaryButton>
                 <OutlineButton href={POLSKIE_PROGRAMISTKI_LINK} target="_blank">
-                  Website
+                  {t("hero.website")}
                 </OutlineButton>
               </ButtonRow>
             </Grid>
-
             <Grid item xs={12} md={5}>
               <HeroImage
                 src="/girls.jpg"
-                alt="Women collaborating"
+                alt={t("hero.imageAlt")}
                 loading="lazy"
               />
             </Grid>
@@ -108,25 +103,19 @@ export default function AboutUs() {
           <Grid container spacing={6} alignItems="center">
             <Grid item xs={12} md={6}>
               <SectionTitle variant="h4" fontWeight={800} gutterBottom>
-                Our mission
+                {t("mission.title")}
               </SectionTitle>
-              <BodyText>
-                We combine language education with our love for technology. This
-                is a community-driven project designed to help learners gain
-                confidence in new languages while empowering more women to
-                explore and enter the IT field. By blending real product work
-                with mentorship and peer support, we grow together.
-              </BodyText>
+              <BodyText>{t("mission.text")}</BodyText>
             </Grid>
 
             <Grid item xs={12} md={6}>
               <ValuesCard>
                 <CardSectionLabel variant="subtitle2">
-                  What guides us:
+                  {t("mission.valuesTitle")}
                 </CardSectionLabel>
                 <Grid container>
                   {values.map((v) => {
-                    const Icon = v.icon;
+                    const Icon = valueIcons[v.icon];
                     return (
                       <Grid key={v.title} item xs={12} sm={6}>
                         <ValueCard tabIndex={0}>
@@ -148,15 +137,11 @@ export default function AboutUs() {
 
       <Section>
         <Container maxWidth="lg">
-          <SectionTitle variant="h4">Meet the team</SectionTitle>
-          <BodyText>
-            A handful of us lead the work, and many contributors from the
-            community jump in with code, design, testing, and ideas.
-          </BodyText>
-
+          <SectionTitle variant="h4"> {t("team.title")}</SectionTitle>
+          <BodyText>{t("team.subtitle")}</BodyText>
           <Grid container spacing={3}>
             {team.map((m) => {
-              const Icon = m.icon;
+              const Icon = teamIcons[m.icon];
               return (
                 <Grid key={m.name} item xs={12} sm={6} md={4}>
                   <Tile>
@@ -177,19 +162,13 @@ export default function AboutUs() {
         <Container maxWidth="lg">
           <Grid container alignItems="center" spacing={3}>
             <Grid item xs={12} md={8}>
-              <CTAHeading variant="h5">
-                Want to learn, build, or mentor?
-              </CTAHeading>
-              <CTAText>
-                Whether you're new to coding, passionate about languages, or
-                ready to mentor - you're invited. Come shape a helpful,
-                inclusive learning app with us.
-              </CTAText>
+              <CTAHeading variant="h5">{t("cta.title")}</CTAHeading>
+              <CTAText>{t("cta.text")}</CTAText>
             </Grid>
             <Grid item xs={12} md={4}>
               <CTAButtonContainer>
                 <PrimaryButton target="_blank" href={DISCORD_INVITE}>
-                  Join our Discord
+                  {t("cta.button")}
                 </PrimaryButton>
               </CTAButtonContainer>
             </Grid>
