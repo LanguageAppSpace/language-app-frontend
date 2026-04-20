@@ -24,6 +24,7 @@ interface FlashcardsContextType {
   setReviewFeedback: (feedback: ReviewFeedback) => void;
   calcNextIndex: (currentIndex: number, dir: SlideDirection) => number;
   mode: FlashcardsMode;
+  handleReviewAnswer: (learned: boolean) => void;
 }
 
 const FlashcardsContext = createContext<FlashcardsContextType | null>(null);
