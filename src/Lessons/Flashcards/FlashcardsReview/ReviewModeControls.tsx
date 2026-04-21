@@ -5,6 +5,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
+import theme from "@/theme/theme";
 
 const ReviewModeControls = () => {
   const {
@@ -64,16 +65,16 @@ const ReviewModeControls = () => {
     <ReviewControlsContainer>
       <FlashcardIconButton
         onClick={() => handleEditFlashcard(false)}
-        bgColor="#EF4444"
-        textColor="#FFFFFF"
+        bgColor={theme.palette.review.incorrect}
+        textColor={theme.palette.text.primary}
         disableRipple
       >
         <CloseIcon fontSize="medium" />
       </FlashcardIconButton>
       <FlashcardIconButton
         onClick={() => handleEditFlashcard(true)}
-        bgColor="#22C55E"
-        textColor="#FFFFFF"
+        bgColor={theme.palette.review.correct}
+        textColor={theme.palette.text.primary}
         disableRipple
       >
         <CheckIcon fontSize="medium" />

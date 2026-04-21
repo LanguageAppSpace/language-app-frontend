@@ -1,3 +1,4 @@
+import theme from "@/theme/theme";
 import { Box, CircularProgress, Typography, styled } from "@mui/material";
 
 interface ProgressRingProps {
@@ -33,10 +34,22 @@ const ProgressRing = ({ correct, wrong }: ProgressRingProps) => {
       </RingWrapper>
 
       <Stats>
-        <Typography sx={{ color: "#16A34A", fontWeight: 600, fontSize: 16 }}>
+        <Typography
+          sx={{
+            color: theme.palette.review.ringCorrect,
+            fontWeight: 600,
+            fontSize: 16,
+          }}
+        >
           Known: {correct}
         </Typography>
-        <Typography sx={{ color: "#DC2626", fontWeight: 600, fontSize: 16 }}>
+        <Typography
+          sx={{
+            color: theme.palette.review.ringIncorrect,
+            fontWeight: 600,
+            fontSize: 16,
+          }}
+        >
           Still learning: {wrong}
         </Typography>
       </Stats>
@@ -58,7 +71,7 @@ const RingWrapper = styled(Box)({
 });
 
 const RedRing = styled(CircularProgress)(() => ({
-  color: "#EF4444",
+  color: theme.palette.review.incorrect,
   width: 140,
   height: 140,
   "& .MuiCircularProgress-circle": {
@@ -67,7 +80,7 @@ const RedRing = styled(CircularProgress)(() => ({
 }));
 
 const GreenRing = styled(CircularProgress)(() => ({
-  color: "#22C55E",
+  color: theme.palette.review.correct,
   position: "absolute",
   left: 0,
   width: 140,
