@@ -5,7 +5,7 @@ import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsCo
 import React from "react";
 import { ReviewFeedback } from "@/Lessons/Flashcards/context/FlashcardsContext";
 import { LessonSessionProgressBar } from "@/Lessons/Flashcards/components/LessonSessionProgressBar";
-import { useSwipeable } from "react-swipeable";
+import useSwipe from "@/Lessons/Flashcards/hooks/useSwipe";
 
 interface FlashcardsLayout {
   children: React.ReactNode;
@@ -32,26 +32,24 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
 
   const currentPhrase = phrases[currentIndex];
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => {
-      handlePrevious();
+  const { onPointerCancel, onPointerDown, onPointerUp } = useSwipe({
+    onSwipeLeft: () => {
       if (mode === "browse") {
         handlePrevious();
         return;
       }
+
       handleReviewAnswer(false);
     },
-    onSwipedRight: () => {
+    onSwipeRight: () => {
       if (mode === "browse") {
         handleNext();
         return;
       }
+
       handleReviewAnswer(true);
     },
-    preventScrollOnSwipe: true,
-    trackTouch: true,
-    trackMouse: false,
-    delta: 40,
+    minSwipeDistance: 40,
   });
 
   return (
@@ -64,7 +62,11 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
           activeIndex={currentIndex}
           totalPhrases={phrases.length}
         />
-        <FlashcardStage {...swipeHandlers}>
+        <FlashcardStage
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerCancel}
+        >
           <FlashcardSlider
             isSliding={isSliding}
             slideDirection={slideDirection}
