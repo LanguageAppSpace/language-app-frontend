@@ -43,7 +43,7 @@
         { "text": "Request deletion of your account and content." }
       ],
       "footer": "To make a request, please contact us at:",
-      "email": "languageApp@gmail.com"
+      "withEmail": true
     },
     {
       "title": "5. Changes to This Policy",
@@ -52,7 +52,7 @@
     {
       "title": "Contact Us",
       "footer": "If you have any questions about this Privacy Policy, please contact us at:",
-      "email": "languageApp@gmail.com"
+      "withEmail": true
     }
   ]
 }

@@ -13,6 +13,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useTranslation } from "react-i18next";
+import { CONTACT_INFO } from "@/constants/contact";
 
 export default function Contact() {
   const { t } = useTranslation("contact");
@@ -32,15 +33,15 @@ export default function Contact() {
             <Stack spacing={2} mt={3}>
               <ContactRow>
                 <EmailIcon color="secondary" />
-                {t("email")}
+                {CONTACT_INFO.email}
               </ContactRow>
               <ContactRow>
                 <PhoneIcon color="secondary" />
-                {t("phone")}
+                {CONTACT_INFO.phone}
               </ContactRow>
               <ContactRow>
                 <LocationOnIcon color="secondary" />
-                {t("address")}
+                {CONTACT_INFO.address}
               </ContactRow>
             </Stack>
           </Grid>

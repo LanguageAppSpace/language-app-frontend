@@ -18,10 +18,6 @@
     "phrase": "Phrase",
     "translation": "Translation"
   },
-  "placeholders": {
-    "phrase": "Cześć, co słychać?",
-    "translation": "Hello, how are you?"
-  },
   "modes": {
     "browse": {
       "title": "Browse",
@@ -60,7 +56,7 @@
     "flashcardDeleteFailed": "Error deleting flashcard"
   },
   "deleteConfirmation": {
-    "message": "Are you sure you want to delete the lesson <strong>{{name}}</strong>?<br />This cannot be undone."
+    "message": "Are you sure you want to delete the lesson <strong>{{name}}</strong>?\nThis cannot be undone."
   },
   "loading": {
     "lesson": "Loading..."

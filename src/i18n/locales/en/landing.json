@@ -13,7 +13,6 @@
   },
   "contact": {
     "title": "Join us to learn languages",
-    "emailPlaceholder": "name@email.com",
     "buttonText": "Join now",
     "validation": {
       "emailRequired": "Email is required",
@@ -47,30 +46,7 @@
     ]
   },
   "testimonials": {
-    "title": "What others think:",
-    "items": [
-      {
-        "image": "boy",
-        "name": "Michael Wong",
-        "profession": "Footballer",
-        "rating": "4.9",
-        "text": "Learning a new language has never been easier! The app's interactive lessons fit perfectly into my busy schedule, helping me connect with teammates from around the world."
-      },
-      {
-        "image": "girl",
-        "name": "Avril Song",
-        "profession": "Project manager",
-        "rating": "4.8",
-        "text": "The personalized approach to learning is fantastic. I was able to focus on the specific skills I needed for my job, and now I can communicate confidently with international clients."
-      },
-      {
-        "image": "girl2",
-        "name": "Jeane Wood",
-        "profession": "Philosophy student",
-        "rating": "5.0",
-        "text": "This app is a game-changer! The lessons are engaging and really helped me grasp complex language concepts quickly. I’m now exploring philosophical texts in their original language."
-      }
-    ]
+    "title": "What others think:"
   },
   "learnMore": {
     "hero": {

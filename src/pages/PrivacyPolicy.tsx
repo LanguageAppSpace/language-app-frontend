@@ -1,3 +1,4 @@
+import { CONTACT_INFO } from "@/constants/contact";
 import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
@@ -9,7 +10,7 @@ interface PrivacySection {
     label?: string;
   }[];
   footer?: string;
-  email?: string;
+  withEmail?: string;
 }
 const PrivacyPolicy = () => {
   const { t } = useTranslation("privacyPolicy");
@@ -41,7 +42,7 @@ const PrivacyPolicy = () => {
             {section.footer && (
               <BodyText>
                 {section.footer}{" "}
-                {section.email && <strong>{section.email}</strong>}
+                {section.withEmail && <strong>{CONTACT_INFO.email}</strong>}
               </BodyText>
             )}
           </Section>

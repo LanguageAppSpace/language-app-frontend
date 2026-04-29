@@ -2,24 +2,10 @@ import { Grid, Typography, Container, Box } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { styled } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
-interface TestimonialItem {
-  image: "boy" | "girl" | "girl2";
-  name: string;
-  profession: string;
-  rating: string;
-  text: string;
-}
-const testimonialImages: Record<TestimonialItem["image"], string> = {
-  boy: "boy-testimonial.jpg",
-  girl: "girl-testimonial.jpg",
-  girl2: "girl2-testimonial.jpg",
-};
+import { TESTIMONIALS, TESTIMONIAL_IMAGES } from "@/constants/testimonials";
 
 const Testimonials = () => {
   const { t } = useTranslation("landing");
-  const testimonials = t("testimonials.items", {
-    returnObjects: true,
-  }) as TestimonialItem[];
 
   return (
     <TestimonialsContainer>
@@ -28,12 +14,12 @@ const Testimonials = () => {
           {t("testimonials.title")}
         </TestimonialsHeader>
         <Grid container justifyContent="space-between" spacing={6}>
-          {testimonials.map((testimonial) => (
-            <Grid item xs={12} sm={4} key={testimonial.name}>
+          {TESTIMONIALS.map((testimonial) => (
+            <Grid item xs={12} sm={4} key={testimonial.id}>
               <TestimonialsItem>
                 <TestimonialsItemHeader>
                   <TestimonialImage
-                    src={testimonialImages[testimonial.image]}
+                    src={TESTIMONIAL_IMAGES[testimonial.image]}
                     alt={testimonial.name}
                   />
                   <TestimonialsItemHeaderText>

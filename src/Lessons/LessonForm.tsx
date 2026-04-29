@@ -22,6 +22,7 @@ import { useDeleteFlashcardMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useGetSectionsQuery } from "@/redux/sections/sectionsApiSlice";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
+import { FORM_PLACEHOLDERS } from "@/constants/placeholders";
 interface LessonFormProps {
   initialValues: NewLesson;
   onSubmit: (data: NewLesson) => void;
@@ -156,7 +157,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
                   <InputField
                     id="phraseOne"
                     {...field}
-                    placeholder={index === 0 ? t("placeholders.phrase") : ""}
+                    placeholder={index === 0 ? FORM_PLACEHOLDERS.phrase : ""}
                   />
                 </>
               )}
@@ -175,7 +176,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
                     id="phraseTwo"
                     {...field}
                     placeholder={
-                      index === 0 ? t("placeholders.translation") : ""
+                      index === 0 ? FORM_PLACEHOLDERS.translation : ""
                     }
                   />
                 </>

@@ -15,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { ROUTE } from "@/config/route.config";
 import { useTranslation } from "react-i18next";
+import { FORM_PLACEHOLDERS } from "@/constants/placeholders";
 
 interface FormValues {
   email: string;
@@ -58,7 +59,7 @@ const Contact = () => {
               <StyledInputBox>
                 <StyledTextField
                   variant="outlined"
-                  placeholder={t("contact.emailPlaceholder")}
+                  placeholder={FORM_PLACEHOLDERS.email}
                   error={!!errors.email}
                   helperText={errors.email?.message}
                   InputProps={{

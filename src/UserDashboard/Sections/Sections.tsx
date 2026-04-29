@@ -139,7 +139,6 @@ const Sections = () => {
             values={{ name: modalState.section?.title }}
             components={{
               strong: <strong />,
-              br: <br />,
             }}
           />
         }
