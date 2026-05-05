@@ -5,37 +5,27 @@ import Sections from "@/UserDashboard/Sections/Sections";
 import { styled } from "@mui/system";
 import heroImg from "@/assets/images/dashboard-hero-image.png";
 import { Trans, useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import {
+  useGetStreakQuery,
+  useUpdateStreakMutation,
+} from "@/redux/auth/authApiSlice";
 
 const Main = () => {
   const username = useSelector(selectUsername);
   const { t } = useTranslation("dashboard");
-  const [streak, setStreak] = useState<number>(0);
+  const { data } = useGetStreakQuery();
+  const [updateStreak] = useUpdateStreakMutation();
 
   useEffect(() => {
-    const today = new Date();
-    const lastActiveRaw = localStorage.getItem("lastActiveDate");
-    const lastActive = new Date(lastActiveRaw ?? today);
-    const savedStreak = Number(localStorage.getItem("streak") ?? 0);
-
-    const diffDays = Math.floor(
-      (today.setHours(0, 0, 0, 0) - lastActive.setHours(0, 0, 0, 0)) /
-        (1000 * 60 * 60 * 24)
-    );
-
-    let newStreak;
-    if (diffDays === 0) {
-      newStreak = savedStreak;
-    } else if (diffDays === 1) {
-      newStreak = savedStreak + 1;
-    } else {
-      newStreak = 1;
-    }
-
-    setStreak(newStreak);
-    localStorage.setItem("streak", String(newStreak));
-    localStorage.setItem("lastActiveDate", today.toISOString());
+    updateStreak()
+      .unwrap()
+      .catch((err) => {
+        console.error("Failed to update streak", err);
+      });
   }, []);
+
+  const streak = data?.streak ?? 0;
 
   return (
     <Grid container spacing={3}>
