@@ -17,6 +17,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
 import QuizIcon from "@mui/icons-material/Quiz";
 import CloseIcon from "@mui/icons-material/Close";
+import KeyboardIcon from "@mui/icons-material/Keyboard";
 import { useNavigate, generatePath } from "react-router-dom";
 import { ROUTE } from "@/config/route.config";
 interface LessonModeDialogProps {
@@ -69,6 +70,19 @@ export const LessonModeDialog = ({
         onClose();
         navigate(
           generatePath(ROUTE.FLASHCARDS_QUIZ, {
+            lessonId: lesson.id,
+          })
+        );
+      },
+    },
+    {
+      title: "Written Answer",
+      desc: "Type your answer and get feedback",
+      icon: <KeyboardIcon />,
+      action: () => {
+        onClose();
+        navigate(
+          generatePath(ROUTE.FLASHCARDS_WRITTEN_ANSWER, {
             lessonId: lesson.id,
           })
         );
