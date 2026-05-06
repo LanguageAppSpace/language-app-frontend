@@ -1,0 +1,68 @@
+{
+  "actions": {
+    "create": "Create Lesson",
+    "update": "Update Lesson",
+    "add": "Add Lesson",
+    "addVocabulary": "Add new vocabulary"
+  },
+  "titles": {
+    "create": "Create New Lesson",
+    "edit": "Edit Lesson",
+    "createInSection": "Create new lesson in:",
+    "selectMode": "Select a mode for: {{lesson}}"
+  },
+  "fields": {
+    "title": "Title",
+    "description": "Description",
+    "section": "Section",
+    "phrase": "Phrase",
+    "translation": "Translation"
+  },
+  "modes": {
+    "browse": {
+      "title": "Browse",
+      "description": "Go through all flashcards quickly"
+    },
+    "review": {
+      "title": "Review",
+      "description": "Practice by testing what you remember"
+    },
+    "quiz": {
+      "title": "Quiz",
+      "description": "Choose the correct answer from options"
+    }
+  },
+  "emptyState": {
+    "title": "You don't have any lessons yet",
+    "description": "Create your first lesson to start learning.",
+    "button": "Create new lesson",
+    "imageAlt": "lesson empty state"
+  },
+  "counts": {
+    "lesson_one": "{{count}} lesson",
+    "lesson_few": "{{count}} lessons",
+    "lesson_many": "{{count}} lessons",
+    "lesson_other": "{{count}} lessons",
+    "phrase_one": "{{count}} phrase",
+    "phrase_few": "{{count}} phrases",
+    "phrase_many": "{{count}} phrases",
+    "phrase_other": "{{count}} phrases"
+  },
+  "notifications": {
+    "created": "Lesson created successfully",
+    "updated": "Lesson updated successfully",
+    "deleted": "Lesson deleted",
+    "progressReset": "Progress reset",
+    "createFailed": "Failed to save lesson",
+    "updateFailed": "Failed to edit lesson",
+    "deleteFailed": "Failed to delete",
+    "progressResetFailed": "Failed to reset progress",
+    "flashcardDeleteFailed": "Error deleting flashcard"
+  },
+  "deleteConfirmation": {
+    "message": "Are you sure you want to delete the lesson <strong>{{name}}</strong>?\nThis cannot be undone."
+  },
+  "loading": {
+    "lesson": "Loading..."
+  }
+}

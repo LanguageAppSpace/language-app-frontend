@@ -23,6 +23,7 @@ import { showNotification } from "@/redux/notification/notificationSlice";
 import { Section } from "@/interface";
 import { SECTION_COLORS } from "@/constants/sectionColors";
 import { FormInput } from "@/components/Form/Form";
+import { useTranslation } from "react-i18next";
 
 interface SectionModal {
   open: boolean;
@@ -52,6 +53,8 @@ const SectionModal: React.FC<SectionModal> = ({
 
   const dispatch = useDispatch();
 
+  const { t } = useTranslation("sections");
+
   const {
     register,
     handleSubmit,
@@ -77,7 +80,7 @@ const SectionModal: React.FC<SectionModal> = ({
         await updateSection({ id: editingSection.id, ...data }).unwrap();
         dispatch(
           showNotification({
-            message: "Section updated successfully",
+            message: t("notifications.updated"),
             severity: "success",
           })
         );
@@ -85,7 +88,7 @@ const SectionModal: React.FC<SectionModal> = ({
         await createSection(data).unwrap();
         dispatch(
           showNotification({
-            message: "Section created successfully",
+            message: t("notifications.created"),
             severity: "success",
           })
         );
@@ -94,7 +97,9 @@ const SectionModal: React.FC<SectionModal> = ({
     } catch (error) {
       dispatch(
         showNotification({
-          message: `Failed to ${editingSection ? "update" : "create"} section`,
+          message: editingSection
+            ? t("notifications.updateError")
+            : t("notifications.createError"),
           severity: "error",
         })
       );
@@ -116,7 +121,7 @@ const SectionModal: React.FC<SectionModal> = ({
       }}
     >
       <DialogTitle color="primary">
-        {editingSection ? "Edit section" : "Create new section"}
+        {editingSection ? t("form.title.edit") : t("form.title.create")}
       </DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <IconButton
@@ -136,7 +141,7 @@ const SectionModal: React.FC<SectionModal> = ({
         >
           <FormInput
             id="title"
-            label="Title"
+            label={t("form.fields.title")}
             variant="outlined"
             {...register("title")}
             required
@@ -145,14 +150,14 @@ const SectionModal: React.FC<SectionModal> = ({
           />
           <FormInput
             id="description"
-            label="Description"
+            label={t("form.fields.description")}
             variant="outlined"
             {...register("description")}
             helperText={errors.description?.message}
             error={!!errors.description}
           />
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
-            <Typography color="primary">Choose section color:</Typography>
+            <Typography color="primary">{t("form.fields.color")}</Typography>
             <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
               {SECTION_COLORS.map((color) => (
                 <ColorCircle
@@ -174,7 +179,7 @@ const SectionModal: React.FC<SectionModal> = ({
         </DialogContent>
         <DialogActions>
           <Button variant="contained" type="submit" color="primary">
-            Save
+            {t("actions.save")}
           </Button>
         </DialogActions>
       </form>

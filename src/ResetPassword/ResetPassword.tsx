@@ -18,32 +18,37 @@ import {
   AuthFormContainer,
   AuthFormTitle,
 } from "@/components/AuthForm/AuthForm";
+import { useTranslation } from "react-i18next";
 
 interface FormData {
   newPassword: string;
   confirmNewPassword: string;
 }
 
-const schema = Yup.object().shape({
-  newPassword: Yup.string()
-    .min(6, "New password should have at least 6 characters")
-    .required("New password is required"),
-  confirmNewPassword: Yup.string()
-    .oneOf([Yup.ref("newPassword")], "Passwords do not match")
-    .required("Confirm new password is required"),
-});
-
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation("auth");
 
   const { isLoading: isValidating, isError } =
     useValidatePasswordResetTokenQuery(token!, { skip: !token });
 
   const [confirmPasswordReset, { isLoading }] =
     useConfirmPasswordResetMutation();
+
+  const schema = Yup.object().shape({
+    newPassword: Yup.string()
+      .min(6, t("resetPassword.validation.newPasswordMin"))
+      .required(t("resetPassword.validation.newPasswordRequired")),
+    confirmNewPassword: Yup.string()
+      .oneOf(
+        [Yup.ref("newPassword")],
+        t("resetPassword.validation.confirmNewPasswordMatch")
+      )
+      .required(t("resetPassword.validation.confirmNewPasswordRequired")),
+  });
 
   const {
     register,
@@ -57,7 +62,7 @@ const ResetPassword = () => {
       await confirmPasswordReset({ ...data, token }).unwrap();
       dispatch(
         showNotification({
-          message: "Your password has been successfully changed.",
+          message: t("resetPassword.notifications.success"),
           severity: "success",
         })
       );
@@ -65,7 +70,7 @@ const ResetPassword = () => {
     } catch {
       dispatch(
         showNotification({
-          message: "Something went wrong. Please try again.",
+          message: t("resetPassword.notifications.error"),
           severity: "error",
         })
       );
@@ -82,7 +87,7 @@ const ResetPassword = () => {
       <CenteredContainer>
         <CircularProgress />
         <Typography variant="body1" mt={2}>
-          Validating password reset link...
+          {t("resetPassword.states.validatingLink")}
         </Typography>
       </CenteredContainer>
     );
@@ -92,7 +97,7 @@ const ResetPassword = () => {
     return (
       <CenteredContainer>
         <Typography variant="h6" color="error" align="center">
-          The password reset link is invalid or has expired.
+          {t("resetPassword.states.invalidLink")}
         </Typography>
       </CenteredContainer>
     );
@@ -101,11 +106,11 @@ const ResetPassword = () => {
   return (
     <AuthFormContainer>
       <AuthForm onSubmit={handleSubmit(onSubmit)}>
-        <AuthFormTitle align="center">Reset your password</AuthFormTitle>
+        <AuthFormTitle align="center">{t("resetPassword.title")}</AuthFormTitle>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"username"}>
-              <Typography>New password</Typography>
+              <Typography>{t("resetPassword.fields.newPassword")}</Typography>
             </FormInputLabel>
             <FormInput
               type="password"
@@ -117,7 +122,9 @@ const ResetPassword = () => {
           </Grid>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"username"}>
-              <Typography>Confirm new password</Typography>
+              <Typography>
+                {t("resetPassword.fields.confirmNewPassword")}
+              </Typography>
             </FormInputLabel>
             <FormInput
               type="password"
@@ -134,7 +141,9 @@ const ResetPassword = () => {
               fullWidth
               disabled={isLoading}
             >
-              {isLoading ? "Submitting..." : "Change Password"}
+              {isLoading
+                ? t("resetPassword.buttons.submitting")
+                : t("resetPassword.buttons.submit")}
             </FormButton>
           </Grid>
         </Grid>

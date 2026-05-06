@@ -6,6 +6,7 @@ import theme from "@/theme/theme";
 import { useEditPhrasePairMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
+import { useTranslation } from "react-i18next";
 
 const ReviewModeControls = () => {
   const {
@@ -19,7 +20,7 @@ const ReviewModeControls = () => {
     setCurrentIndex,
     finishReview,
   } = useFlashcardsContext();
-
+  const { t } = useTranslation("flashcards");
   const [editPhrasePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
 
@@ -52,7 +53,7 @@ const ReviewModeControls = () => {
       } catch (err) {
         dispatch(
           showNotification({
-            message: "Failed to update flashcard",
+            message: t("notifications.updateFailed"),
             severity: "error",
           })
         );

@@ -17,6 +17,7 @@ import {
   AuthFormContainer,
   AuthFormTitle,
 } from "@/components/AuthForm/AuthForm";
+import { useTranslation } from "react-i18next";
 
 interface FormData {
   username: string;
@@ -28,15 +29,16 @@ interface LoginResponse {
   refresh: string;
 }
 
-const schema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
-  password: Yup.string().required("Password is required"),
-});
-
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginUser] = useLoginUserMutation();
+  const { t } = useTranslation("auth");
+
+  const schema = Yup.object().shape({
+    username: Yup.string().required(t("login.validation.usernameRequired")),
+    password: Yup.string().required(t("login.validation.passwordRequired")),
+  });
 
   const {
     register,
@@ -55,14 +57,17 @@ const Login = () => {
       );
       dispatch(
         showNotification({
-          message: "You've successfully logged in",
+          message: t("login.notifications.success"),
           severity: "success",
         })
       );
       navigate(ROUTE.DASHBOARD);
     } catch {
       dispatch(
-        showNotification({ message: "Login failed", severity: "error" })
+        showNotification({
+          message: t("login.notifications.error"),
+          severity: "error",
+        })
       );
     }
   };
@@ -70,11 +75,11 @@ const Login = () => {
   return (
     <AuthFormContainer>
       <AuthForm onSubmit={handleSubmit(onSubmit)}>
-        <AuthFormTitle align="center">Sign in</AuthFormTitle>
+        <AuthFormTitle align="center">{t("login.title")}</AuthFormTitle>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"username"}>
-              <Typography>Username</Typography>
+              <Typography>{t("login.fields.username")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -85,7 +90,7 @@ const Login = () => {
           </Grid>
           <Grid item xs={12}>
             <FormInputLabel shrink={false} htmlFor={"password"}>
-              <Typography>Your password</Typography>
+              <Typography>{t("login.fields.password")}</Typography>
             </FormInputLabel>
             <FormInput
               fullWidth
@@ -97,19 +102,19 @@ const Login = () => {
           </Grid>
           <Grid item xs={12}>
             <FormButton type="submit" variant="contained" fullWidth>
-              Log in
+              {t("login.buttons.submit")}
             </FormButton>
           </Grid>
         </Grid>
         <ForgotPassword to="/forgot-password">
-          Forgot your password?
+          {t("login.links.forgotPassword")}
         </ForgotPassword>
       </AuthForm>
       <SignUpSection>
-        <LoginDivider>New to our community?</LoginDivider>
+        <LoginDivider>{t("login.divider")}</LoginDivider>
         <StyledLink to={ROUTE.REGISTER}>
           <CreateAccountButton variant="outlined" fullWidth>
-            Create an account
+            {t("login.buttons.createAccount")}
           </CreateAccountButton>
         </StyledLink>
       </SignUpSection>

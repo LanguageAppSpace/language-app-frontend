@@ -1,0 +1,21 @@
+{
+  "progress": {
+    "counter": "{{current}} / {{total}} phrases"
+  },
+  "states": {
+    "noPhrases": "No phrases found in this lesson.",
+    "completedLesson": "You have completed this lesson.",
+    "somethingWentWrong": "Something went wrong."
+  },
+  "review": {
+    "known": "I know",
+    "stillLearning": "Still learning"
+  },
+  "quiz": {
+    "next": "Next question"
+  },
+  "notifications": {
+    "updateFailed": "Failed to update flashcard",
+    "saveFailed": "Failed to save"
+  }
+}

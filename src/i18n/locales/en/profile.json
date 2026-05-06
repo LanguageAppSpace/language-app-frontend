@@ -1,0 +1,51 @@
+{
+  "title": "User Settings",
+  "changePassword": {
+    "title": "Change Password",
+    "fields": {
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "newPasswordConfirm": "Confirm New Password"
+    },
+    "button": "Change Password",
+    "notifications": {
+      "success": "Password changed successfully",
+      "error": "Failed to change password"
+    },
+    "validation": {
+      "oldPasswordRequired": "Old password is required",
+      "newPasswordMin": "New password should have at least 6 characters",
+      "newPasswordRequired": "New password is required",
+      "newPasswordConfirmMatch": "Passwords do not match",
+      "newPasswordConfirmRequired": "Confirm new password is required"
+    }
+  },
+  "updateProfile": {
+    "title": "Update Profile",
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "photo": "Profile Photo URL",
+      "birthday": "Birthday"
+    },
+    "button": "Save Profile",
+    "notifications": {
+      "success": "Profile updated successfully",
+      "error": "Failed to update profile"
+    },
+    "validation": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "photoRequired": "Profile photo is required",
+      "birthdayRequired": "Birthday is required"
+    }
+  },
+  "deactivateAccount": {
+    "title": "Deactivate Account",
+    "button": "Deactivate Account",
+    "notifications": {
+      "success": "Account deactivated",
+      "error": "Failed to deactivate account"
+    }
+  }
+}

@@ -6,6 +6,7 @@ import FlashcardsReviewSummary from "@/Lessons/Flashcards/FlashcardsReview/Flash
 import React from "react";
 import { ReviewFeedback } from "@/Lessons/Flashcards/context/FlashcardsContext";
 import { LessonSessionProgressBar } from "@/Lessons/Flashcards/components/LessonSessionProgressBar";
+import { useTranslation } from "react-i18next";
 import useSwipe from "@/Lessons/Flashcards/hooks/useSwipe";
 
 interface FlashcardsLayout {
@@ -13,6 +14,7 @@ interface FlashcardsLayout {
 }
 
 const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
+  const { t } = useTranslation("flashcards");
   const {
     lesson,
     phrases,
@@ -103,7 +105,9 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
               reviewFeedback={reviewFeedback}
               onAnimationEnd={() => setReviewFeedback(null)}
             >
-              {reviewFeedback === "correct" ? "I know" : "Still learning"}
+              {reviewFeedback === "correct"
+                ? t("review.known")
+                : t("review.stillLearning")}
             </FlashcardOverlayCard>
           )}
         </FlashcardStage>

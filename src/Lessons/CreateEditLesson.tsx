@@ -21,6 +21,7 @@ import LessonForm from "@/Lessons/LessonForm.tsx";
 import { ROUTE } from "@/config/route.config";
 import { useGetSectionByIdQuery } from "@/redux/sections/sectionsApiSlice";
 import FolderImg from "@/assets/images/folder.png";
+import { useTranslation } from "react-i18next";
 
 const CreateEditLesson = () => {
   const [createNewLesson] = useCreateNewLessonMutation();
@@ -31,6 +32,7 @@ const CreateEditLesson = () => {
   const params = useParams();
   const lessonId = params.lessonId;
   const sectionIdString = params.sectionId;
+  const { t } = useTranslation("lessons");
 
   const { data: lesson, isLoading } = useGetLessonByIdQuery(lessonId ?? "", {
     skip: !lessonId,
@@ -124,7 +126,7 @@ const CreateEditLesson = () => {
         }
         dispatch(
           showNotification({
-            message: "Lesson updated successfully",
+            message: t("notifications.updated"),
             severity: "success",
           })
         );
@@ -139,7 +141,7 @@ const CreateEditLesson = () => {
 
         dispatch(
           showNotification({
-            message: "Lesson created successfully",
+            message: t("notifications.created"),
             severity: "success",
           })
         );
@@ -148,7 +150,9 @@ const CreateEditLesson = () => {
     } catch (error) {
       dispatch(
         showNotification({
-          message: lessonId ? "Failed to edit lesson" : "Failed to save lesson",
+          message: lessonId
+            ? t("notifications.updateFailed")
+            : t("notifications.createFailed"),
           severity: "error",
         })
       );
@@ -166,9 +170,9 @@ const CreateEditLesson = () => {
     sectionId: Section["id"] | null;
     lessonId: Lesson["id"] | undefined;
   }) => {
-    if (lessonId) return "Edit Lesson";
-    if (sectionId && section) return "Create new lesson in:";
-    return "Create New Lesson";
+    if (lessonId) return t("titles.edit");
+    if (sectionId && section) return t("titles.createInSection");
+    return t("titles.create");
   };
 
   const titleText = getLessonTitle({

@@ -3,9 +3,11 @@ import { useGetLessonByIdQuery } from "@/redux/lessons/lessonsApiSlice";
 import { Typography, CircularProgress } from "@mui/material";
 import { FlashcardPageWrapper } from "@/Lessons/Flashcards/components/FlashcardsLayout";
 import QuizSession from "@/Lessons/Quiz/QuizSession";
+import { useTranslation } from "react-i18next";
 
 const Quiz = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
+  const { t } = useTranslation("flashcards");
 
   const {
     data: lesson,
@@ -26,7 +28,9 @@ const Quiz = () => {
   if (isError || !lesson) {
     return (
       <FlashcardPageWrapper>
-        <Typography color="primary">Something went wrong.</Typography>
+        <Typography color="primary">
+          {t("states.somethingWentWrong")}
+        </Typography>
       </FlashcardPageWrapper>
     );
   }
@@ -34,9 +38,7 @@ const Quiz = () => {
   if (!lesson.phrasePairs.length) {
     return (
       <FlashcardPageWrapper>
-        <Typography color="primary">
-          No phrases found in this lesson.
-        </Typography>
+        <Typography color="primary">{t("states.noPhrases")}</Typography>
       </FlashcardPageWrapper>
     );
   }

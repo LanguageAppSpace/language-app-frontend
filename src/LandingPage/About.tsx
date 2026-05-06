@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@/config/route.config.ts";
 import { styled } from "@mui/material/styles";
 import { Box, Grid, Button, Typography, Container } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const About = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation("landing");
   const handleLoginClick = () => {
     navigate(ROUTE.LEARN_MORE);
   };
@@ -18,19 +19,14 @@ const About = () => {
           <ImageGridItem item xs={12} sm={6}>
             <img
               src="/children.png"
-              alt="Children"
+              alt={`${t("about.imageAlt")}`}
               style={{ maxWidth: "100%" }}
             />
           </ImageGridItem>
           <TextGridItem item xs={12} sm={6}>
-            <HeaderTypography variant="h4">
-              E-Learning Platform for Learning Language
-            </HeaderTypography>
+            <HeaderTypography variant="h4">{t("about.title")}</HeaderTypography>
             <BodyTypography variant="body1">
-              Unlock a world of opportunities with our interactive and engaging
-              language courses. Whether you're a beginner or looking to perfect
-              your skills, our platform offers a personalized learning
-              experience to help you achieve fluency at your own pace.
+              {t("about.description")}
             </BodyTypography>
             <StyledButton
               variant="contained"
@@ -38,7 +34,7 @@ const About = () => {
               onClick={handleLoginClick}
               endIcon={<ArrowForwardIcon />}
             >
-              Learn More
+              {t("about.buttonText")}
             </StyledButton>
           </TextGridItem>
         </Grid>
