@@ -3,6 +3,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
 import theme from "@/theme/theme";
+import { useEditPhrasePairMutation } from "@/redux/lessons/lessonsApiSlice";
+import { useDispatch } from "react-redux";
+import { showNotification } from "@/redux/notification/notificationSlice";
 
 const ReviewModeControls = () => {
   const {
@@ -15,13 +18,12 @@ const ReviewModeControls = () => {
     setReviewFeedback,
     setCurrentIndex,
     finishReview,
-    handleReviewAnswer
   } = useFlashcardsContext();
 
   const [editPhrasePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
 
-  const handleEditFlashcard = async (learned: boolean) => {
+  const handleReviewAnswer = async (learned: boolean) => {
     if (isSliding) return;
 
     const pair = phrases[currentIndex];
