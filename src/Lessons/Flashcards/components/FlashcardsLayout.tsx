@@ -32,16 +32,6 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
     handleReviewAnswer,
   } = useFlashcardsContext();
 
-  if (isReviewFinished) {
-    return (
-      <FlashcardPageWrapper>
-        <FlashcardsReviewSummary />
-      </FlashcardPageWrapper>
-    );
-  }
-
-  const currentPhrase = phrases[currentIndex];
-
   const { onPointerCancel, onPointerDown, onPointerUp } = useSwipe({
     onSwipeLeft: () => {
       if (mode === "browse") {
@@ -61,6 +51,16 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
     },
     minSwipeDistance: 40,
   });
+
+  if (isReviewFinished) {
+    return (
+      <FlashcardPageWrapper>
+        <FlashcardsReviewSummary />
+      </FlashcardPageWrapper>
+    );
+  }
+
+  const currentPhrase = phrases[currentIndex];
 
   return (
     <FlashcardPageWrapper>
