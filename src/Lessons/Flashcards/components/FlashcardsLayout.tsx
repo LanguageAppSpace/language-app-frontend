@@ -6,6 +6,7 @@ import React from "react";
 import { ReviewFeedback } from "@/Lessons/Flashcards/context/FlashcardsContext";
 import { LessonSessionProgressBar } from "@/Lessons/Flashcards/components/LessonSessionProgressBar";
 import { useTranslation } from "react-i18next";
+import useSwipe from "@/Lessons/Flashcards/hooks/useSwipe";
 
 interface FlashcardsLayout {
   children: React.ReactNode;
@@ -26,9 +27,32 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
     reviewFeedback,
     mode,
     setReviewFeedback,
+    handleNext,
+    handlePrevious,
+    handleReviewAnswer,
   } = useFlashcardsContext();
 
   const currentPhrase = phrases[currentIndex];
+
+  const { onPointerCancel, onPointerDown, onPointerUp } = useSwipe({
+    onSwipeLeft: () => {
+      if (mode === "browse") {
+        handlePrevious();
+        return;
+      }
+
+      handleReviewAnswer(false);
+    },
+    onSwipeRight: () => {
+      if (mode === "browse") {
+        handleNext();
+        return;
+      }
+
+      handleReviewAnswer(true);
+    },
+    minSwipeDistance: 40,
+  });
 
   return (
     <FlashcardPageWrapper>
@@ -40,7 +64,11 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
           activeIndex={currentIndex}
           totalPhrases={phrases.length}
         />
-        <FlashcardStage>
+        <FlashcardStage
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerCancel}
+        >
           <FlashcardSlider
             isSliding={isSliding}
             slideDirection={slideDirection}
@@ -108,6 +136,8 @@ const FlashcardStage = styled(Box)(() => ({
   width: "100%",
   height: "clamp(200px, 40vh, 400px)",
   isolation: "isolate",
+  touchAction: "pan-y",
+  userSelect: "none",
 }));
 
 const overlayCorrect = keyframes`
