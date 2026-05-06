@@ -1,9 +1,6 @@
-import { useEditPhrasePairMutation } from "@/redux/lessons/lessonsApiSlice";
 import { Box, IconButton, styled } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
-import { useDispatch } from "react-redux";
-import { showNotification } from "@/redux/notification/notificationSlice";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
 import theme from "@/theme/theme";
 
@@ -18,6 +15,7 @@ const ReviewModeControls = () => {
     setReviewFeedback,
     setCurrentIndex,
     finishReview,
+    handleReviewAnswer
   } = useFlashcardsContext();
 
   const [editPhrasePair] = useEditPhrasePairMutation();
@@ -64,7 +62,7 @@ const ReviewModeControls = () => {
   return (
     <ReviewControlsContainer>
       <FlashcardIconButton
-        onClick={() => handleEditFlashcard(false)}
+        onClick={() => handleReviewAnswer(false)}
         bgColor={theme.palette.review.incorrect}
         textColor={theme.palette.text.primary}
         disableRipple
@@ -72,7 +70,7 @@ const ReviewModeControls = () => {
         <CloseIcon fontSize="medium" />
       </FlashcardIconButton>
       <FlashcardIconButton
-        onClick={() => handleEditFlashcard(true)}
+        onClick={() => handleReviewAnswer(true)}
         bgColor={theme.palette.review.correct}
         textColor={theme.palette.text.primary}
         disableRipple
