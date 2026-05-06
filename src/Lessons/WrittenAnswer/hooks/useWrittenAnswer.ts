@@ -1,7 +1,6 @@
 import { Lesson } from "@/interface";
 import { useMemo, useState } from "react";
-
-type PhrasePair = Lesson["phrasePairs"][number];
+import { PhrasePair } from "@/interface";
 
 export interface WrittenAnswerResult {
   pair: PhrasePair;
@@ -26,12 +25,9 @@ const useWrittenAnswer = (lesson: Lesson) => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [results, setResults] = useState<WrittenAnswerResult[]>([]);
   const [isFinished, setIsFinished] = useState(false);
-
   const currentPhrase = phrasesToReview[currentIndex];
-
   const correctCount = results.filter((result) => result.isCorrect).length;
   const wrongCount = results.filter((result) => !result.isCorrect).length;
-
   const failedResults = results.filter((result) => !result.isCorrect);
 
   const checkAnswer = () => {
