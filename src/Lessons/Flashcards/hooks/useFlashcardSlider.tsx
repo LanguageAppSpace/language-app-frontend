@@ -5,7 +5,7 @@ import {
   FlashcardsMode,
 } from "@/Lessons/Flashcards/context/FlashcardsContext";
 
-const useFlashcardSlider = (phrasesLength: number) => {
+const useFlashcardSlider = (phrasesLength: number, onLastCard?: () => void) => {
   const [mode, setMode] = useState<FlashcardsMode>("browse");
   const [isSliding, setIsSliding] = useState(false);
   const [slideDirection, setSlideDirection] = useState<SlideDirection>(null);
@@ -22,10 +22,30 @@ const useFlashcardSlider = (phrasesLength: number) => {
     currentIndex: number,
     setCurrentIndex: (i: number) => void
   ) => {
-    if (mode !== "browse") return;
-    if (!isSliding || !phrasesLength || !slideDirection) return;
+    if (!isSliding || !phrasesLength) return;
 
-    setCurrentIndex(calcNextIndex(currentIndex, slideDirection));
+    if (mode === "review") {
+      if (slideDirection === "next") {
+        const isLastCard = currentIndex === phrasesLength - 1;
+
+        if (isLastCard) {
+          onLastCard?.();
+          setIsSliding(false);
+          setSlideDirection(null);
+          return;
+        }
+
+        setCurrentIndex(currentIndex + 1);
+      }
+
+      if (slideDirection === "prev" && currentIndex > 0) {
+        setCurrentIndex(currentIndex - 1);
+      }
+    } else {
+      if (!slideDirection) return;
+      setCurrentIndex(calcNextIndex(currentIndex, slideDirection));
+    }
+
     setIsSliding(false);
     setSlideDirection(null);
   };

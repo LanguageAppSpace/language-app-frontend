@@ -6,7 +6,9 @@ import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
 
 const useQuiz = (lesson?: Lesson) => {
-  const [quizQuestions] = useState<QuizQuestion[]>(() =>
+  const [correctCount, setCorrectCount] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
+  const [questions, setQuestions] = useState<QuizQuestion[]>(() =>
     buildQuizQuestions(lesson?.phrasePairs ?? [])
   );
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,7 +17,8 @@ const useQuiz = (lesson?: Lesson) => {
   const [editPhrasePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
 
-  const currentQuestion = quizQuestions[currentIndex];
+  const quizQuestions = questions;
+  const currentQuestion = quizQuestions[currentIndex] ?? null;
   const isFinished = currentIndex >= quizQuestions.length;
   const isAnswered = selectedAnswer !== null;
 
@@ -25,6 +28,13 @@ const useQuiz = (lesson?: Lesson) => {
     setSelectedAnswer(answer);
 
     const isAnswerCorrect = answer === currentQuestion.correctAnswer;
+
+    if (isAnswerCorrect) {
+      setCorrectCount((c) => c + 1);
+    } else {
+      setWrongCount((c) => c + 1);
+    }
+
     const shouldUpdateProgress =
       currentQuestion.originalPair.isLearned !== isAnswerCorrect;
 
@@ -58,6 +68,14 @@ const useQuiz = (lesson?: Lesson) => {
     setSelectedAnswer(null);
   };
 
+  const restartQuiz = () => {
+    setQuestions(buildQuizQuestions(lesson?.phrasePairs ?? []));
+    setCurrentIndex(0);
+    setSelectedAnswer(null);
+    setCorrectCount(0);
+    setWrongCount(0);
+  };
+
   return {
     quizQuestions,
     currentQuestion,
@@ -67,6 +85,9 @@ const useQuiz = (lesson?: Lesson) => {
     isFinished,
     handleSelectAnswer,
     handleNextQuestion,
+    correctCount,
+    wrongCount,
+    restartQuiz,
   };
 };
 

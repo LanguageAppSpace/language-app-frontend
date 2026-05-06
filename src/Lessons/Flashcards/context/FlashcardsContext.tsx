@@ -20,6 +20,15 @@ interface FlashcardsContextType {
     currentIndex: number,
     setCurrentIndex: (index: number) => void
   ) => void;
+  isReviewFinished: boolean;
+  finishReview: () => void;
+  correctCount: number;
+  wrongCount: number;
+  markCorrect: () => void;
+  markWrong: () => void;
+  resetReview: () => void;
+  wrongPhrases: PhrasePair[];
+  keepReviewingWrongPhrases: () => void;
   reviewFeedback: ReviewFeedback;
   setReviewFeedback: (feedback: ReviewFeedback) => void;
   calcNextIndex: (currentIndex: number, dir: SlideDirection) => number;

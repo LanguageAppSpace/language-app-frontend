@@ -33,6 +33,12 @@ const theme = createTheme({
       hover: "#333d47",
       loginHover: "#192a32",
     },
+    review: {
+      correct: "#22C55E",
+      incorrect: "#EF4444",
+      ringCorrect: "#16A34A",
+      ringIncorrect: "#DC2626",
+    },
   },
   typography: {
     fontFamily: ["Poppins"].join(","),
@@ -59,6 +65,12 @@ declare module "@mui/material/styles" {
       light: string;
       medium: string;
     };
+    review: {
+      correct: string;
+      incorrect: string;
+      ringCorrect: string;
+      ringIncorrect: string;
+    };
   }
 
   interface PaletteOptions {
@@ -72,6 +84,12 @@ declare module "@mui/material/styles" {
     input?: {
       light: string;
       medium: string;
+    };
+    review?: {
+      correct: string;
+      incorrect: string;
+      ringCorrect: string;
+      ringIncorrect: string;
     };
   }
 }
