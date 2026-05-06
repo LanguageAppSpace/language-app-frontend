@@ -40,8 +40,12 @@
   },
   "counts": {
     "lesson_one": "{{count}} lesson",
+    "lesson_few": "{{count}} lessons",
+    "lesson_many": "{{count}} lessons",
     "lesson_other": "{{count}} lessons",
     "phrase_one": "{{count}} phrase",
+    "phrase_few": "{{count}} phrases",
+    "phrase_many": "{{count}} phrases",
     "phrase_other": "{{count}} phrases"
   },
   "notifications": {
