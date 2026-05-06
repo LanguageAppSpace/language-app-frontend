@@ -17,6 +17,7 @@ const Main = () => {
   const { data } = useGetStreakQuery();
   const [updateStreak] = useUpdateStreakMutation();
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     updateStreak()
       .unwrap()
@@ -24,6 +25,7 @@ const Main = () => {
         console.error("Failed to update streak", err);
       });
   }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const streak = data?.streak ?? 0;
 
