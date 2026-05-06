@@ -7,10 +7,9 @@ import {
   FlashcardPageWrapper,
 } from "@/Lessons/Flashcards/components/FlashcardsLayout";
 import useQuiz from "@/Lessons/Quiz/hooks/useQuiz";
-import { useTranslation } from "react-i18next";
+import QuizSummary from "./QuizReview/QuizSummary";
 
 const QuizSession = ({ lesson }: { lesson: Lesson }) => {
-  const { t } = useTranslation("flashcards");
   const {
     quizQuestions,
     currentQuestion,
@@ -18,14 +17,21 @@ const QuizSession = ({ lesson }: { lesson: Lesson }) => {
     selectedAnswer,
     isAnswered,
     isFinished,
+    correctCount,
+    wrongCount,
     handleSelectAnswer,
     handleNextQuestion,
+    restartQuiz,
   } = useQuiz(lesson);
 
   if (isFinished) {
     return (
       <FlashcardPageWrapper>
-        <Typography color="primary">{t("states.completedLesson")}</Typography>
+        <QuizSummary
+          correct={correctCount}
+          wrong={wrongCount}
+          onRestart={restartQuiz}
+        />
       </FlashcardPageWrapper>
     );
   }

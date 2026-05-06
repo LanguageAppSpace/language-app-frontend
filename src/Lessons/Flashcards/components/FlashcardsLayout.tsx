@@ -2,6 +2,7 @@ import { Box, Typography, styled, keyframes } from "@mui/material";
 import Flashcard from "@/Lessons/Flashcards/components/Flashcard";
 import FlashcardSlider from "@/Lessons/Flashcards/components/FlashcardSlider";
 import { useFlashcardsContext } from "@/Lessons/Flashcards/hooks/useFlashcardsContext";
+import FlashcardsReviewSummary from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReviewSummary";
 import React from "react";
 import { ReviewFeedback } from "@/Lessons/Flashcards/context/FlashcardsContext";
 import { LessonSessionProgressBar } from "@/Lessons/Flashcards/components/LessonSessionProgressBar";
@@ -24,6 +25,7 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
     isSliding,
     slideDirection,
     handleTransitionEnd,
+    isReviewFinished,
     reviewFeedback,
     mode,
     setReviewFeedback,
@@ -31,8 +33,6 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
     handlePrevious,
     handleReviewAnswer,
   } = useFlashcardsContext();
-
-  const currentPhrase = phrases[currentIndex];
 
   const { onPointerCancel, onPointerDown, onPointerUp } = useSwipe({
     onSwipeLeft: () => {
@@ -54,12 +54,23 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
     minSwipeDistance: 40,
   });
 
+  if (isReviewFinished) {
+    return (
+      <FlashcardPageWrapper>
+        <FlashcardsReviewSummary />
+      </FlashcardPageWrapper>
+    );
+  }
+
+  const currentPhrase = phrases[currentIndex];
+
   return (
     <FlashcardPageWrapper>
       <FlashcardContainer>
         <Typography variant="h4" color="primary">
           {lesson.title}
         </Typography>
+
         <LessonSessionProgressBar
           activeIndex={currentIndex}
           totalPhrases={phrases.length}
@@ -88,6 +99,7 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
               }
             />
           </FlashcardSlider>
+
           {reviewFeedback && (
             <FlashcardOverlayCard
               reviewFeedback={reviewFeedback}
@@ -99,6 +111,7 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
             </FlashcardOverlayCard>
           )}
         </FlashcardStage>
+
         <FlashcardControls>{children}</FlashcardControls>
       </FlashcardContainer>
     </FlashcardPageWrapper>

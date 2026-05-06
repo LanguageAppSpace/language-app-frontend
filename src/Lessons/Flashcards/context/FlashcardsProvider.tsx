@@ -2,13 +2,14 @@ import { useParams, useLocation } from "react-router-dom";
 import { Typography, CircularProgress } from "@mui/material";
 import useFlashcards from "@/Lessons/Flashcards/hooks/useFlashcards";
 import useFlashcardSlider from "@/Lessons/Flashcards/hooks/useFlashcardSlider";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import FlashcardsContext from "@/Lessons/Flashcards/context/FlashcardsContext";
 import { FlashcardPageWrapper } from "@/Lessons/Flashcards/components/FlashcardsLayout";
 import { useTranslation } from "react-i18next";
 import { useEditPhrasePairMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
+import { PhrasePair } from "@/interface";
 export const FlashcardsProvider = ({
   children,
 }: {
@@ -30,6 +31,49 @@ export const FlashcardsProvider = ({
     setCurrentIndex,
   } = useFlashcards(lessonId ?? "");
 
+  const [correctCount, setCorrectCount] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
+  const [isReviewFinished, setIsReviewFinished] = useState(false);
+  const [reviewPhrases, setReviewPhrases] = useState<PhrasePair[]>([]);
+  const [wrongPhrases, setWrongPhrases] = useState<PhrasePair[]>([]);
+
+  const activePhrases = reviewPhrases.length ? reviewPhrases : phrases;
+
+  const markCorrect = () => {
+    setCorrectCount((c) => c + 1);
+  };
+
+  const markWrong = () => {
+    setWrongCount((c) => c + 1);
+    setWrongPhrases((prev) => [...prev, activePhrases[currentIndex]]);
+  };
+
+  const keepReviewingWrongPhrases = () => {
+    if (!wrongPhrases.length) return;
+
+    setReviewPhrases(wrongPhrases);
+    setWrongPhrases([]);
+    setCurrentIndex(0);
+    setCorrectCount(0);
+    setWrongCount(0);
+    setIsReviewFinished(false);
+    setReviewFeedback(null);
+  };
+
+  const resetReview = () => {
+    setReviewPhrases([]);
+    setWrongPhrases([]);
+    setCurrentIndex(0);
+    setCorrectCount(0);
+    setWrongCount(0);
+    setIsReviewFinished(false);
+    setReviewFeedback(null);
+  };
+
+  const finishReview = () => {
+    setIsReviewFinished(true);
+  };
+
   const {
     setSlideDirection,
     setIsSliding,
@@ -41,7 +85,7 @@ export const FlashcardsProvider = ({
     calcNextIndex,
     mode,
     setMode,
-  } = useFlashcardSlider(lesson?.phrasePairs.length ?? 0);
+  } = useFlashcardSlider(activePhrases.length);
 
   useEffect(() => {
     const currentMode = location.pathname.endsWith("/review")
@@ -106,7 +150,7 @@ export const FlashcardsProvider = ({
     <FlashcardsContext.Provider
       value={{
         lesson,
-        phrases,
+        phrases: activePhrases,
         currentIndex,
         flipped,
         isSliding,
@@ -116,6 +160,15 @@ export const FlashcardsProvider = ({
         handlePrevious,
         setCurrentIndex,
         handleTransitionEnd,
+        isReviewFinished,
+        finishReview,
+        correctCount,
+        wrongCount,
+        markCorrect,
+        markWrong,
+        resetReview,
+        wrongPhrases,
+        keepReviewingWrongPhrases,
         reviewFeedback,
         setReviewFeedback,
         calcNextIndex,
