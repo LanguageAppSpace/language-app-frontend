@@ -16,6 +16,7 @@ import { styled } from "@mui/material/styles";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
 import QuizIcon from "@mui/icons-material/Quiz";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate, generatePath } from "react-router-dom";
 import { ROUTE } from "@/config/route.config";
@@ -71,6 +72,19 @@ export const LessonModeDialog = ({
         onClose();
         navigate(
           generatePath(ROUTE.FLASHCARDS_QUIZ, {
+            lessonId: lesson.id,
+          })
+        );
+      },
+    },
+    {
+      title: "Matching",
+      desc: "Select the related phrase and translation",
+      icon: <CompareArrowsIcon />,
+      action: () => {
+        onClose();
+        navigate(
+          generatePath(ROUTE.FLASHCARDS_MATCHING, {
             lessonId: lesson.id,
           })
         );

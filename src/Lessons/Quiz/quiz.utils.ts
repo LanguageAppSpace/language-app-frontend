@@ -8,7 +8,7 @@ export interface QuizQuestion {
   originalPair: PhrasePair;
 }
 
-const shuffleArray = <T>(array: T[]): T[] => {
+export const shuffleArray = <T>(array: T[]): T[] => {
   return [...array].sort(() => Math.random() - 0.5);
 };
 
