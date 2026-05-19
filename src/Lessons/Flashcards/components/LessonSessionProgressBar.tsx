@@ -4,21 +4,25 @@ import { useTranslation } from "react-i18next";
 interface LessonSessionProgressProps {
   activeIndex: number;
   totalPhrases: number;
+  completedCount?: number;
+  label?: string;
 }
 
 export const LessonSessionProgressBar = ({
   activeIndex,
   totalPhrases,
+  completedCount,
+  label,
 }: LessonSessionProgressProps) => {
   const { t } = useTranslation("flashcards");
   const total = Math.max(totalPhrases, 1);
-  const current = Math.min(activeIndex + 1, total);
+  const current = Math.min(completedCount ?? activeIndex + 1, total);
   const progressValue = (current / total) * 100;
 
   return (
     <Box sx={{ width: "100%", mb: 2 }}>
       <ProgressBarCounter variant="body2">
-        {t("progress.counter", { current, total })}
+        {label ?? t("progress.counter", { current, total })}
       </ProgressBarCounter>
       <LinearProgressBar variant="determinate" value={progressValue} />
     </Box>

@@ -28,6 +28,7 @@ import FlashcardsReview from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsRe
 import PublicRoutes from "@/routes/PublicRoutes";
 import SectionView from "@/UserDashboard/Sections/SectionView/SectionView";
 import Quiz from "@/Lessons/Quiz/Quiz";
+import MatchingPairs from "@/Lessons/MatchingPairs/MatchingPairs";
 
 const App = () => {
   return (
@@ -73,6 +74,10 @@ const App = () => {
               element={<FlashcardsReview />}
             />
             <Route path={ROUTE.FLASHCARDS_QUIZ} element={<Quiz />} />
+            <Route
+              path={ROUTE.FLASHCARDS_MATCHING}
+              element={<MatchingPairs />}
+            />
             <Route path={ROUTE.SECTION} element={<SectionView />} />
           </Route>
         </Route>

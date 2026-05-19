@@ -14,6 +14,15 @@
   "quiz": {
     "next": "Next question"
   },
+  "matchingPairs": {
+    "title": "Match pairs",
+    "description": "Select matching pairs.",
+    "summaryTitle": "Matching finished!",
+    "summaryDescription": "All pairs have been matched, here's how you did:",
+    "restart": "Restart matching",
+    "backToSection": "Back to section",
+    "progress": "Round {{current}} / {{total}}"
+  },
   "notifications": {
     "updateFailed": "Failed to update flashcard",
     "saveFailed": "Failed to save"
