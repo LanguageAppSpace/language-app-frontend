@@ -1,5 +1,7 @@
 import { Box, Typography, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
+import { showNotification } from "@/redux/notification/notificationSlice";
+import { useDispatch } from "react-redux";
 import { selectUsername } from "@/redux/auth/authSlice";
 import Sections from "@/UserDashboard/Sections/Sections";
 import { styled } from "@mui/system";
@@ -14,18 +16,23 @@ import {
 const Main = () => {
   const username = useSelector(selectUsername);
   const { t } = useTranslation("dashboard");
+  const dispatch = useDispatch();
   const { data } = useGetStreakQuery();
   const [updateStreak] = useUpdateStreakMutation();
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     updateStreak()
       .unwrap()
-      .catch((err) => {
-        console.error("Failed to update streak", err);
+      .catch(() => {
+        dispatch(
+          showNotification({
+            message: "Failed to update streak.",
+            severity: "error",
+          })
+        );
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   const streak = data?.streak ?? 0;
 
