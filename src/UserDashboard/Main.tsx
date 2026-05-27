@@ -26,7 +26,7 @@ const Main = () => {
       .catch(() => {
         dispatch(
           showNotification({
-            message: "Failed to update streak.",
+            message: t("updateStreak.notifications.error"),
             severity: "error",
           })
         );
