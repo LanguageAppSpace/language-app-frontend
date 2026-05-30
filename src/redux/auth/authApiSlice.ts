@@ -75,6 +75,23 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
+    getStreak: builder.query<{ streak: number; last_active: string }, void>({
+      query: () => ({
+        url: "/user/streak/",
+        method: "GET",
+      }),
+      providesTags: ["Streak"],
+    }),
+    updateStreak: builder.mutation<
+      { streak: number; last_active: string },
+      void
+    >({
+      query: () => ({
+        url: "/user/streak/update/",
+        method: "POST",
+      }),
+      invalidatesTags: ["Streak"],
+    }),
   }),
 });
 
@@ -86,4 +103,6 @@ export const {
   useValidatePasswordResetTokenQuery,
   useConfirmPasswordResetMutation,
   useRefreshTokenMutation,
+  useGetStreakQuery,
+  useUpdateStreakMutation,
 } = authApiSlice;
