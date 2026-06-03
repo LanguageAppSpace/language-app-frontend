@@ -3,38 +3,42 @@ import { styled } from "@mui/material/styles";
 import emptyFolderImg from "@/assets/images/empty-folder.png";
 import emptyLessonImg from "@/assets/images/empty-lesson.png";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useTranslation } from "react-i18next";
 
 interface EmptyStateProps {
   type: "section" | "lesson";
   onAction: () => void;
 }
-const emptyStateContent = {
-  section: {
-    title: "You don't have any sections yet",
-    description: "Create your first section to start organizing your lessons.",
-    image: emptyFolderImg,
-    buttonText: "Create new section",
-    buttonIcon: <AddCircleIcon />,
-  },
-  lesson: {
-    title: "You don't have any lessons yet",
-    description: "Create your first lesson to start learning.",
-    image: emptyLessonImg,
-    buttonText: "Create new lesson",
-    buttonIcon: <AddCircleIcon />,
-  },
-};
 
 const EmptyState: React.FC<EmptyStateProps> = ({ type, onAction }) => {
-  const { title, description, image, buttonText } = emptyStateContent[type];
+  const { t: tSections } = useTranslation("sections");
+  const { t: tLessons } = useTranslation("lessons");
+
+  const emptyStateContent = {
+    section: {
+      title: tSections("emptyState.title"),
+      description: tSections("emptyState.description"),
+      image: emptyFolderImg,
+      buttonText: tSections("emptyState.button"),
+      buttonIcon: <AddCircleIcon />,
+      imageAlt: tSections("emptyState.imageAlt"),
+    },
+    lesson: {
+      title: tLessons("emptyState.title"),
+      description: tLessons("emptyState.description"),
+      image: emptyLessonImg,
+      buttonText: tLessons("emptyState.button"),
+      buttonIcon: <AddCircleIcon />,
+      imageAlt: tLessons("emptyState.imageAlt"),
+    },
+  };
+
+  const { title, description, image, buttonText, imageAlt } =
+    emptyStateContent[type];
 
   return (
     <EmptyStateCard>
-      <img
-        src={image}
-        alt={`${type} empty state image`}
-        style={{ maxHeight: "100px" }}
-      />
+      <img src={image} alt={imageAlt} style={{ maxHeight: "100px" }} />
       <Typography variant="h6">{title}</Typography>
       <Typography variant="body1">{description}</Typography>
       <Button

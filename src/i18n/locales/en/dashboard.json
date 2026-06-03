@@ -1,0 +1,11 @@
+{
+  "hero": {
+    "greeting": "👋 Hello, <strong>{{name}}</strong>!",
+    "streak": "Keep up the great work and don't let your <strong>{{count}}</strong>-day streak slip away!"
+  },
+  "updateStreak": {
+    "notifications": {
+      "error": "Failed to update streak"
+    }
+  }
+}

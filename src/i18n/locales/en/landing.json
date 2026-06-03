@@ -1,0 +1,115 @@
+{
+  "hero": {
+    "title": "Learn a Language, Unlock a World",
+    "description": "Expand your horizons with interactive lessons designed to make language learning easy, effective, and fun.",
+    "buttonText": "Learn more"
+  },
+
+  "about": {
+    "imageAlt": "Children holding hands around the Earth",
+    "title": "E-learning platform for language learning",
+    "description": "Unlock a world of opportunities with our interactive and engaging language courses. Whether you're a beginner or looking to refine your skills, our platform offers a personalized learning experience to help you achieve fluency at your own pace.",
+    "buttonText": "Learn more"
+  },
+  "contact": {
+    "title": "Join us to learn languages",
+    "buttonText": "Join now",
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email"
+    }
+  },
+  "features": {
+    "title": "Best learning experience",
+    "learnMore": "Learn more",
+    "items": [
+      {
+        "iconAlt": "Human icon",
+        "title": "Free. Fun. Effective.",
+        "description": "Enjoy learning at no cost with our engaging and proven methods. Discover a fun way to enhance your language skills effectively!"
+      },
+      {
+        "iconAlt": "Remote icon",
+        "title": "Interactive learning",
+        "description": "Dive into interactive lessons designed to keep you engaged and motivated. Practice in real-time and get immediate feedback to improve faster."
+      },
+      {
+        "iconAlt": "Padlock icon",
+        "title": "Learn anytime, anywhere",
+        "description": "Access your courses anytime, anywhere. Whether you're on the go or at home, your learning experience is always within reach."
+      },
+      {
+        "iconAlt": "Certificate icon",
+        "title": "Personalized learning",
+        "description": "Tailor your learning journey to fit your needs. Our app adapts to your level and pace, ensuring you achieve your language goals."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "What others think:"
+  },
+  "learnMore": {
+    "hero": {
+      "title": "Unlock Your Language Potential",
+      "subtitle": "Dive into the world of new languages with our intuitive and effective app. Learn at your own pace, track your progress, and achieve your goals!",
+      "button": "Start learning for free"
+    },
+    "whyUs": {
+      "title": "Why Us?"
+    },
+    "features": [
+      {
+        "title": "Personalized Lessons",
+        "description": "Our app adapts to your learning style and level, offering personalized learning paths tailored just for you.",
+        "button": "Learn More"
+      },
+      {
+        "title": "Interactive Exercises",
+        "description": "Learn through engaging games, challenging quizzes, and real-life conversations that make learning fun and effective.",
+        "button": "Discover Exercises"
+      },
+      {
+        "title": "Progress Tracking",
+        "description": "Track your achievements, earn badges, and stay motivated to learn more with detailed statistics and insights.",
+        "button": "View Progress"
+      },
+      {
+        "title": "Offline Access",
+        "description": "Learn wherever you are, even without internet access. Download lessons and exercises directly to your device.",
+        "button": "More Info"
+      },
+      {
+        "title": "Learner Community",
+        "description": "Join a global community of language learners. Exchange experiences, find study partners, and motivate each other.",
+        "button": "Join Now"
+      },
+      {
+        "title": "Professional Teachers",
+        "description": "Take advantage of optional lessons with certified teachers to accelerate your language development and get personalized feedback.",
+        "button": "Meet Teachers"
+      }
+    ],
+    "cta": {
+      "title": "Ready to start your language adventure?",
+      "subtitle": "Join the thousands of satisfied users who are already learning with us!",
+      "button": "Register Today"
+    }
+  },
+  "footer": {
+    "brand": "LanguageApp",
+    "description": "An intuitive language learning app designed to help you practice daily, stay motivated, and achieve fluency at your own pace.",
+    "quickLinks": {
+      "title": "Quick links",
+      "about": "About us",
+      "contact": "Contact"
+    },
+    "resources": {
+      "title": "Resources",
+      "support": "Support",
+      "privacy": "Privacy policy"
+    },
+    "social": {
+      "title": "Social Media"
+    }
+  }
+}

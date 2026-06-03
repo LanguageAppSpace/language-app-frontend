@@ -4,6 +4,7 @@ import { useEditPhrasePairMutation } from "@/redux/lessons/lessonsApiSlice";
 import { buildQuizQuestions, QuizQuestion } from "@/Lessons/Quiz/quiz.utils";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
+import { useTranslation } from "react-i18next";
 
 const useQuiz = (lesson?: Lesson) => {
   const [correctCount, setCorrectCount] = useState(0);
@@ -16,6 +17,7 @@ const useQuiz = (lesson?: Lesson) => {
 
   const [editPhrasePair] = useEditPhrasePairMutation();
   const dispatch = useDispatch();
+  const { t } = useTranslation("flashcards");
 
   const quizQuestions = questions;
   const currentQuestion = quizQuestions[currentIndex] ?? null;
@@ -54,7 +56,7 @@ const useQuiz = (lesson?: Lesson) => {
       console.error("Failed to update phrase pair", error);
       dispatch(
         showNotification({
-          message: "Failed to save ",
+          message: t("notifications.saveFailed"),
           severity: "error",
         })
       );

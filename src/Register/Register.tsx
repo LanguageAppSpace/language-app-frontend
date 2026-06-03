@@ -14,6 +14,7 @@ import { showNotification } from "@/redux/notification/notificationSlice";
 import { useRegisterUserMutation } from "@/redux/auth/authApiSlice";
 import { ROUTE } from "@/config/route.config";
 import { FormInput, FormInputLabel } from "@/components/Form/Form";
+import { useTranslation } from "react-i18next";
 
 interface FormData {
   username: string;
@@ -24,25 +25,31 @@ interface FormData {
 
 const PASSWORD_MIN_LENGTH = 6;
 
-const schema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
-  email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Email is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(
-      PASSWORD_MIN_LENGTH,
-      `Password must be at least ${PASSWORD_MIN_LENGTH} characters`
-    ),
-  passwordConfirm: Yup.string()
-    .required("Password confirmation is required")
-    .oneOf([Yup.ref("password")], "Passwords do not match"),
-});
-
 const SignUpForm: React.FC = () => {
   const [searchParams] = useSearchParams();
   const emailFromQuery = searchParams.get("email") ?? "";
+  const { t } = useTranslation("auth");
+
+  const schema = Yup.object().shape({
+    username: Yup.string().required(t("register.validation.usernameRequired")),
+    email: Yup.string()
+      .email(t("register.validation.emailInvalid"))
+      .required(t("register.validation.emailRequired")),
+    password: Yup.string()
+      .required(t("register.validation.passwordRequired"))
+      .min(
+        PASSWORD_MIN_LENGTH,
+        t("register.validation.passwordMin", {
+          count: PASSWORD_MIN_LENGTH,
+        })
+      ),
+    passwordConfirm: Yup.string()
+      .required(t("register.validation.passwordConfirmRequired"))
+      .oneOf(
+        [Yup.ref("password")],
+        t("register.validation.passwordConfirmMatch")
+      ),
+  });
 
   const {
     register,
@@ -64,7 +71,7 @@ const SignUpForm: React.FC = () => {
       await registerUser(data).unwrap();
       dispatch(
         showNotification({
-          message: "Your account has been created successfully.",
+          message: t("register.notifications.success"),
           severity: "success",
         })
       );
@@ -74,7 +81,8 @@ const SignUpForm: React.FC = () => {
       const errorData = error.data ?? {};
       const firstErrorKey = Object.keys(errorData)[0];
       const firstMessage =
-        errorData[firstErrorKey]?.[0] ?? "Something went wrong";
+        errorData[firstErrorKey]?.[0] ??
+        t("register.notifications.errorFallback");
       const formattedMessage =
         firstMessage.charAt(0).toUpperCase() + firstMessage.slice(1);
 
@@ -98,17 +106,19 @@ const SignUpForm: React.FC = () => {
         >
           <Grid item xs={7}>
             <RegisterFormTitle variant="h4">
-              Create an account
+              {t("register.title")}
             </RegisterFormTitle>
             <RegisterFormSubtitle>
-              <>Already have an account?</>
-              <LogInLink to={ROUTE.LOGIN}>Log in</LogInLink>
+              {t("register.subtitle")}
+              <LogInLink to={ROUTE.LOGIN}>
+                {t("register.links.login")}
+              </LogInLink>
             </RegisterFormSubtitle>
             <Grid container direction="column">
               <FormRow>
                 <Grid item xs={12}>
                   <FormInputLabel shrink={false} htmlFor={"username"}>
-                    <Typography>Username</Typography>
+                    <Typography>{t("register.fields.username")}</Typography>
                   </FormInputLabel>
                   <FormInput
                     fullWidth
@@ -121,7 +131,7 @@ const SignUpForm: React.FC = () => {
               <FormRow>
                 <Grid item xs={12}>
                   <FormInputLabel shrink={false} htmlFor={"email"}>
-                    <Typography>Email address</Typography>
+                    <Typography>{t("register.fields.email")}</Typography>
                   </FormInputLabel>
                   <FormInput
                     fullWidth
@@ -135,7 +145,7 @@ const SignUpForm: React.FC = () => {
               <FormRow>
                 <Grid item xs={12}>
                   <FormInputLabel shrink={false} htmlFor={"password"}>
-                    <Typography>Password</Typography>
+                    <Typography>{t("register.fields.password")}</Typography>
                   </FormInputLabel>
                   <FormInput
                     fullWidth
@@ -147,7 +157,9 @@ const SignUpForm: React.FC = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <FormInputLabel shrink={false} htmlFor={"passwordConfirm"}>
-                    <Typography>Confirm your password</Typography>
+                    <Typography>
+                      {t("register.fields.passwordConfirm")}
+                    </Typography>
                   </FormInputLabel>
                   <FormInput
                     fullWidth
@@ -167,12 +179,15 @@ const SignUpForm: React.FC = () => {
                 endIcon={<ArrowForwardIcon />}
                 aria-label="Create an account"
               >
-                Create an account
+                {t("register.buttons.submit")}
               </FormButton>
             </RegisterFormButtons>
           </Grid>
           <Grid item xs={5}>
-            <StyledRegisterImage src={RegisterImage} alt="Register" />
+            <StyledRegisterImage
+              src={RegisterImage}
+              alt={t("register.imageAlt")}
+            />
           </Grid>
         </Grid>
       </RegisterForm>

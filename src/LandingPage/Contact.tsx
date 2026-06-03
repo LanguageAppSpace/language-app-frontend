@@ -14,12 +14,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { ROUTE } from "@/config/route.config";
-
-const schema = Yup.object({
-  email: Yup.string()
-    .required("Email is required")
-    .email("Please enter a valid email"),
-});
+import { useTranslation } from "react-i18next";
+import { FORM_PLACEHOLDERS } from "@/constants/placeholders";
 
 interface FormValues {
   email: string;
@@ -27,6 +23,13 @@ interface FormValues {
 
 const Contact = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation("landing");
+
+  const schema = Yup.object({
+    email: Yup.string()
+      .required(t("contact.validation.emailRequired"))
+      .email(t("contact.validation.emailInvalid")),
+  });
 
   const {
     register,
@@ -47,7 +50,7 @@ const Contact = () => {
           <Grid item xs={12} sm={6}>
             <StyledTextContainer>
               <Typography variant="h4" component="div">
-                Join us to learn languages
+                {t("contact.title")}
               </Typography>
             </StyledTextContainer>
           </Grid>
@@ -56,7 +59,7 @@ const Contact = () => {
               <StyledInputBox>
                 <StyledTextField
                   variant="outlined"
-                  placeholder="name@email.com"
+                  placeholder={FORM_PLACEHOLDERS.email}
                   error={!!errors.email}
                   helperText={errors.email?.message}
                   InputProps={{
@@ -72,7 +75,7 @@ const Contact = () => {
                   variant="contained"
                   onClick={handleSubmit(handleJoin)}
                 >
-                  Join now
+                  {t("contact.buttonText")}
                 </StyledButton>
               </StyledInputBox>
             </StyledFormContainer>

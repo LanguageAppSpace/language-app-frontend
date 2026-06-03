@@ -21,6 +21,8 @@ import { showNotification } from "@/redux/notification/notificationSlice.ts";
 import { useDeleteFlashcardMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useGetSectionsQuery } from "@/redux/sections/sectionsApiSlice";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTranslation } from "react-i18next";
+import { FORM_PLACEHOLDERS } from "@/constants/placeholders";
 interface LessonFormProps {
   initialValues: NewLesson;
   onSubmit: (data: NewLesson) => void;
@@ -28,6 +30,7 @@ interface LessonFormProps {
 
 const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
   const [deleteFlashcard] = useDeleteFlashcardMutation();
+  const { t } = useTranslation("lessons");
 
   const { data: sections } = useGetSectionsQuery();
   const { lessonId, sectionId: sectionIdFromUrl } = useParams<{
@@ -61,7 +64,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
       } catch (error: unknown) {
         dispatch(
           showNotification({
-            message: "Error deleting flashcard",
+            message: t("notifications.flashcardDeleteFailed"),
             severity: "error",
           })
         );
@@ -82,13 +85,13 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
             fullWidth
             variant="outlined"
             required
-            label="Title"
+            label={t("fields.title")}
             {...register("title")}
           />
         </Grid>
         <Grid item>
           <FormInput
-            label="Description"
+            label={t("fields.description")}
             fullWidth
             required
             variant="outlined"
@@ -102,11 +105,11 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
               control={control}
               render={({ field }) => (
                 <FormControl fullWidth>
-                  <InputLabel id="sections">Section</InputLabel>
+                  <InputLabel id="sections">{t("fields.section")}</InputLabel>
                   <FormSelect
                     labelId="sections"
                     id="sections"
-                    label="Section"
+                    label={t("fields.section")}
                     {...field}
                     onChange={(e) => {
                       const value = e.target.value;
@@ -148,11 +151,13 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
               control={control}
               render={({ field }) => (
                 <>
-                  <InputLabel htmlFor="phraseOne">Phrase</InputLabel>
+                  <InputLabel htmlFor="phraseOne">
+                    {t("fields.phrase")}
+                  </InputLabel>
                   <InputField
                     id="phraseOne"
                     {...field}
-                    placeholder={index === 0 ? "Cześć, co słychać?" : ""}
+                    placeholder={index === 0 ? FORM_PLACEHOLDERS.phrase : ""}
                   />
                 </>
               )}
@@ -164,11 +169,15 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
               control={control}
               render={({ field }) => (
                 <>
-                  <InputLabel htmlFor="phraseTwo">Translation</InputLabel>
+                  <InputLabel htmlFor="phraseTwo">
+                    {t("fields.translation")}
+                  </InputLabel>
                   <InputField
                     id="phraseTwo"
                     {...field}
-                    placeholder={index === 0 ? "Hello, how are you?" : ""}
+                    placeholder={
+                      index === 0 ? FORM_PLACEHOLDERS.translation : ""
+                    }
                   />
                 </>
               )}
@@ -190,7 +199,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           endIcon={<AddIcon />}
           onClick={() => append({ phraseOne: "", phraseTwo: "" })}
         >
-          Add new vocabulary
+          {t("actions.addVocabulary")}
         </ButtonAddVocabulary>
       </Grid>
       <LessonFooter>
@@ -200,7 +209,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
           type="submit"
           fullWidth
         >
-          {lessonId ? "Update Lesson" : "Create Lesson"}
+          {lessonId ? t("actions.update") : t("actions.create")}
         </ButtonCreateLesson>
       </LessonFooter>
     </form>

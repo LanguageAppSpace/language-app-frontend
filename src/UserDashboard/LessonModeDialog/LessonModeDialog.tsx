@@ -16,10 +16,12 @@ import { styled } from "@mui/material/styles";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
 import QuizIcon from "@mui/icons-material/Quiz";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
 import { useNavigate, generatePath } from "react-router-dom";
 import { ROUTE } from "@/config/route.config";
+import { useTranslation } from "react-i18next";
 interface LessonModeDialogProps {
   open: boolean;
   onClose: () => void;
@@ -32,13 +34,14 @@ export const LessonModeDialog = ({
   lesson,
 }: LessonModeDialogProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation("lessons");
 
   if (!lesson) return null;
 
   const modes = [
     {
-      title: "Browse",
-      desc: "Go through all flashcards quickly",
+      title: t("modes.browse.title"),
+      desc: t("modes.browse.description"),
       icon: <MenuBookIcon />,
       action: () => {
         onClose();
@@ -50,8 +53,8 @@ export const LessonModeDialog = ({
       },
     },
     {
-      title: "Review",
-      desc: "Practice by testing what you remember",
+      title: t("modes.review.title"),
+      desc: t("modes.review.description"),
       icon: <FlipToFrontIcon />,
       action: () => {
         onClose();
@@ -63,13 +66,26 @@ export const LessonModeDialog = ({
       },
     },
     {
-      title: "Quiz",
-      desc: "Choose the correct answer from options",
+      title: t("modes.quiz.title"),
+      desc: t("modes.quiz.description"),
       icon: <QuizIcon />,
       action: () => {
         onClose();
         navigate(
           generatePath(ROUTE.FLASHCARDS_QUIZ, {
+            lessonId: lesson.id,
+          })
+        );
+      },
+    },
+    {
+      title: "Matching",
+      desc: "Select the related phrase and translation",
+      icon: <CompareArrowsIcon />,
+      action: () => {
+        onClose();
+        navigate(
+          generatePath(ROUTE.FLASHCARDS_MATCHING, {
             lessonId: lesson.id,
           })
         );
@@ -93,7 +109,7 @@ export const LessonModeDialog = ({
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <StyledDialogTitle color="primary">
-        Select a mode for: {lesson.title}
+        {t("titles.selectMode", { lesson: lesson.title })}
       </StyledDialogTitle>
       <IconButton
         aria-label="close"

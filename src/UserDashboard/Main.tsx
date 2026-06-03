@@ -1,22 +1,60 @@
 import { Box, Typography, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
+import { showNotification } from "@/redux/notification/notificationSlice";
+import { useDispatch } from "react-redux";
 import { selectUsername } from "@/redux/auth/authSlice";
 import Sections from "@/UserDashboard/Sections/Sections";
 import { styled } from "@mui/system";
 import heroImg from "@/assets/images/dashboard-hero-image.png";
+import { Trans, useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import {
+  useGetStreakQuery,
+  useUpdateStreakMutation,
+} from "@/redux/auth/authApiSlice";
+
 const Main = () => {
   const username = useSelector(selectUsername);
+  const { t } = useTranslation("dashboard");
+  const dispatch = useDispatch();
+  const { data } = useGetStreakQuery();
+  const [updateStreak] = useUpdateStreakMutation();
+
+  useEffect(() => {
+    updateStreak()
+      .unwrap()
+      .catch(() => {
+        dispatch(
+          showNotification({
+            message: t("updateStreak.notifications.error"),
+            severity: "error",
+          })
+        );
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const streak = data?.streak ?? 0;
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={6}>
         <HeroText>
           <Typography variant="h6" color="primary">
-            👋 Hello, <strong>{username}</strong>!
+            <Trans
+              t={t}
+              i18nKey="hero.greeting"
+              values={{ name: username }}
+              components={{ strong: <strong /> }}
+            />
           </Typography>
           <Typography variant="h6" component="span" sx={{ color: "black" }}>
-            Keep up the great work and don't let your <b>9</b>-day streak slip
-            away!
+            <Trans
+              t={t}
+              i18nKey="hero.streak"
+              values={{ count: streak }}
+              components={{ strong: <strong /> }}
+            />
           </Typography>
         </HeroText>
       </Grid>

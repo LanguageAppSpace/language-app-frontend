@@ -14,11 +14,13 @@ import { showNotification } from "@/redux/notification/notificationSlice";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@/config/route.config";
+import { Trans, useTranslation } from "react-i18next";
 const Sections = () => {
   const { data: sections, isLoading } = useGetSectionsQuery();
   const [deleteSection] = useDeleteSectionMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation("sections");
 
   const [modalState, setModalState] = useState<{
     modal: "create" | "edit" | "delete" | null;
@@ -41,11 +43,17 @@ const Sections = () => {
     try {
       await deleteSection(modalState.section.id).unwrap();
       dispatch(
-        showNotification({ message: "Section deleted", severity: "success" })
+        showNotification({
+          message: t("notifications.deleted"),
+          severity: "success",
+        })
       );
     } catch {
       dispatch(
-        showNotification({ message: "Failed to delete", severity: "error" })
+        showNotification({
+          message: t("notifications.deleteFailed"),
+          severity: "error",
+        })
       );
     }
 
@@ -88,7 +96,7 @@ const Sections = () => {
             onClick={() => openModal("create")}
             startIcon={<AddCircleIcon />}
           >
-            Create section
+            {t("actions.createSection")}
           </Button>
         )}
         <Button
@@ -97,7 +105,7 @@ const Sections = () => {
           onClick={() => navigate(ROUTE.CREATE_LESSON)}
           startIcon={<AddCircleIcon />}
         >
-          Create lesson
+          {t("actions.createLesson")}
         </Button>
       </Grid>
       {hasUserSections ? (
@@ -125,11 +133,14 @@ const Sections = () => {
         onClose={closeModal}
         onConfirm={handleDeleteConfirm}
         message={
-          <>
-            Are you sure you want to delete{" "}
-            <strong>{modalState.section?.title}</strong> section? <br />
-            This cannot be undone.
-          </>
+          <Trans
+            ns="sections"
+            i18nKey="deleteConfirmation.message"
+            values={{ name: modalState.section?.title }}
+            components={{
+              strong: <strong />,
+            }}
+          />
         }
       />
     </>

@@ -22,6 +22,7 @@ import { useDeleteLessonMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { Trans, useTranslation } from "react-i18next";
 
 const SectionView = () => {
   const { sectionId: sectionIdString } = useParams();
@@ -30,6 +31,8 @@ const SectionView = () => {
   const [resetLessonProgress] = useResetLessonProgressMutation();
   const [deleteLesson] = useDeleteLessonMutation();
   const dispatch = useDispatch();
+  const { t: tSections } = useTranslation("sections");
+  const { t: tLessons } = useTranslation("lessons");
 
   const [modalState, setModalState] = useState<{
     modal: "lessonMode" | "delete" | null;
@@ -50,12 +53,15 @@ const SectionView = () => {
     try {
       await resetLessonProgress(lessonId).unwrap();
       dispatch(
-        showNotification({ message: "Progress reset", severity: "success" })
+        showNotification({
+          message: tLessons("notifications.progressReset"),
+          severity: "success",
+        })
       );
     } catch {
       dispatch(
         showNotification({
-          message: "Failed to reset progress",
+          message: tLessons("notifications.progressResetFailed"),
           severity: "error",
         })
       );
@@ -68,11 +74,17 @@ const SectionView = () => {
     try {
       await deleteLesson(modalState.lesson.id).unwrap();
       dispatch(
-        showNotification({ message: "Lesson deleted", severity: "success" })
+        showNotification({
+          message: tLessons("notifications.deleted"),
+          severity: "success",
+        })
       );
     } catch {
       dispatch(
-        showNotification({ message: "Failed to delete", severity: "error" })
+        showNotification({
+          message: tLessons("notifications.deleteFailed"),
+          severity: "error",
+        })
       );
     }
 
@@ -110,7 +122,7 @@ const SectionView = () => {
   }
 
   if (!section) {
-    return <Typography>Section not found.</Typography>;
+    return <Typography>{tSections("details.notFound")}</Typography>;
   }
 
   const { lessons } = section;
@@ -143,7 +155,7 @@ const SectionView = () => {
                 })}
               >
                 <Button variant="contained" startIcon={<AddCircleIcon />}>
-                  Add Lesson
+                  {tSections("actions.addLesson")}
                 </Button>
               </Link>
             )}
@@ -208,11 +220,15 @@ const SectionView = () => {
         onClose={closeModal}
         onConfirm={handleDeleteConfirm}
         message={
-          <>
-            Are you sure you want to delete the lesson{" "}
-            <strong>{modalState.lesson?.title}</strong> ? <br />
-            This cannot be undone.
-          </>
+          <Trans
+            ns="lessons"
+            i18nKey="deleteConfirmation.message"
+            values={{ name: modalState.lesson?.title }}
+            components={{
+              strong: <strong />,
+              br: <br />,
+            }}
+          />
         }
       />
     </>

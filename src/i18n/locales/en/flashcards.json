@@ -1,0 +1,30 @@
+{
+  "progress": {
+    "counter": "{{current}} / {{total}} phrases"
+  },
+  "states": {
+    "noPhrases": "No phrases found in this lesson.",
+    "completedLesson": "You have completed this lesson.",
+    "somethingWentWrong": "Something went wrong."
+  },
+  "review": {
+    "known": "I know",
+    "stillLearning": "Still learning"
+  },
+  "quiz": {
+    "next": "Next question"
+  },
+  "matchingPairs": {
+    "title": "Match pairs",
+    "description": "Select matching pairs.",
+    "summaryTitle": "Matching finished!",
+    "summaryDescription": "All pairs have been matched, here's how you did:",
+    "restart": "Restart matching",
+    "backToSection": "Back to section",
+    "progress": "Round {{current}} / {{total}}"
+  },
+  "notifications": {
+    "updateFailed": "Failed to update flashcard",
+    "saveFailed": "Failed to save"
+  }
+}

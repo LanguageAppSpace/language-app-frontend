@@ -8,13 +8,19 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { styled } from "@mui/material/styles";
-import { faqData } from "@/constants/faqData";
+import { useTranslation } from "react-i18next";
 
 const Support = () => {
+  const { t } = useTranslation("support");
+
+  const faqData = t("items", {
+    returnObjects: true,
+  }) as { question: string; answer: string }[];
+
   return (
     <Wrapper>
       <Container>
-        <PageTitle variant="h4">Frequently Asked Questions</PageTitle>
+        <PageTitle variant="h4">{t("title")}</PageTitle>
         {faqData.map(({ question, answer }) => (
           <Accordion key={question}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>

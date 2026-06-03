@@ -6,23 +6,26 @@ import { useDeactivateAccountMutation } from "@/redux/userSettings/userSettingsA
 import ChangePasswordForm from "@/Profile/ChangePasswordForm.tsx";
 import UpdateProfileForm from "@/Profile/UpdateProfileForm.tsx";
 import { styled } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 const UserSettings: React.FC = () => {
   const dispatch = useDispatch();
   const [deactivateAccount] = useDeactivateAccountMutation();
+  const { t } = useTranslation("profile");
+
   const handleDeactivateAccount = async () => {
     try {
       await deactivateAccount().unwrap();
       dispatch(
         showNotification({
-          message: "Account deactivated",
+          message: t("deactivateAccount.notifications.success"),
           severity: "warning",
         })
       );
     } catch (error) {
       dispatch(
         showNotification({
-          message: "Failed to deactivate account",
+          message: t("deactivateAccount.notifications.error"),
           severity: "error",
         })
       );
@@ -33,19 +36,19 @@ const UserSettings: React.FC = () => {
     <StyledFormWrapper>
       <StyledContainer>
         <Box mb={4}>
-          <Typography variant="h4">User Settings</Typography>
+          <Typography variant="h4">{t("title")}</Typography>
         </Box>
         <ChangePasswordForm />
         <Divider sx={{ my: 4 }} />
         <UpdateProfileForm />
         <Divider sx={{ my: 4 }} />
-        <Typography variant="h6">Deactivate Account</Typography>
+        <Typography variant="h6">{t("deactivateAccount.title")}</Typography>
         <Button
           variant="outlined"
           color="error"
           onClick={handleDeactivateAccount}
         >
-          Deactivate Account
+          {t("deactivateAccount.button")}
         </Button>
       </StyledContainer>
     </StyledFormWrapper>
