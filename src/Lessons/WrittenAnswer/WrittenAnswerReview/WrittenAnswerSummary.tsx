@@ -4,6 +4,7 @@ import SummaryCard from "@/Lessons/SharedComponentes/SummaryCard";
 import { Button, Typography, Box, styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { WrittenAnswerResult } from "@/Lessons/WrittenAnswer/hooks/useWrittenAnswer";
+import { Trans, useTranslation } from "react-i18next";
 
 interface Props {
   correct: number;
@@ -21,36 +22,46 @@ const WrittenAnswerSummary = ({
   onReviewFailed,
 }: Props) => {
   const navigate = useNavigate();
+  const { t } = useTranslation("lessons");
 
   return (
     <SummaryCard>
-      <Typography variant="h4">Practice finished!</Typography>
+      <Typography variant="h4">{t("titles.practiceFinished")}</Typography>
 
       <Typography
         color="text.secondary"
         textAlign="center"
         sx={{ lineHeight: 1.6 }}
       >
-        All answers have been checked, <br />
-        here's how you did:
+        <Trans
+          t={t}
+          i18nKey="notifications.allAnswersChecked"
+          components={{ br: <br /> }}
+        />
       </Typography>
 
       <ProgressRing correct={correct} wrong={wrong} />
 
       {!!failedResults.length && (
         <FailedAnswersList>
-          <Typography fontWeight={600}>Answers to review:</Typography>
+          <Typography fontWeight={600}>
+            {t("titles.answersToReview")}
+          </Typography>
 
           {failedResults.map((result) => (
             <FailedAnswerItem key={result.pair.id}>
               <Typography fontWeight={600}>{result.pair.phraseOne}</Typography>
 
               <Typography color="error">
-                Your answer: {result.userAnswer}
+                {t("titles.yourAnswerParam", {
+                  answer: result.userAnswer,
+                })}
               </Typography>
 
               <Typography color="success.main">
-                Correct answer: {result.pair.phraseTwo}
+                {t("titles.correctAnswerParam", {
+                  answer: result.pair.phraseTwo,
+                })}
               </Typography>
             </FailedAnswerItem>
           ))}
@@ -65,12 +76,12 @@ const WrittenAnswerSummary = ({
             fullWidth
             onClick={onReviewFailed}
           >
-            Practice failed answers
+            {t("titles.practiceFailed")}
           </Button>
         )}
 
         <Button variant="outlined" size="large" fullWidth onClick={onRestart}>
-          Restart all
+          {t("actions.restartAll")}
         </Button>
 
         <Button
@@ -79,7 +90,7 @@ const WrittenAnswerSummary = ({
           fullWidth
           onClick={() => navigate(-1)}
         >
-          Back to section
+          {t("actions.backToSection")}
         </Button>
       </ButtonsContainer>
     </SummaryCard>

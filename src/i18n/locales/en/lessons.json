@@ -3,13 +3,22 @@
     "create": "Create Lesson",
     "update": "Update Lesson",
     "add": "Add Lesson",
-    "addVocabulary": "Add new vocabulary"
+    "addVocabulary": "Add new vocabulary",
+    "backToSection": "Back to section",
+    "restartAll": "Restart all"
   },
   "titles": {
     "create": "Create New Lesson",
     "edit": "Edit Lesson",
     "createInSection": "Create new lesson in:",
-    "selectMode": "Select a mode for: {{lesson}}"
+    "selectMode": "Select a mode for: {{lesson}}",
+    "practiceFinished": "Practice finished!",
+    "answersToReview":" Answers to review:",
+    "yourAnswerParam": "Your answer: {{answer}}",
+    "yourAnswer": "Your answer: ",
+    "correctAnswerParam": "Correct answer: {{answer}}",
+    "correctAnswer": "Correct answer: ",
+    "practiceFailed": "Practice failed answers"
   },
   "fields": {
     "title": "Title",
@@ -30,6 +39,10 @@
     "quiz": {
       "title": "Quiz",
       "description": "Choose the correct answer from options"
+    },
+    "writtenAnswer": {
+      "title": "Written Answer",
+      "description": "Type your answer and get feedback"
     }
   },
   "emptyState": {
@@ -57,12 +70,20 @@
     "updateFailed": "Failed to edit lesson",
     "deleteFailed": "Failed to delete",
     "progressResetFailed": "Failed to reset progress",
-    "flashcardDeleteFailed": "Error deleting flashcard"
+    "flashcardDeleteFailed": "Error deleting flashcard",
+    "allAnswersChecked": "All answers have been checked,<br />here's how you did:",
+    "somethingWentWrong": "Something went wrong.",
+    "noPhrasesFound": "No phrases found in this lesson.",
+    "correct": "Correct!",
+    "incorrect": "Not quite."
   },
   "deleteConfirmation": {
     "message": "Are you sure you want to delete the lesson <strong>{{name}}</strong>?\nThis cannot be undone."
   },
   "loading": {
     "lesson": "Loading..."
+  },
+  "placeholders": {
+    "typeYourAnswer": "Type your answer..."
   }
 }

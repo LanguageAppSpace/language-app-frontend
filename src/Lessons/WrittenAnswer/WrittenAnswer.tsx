@@ -3,10 +3,11 @@ import { useGetLessonByIdQuery } from "@/redux/lessons/lessonsApiSlice";
 import { Typography, CircularProgress } from "@mui/material";
 import { FlashcardPageWrapper } from "@/Lessons/Flashcards/components/FlashcardsLayout";
 import WrittenAnswerSession from "@/Lessons/WrittenAnswer/WrittenAnswerSession";
+import { useTranslation } from "react-i18next";
 
 const WrittenAnswer = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
-
+  const { t } = useTranslation("lessons");
   const {
     data: lesson,
     isLoading,
@@ -26,7 +27,9 @@ const WrittenAnswer = () => {
   if (isError || !lesson) {
     return (
       <FlashcardPageWrapper>
-        <Typography color="primary">Something went wrong.</Typography>
+        <Typography color="primary">
+          {t("notifications.somethingWentWrong")}
+        </Typography>
       </FlashcardPageWrapper>
     );
   }
@@ -35,7 +38,7 @@ const WrittenAnswer = () => {
     return (
       <FlashcardPageWrapper>
         <Typography color="primary">
-          No phrases found in this lesson.
+          {t("notifications.noPhrasesFound")}
         </Typography>
       </FlashcardPageWrapper>
     );

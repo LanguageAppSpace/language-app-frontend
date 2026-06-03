@@ -15,8 +15,10 @@ import {
 } from "@mui/material";
 import useWrittenAnswer from "@/Lessons/WrittenAnswer/hooks/useWrittenAnswer";
 import WrittenAnswerSummary from "@/Lessons/WrittenAnswer/WrittenAnswerReview/WrittenAnswerSummary";
+import { useTranslation } from "react-i18next";
 
 const WrittenAnswerSession = ({ lesson }: { lesson: Lesson }) => {
+  const { t } = useTranslation("lessons");
   const {
     phrasesToReview,
     currentPhrase,
@@ -80,7 +82,7 @@ const WrittenAnswerSession = ({ lesson }: { lesson: Lesson }) => {
             value={userAnswer}
             onChange={(event) => setUserAnswer(event.target.value)}
             disabled={isAnswered}
-            placeholder="Type your answer..."
+            placeholder={t("placeholders.typeYourAnswer")}
             fullWidth
             autoFocus
             onKeyDown={(event) => {
@@ -98,17 +100,20 @@ const WrittenAnswerSession = ({ lesson }: { lesson: Lesson }) => {
           {isAnswered && (
             <FeedbackBox $isCorrect={isCorrect}>
               <Typography fontWeight={700}>
-                {isCorrect ? "Correct!" : "Not quite."}
+                {isCorrect
+                  ? t("notifications.correct")
+                  : t("notifications.incorrect")}
               </Typography>
 
               {!isCorrect && (
                 <>
                   <Typography>
-                    Your answer: <strong>{userAnswer}</strong>
+                    {t("titles.yourAnswer")} <strong>{userAnswer}</strong>
                   </Typography>
 
                   <Typography>
-                    Correct answer: <strong>{currentPhrase.phraseTwo}</strong>
+                    {t("titles.correctAnswer")}{" "}
+                    <strong>{currentPhrase.phraseTwo}</strong>
                   </Typography>
                 </>
               )}

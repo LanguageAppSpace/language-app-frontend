@@ -92,8 +92,8 @@ export const LessonModeDialog = ({
       },
     },
     {
-      title: "Written Answer",
-      desc: "Type your answer and get feedback",
+      title: t("modes.writtenAnswer.title"),
+      desc: t("modes.writtenAnswer.description"),
       icon: <KeyboardIcon />,
       action: () => {
         onClose();
