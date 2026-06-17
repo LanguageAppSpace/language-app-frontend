@@ -29,6 +29,7 @@ import PublicRoutes from "@/routes/PublicRoutes";
 import SectionView from "@/UserDashboard/Sections/SectionView/SectionView";
 import Quiz from "@/Lessons/Quiz/Quiz";
 import MatchingPairs from "@/Lessons/MatchingPairs/MatchingPairs";
+import WrittenAnswer from "@/Lessons/WrittenAnswer/WrittenAnswer";
 
 const App = () => {
   return (
@@ -77,6 +78,10 @@ const App = () => {
             <Route
               path={ROUTE.FLASHCARDS_MATCHING}
               element={<MatchingPairs />}
+            />
+            <Route
+              path={ROUTE.FLASHCARDS_WRITTEN_ANSWER}
+              element={<WrittenAnswer />}
             />
             <Route path={ROUTE.SECTION} element={<SectionView />} />
           </Route>

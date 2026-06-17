@@ -18,6 +18,7 @@ import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
 import QuizIcon from "@mui/icons-material/Quiz";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import CloseIcon from "@mui/icons-material/Close";
+import KeyboardIcon from "@mui/icons-material/Keyboard";
 import { useNavigate, generatePath } from "react-router-dom";
 import { ROUTE } from "@/config/route.config";
 import { useTranslation } from "react-i18next";
@@ -85,6 +86,19 @@ export const LessonModeDialog = ({
         onClose();
         navigate(
           generatePath(ROUTE.FLASHCARDS_MATCHING, {
+            lessonId: lesson.id,
+          })
+        );
+      },
+    },
+    {
+      title: t("modes.writtenAnswer.title"),
+      desc: t("modes.writtenAnswer.description"),
+      icon: <KeyboardIcon />,
+      action: () => {
+        onClose();
+        navigate(
+          generatePath(ROUTE.FLASHCARDS_WRITTEN_ANSWER, {
             lessonId: lesson.id,
           })
         );
