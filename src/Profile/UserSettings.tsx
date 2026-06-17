@@ -7,10 +7,14 @@ import ChangePasswordForm from "@/Profile/ChangePasswordForm.tsx";
 import UpdateProfileForm from "@/Profile/UpdateProfileForm.tsx";
 import { styled } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
+import { logOut } from "@/redux/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { ROUTE } from "@/config/route.config";
 
 const UserSettings: React.FC = () => {
   const dispatch = useDispatch();
   const [deactivateAccount] = useDeactivateAccountMutation();
+  const navigate = useNavigate();
   const { t } = useTranslation("profile");
 
   const handleDeactivateAccount = async () => {
@@ -19,9 +23,11 @@ const UserSettings: React.FC = () => {
       dispatch(
         showNotification({
           message: t("deactivateAccount.notifications.success"),
-          severity: "warning",
+          severity: "success",
         })
       );
+      dispatch(logOut());
+      navigate(ROUTE.LANDING_PAGE, { replace: true });
     } catch (error) {
       dispatch(
         showNotification({
