@@ -32,6 +32,7 @@ const LessonCard: React.FC<LessonCardProps> = ({
   const { t } = useTranslation("lessons");
   const phrasesCount = lesson.phrasePairs.length;
   const progressValue = lesson.progress ?? 0;
+  const locale = navigator.language || "en-US";
 
   return (
     <LessonBox onClick={onCardClick}>
@@ -44,6 +45,9 @@ const LessonCard: React.FC<LessonCardProps> = ({
             {lesson.description}
           </Typography>
         </LessonTitle>
+        <LessonCreatedAt>
+          {new Date(lesson.createdAt).toLocaleDateString(locale)}
+        </LessonCreatedAt>
         <StyledChip
           label={t("counts.phrase", { count: phrasesCount })}
           color="default"
@@ -140,6 +144,13 @@ const LessonTitle = styled(Box)(({ theme }) => ({
     flexDirection: "row",
     alignItems: "baseline",
     gap: theme.spacing(1),
+  },
+}));
+
+const LessonCreatedAt = styled(Box)(({ theme }) => ({
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    width: "150px",
   },
 }));
 

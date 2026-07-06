@@ -22,6 +22,7 @@ export interface NewLesson {
   section: number | null;
   title: string;
   description: string;
+  createdAt: string;
   phrasePairs: PhrasePair[];
 }
 
