@@ -6,6 +6,8 @@ import {
   Box,
   Divider,
   Button,
+  Menu,
+  MenuItem,
   styled,
 } from "@mui/material";
 import { useGetSectionByIdQuery } from "@/redux/sections/sectionsApiSlice";
@@ -14,7 +16,7 @@ import LessonCard from "@/UserDashboard/Sections/SectionView/LessonCard";
 import EmptyState from "@/UserDashboard/Sections/EmptyState";
 import { ROUTE } from "@/config/route.config";
 import { LessonModeDialog } from "@/UserDashboard/LessonModeDialog/LessonModeDialog";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Lesson } from "@/interface";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal/DeleteConfirmationModal";
 import { useResetLessonProgressMutation } from "@/redux/lessons/lessonsApiSlice";
@@ -23,6 +25,7 @@ import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Trans, useTranslation } from "react-i18next";
+import { SortRounded } from "@mui/icons-material";
 
 const SectionView = () => {
   const { sectionId: sectionIdString } = useParams();
@@ -48,6 +51,34 @@ const SectionView = () => {
   ) => setModalState({ modal: type, lesson });
 
   const closeModal = () => setModalState({ modal: null, lesson: null });
+
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  const handleSortOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleSortClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSortLessonsDesc = () => {
+    const sorted = [...lessons].sort(
+      (a, b) =>
+        new Date(b.createdAt ?? 0).getTime() -
+        new Date(a.createdAt ?? 0).getTime()
+    );
+    setSortedLessons(sorted);
+  };
+
+  const handleSortLessonsAsc = () => {
+    const sorted = [...lessons].sort(
+      (a, b) =>
+        new Date(a.createdAt ?? 0).getTime() -
+        new Date(b.createdAt ?? 0).getTime()
+    );
+    setSortedLessons(sorted);
+  };
 
   const handleResetLessonProgress = async (lessonId: string) => {
     try {
@@ -99,6 +130,17 @@ const SectionView = () => {
     skip: !sectionId,
   });
 
+  const lessons = useMemo(() => {
+    return section?.lessons ?? [];
+  }, [section?.lessons]);
+
+  const hasUserLessons = lessons.length > 0;
+  const [sortedLessons, setSortedLessons] = useState<Lesson[]>(lessons);
+
+  useEffect(() => {
+    setSortedLessons(lessons);
+  }, [lessons]);
+
   if (isLoading || isFetching) {
     return (
       <>
@@ -124,9 +166,6 @@ const SectionView = () => {
   if (!section) {
     return <Typography>{tSections("details.notFound")}</Typography>;
   }
-
-  const { lessons } = section;
-  const hasUserLessons = lessons.length > 0;
 
   return (
     <>
@@ -174,15 +213,75 @@ const SectionView = () => {
             <Grid
               item
               xs={12}
-              sx={{ display: "flex", justifyContent: "flex-end" }}
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                gap: 2,
+              }}
             >
               <Typography variant="body1" color="primary">
                 {lessons.length} {lessons.length > 1 ? "lessons" : "lesson"}
               </Typography>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 1,
+                }}
+              >
+                <Button
+                  variant="contained"
+                  startIcon={<SortRounded />}
+                  onClick={handleSortOpen}
+                >
+                  {tSections("actions.sortLessons")}
+                </Button>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleSortClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  slotProps={{
+                    paper: {
+                      sx: {
+                        bgcolor: "primary.main",
+                        mt: 0.5,
+                        textTransform: "uppercase",
+                      },
+                    },
+                  }}
+                >
+                  <MenuItem
+                    sx={{
+                      fontSize: "0.875rem",
+                    }}
+                    onClick={handleSortLessonsAsc}
+                  >
+                    {tSections("actions.sortLessonsAsc")}
+                  </MenuItem>
+                  <MenuItem
+                    sx={{
+                      fontSize: "0.875rem",
+                    }}
+                    onClick={handleSortLessonsDesc}
+                  >
+                    {tSections("actions.sortLessonsDesc")}
+                  </MenuItem>
+                </Menu>
+              </Box>
             </Grid>
 
             <Grid item xs={12} mt={2}>
-              {lessons.map((lesson) => (
+              {sortedLessons.map((lesson) => (
                 <LessonCard
                   lesson={lesson}
                   onCardClick={() => openModal("lessonMode", lesson)}
