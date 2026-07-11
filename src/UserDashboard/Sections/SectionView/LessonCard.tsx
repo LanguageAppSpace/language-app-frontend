@@ -46,7 +46,8 @@ const LessonCard: React.FC<LessonCardProps> = ({
           </Typography>
         </LessonTitle>
         <LessonCreatedAt>
-          {new Date(lesson.createdAt).toLocaleDateString(locale)}
+          {lesson.createdAt &&
+            new Date(lesson.createdAt).toLocaleDateString(locale)}
         </LessonCreatedAt>
         <StyledChip
           label={t("counts.phrase", { count: phrasesCount })}

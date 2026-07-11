@@ -16,7 +16,7 @@ import LessonCard from "@/UserDashboard/Sections/SectionView/LessonCard";
 import EmptyState from "@/UserDashboard/Sections/EmptyState";
 import { ROUTE } from "@/config/route.config";
 import { LessonModeDialog } from "@/UserDashboard/LessonModeDialog/LessonModeDialog";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Lesson } from "@/interface";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal/DeleteConfirmationModal";
 import { useResetLessonProgressMutation } from "@/redux/lessons/lessonsApiSlice";
@@ -65,7 +65,8 @@ const SectionView = () => {
   const handleSortLessonsDesc = () => {
     const sorted = [...lessons].sort(
       (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        new Date(b.createdAt ?? 0).getTime() -
+        new Date(a.createdAt ?? 0).getTime()
     );
     setSortedLessons(sorted);
   };
@@ -73,7 +74,8 @@ const SectionView = () => {
   const handleSortLessonsAsc = () => {
     const sorted = [...lessons].sort(
       (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        new Date(a.createdAt ?? 0).getTime() -
+        new Date(b.createdAt ?? 0).getTime()
     );
     setSortedLessons(sorted);
   };
@@ -128,7 +130,10 @@ const SectionView = () => {
     skip: !sectionId,
   });
 
-  const lessons = section?.lessons ?? [];
+  const lessons = useMemo(() => {
+    return section?.lessons ?? [];
+  }, [section?.lessons]);
+
   const hasUserLessons = lessons.length > 0;
   const [sortedLessons, setSortedLessons] = useState<Lesson[]>(lessons);
 
