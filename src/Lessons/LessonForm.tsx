@@ -73,6 +73,17 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
     remove(index);
   };
 
+  const handleAddVocabulary = () => {
+    append({ phraseOne: "", phraseTwo: "" });
+
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    });
+  };
+
   const hasSection = sections && sections?.results.length > 0;
   const sectionsList = sections ? sections.results : [];
   const isEditMode = Boolean(lessonId);
@@ -197,7 +208,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
         <ButtonAddVocabulary
           variant="contained"
           endIcon={<AddIcon />}
-          onClick={() => append({ phraseOne: "", phraseTwo: "" })}
+          onClick={handleAddVocabulary}
         >
           {t("actions.addVocabulary")}
         </ButtonAddVocabulary>
