@@ -11,23 +11,29 @@ import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
+  title: React.ReactNode;
+  message: React.ReactNode;
+  confirmText: string;
+  cancelText?: string;
   onClose: () => void;
   onConfirm: () => void;
-  message: React.ReactNode;
 }
 
-const DeleteConfirmationModal = ({
+const ConfirmationModal = ({
   open,
+  title,
+  message,
+  confirmText,
+  cancelText,
   onClose,
   onConfirm,
-  message,
 }: Props) => {
   const { t } = useTranslation("common");
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>
         <Typography color="primary" variant="h6" component="span">
-          {t("modal.confirmAction")}
+          {title}
         </Typography>
       </DialogTitle>
       <DialogContent>
@@ -35,14 +41,14 @@ const DeleteConfirmationModal = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onConfirm} color="primary" variant="contained">
-          {t("actions.delete")}
+          {confirmText}
         </Button>
         <Button onClick={onClose} variant="outlined">
-          {t("actions.cancel")}
+          {cancelText ?? t("actions.cancel")}
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default DeleteConfirmationModal;
+export default ConfirmationModal;

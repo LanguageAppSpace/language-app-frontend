@@ -16,7 +16,7 @@ import { ROUTE } from "@/config/route.config";
 import { LessonModeDialog } from "@/UserDashboard/LessonModeDialog/LessonModeDialog";
 import { useState } from "react";
 import { Lesson } from "@/interface";
-import DeleteConfirmationModal from "@/components/DeleteConfirmationModal/DeleteConfirmationModal";
+import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal";
 import { useResetLessonProgressMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useDeleteLessonMutation } from "@/redux/lessons/lessonsApiSlice";
 import { useDispatch } from "react-redux";
@@ -33,6 +33,7 @@ const SectionView = () => {
   const dispatch = useDispatch();
   const { t: tSections } = useTranslation("sections");
   const { t: tLessons } = useTranslation("lessons");
+  const { t: tCommon } = useTranslation("common");
 
   const [modalState, setModalState] = useState<{
     modal: "lessonMode" | "delete" | null;
@@ -215,10 +216,12 @@ const SectionView = () => {
         onClose={closeModal}
         lesson={modalState.lesson}
       />
-      <DeleteConfirmationModal
+      <ConfirmationModal
         open={modalState.modal === "delete"}
         onClose={closeModal}
         onConfirm={handleDeleteConfirm}
+        title={tCommon("modal.confirmAction")}
+        confirmText={tCommon("actions.delete")}
         message={
           <Trans
             ns="lessons"

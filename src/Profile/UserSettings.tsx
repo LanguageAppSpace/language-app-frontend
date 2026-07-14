@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Button, Divider, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
@@ -7,8 +7,10 @@ import ChangePasswordForm from "@/Profile/ChangePasswordForm.tsx";
 import UpdateProfileForm from "@/Profile/UpdateProfileForm.tsx";
 import { styled } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
+import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal.tsx";
 
 const UserSettings: React.FC = () => {
+  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
   const dispatch = useDispatch();
   const [deactivateAccount] = useDeactivateAccountMutation();
   const { t } = useTranslation("profile");
@@ -22,6 +24,7 @@ const UserSettings: React.FC = () => {
           severity: "warning",
         })
       );
+      setIsDeactivateModalOpen(false);
     } catch (error) {
       dispatch(
         showNotification({
@@ -46,10 +49,19 @@ const UserSettings: React.FC = () => {
         <Button
           variant="outlined"
           color="error"
-          onClick={handleDeactivateAccount}
+          onClick={() => setIsDeactivateModalOpen(true)}
         >
           {t("deactivateAccount.button")}
         </Button>
+
+        <ConfirmationModal
+          open={isDeactivateModalOpen}
+          onClose={() => setIsDeactivateModalOpen(false)}
+          onConfirm={handleDeactivateAccount}
+          title={t("deactivateAccount.modal.title")}
+          message={t("deactivateAccount.modal.message")}
+          confirmText={t("deactivateAccount.modal.confirm")}
+        />
       </StyledContainer>
     </StyledFormWrapper>
   );

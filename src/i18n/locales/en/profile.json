@@ -46,6 +46,11 @@
     "notifications": {
       "success": "Account deactivated",
       "error": "Failed to deactivate account"
+    },
+    "modal": {
+      "title": "Deactivate  User Account",
+      "message": "This action is permanent and cannot be undone. The user will no longer be able to sign in or access the application. All learning progress, study results, saved words, and previously entered content will be permanently deleted.",
+      "confirm": "Deactivate"
     }
   }
 }
