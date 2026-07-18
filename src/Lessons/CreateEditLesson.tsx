@@ -214,6 +214,8 @@ const StyledCreateLessonContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   padding: theme.spacing(3),
+  paddingBottom: theme.spacing(15),
+  scrollPaddingBottom: theme.spacing(15),
 }));
 
 export const VocabularyRowStyled = styled(Grid)(({ theme }) => ({
