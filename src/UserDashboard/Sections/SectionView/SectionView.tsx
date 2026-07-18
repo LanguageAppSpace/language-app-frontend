@@ -54,6 +54,25 @@ const SectionView = () => {
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
+  const {
+    data: section,
+    isLoading,
+    isFetching,
+  } = useGetSectionByIdQuery(sectionId!, {
+    skip: !sectionId,
+  });
+
+  const lessons = useMemo(() => {
+    return section?.lessons ?? [];
+  }, [section?.lessons]);
+
+  const hasUserLessons = lessons.length > 0;
+  const [sortedLessons, setSortedLessons] = useState<Lesson[]>(lessons);
+
+  useEffect(() => {
+    setSortedLessons(lessons);
+  }, [lessons]);
+
   const handleSortOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -121,25 +140,6 @@ const SectionView = () => {
 
     closeModal();
   };
-
-  const {
-    data: section,
-    isLoading,
-    isFetching,
-  } = useGetSectionByIdQuery(sectionId!, {
-    skip: !sectionId,
-  });
-
-  const lessons = useMemo(() => {
-    return section?.lessons ?? [];
-  }, [section?.lessons]);
-
-  const hasUserLessons = lessons.length > 0;
-  const [sortedLessons, setSortedLessons] = useState<Lesson[]>(lessons);
-
-  useEffect(() => {
-    setSortedLessons(lessons);
-  }, [lessons]);
 
   if (isLoading || isFetching) {
     return (

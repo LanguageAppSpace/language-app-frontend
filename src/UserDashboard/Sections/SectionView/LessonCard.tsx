@@ -32,7 +32,8 @@ const LessonCard: React.FC<LessonCardProps> = ({
   const { t } = useTranslation("lessons");
   const phrasesCount = lesson.phrasePairs.length;
   const progressValue = lesson.progress ?? 0;
-  const locale = navigator.language || "en-US";
+  const { i18n } = useTranslation();
+  const locale = i18n.language || "en-US";
 
   return (
     <LessonBox onClick={onCardClick}>
