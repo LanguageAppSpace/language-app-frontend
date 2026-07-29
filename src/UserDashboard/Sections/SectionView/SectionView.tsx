@@ -28,15 +28,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { SortRounded } from "@mui/icons-material";
 
 const SectionView = () => {
-  const { sectionId: sectionIdString } = useParams();
-  const navigate = useNavigate();
-  const sectionId = sectionIdString ? Number(sectionIdString) : null;
-  const [resetLessonProgress] = useResetLessonProgressMutation();
-  const [deleteLesson] = useDeleteLessonMutation();
-  const dispatch = useDispatch();
-  const { t: tSections } = useTranslation("sections");
-  const { t: tLessons } = useTranslation("lessons");
-
   const [modalState, setModalState] = useState<{
     modal: "lessonMode" | "delete" | null;
     lesson: Lesson | null;
@@ -44,15 +35,19 @@ const SectionView = () => {
     modal: null,
     lesson: null,
   });
-
-  const openModal = (
-    type: "lessonMode" | "delete",
-    lesson: Lesson | null = null
-  ) => setModalState({ modal: type, lesson });
-
-  const closeModal = () => setModalState({ modal: null, lesson: null });
-
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [sortedLessons, setSortedLessons] = useState<Lesson[]>([]);
+
+  const { sectionId: sectionIdString } = useParams();
+  const navigate = useNavigate();
+  const sectionId = sectionIdString ? Number(sectionIdString) : null;
+
+  const dispatch = useDispatch();
+  const { t: tSections } = useTranslation("sections");
+  const { t: tLessons } = useTranslation("lessons");
+
+  const [resetLessonProgress] = useResetLessonProgressMutation();
+  const [deleteLesson] = useDeleteLessonMutation();
 
   const {
     data: section,
@@ -67,11 +62,17 @@ const SectionView = () => {
   }, [section?.lessons]);
 
   const hasUserLessons = lessons.length > 0;
-  const [sortedLessons, setSortedLessons] = useState<Lesson[]>(lessons);
 
   useEffect(() => {
     setSortedLessons(lessons);
   }, [lessons]);
+
+  const openModal = (
+    type: "lessonMode" | "delete",
+    lesson: Lesson | null = null
+  ) => setModalState({ modal: type, lesson });
+
+  const closeModal = () => setModalState({ modal: null, lesson: null });
 
   const handleSortOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
