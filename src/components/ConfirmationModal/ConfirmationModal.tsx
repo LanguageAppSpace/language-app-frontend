@@ -6,13 +6,13 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import React from "react";
+import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
-  title: React.ReactNode;
-  message: React.ReactNode;
+  title: ReactNode;
+  message: ReactNode;
   confirmText: string;
   cancelText?: string;
   onClose: () => void;
