@@ -37,7 +37,8 @@
       "firstNameRequired": "First name is required",
       "lastNameRequired": "Last name is required",
       "photoRequired": "Profile photo is required",
-      "birthdayRequired": "Birthday is required"
+      "birthdayRequired": "Birthday is required",
+      "selectFile" : "Click to select a file"
     }
   },
   "deactivateAccount": {

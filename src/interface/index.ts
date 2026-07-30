@@ -7,7 +7,8 @@ export interface PasswordData {
 export interface ProfileData {
   firstName: string;
   lastName: string;
-  photo: string;
+  photoUrl?: string;
+  photoFile?: File;
   birthday: Date;
 }
 

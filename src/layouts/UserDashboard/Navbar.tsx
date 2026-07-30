@@ -1,9 +1,11 @@
 import Logo from "@/components/Logo/Logo";
 import { Box, Toolbar, Container, Avatar, AppBar } from "@mui/material";
 import Hamburger from "@/components/Buttons/Hamburger";
+import { useGetProfileQuery } from "@/redux/userSettings/userSettingsApiSlice";
 
 const drawerWidth = 240;
 const Navbar = () => {
+  const { data: profile } = useGetProfileQuery();
   return (
     <>
       <AppBar
@@ -20,7 +22,10 @@ const Navbar = () => {
             <Hamburger />
             <Logo />
             <Box sx={{ flexGrow: 0 }}>
-              <Avatar />
+              <Avatar
+                src={profile?.photoUrl}
+                alt={`${profile?.firstName} ${profile?.lastName}`}
+              />
             </Box>
           </Toolbar>
         </Container>
