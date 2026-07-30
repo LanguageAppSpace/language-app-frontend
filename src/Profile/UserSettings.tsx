@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Button, Divider, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice.ts";
@@ -7,14 +7,12 @@ import ChangePasswordForm from "@/Profile/ChangePasswordForm.tsx";
 import UpdateProfileForm from "@/Profile/UpdateProfileForm.tsx";
 import { styled } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
-import { logOut } from "@/redux/auth/authSlice";
-import { useNavigate } from "react-router-dom";
-import { ROUTE } from "@/config/route.config";
+import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal.tsx";
 
 const UserSettings: React.FC = () => {
+  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
   const dispatch = useDispatch();
   const [deactivateAccount] = useDeactivateAccountMutation();
-  const navigate = useNavigate();
   const { t } = useTranslation("profile");
 
   const handleDeactivateAccount = async () => {
@@ -26,8 +24,7 @@ const UserSettings: React.FC = () => {
           severity: "success",
         })
       );
-      dispatch(logOut());
-      navigate(ROUTE.LANDING_PAGE, { replace: true });
+      setIsDeactivateModalOpen(false);
     } catch (error) {
       dispatch(
         showNotification({
@@ -52,10 +49,19 @@ const UserSettings: React.FC = () => {
         <Button
           variant="outlined"
           color="error"
-          onClick={handleDeactivateAccount}
+          onClick={() => setIsDeactivateModalOpen(true)}
         >
           {t("deactivateAccount.button")}
         </Button>
+
+        <ConfirmationModal
+          open={isDeactivateModalOpen}
+          onClose={() => setIsDeactivateModalOpen(false)}
+          onConfirm={handleDeactivateAccount}
+          title={t("deactivateAccount.modal.title")}
+          message={t("deactivateAccount.modal.message")}
+          confirmText={t("deactivateAccount.modal.confirm")}
+        />
       </StyledContainer>
     </StyledFormWrapper>
   );

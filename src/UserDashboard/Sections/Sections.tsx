@@ -7,7 +7,7 @@ import {
   useGetSectionsQuery,
 } from "@/redux/sections/sectionsApiSlice";
 import SectionModal from "@/UserDashboard/Sections/SectionModal";
-import DeleteConfirmationModal from "@/components/DeleteConfirmationModal/DeleteConfirmationModal";
+import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal";
 import { Section } from "@/interface";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
@@ -21,6 +21,7 @@ const Sections = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation("sections");
+  const { t: tCommon } = useTranslation("common");
 
   const [modalState, setModalState] = useState<{
     modal: "create" | "edit" | "delete" | null;
@@ -128,10 +129,12 @@ const Sections = () => {
         onClose={closeModal}
         editingSection={modalState.modal === "edit" ? modalState.section : null}
       />
-      <DeleteConfirmationModal
+      <ConfirmationModal
         open={modalState.modal === "delete"}
         onClose={closeModal}
         onConfirm={handleDeleteConfirm}
+        title={tCommon("modal.confirmAction")}
+        confirmText={tCommon("actions.delete")}
         message={
           <Trans
             ns="sections"
