@@ -4,6 +4,13 @@ import { AuthState } from "@/redux/auth/authSlice";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getProfile: builder.query<ProfileData, void>({
+      query: () => ({
+        url: `user/profile/`,
+        method: "GET",
+      }),
+      providesTags: ["Profile"],
+    }),
     changePassword: builder.mutation({
       query: ({
         userId,
@@ -25,19 +32,16 @@ export const userApiSlice = apiSlice.injectEndpoints({
       },
     }),
     updateProfile: builder.mutation({
-      query: ({ data }: { data: ProfileData }) => {
-        const { firstName, lastName, photo, birthday } = data;
-        return {
-          url: `user/profile/`,
-          method: "PATCH",
-          body: {
-            first_name: firstName,
-            last_name: lastName,
-            photo,
-            birthday,
-          },
-        };
-      },
+      query: ({ data }: { data: ProfileData }) => ({
+        url: `user/profile/`,
+        method: "PATCH",
+        body: {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          photo_url: data.photoUrl,
+          birthday: data.birthday,
+        },
+      }),
     }),
     deactivateAccount: builder.mutation<void, void>({
       query: () => ({
@@ -49,6 +53,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
+  useGetProfileQuery,
   useChangePasswordMutation,
   useUpdateProfileMutation,
   useDeactivateAccountMutation,
