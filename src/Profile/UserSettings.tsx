@@ -21,7 +21,7 @@ const UserSettings: React.FC = () => {
       dispatch(
         showNotification({
           message: t("deactivateAccount.notifications.success"),
-          severity: "warning",
+          severity: "success",
         })
       );
       setIsDeactivateModalOpen(false);

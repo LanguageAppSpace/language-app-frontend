@@ -7,6 +7,8 @@ import {
   Divider,
   Button,
   styled,
+  TextField,
+  InputAdornment,
 } from "@mui/material";
 import { useGetSectionByIdQuery } from "@/redux/sections/sectionsApiSlice";
 import folderImg from "@/assets/images/folder.png";
@@ -17,14 +19,18 @@ import { LessonModeDialog } from "@/UserDashboard/LessonModeDialog/LessonModeDia
 import { useState } from "react";
 import { Lesson } from "@/interface";
 import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal";
-import { useResetLessonProgressMutation } from "@/redux/lessons/lessonsApiSlice";
-import { useDeleteLessonMutation } from "@/redux/lessons/lessonsApiSlice";
+import {
+  useResetLessonProgressMutation,
+  useDeleteLessonMutation,
+} from "@/redux/lessons/lessonsApiSlice";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Trans, useTranslation } from "react-i18next";
+import SearchIcon from "@mui/icons-material/Search";
 
 const SectionView = () => {
+  const [searchValue, setSearchValue] = useState("");
   const { sectionId: sectionIdString } = useParams();
   const navigate = useNavigate();
   const sectionId = sectionIdString ? Number(sectionIdString) : null;
@@ -129,6 +135,16 @@ const SectionView = () => {
   const { lessons } = section;
   const hasUserLessons = lessons.length > 0;
 
+  const normalizedSearchValue = searchValue.trim().toLowerCase();
+
+  const filteredLessons = normalizedSearchValue
+    ? lessons.filter((lesson) =>
+        lesson.title.toLowerCase().includes(normalizedSearchValue)
+      )
+    : lessons;
+
+  const hasMatchingLessons = filteredLessons.length > 0;
+
   return (
     <>
       <Grid container sx={{ mt: 4 }}>
@@ -172,29 +188,50 @@ const SectionView = () => {
         />
         {hasUserLessons ? (
           <>
-            <Grid
-              item
-              xs={12}
-              sx={{ display: "flex", justifyContent: "flex-end" }}
-            >
-              <Typography variant="body1" color="primary">
-                {lessons.length} {lessons.length > 1 ? "lessons" : "lesson"}
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12} mt={2}>
-              {lessons.map((lesson) => (
-                <LessonCard
-                  lesson={lesson}
-                  onCardClick={() => openModal("lessonMode", lesson)}
-                  onResetProgressClick={async () => {
-                    await handleResetLessonProgress(lesson.id);
-                  }}
-                  onDeleteClick={() => openModal("delete", lesson)}
-                  key={lesson.id}
-                />
-              ))}
-            </Grid>
+            <SearchBoxContainer item xs={12}>
+              <SearchTextField
+                fullWidth
+                size="small"
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
+                placeholder={tLessons("search.placeholder")}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Grid
+                item
+                xs={12}
+                sx={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <Typography variant="body1" color="primary">
+                  {tLessons("counts.lesson", { count: filteredLessons.length })}
+                </Typography>
+              </Grid>
+            </SearchBoxContainer>
+            {hasMatchingLessons ? (
+              <Grid item xs={12} mt={2}>
+                {filteredLessons.map((lesson) => (
+                  <LessonCard
+                    lesson={lesson}
+                    onCardClick={() => openModal("lessonMode", lesson)}
+                    onResetProgressClick={async () => {
+                      await handleResetLessonProgress(lesson.id);
+                    }}
+                    onDeleteClick={() => openModal("delete", lesson)}
+                    key={lesson.id}
+                  />
+                ))}
+              </Grid>
+            ) : (
+              <Grid item xs={12} mt={2}>
+                <Typography>{tLessons("search.noResults")}</Typography>
+              </Grid>
+            )}
           </>
         ) : (
           <Grid item xs={12} mt={2}>
@@ -251,4 +288,24 @@ const HeaderWrapper = styled(Box)(({ theme }) => ({
     flexDirection: "row",
     alignItems: "center",
   },
+}));
+
+const SearchTextField = styled(TextField)(({ theme }) => ({
+  "& .MuiInputBase-input": {
+    color: theme.palette.primary.main,
+
+    "&::placeholder": {
+      color: theme.palette.primary.light,
+      opacity: 1,
+    },
+  },
+}));
+
+const SearchBoxContainer = styled(Grid)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: theme.spacing(2),
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
 }));
