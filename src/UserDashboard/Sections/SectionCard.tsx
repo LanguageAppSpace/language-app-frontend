@@ -44,15 +44,17 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
           >
             <EditIcon fontSize="small" />
           </IconButton>
-          <IconButton
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete?.(section);
-            }}
-          >
-            <DeleteIcon fontSize="small" />
-          </IconButton>
+          {section.title !== "Other" && (
+            <IconButton
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete?.(section);
+              }}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          )}
         </IconsRow>
       </Box>
       <Typography variant="body2" color="primary.light">
