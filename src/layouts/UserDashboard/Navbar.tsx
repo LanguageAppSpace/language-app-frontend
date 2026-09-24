@@ -2,10 +2,44 @@ import Logo from "@/components/Logo/Logo";
 import { Box, Toolbar, Container, Avatar, AppBar } from "@mui/material";
 import Hamburger from "@/components/Buttons/Hamburger";
 import { useGetProfileQuery } from "@/redux/userSettings/userSettingsApiSlice";
+import { useEffect } from "react";
 
 const drawerWidth = 240;
+const getPhotoUrl = (photo?: string) => {
+  if (!photo) return undefined;
+
+  if (/^https?:\/\//i.test(photo)) {
+    return photo;
+  }
+
+  const apiUrl = import.meta.env.VITE_API;
+
+  try {
+    const apiOrigin = new URL(apiUrl).origin;
+    return new URL(photo, `${apiOrigin}/`).toString();
+  } catch {
+    return `${apiUrl.replace(/\/$/, "")}/${photo.replace(/^\//, "")}`;
+  }
+};
+
 const Navbar = () => {
-  const { data: profile } = useGetProfileQuery();
+  const { data: profile, refetch, fulfilledTimeStamp } = useGetProfileQuery();
+
+  useEffect(() => {
+    const handleProfileUpdate = () => void refetch();
+    window.addEventListener("profile-updated", handleProfileUpdate);
+    return () => {
+      window.removeEventListener("profile-updated", handleProfileUpdate);
+    };
+  }, [refetch]);
+
+  const basePhotoSrc = getPhotoUrl(profile?.photo);
+  const photoSrc = basePhotoSrc
+    ? `${basePhotoSrc}${basePhotoSrc.includes("?") ? "&" : "?"}v=${
+        fulfilledTimeStamp ?? 0
+      }`
+    : undefined;
+
   return (
     <>
       <AppBar
@@ -21,10 +55,15 @@ const Navbar = () => {
           <Toolbar>
             <Hamburger />
             <Logo />
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0, ml: "auto" }}>
               <Avatar
-                src={profile?.photoUrl}
-                alt={`${profile?.firstName} ${profile?.lastName}`}
+                key={photoSrc}
+                src={photoSrc}
+                alt={`${profile?.firstName ?? ""} ${profile?.lastName ?? ""}`}
+                sx={{
+                  width: 40,
+                  height: 40,
+                }}
               />
             </Box>
           </Toolbar>

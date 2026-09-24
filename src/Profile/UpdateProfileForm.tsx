@@ -7,7 +7,7 @@ import { Grid, Typography, Button, Avatar, Box } from "@mui/material";
 import { FormRow, FormInputLabel, FormInput } from "@/components/Form/Form.tsx";
 import { useUpdateProfileMutation } from "@/redux/userSettings/userSettingsApiSlice.ts";
 import { ProfileData } from "@/interface";
-import { ChangeEvent } from "react";
+import { ChangeEvent, DragEvent } from "react";
 import { useTranslation } from "react-i18next";
 
 const UpdateProfileForm = () => {
@@ -43,16 +43,30 @@ const UpdateProfileForm = () => {
 
   const preview = photoFile ? URL.createObjectURL(photoFile) : photoUrl;
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setValue("photoFile", file);
+  const setPhotoFile = (file?: File) => {
+    if (
+      !file ||
+      !["image/jpeg", "image/png", "image/webp"].includes(file.type)
+    ) {
+      return;
     }
+
+    setValue("photoFile", file);
+    setValue("photoUrl", "");
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPhotoFile(event.target.files?.[0]);
+  };
+
+  const handleDrop = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setPhotoFile(event.dataTransfer.files?.[0]);
   };
 
   const handleProfileSubmit: SubmitHandler<ProfileData> = async (data) => {
     try {
-      await updateProfile({ data });
+      await updateProfile({ data }).unwrap();
       dispatch(
         showNotification({
           message: t("updateProfile.notifications.success"),
@@ -61,9 +75,13 @@ const UpdateProfileForm = () => {
       );
       resetProfile();
     } catch (error) {
+      const message =
+        typeof (error as { error?: unknown })?.error === "string"
+          ? (error as { error: string }).error
+          : t("updateProfile.notifications.error");
       dispatch(
         showNotification({
-          message: t("updateProfile.notifications.error"),
+          message,
           severity: "error",
         })
       );
@@ -100,17 +118,22 @@ const UpdateProfileForm = () => {
         </FormRow>
         <FormRow>
           <Grid item xs={12}>
-            <FormInputLabel shrink={false} htmlFor={"photo"}>
+            <FormInputLabel shrink={false} htmlFor={"photoUrl"}>
               <Typography>{t("updateProfile.fields.photo")}</Typography>
             </FormInputLabel>
             <FormInput
+              id="photoUrl"
               fullWidth
               error={Boolean(profileErrors.photoUrl)}
               helperText={profileErrors.photoUrl?.message}
-              {...registerProfile("photoUrl")}
+              {...registerProfile("photoUrl", {
+                onChange: () => setValue("photoFile", undefined),
+              })}
             />
 
             <Box
+              onDragOver={(event) => event.preventDefault()}
+              onDrop={handleDrop}
               sx={{
                 border: "2px dashed gray",
                 borderRadius: 2,
@@ -123,7 +146,7 @@ const UpdateProfileForm = () => {
               <input
                 id="photoUploadInput"
                 type="file"
-                accept="image/jpeg,image/png"
+                accept="image/jpeg,image/png,image/webp"
                 hidden
                 onChange={handleFileChange}
               />
@@ -142,13 +165,7 @@ const UpdateProfileForm = () => {
                   mt: 3,
                 }}
               >
-                <Avatar
-                  src={preview}
-                  sx={{
-                    width: 120,
-                    height: 120,
-                  }}
-                />
+                <Avatar src={preview} sx={{ width: 120, height: 120 }} />
               </Box>
             )}
           </Grid>
