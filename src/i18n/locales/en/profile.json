@@ -31,13 +31,16 @@
     "button": "Save Profile",
     "notifications": {
       "success": "Profile updated successfully",
-      "error": "Failed to update profile"
+      "error": "Failed to update profile",
+      "invalidPhotoUrl": "This URL does not point directly to an image.",
+      "photoDownloadError": "Could not download this image. Try another direct image URL or upload the file."
     },
     "validation": {
       "firstNameRequired": "First name is required",
       "lastNameRequired": "Last name is required",
       "photoRequired": "Profile photo is required",
-      "birthdayRequired": "Birthday is required"
+      "birthdayRequired": "Birthday is required",
+      "selectFile" : "Click to select a file"
     }
   },
   "deactivateAccount": {
