@@ -1,5 +1,5 @@
-import React from "react";
-import { Grid, IconButton, InputLabel, FormControl } from "@mui/material";
+import React, { useState } from "react";
+import { Grid, IconButton, InputLabel, FormControl, Box } from "@mui/material";
 import { Controller, useForm, useFieldArray } from "react-hook-form";
 import { Add as AddIcon, Delete as DeleteIcon } from "@mui/icons-material";
 import {
@@ -7,6 +7,7 @@ import {
   InputField,
   ButtonAddVocabulary,
   ButtonCreateLesson,
+  ButtonCancelLesson,
 } from "@/Lessons/CreateEditLesson.tsx";
 import {
   FormInput,
@@ -25,11 +26,17 @@ import { useTranslation } from "react-i18next";
 import { FORM_PLACEHOLDERS } from "@/constants/placeholders";
 interface LessonFormProps {
   initialValues: NewLesson;
-  onSubmit: (data: NewLesson) => void;
+  onSubmit: (data: NewLesson) => void | Promise<void>;
+  onCancel: () => void;
 }
 
-const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
+const LessonForm: React.FC<LessonFormProps> = ({
+  initialValues,
+  onSubmit,
+  onCancel,
+}) => {
   const [deleteFlashcard] = useDeleteFlashcardMutation();
+  const [deletedFlashcardIds, setDeletedFlashcardIds] = useState<number[]>([]);
   const { t } = useTranslation("lessons");
 
   const { data: sections } = useGetSectionsQuery();
@@ -54,13 +61,25 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
     keyName: "uid",
   });
 
-  const onDeleteFlashcard = async (
-    pairId: number | undefined,
-    index: number
-  ) => {
+  const onDeleteFlashcard = (pairId: number | undefined, index: number) => {
     if (lessonId && pairId !== undefined) {
+      setDeletedFlashcardIds((currentIds) => [...currentIds, pairId]);
+    }
+
+    remove(index);
+  };
+
+  const submitForm = async (data: NewLesson) => {
+    if (lessonId && deletedFlashcardIds.length > 0) {
       try {
-        await deleteFlashcard({ lessonId, pairId }).unwrap();
+        await Promise.all(
+          deletedFlashcardIds.map((pairId) =>
+            deleteFlashcard({
+              lessonId,
+              pairId,
+            }).unwrap()
+          )
+        );
       } catch (error: unknown) {
         dispatch(
           showNotification({
@@ -68,9 +87,10 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
             severity: "error",
           })
         );
+        return;
       }
     }
-    remove(index);
+    await onSubmit(data);
   };
 
   const handleAddVocabulary = () => {
@@ -89,7 +109,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
   const isEditMode = Boolean(lessonId);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(submitForm)}>
       <Grid container spacing={2} direction="column" xs={6}>
         <Grid item>
           <FormInput
@@ -214,14 +234,27 @@ const LessonForm: React.FC<LessonFormProps> = ({ initialValues, onSubmit }) => {
         </ButtonAddVocabulary>
       </Grid>
       <LessonFooter>
-        <ButtonCreateLesson
-          variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: 2,
+            width: "100%",
+          }}
         >
-          {lessonId ? t("actions.update") : t("actions.create")}
-        </ButtonCreateLesson>
+          <ButtonCancelLesson
+            variant="outlined"
+            type="button"
+            onClick={onCancel}
+          >
+            {t("actions.cancel")}
+          </ButtonCancelLesson>
+
+          <ButtonCreateLesson variant="contained" color="primary" type="submit">
+            {lessonId ? t("actions.update") : t("actions.create")}
+          </ButtonCreateLesson>
+        </Box>
       </LessonFooter>
     </form>
   );
