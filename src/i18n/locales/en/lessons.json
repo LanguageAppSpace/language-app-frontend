@@ -5,7 +5,8 @@
     "add": "Add Lesson",
     "addVocabulary": "Add new vocabulary",
     "backToSection": "Back to section",
-    "restartAll": "Restart all"
+    "restartAll": "Restart all",
+    "cancel": "Cancel"
   },
   "titles": {
     "create": "Create New Lesson",
