@@ -21,6 +21,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: user,
       }),
+      extraOptions: { requiresAuth: false },
     }),
     loginUser: builder.mutation<LoginResponse, LoginUser>({
       query: (user) => ({
@@ -28,6 +29,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: user,
       }),
+      extraOptions: { requiresAuth: false },
       transformResponse: (response: LoginResponse) => {
         const { refresh, access } = response;
         const { user_id, username } = jwtDecode<DecodedToken>(access);
@@ -50,6 +52,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { email },
       }),
+      extraOptions: { requiresAuth: false },
     }),
     validatePasswordResetToken: builder.query<void, string>({
       query: (token) => ({
@@ -57,6 +60,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { token },
       }),
+      extraOptions: { requiresAuth: false },
     }),
     confirmPasswordReset: builder.mutation<
       void,
@@ -67,13 +71,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { token, newPassword, confirmNewPassword },
       }),
-    }),
-    refreshToken: builder.mutation<LoginResponse, { refresh: string }>({
-      query: (body) => ({
-        url: "user/token/refresh/",
-        method: "POST",
-        body,
-      }),
+      extraOptions: { requiresAuth: false },
     }),
     getStreak: builder.query<{ streak: number; last_active: string }, void>({
       query: () => ({
@@ -102,7 +100,6 @@ export const {
   useResetPasswordMutation,
   useValidatePasswordResetTokenQuery,
   useConfirmPasswordResetMutation,
-  useRefreshTokenMutation,
   useGetStreakQuery,
   useUpdateStreakMutation,
 } = authApiSlice;
