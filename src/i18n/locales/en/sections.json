@@ -35,6 +35,9 @@
     "button": "Create new section",
     "imageAlt": "section empty state"
   },
+  "states": {
+    "loadError": "Could not load sections. Please try again."
+  },
   "details": {
     "notFound": "Section not found."
   },

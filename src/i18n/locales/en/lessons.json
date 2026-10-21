@@ -61,6 +61,10 @@
     "phrase_many": "{{count}} phrases",
     "phrase_other": "{{count}} phrases"
   },
+  "reviewBanner": {
+    "message_one": "{{count}} flashcard is ready for review",
+    "message_other": "{{count}} flashcards are ready for review"
+  },
   "notifications": {
     "created": "Lesson created successfully",
     "updated": "Lesson updated successfully",

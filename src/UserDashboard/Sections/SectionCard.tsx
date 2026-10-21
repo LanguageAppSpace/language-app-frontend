@@ -8,6 +8,7 @@ import { Link, useNavigate, generatePath } from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { ROUTE } from "@/config/route.config";
 import { useTranslation } from "react-i18next";
+import ReviewBanner from "@/UserDashboard/Sections/ReviewBanner";
 
 interface SectionCard {
   section: Section;
@@ -16,7 +17,8 @@ interface SectionCard {
 }
 
 const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
-  const { title, description, lessons } = section;
+  const { title, description, lessons, reviewCount } = section;
+  const displayedReviewCount = Number(reviewCount);
   const navigate = useNavigate();
   const { t } = useTranslation("lessons");
 
@@ -60,7 +62,21 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
       <Typography variant="body2" color="primary.light">
         {description}
       </Typography>
-      <Divider />
+      {displayedReviewCount && displayedReviewCount > 0 && (
+        <ReviewBanner
+          count={displayedReviewCount}
+          onReview={(event) => {
+            event.stopPropagation();
+            navigate(
+              generatePath(ROUTE.SECTION_FLASHCARDS_REVIEW, {
+                sectionId: String(section.id),
+              })
+            );
+          }}
+        />
+      )}
+
+      <Divider sx={{ mt: "auto" }} />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="body1" color="primary">
           {t("counts.lesson", { count: lessons.length })}
@@ -89,6 +105,9 @@ export default SectionCard;
 const SectionCardWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== "$border",
 })<{ $border: string }>`
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
   border-radius: 20px;
   padding: 28px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.04);

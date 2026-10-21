@@ -3,6 +3,7 @@ import {
   SectionResponse,
   UpdateSectionPayload,
   Section,
+  SectionReviewResponse,
 } from "@/interface";
 import { apiSlice } from "@/redux/apiSlice";
 
@@ -48,6 +49,13 @@ export const sectionApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: (_result, _error, id) => [{ type: "Sections", id }],
     }),
+    getReviewsBySectionId: builder.query<SectionReviewResponse, number>({
+      query: (id) => ({
+        url: `flashcards/sections/${id}/review/`,
+        method: "GET",
+      }),
+      providesTags: ["Sections"],
+    }),
   }),
 });
 
@@ -57,4 +65,5 @@ export const {
   useUpdateSectionMutation,
   useDeleteSectionMutation,
   useGetSectionByIdQuery,
+  useGetReviewsBySectionIdQuery,
 } = sectionApiSlice;

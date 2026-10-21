@@ -46,6 +46,7 @@ export interface Section extends NewSection {
   id: number;
   progress: string;
   lessons: Lesson[];
+  reviewCount: number | string;
 }
 
 export interface NewSection {
@@ -71,3 +72,5 @@ export interface LessonResponse {
   previous: string | null;
   results: Lesson[];
 }
+
+export type SectionReviewResponse = (PhrasePair & { id: number })[];

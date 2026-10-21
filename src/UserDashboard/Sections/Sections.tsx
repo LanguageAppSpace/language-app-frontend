@@ -16,7 +16,11 @@ import { useNavigate } from "react-router-dom";
 import { ROUTE } from "@/config/route.config";
 import { Trans, useTranslation } from "react-i18next";
 const Sections = () => {
-  const { data: sections, isLoading } = useGetSectionsQuery();
+  const {
+    data: sections,
+    isLoading,
+    isFetching,
+  } = useGetSectionsQuery(undefined, { refetchOnMountOrArgChange: true });
   const [deleteSection] = useDeleteSectionMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,7 +75,7 @@ const Sections = () => {
       })
     : [];
 
-  if (isLoading) {
+  if (isLoading || (isFetching && !sections)) {
     return (
       <>
         {[1, 2, 3].map((i) => (
@@ -111,7 +115,14 @@ const Sections = () => {
       </Grid>
       {hasUserSections ? (
         sortedSections.map((section) => (
-          <Grid item xs={12} sm={6} md={4} key={section.id}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            key={section.id}
+            sx={{ display: "flex" }}
+          >
             <SectionCard
               section={section}
               onEdit={() => openModal("edit", section)}

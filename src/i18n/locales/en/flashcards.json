@@ -11,6 +11,15 @@
     "known": "I know",
     "stillLearning": "Still learning"
   },
+  "sectionReview": {
+    "title": "Section review",
+    "backToDashboard": "Back to dashboard",
+    "empty": "No flashcards are ready for review in this section.",
+    "previous": "Previous",
+    "next": "Next",
+    "flipCard": "Flip card: {{phrase}}",
+    "endOfSet": "You've reviewed all the flashcards in this set!"
+  },
   "quiz": {
     "next": "Next question"
   },

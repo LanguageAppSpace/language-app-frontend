@@ -19,6 +19,7 @@ export enum ROUTE {
   FLASHCARDS_QUIZ = "/flashcards/:lessonId/quiz",
   FLASHCARDS_MATCHING = "/flashcards/:lessonId/matching",
   FLASHCARDS_WRITTEN_ANSWER = "/flashcards/:lessonId/written-answer",
+  SECTION_FLASHCARDS_REVIEW = "/section/:sectionId/review/cards",
   ABOUT_US = "/about-us",
   CONTACT = "/contact",
   SECTION = "/section/:sectionId",
