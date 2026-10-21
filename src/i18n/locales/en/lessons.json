@@ -5,7 +5,8 @@
     "add": "Add Lesson",
     "addVocabulary": "Add new vocabulary",
     "backToSection": "Back to section",
-    "restartAll": "Restart all"
+    "restartAll": "Restart all",
+    "cancel": "Cancel"
   },
   "titles": {
     "create": "Create New Lesson",
@@ -13,7 +14,7 @@
     "createInSection": "Create new lesson in:",
     "selectMode": "Select a mode for: {{lesson}}",
     "practiceFinished": "Practice finished!",
-    "answersToReview":" Answers to review:",
+    "answersToReview": " Answers to review:",
     "yourAnswerParam": "Your answer: {{answer}}",
     "yourAnswer": "Your answer: ",
     "correctAnswerParam": "Correct answer: {{answer}}",
@@ -85,5 +86,9 @@
   },
   "placeholders": {
     "typeYourAnswer": "Type your answer..."
+  },
+  "search": {
+    "placeholder": "Search lessons by name",
+    "noResults": "No lessons found"
   }
 }

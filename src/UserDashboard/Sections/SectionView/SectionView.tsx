@@ -9,6 +9,8 @@ import {
   Menu,
   MenuItem,
   styled,
+  TextField,
+  InputAdornment,
 } from "@mui/material";
 import { useGetSectionByIdQuery } from "@/redux/sections/sectionsApiSlice";
 import folderImg from "@/assets/images/folder.png";
@@ -18,16 +20,29 @@ import { ROUTE } from "@/config/route.config";
 import { LessonModeDialog } from "@/UserDashboard/LessonModeDialog/LessonModeDialog";
 import { useState, useEffect, useMemo } from "react";
 import { Lesson } from "@/interface";
-import DeleteConfirmationModal from "@/components/DeleteConfirmationModal/DeleteConfirmationModal";
-import { useResetLessonProgressMutation } from "@/redux/lessons/lessonsApiSlice";
-import { useDeleteLessonMutation } from "@/redux/lessons/lessonsApiSlice";
+import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal";
+import {
+  useResetLessonProgressMutation,
+  useDeleteLessonMutation,
+} from "@/redux/lessons/lessonsApiSlice";
 import { useDispatch } from "react-redux";
 import { showNotification } from "@/redux/notification/notificationSlice";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Trans, useTranslation } from "react-i18next";
 import { SortRounded } from "@mui/icons-material";
-
+import SearchIcon from "@mui/icons-material/Search";
 const SectionView = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const { sectionId: sectionIdString } = useParams();
+  const navigate = useNavigate();
+  const sectionId = sectionIdString ? Number(sectionIdString) : null;
+  const [resetLessonProgress] = useResetLessonProgressMutation();
+  const [deleteLesson] = useDeleteLessonMutation();
+  const dispatch = useDispatch();
+  const { t: tSections } = useTranslation("sections");
+  const { t: tLessons } = useTranslation("lessons");
+  const { t: tCommon } = useTranslation("common");
+
   const [modalState, setModalState] = useState<{
     modal: "lessonMode" | "delete" | null;
     lesson: Lesson | null;
@@ -37,17 +52,6 @@ const SectionView = () => {
   });
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [sortedLessons, setSortedLessons] = useState<Lesson[]>([]);
-
-  const { sectionId: sectionIdString } = useParams();
-  const navigate = useNavigate();
-  const sectionId = sectionIdString ? Number(sectionIdString) : null;
-
-  const dispatch = useDispatch();
-  const { t: tSections } = useTranslation("sections");
-  const { t: tLessons } = useTranslation("lessons");
-
-  const [resetLessonProgress] = useResetLessonProgressMutation();
-  const [deleteLesson] = useDeleteLessonMutation();
 
   const {
     data: section,
@@ -168,6 +172,16 @@ const SectionView = () => {
     return <Typography>{tSections("details.notFound")}</Typography>;
   }
 
+  const normalizedSearchValue = searchValue.trim().toLowerCase();
+
+  const filteredLessons = normalizedSearchValue
+    ? sortedLessons.filter((lesson) =>
+        lesson.title.toLowerCase().includes(normalizedSearchValue)
+      )
+    : sortedLessons;
+
+  const hasMatchingLessons = filteredLessons.length > 0;
+
   return (
     <>
       <Grid container sx={{ mt: 4 }}>
@@ -221,10 +235,6 @@ const SectionView = () => {
                 gap: 2,
               }}
             >
-              <Typography variant="body1" color="primary">
-                {lessons.length} {lessons.length > 1 ? "lessons" : "lesson"}
-              </Typography>
-
               <Box
                 sx={{
                   display: "flex",
@@ -281,19 +291,50 @@ const SectionView = () => {
               </Box>
             </Grid>
 
-            <Grid item xs={12} mt={2}>
-              {sortedLessons.map((lesson) => (
-                <LessonCard
-                  lesson={lesson}
-                  onCardClick={() => openModal("lessonMode", lesson)}
-                  onResetProgressClick={async () => {
-                    await handleResetLessonProgress(lesson.id);
-                  }}
-                  onDeleteClick={() => openModal("delete", lesson)}
-                  key={lesson.id}
-                />
-              ))}
-            </Grid>
+            <SearchBoxContainer item xs={12}>
+              <SearchTextField
+                fullWidth
+                size="small"
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
+                placeholder={tLessons("search.placeholder")}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Grid
+                item
+                xs={12}
+                sx={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <Typography variant="body1" color="primary">
+                  {tLessons("counts.lesson", { count: filteredLessons.length })}
+                </Typography>
+              </Grid>
+            </SearchBoxContainer>
+            {hasMatchingLessons ? (
+              <Grid item xs={12} mt={2}>
+                {filteredLessons.map((lesson) => (
+                  <LessonCard
+                    lesson={lesson}
+                    onCardClick={() => openModal("lessonMode", lesson)}
+                    onResetProgressClick={async () => {
+                      await handleResetLessonProgress(lesson.id);
+                    }}
+                    onDeleteClick={() => openModal("delete", lesson)}
+                    key={lesson.id}
+                  />
+                ))}
+              </Grid>
+            ) : (
+              <Grid item xs={12} mt={2}>
+                <Typography>{tLessons("search.noResults")}</Typography>
+              </Grid>
+            )}
           </>
         ) : (
           <Grid item xs={12} mt={2}>
@@ -315,10 +356,12 @@ const SectionView = () => {
         onClose={closeModal}
         lesson={modalState.lesson}
       />
-      <DeleteConfirmationModal
+      <ConfirmationModal
         open={modalState.modal === "delete"}
         onClose={closeModal}
         onConfirm={handleDeleteConfirm}
+        title={tCommon("modal.confirmAction")}
+        confirmText={tCommon("actions.delete")}
         message={
           <Trans
             ns="lessons"
@@ -348,4 +391,24 @@ const HeaderWrapper = styled(Box)(({ theme }) => ({
     flexDirection: "row",
     alignItems: "center",
   },
+}));
+
+const SearchTextField = styled(TextField)(({ theme }) => ({
+  "& .MuiInputBase-input": {
+    color: theme.palette.primary.main,
+
+    "&::placeholder": {
+      color: theme.palette.primary.light,
+      opacity: 1,
+    },
+  },
+}));
+
+const SearchBoxContainer = styled(Grid)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: theme.spacing(2),
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
 }));

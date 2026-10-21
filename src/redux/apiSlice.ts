@@ -31,7 +31,11 @@ const baseQueryWithReauth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  if (typeof args !== "string" && args.body) {
+  if (
+    typeof args !== "string" &&
+    args.body &&
+    !(args.body instanceof FormData)
+  ) {
     args.body = snakecaseKeys(args.body, { deep: true }) as Record<
       string,
       unknown
@@ -81,5 +85,5 @@ const baseQueryWithReauth: BaseQueryFn<
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: ["Lessons", "Sections", "Streak"],
+  tagTypes: ["Lessons", "Sections", "Streak", "Profile"],
 });

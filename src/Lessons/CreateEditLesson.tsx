@@ -158,6 +158,9 @@ const CreateEditLesson = () => {
       );
     }
   };
+  const handleCancel = () => {
+    navigate(-1);
+  };
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -206,6 +209,7 @@ const CreateEditLesson = () => {
           section: lesson?.section ?? sectionId ?? null,
         }}
         onSubmit={onSubmit}
+        onCancel={handleCancel}
       />
     </StyledCreateLessonContainer>
   );
@@ -214,6 +218,8 @@ const StyledCreateLessonContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   padding: theme.spacing(3),
+  paddingBottom: theme.spacing(15),
+  scrollPaddingBottom: theme.spacing(15),
 }));
 
 export const VocabularyRowStyled = styled(Grid)(({ theme }) => ({
@@ -246,6 +252,20 @@ export const ButtonCreateLesson = styled(Button)(({ theme }) => ({
   width: "auto",
   "&:hover": {
     backgroundColor: alpha(theme.palette.secondary.main, 1),
+  },
+}));
+
+export const ButtonCancelLesson = styled(Button)(({ theme }) => ({
+  borderRadius: "16px",
+  padding: "12px 18px",
+  color: theme.palette.text.primary,
+  borderColor: theme.palette.text.primary,
+  fontSize: "13px",
+  width: "auto",
+
+  "&:hover": {
+    borderColor: theme.palette.text.primary,
+    backgroundColor: alpha(theme.palette.text.primary, 0.08),
   },
 }));
 
