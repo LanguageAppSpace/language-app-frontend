@@ -144,7 +144,7 @@ export const FlashcardControls = styled(Box)(({ theme }) => ({
   width: "100%",
 }));
 
-const FlashcardStage = styled(Box)(() => ({
+export const FlashcardStage = styled(Box)(() => ({
   position: "relative",
   width: "100%",
   height: "clamp(200px, 40vh, 400px)",

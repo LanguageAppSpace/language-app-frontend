@@ -25,6 +25,7 @@ import AboutUs from "@/pages/AboutUs";
 import Contact from "@/pages/Contact";
 import FlashcardsBrowse from "@/Lessons/Flashcards/FlashcardsBrowse/FlashcardsBrowse";
 import FlashcardsReview from "@/Lessons/Flashcards/FlashcardsReview/FlashcardsReview";
+import SectionFlashcardsReview from "@/UserDashboard/Sections/SectionFlashcardsReview";
 import PublicRoutes from "@/routes/PublicRoutes";
 import SectionView from "@/UserDashboard/Sections/SectionView/SectionView";
 import Quiz from "@/Lessons/Quiz/Quiz";
@@ -73,6 +74,10 @@ const App = () => {
             <Route
               path={ROUTE.FLASHCARDS_REVIEW}
               element={<FlashcardsReview />}
+            />
+            <Route
+              path={ROUTE.SECTION_FLASHCARDS_REVIEW}
+              element={<SectionFlashcardsReview />}
             />
             <Route path={ROUTE.FLASHCARDS_QUIZ} element={<Quiz />} />
             <Route

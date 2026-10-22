@@ -86,7 +86,7 @@ const ReviewModeControls = () => {
 
 export default ReviewModeControls;
 
-const ReviewControlsContainer = styled(Box)(({ theme }) => ({
+export const ReviewControlsContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(4),
   justifyContent: "center",
