@@ -3,6 +3,9 @@
     "createSection": "Create section",
     "createLesson": "Create lesson",
     "addLesson": "Add Lesson",
+    "sortLessons": "Sort lessons",
+    "sortLessonsAsc": "Ascending",
+    "sortLessonsDesc": "Descending",
     "save": "Save",
     "edit": "Edit section"
   },
