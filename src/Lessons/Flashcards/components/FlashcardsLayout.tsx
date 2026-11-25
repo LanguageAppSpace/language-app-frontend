@@ -9,6 +9,10 @@ import { LessonSessionProgressBar } from "@/Lessons/Flashcards/components/Lesson
 import { useTranslation } from "react-i18next";
 import useSwipe from "@/Lessons/Flashcards/hooks/useSwipe";
 
+// TODO: Replace these mock codes with source/target languages from lesson data.
+const MOCK_SOURCE_LANGUAGE = "pl-PL";
+const MOCK_TARGET_LANGUAGE = "en-US";
+
 interface FlashcardsLayout {
   children: React.ReactNode;
 }
@@ -91,6 +95,8 @@ const FlashcardsLayout: React.FC<FlashcardsLayout> = ({ children }) => {
             <Flashcard
               phraseOne={currentPhrase.phraseOne}
               phraseTwo={currentPhrase.phraseTwo}
+              phraseLanguage={MOCK_SOURCE_LANGUAGE}
+              translationLanguage={MOCK_TARGET_LANGUAGE}
               flipped={flipped}
               onFlip={handleFlip}
               key={currentPhrase.id ?? currentIndex}
