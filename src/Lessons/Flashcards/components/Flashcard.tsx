@@ -1,8 +1,12 @@
-import { Box, styled } from "@mui/material";
+import { alpha, Box, IconButton, styled } from "@mui/material";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import { useEffect } from "react";
 
 interface FlashcardProps {
   phraseOne: string;
   phraseTwo: string;
+  phraseLanguage: string;
+  translationLanguage: string;
   flipped: boolean;
   onFlip: () => void;
   disableFlipAnimation?: boolean;
@@ -11,18 +15,96 @@ interface FlashcardProps {
 const Flashcard = ({
   phraseOne,
   phraseTwo,
+  phraseLanguage,
+  translationLanguage,
   flipped,
   onFlip,
   disableFlipAnimation,
 }: FlashcardProps) => {
+  const speechSupported =
+    "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+
+  useEffect(() => {
+    return () => {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, [flipped, phraseOne, phraseTwo]);
+
+  const speak = (text: string, language: string) => {
+    if (!speechSupported || !text.trim() || !language) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = language;
+    window.speechSynthesis.speak(utterance);
+  };
+
   return (
     <FlashcardContainer
       flipped={flipped}
       onClick={onFlip}
       disableFlipAnimation={disableFlipAnimation}
     >
-      <FlashcardSide>{phraseOne}</FlashcardSide>
-      <FlashcardSideBack>{phraseTwo}</FlashcardSideBack>
+      <FlashcardSide sx={{ pointerEvents: flipped ? "none" : "auto" }}>
+        {phraseOne}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 3,
+            right: 3,
+          }}
+          onClick={(event) => event.stopPropagation()}
+          onPointerDown={(event) => event.stopPropagation()}
+          onPointerUp={(event) => event.stopPropagation()}
+          onPointerCancel={(event) => event.stopPropagation()}
+        >
+          <IconButton
+            color="inherit"
+            disabled={
+              flipped ||
+              !speechSupported ||
+              !phraseLanguage ||
+              !phraseOne.trim()
+            }
+            tabIndex={flipped ? -1 : 0}
+            onClick={() => speak(phraseOne, phraseLanguage)}
+          >
+            <VolumeUpIcon />
+          </IconButton>
+        </Box>
+      </FlashcardSide>
+      <FlashcardSideBack
+        aria-hidden={!flipped}
+        sx={{ pointerEvents: flipped ? "auto" : "none" }}
+      >
+        {phraseTwo}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 3,
+            right: 3,
+          }}
+          onClick={(event) => event.stopPropagation()}
+          onPointerDown={(event) => event.stopPropagation()}
+          onPointerUp={(event) => event.stopPropagation()}
+          onPointerCancel={(event) => event.stopPropagation()}
+        >
+          <IconButton
+            color="inherit"
+            disabled={
+              !flipped ||
+              !speechSupported ||
+              !translationLanguage ||
+              !phraseTwo.trim()
+            }
+            tabIndex={!flipped ? -1 : 0}
+            onClick={() => speak(phraseTwo, translationLanguage)}
+          >
+            <VolumeUpIcon />
+          </IconButton>
+        </Box>
+      </FlashcardSideBack>
     </FlashcardContainer>
   );
 };
@@ -54,6 +136,7 @@ const FlashcardContainer = styled(Box, {
 
 const FlashcardSide = styled(Box)(({ theme }) => ({
   position: "absolute",
+  boxSizing: "border-box",
   width: "100%",
   height: "100%",
   backfaceVisibility: "hidden",
@@ -61,6 +144,18 @@ const FlashcardSide = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   padding: theme.spacing(2),
+  "& .MuiIconButton-root": {
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+    borderRadius: "50%",
+    backgroundColor: alpha(theme.palette.common.white, 0.1),
+    transition: theme.transitions.create("background-color", {
+      duration: theme.transitions.duration.short,
+    }),
+    "&:hover, &.Mui-focusVisible": {
+      backgroundColor: alpha(theme.palette.common.white, 0.18),
+    },
+  },
 }));
 
 const FlashcardSideBack = styled(FlashcardSide)({
