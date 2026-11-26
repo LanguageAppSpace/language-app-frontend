@@ -178,6 +178,9 @@ const SectionModal: React.FC<SectionModal> = ({
           </Box>
         </DialogContent>
         <DialogActions>
+          <Button variant="outlined" type="button" onClick={onClose}>
+            {t("actions.cancel", { ns: "common" })}
+          </Button>
           <Button variant="contained" type="submit" color="primary">
             {t("actions.save")}
           </Button>
