@@ -39,10 +39,18 @@ const LessonCard: React.FC<LessonCardProps> = ({
     <LessonBox onClick={onCardClick}>
       <LessonInfo>
         <LessonTitle>
-          <Typography variant="h6" color="primary">
+          <Typography
+            variant="h6"
+            color="primary"
+            sx={{ overflowWrap: "anywhere" }}
+          >
             {lesson.title}
           </Typography>
-          <Typography variant="body2" color="primary.light">
+          <Typography
+            variant="body2"
+            color="primary.light"
+            sx={{ overflowWrap: "anywhere" }}
+          >
             {lesson.description}
           </Typography>
         </LessonTitle>
