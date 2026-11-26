@@ -30,7 +30,11 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <img src={folderImg} alt="folder" style={{ maxHeight: "25px" }} />
-          <Typography variant="h6" color="primary">
+          <Typography
+            variant="h6"
+            color="primary"
+            sx={{ overflowWrap: "anywhere" }}
+          >
             {title}
           </Typography>
         </Box>
@@ -57,7 +61,11 @@ const SectionCard: React.FC<SectionCard> = ({ section, onEdit, onDelete }) => {
           )}
         </IconsRow>
       </Box>
-      <Typography variant="body2" color="primary.light">
+      <Typography
+        variant="body2"
+        color="primary.light"
+        sx={{ overflowWrap: "anywhere" }}
+      >
         {description}
       </Typography>
       <Divider />
